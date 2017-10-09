@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="QNH.Overheid.KernRegister.Business.Model.Entities.DeponeringsStuk">
+    <Position X="5.25" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAAAAAAEAgAAAAIAAAAAAAIQAAQAAAAAAAAA=</HashCode>
+      <FileName>Model\Entities\DeponeringsStuk.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QNH.Overheid.KernRegister.Business.Model.Entities.FunctieVervulling">
+    <Position X="3.25" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>gAACQABAAAAAABAAgAAAAMAAAAAAAIAAAAAEBAAAAAA=</HashCode>
+      <FileName>Model\Entities\FunctieVervulling.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QNH.Overheid.KernRegister.Business.Model.Entities.KvkInschrijving" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="0.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IARGCFAhAAAAgQIAkCEhBAAAYAAAhJCBEgUBASEAAAQ=</HashCode>
+      <FileName>Model\Entities\KvkInschrijving.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QNH.Overheid.KernRegister.Business.Model.Entities.SbiActiviteit" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAQgAAAAIAAAAAAAIAAAAAAAQAAAAA=</HashCode>
+      <FileName>Model\Entities\SbiActiviteit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QNH.Overheid.KernRegister.Business.Model.Entities.SbiCode" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="3.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAgAAgAAAAACAAAICAAAAAKAAAAAA=</HashCode>
+      <FileName>Model\Entities\SbiCode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QNH.Overheid.KernRegister.Business.Model.Entities.Vestiging" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="0.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AACGgEBBgCARAAIAgAsAHIAgIAiAhICDAACBQAAACAg=</HashCode>
+      <FileName>Model\Entities\Vestiging.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QNH.Overheid.KernRegister.Business.Model.Entities.VestigingSbiActiviteit" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAQgAAAAAAAAAAAgIAAAAAAAQAAAAA=</HashCode>
+      <FileName>Model\Entities\VestigingSbiActiviteit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

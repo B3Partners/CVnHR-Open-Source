@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="44c87a65-7214-4c4e-8225-ac3e61f5909a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02/KVK-KvKDataservice.wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CatalogusMainTypes.xsd" MetadataType="Schema" ID="e17c269e-b595-4e9f-a0a8-b4990e21b189" SourceId="1" SourceUrl="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02/CatalogusMainTypes.xsd" />
+    <MetadataFile FileName="Catalogus.xsd" MetadataType="Schema" ID="4e6b3039-f8ab-4dd8-a76d-5bb9f5e2e5ee" SourceId="1" SourceUrl="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02/Catalogus.xsd" />
+    <MetadataFile FileName="CatalogusTypes.xsd" MetadataType="Schema" ID="5759b281-a5b2-4fc0-b503-c908269e98ca" SourceId="1" SourceUrl="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02/CatalogusTypes.xsd" />
+    <MetadataFile FileName="CatalogusRelaties.xsd" MetadataType="Schema" ID="6e30fb6e-761c-4b0e-a303-dd54ff19ecbe" SourceId="1" SourceUrl="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02/CatalogusRelaties.xsd" />
+    <MetadataFile FileName="CatalogusGegevensGroepen.xsd" MetadataType="Schema" ID="be2180f3-f86d-456c-9b54-bfb9a116f24a" SourceId="1" SourceUrl="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02/CatalogusGegevensGroepen.xsd" />
+    <MetadataFile FileName="KVK-Dataservice.wsdl" MetadataType="Wsdl" ID="0788b768-a2f6-4a88-8847-0462d51712bc" SourceId="1" SourceUrl="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02/KVK-KvKDataservice.wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

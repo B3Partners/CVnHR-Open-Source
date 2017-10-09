@@ -1,0 +1,76 @@
+﻿@using System.Globalization
+@using System.Configuration
+
+@model QNH.Overheid.KernRegister.Beheer.ViewModels.KvkItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section customstyles
+{
+    <style>
+        .vestiging tbody tr {
+            cursor: pointer;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Detailscherm @Default.ApplicationName inschrijving</h2>
+    </div>
+</div>
+
+@if (Model == null)
+{
+    <div class="error">Deze inschrijving bestaat niet in de CVnHR. Probeer het opnieuw</div>
+    <div>@Html.ActionLink("Zoek bij KVK", "Index", "Search", new { kvkNummer = Request["kvkNummer"] }, new { @class = "btn btn-large btn-info" })</div>
+}
+else
+{
+
+    @Html.Partial("_KvKInschrijvingPartial", Model)
+
+    <div class="row">
+        <div class="pull-right">
+            @Html.ActionLink("Zoek bij KVK", "Index", "Search", new { kvkNummer = Model.KvkNummer }, new { @class = "btn btn-large btn-info" })
+            @BackButton.Render(cssClass: "btn btn-success btn-large")
+            @*@Html.ActionLink("Terug naar zoekscherm", "Index", "Vestiging", new { searchcriteria = Request["searchcriteria"] }, new { @class = "btn btn-success btn-large" })*@
+            
+            @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
+            {
+                @Html.ActionLink("Alle vestigingen naar " + Default.CrmApplication, 
+                    "Export", 
+                    new { kvkNummer = Model.KvkNummer }, 
+                    new { @class = "btn btn-large btn-warning" })
+            }
+            @if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+            {
+                @Html.ActionLink(linkText: Default.ToDebiteuren,
+                                actionName: "ExportDebiteuren",
+                                routeValues: new { kvkNummer = Model.KvkNummer },
+                                htmlAttributes: new { @class = "btn btn-large btn-warning" })
+            }
+            @if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+            {
+                @Html.ActionLink(linkText: Default.ToCrediteuren,
+                                actionName: "ExportCrediteuren",
+                                routeValues: new { kvkNummer = Model.KvkNummer },
+                                htmlAttributes: new { @class = "btn btn-large btn-warning" })
+            }
+        </div>
+    </div>
+
+
+@section scripts {
+    <script type="text/javascript">
+    $(function () {
+        $(".vestiging tbody").on("click", "tr", function () {
+            var id = $(this).attr("data-vestigingId") || $(this).prev("tr").attr("data-vestigingId");
+            window.location = '@Url.Action("VestigingDetails")?kvkNummer=@Model.KvkNummer&vestigingId=' + id + '&searchcriteria=@Request["searchcriteria"]';
+        });
+    });
+    </script>
+}
+}

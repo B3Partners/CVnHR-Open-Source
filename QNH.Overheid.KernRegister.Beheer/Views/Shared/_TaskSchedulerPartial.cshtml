@@ -1,0 +1,97 @@
+﻿@model QNH.Overheid.KernRegister.Beheer.Controllers.ScheduledTaskManager
+@using Microsoft.Win32.TaskScheduler
+
+@{
+    var trigger = Model.Trigger;
+    var triggerType = Model.Trigger == null ? TaskTriggerType.Time : Model.Trigger.TriggerType;
+}
+@if (Model.ExecutableExists)
+{
+    <p style="display: none;">(Locatie: @Model.ExecutablePath)</p>
+    <br />
+    <div class="form-batch">
+        <div class="row">
+            <div class="col-sm-4">
+                Update frequentie
+            </div>
+            <div class="col-sm-8">
+                @Html.DropDownList("updateFrequency", new[] {
+                                new SelectListItem { Text="Eenmalig", Value="Time", Selected = triggerType == TaskTriggerType.Time },
+                                new SelectListItem { Text="Dagelijks", Value="Daily", Selected=triggerType == TaskTriggerType.Daily },
+                                new SelectListItem { Text="Wekelijks", Value="Weekly", Selected=triggerType == TaskTriggerType.Weekly },
+                                new SelectListItem { Text="Maandelijks", Value="Monthly", Selected=triggerType == TaskTriggerType.Monthly }
+                            }, htmlAttributes: Model.Trigger != null && Model.Trigger.Enabled ? new { disabled="disabled" } : null)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">Start Tijdstip</div>
+            <div class="col-sm-8">
+                <input type='text' class="form-control" id="datetimepicker" @(Model.Trigger != null && Model.Trigger.Enabled ? "disabled" : null) />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">Volgende start</div>
+            <div class="col-sm-8 task-next-runtime">@(Model.Trigger != null && Model.Trigger.Enabled ? Model.NextRunTime : "--")</div>
+        </div>
+        @{
+            var scheduleStarted = Model.Trigger != null && Model.Trigger.Enabled;
+            string btnStartScheduleDisabled = Model.ExecutableProcessDisabled || scheduleStarted ? "disabled style=display:none;" : null;
+            string btnStopScheduleDisabled = Model.ExecutableProcessDisabled || !scheduleStarted ? "disabled style=display:none;" : null;
+        }
+        <div class="row">
+            <div class="col-sm-4">Geplande batchupdates</div>
+            <div class="col-sm-8 task-state-schedule">@(scheduleStarted ? "Aan" : "Uit")</div>
+        </div>
+
+        <br/>
+        <div class="row">
+            <div class="col-sm-4">Status</div>
+            <div class="col-sm-8 task-state">@Model.ScheduledTask.State</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Laatste resultaat</div>
+            <div class="col-sm-8 task-last-task-result">@Model.LastTaskResult</div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <br />
+                <button class="btn btn-success btn-start-schedule" @btnStartScheduleDisabled>Planning aanzetten</button>
+                <button class="btn btn-danger btn-stop-schedule" @btnStopScheduleDisabled>Planning uitzetten</button>
+                <button class="btn btn-info btn-start-now" @((Model.ScheduledTask.State == TaskState.Running || Model.ExecutableProcessDisabled) ? "disabled" : null)>
+                    @(Model.ScheduledTask.State == TaskState.Running ? "running" : "Start batchupdate nu")
+                </button>
+                <button class="btn btn-inverse btn-stop-now" @(Model.ScheduledTask.State != TaskState.Running ? "style=display:none;" : null)>
+                    Stop nu
+                </button>
+            </div>
+        </div>
+        @if (Model.ExecutableProcessDisabled)
+        { 
+            <div class="row">
+                <div class="col-sm-12 error">
+                    Het batchproces is in de configuratie buiten werking gesteld. Neem contact op met de systeembeheerder.
+                </div>
+            </div>
+        }
+    </div>
+
+    <hr />
+    <h4>Laatste logfiles (10 maximaal)</h4>
+    <div class="log-files">
+        @foreach (var logfile in Model.LogFiles.OrderByDescending(s => s).Take(10))
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="#" data-href="@Path.GetFileName(logfile)">@Path.GetFileName(logfile)</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="error">De batch executable bestaat niet op locatie @Model.ExecutablePath</p>
+}

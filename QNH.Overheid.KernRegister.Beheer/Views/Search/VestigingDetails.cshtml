@@ -1,0 +1,41 @@
+﻿@using System.Globalization
+@using System.Configuration
+@model QNH.Overheid.KernRegister.Business.Model.Entities.Vestiging
+
+@{
+    ViewBag.Title = "VestigingDetails";
+}
+
+@section customstyles
+{
+
+}
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Detailscherm handelsregister Vestiging</h2>
+        </div>
+    </div>
+
+    @Html.Partial("_VestigingDetailPartial", Model)
+
+    <div class="row">
+        <div class="pull-right">
+            @BackButton.Render(cssClass: "btn btn-large btn-primary")
+            @*@Html.ActionLink("Terug naar zoekscherm", "Index", "Search", new { kvkNummer = Request["kvknummer"] }, new { @class = "btn btn-primary btn-large" })*@
+
+            @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
+            {
+                <td rowspan="2">
+                    @Html.ActionLink(
+                                   linkText: "Naar " + Default.ApplicationName + " en " + Default.CrmApplication,
+                                actionName: "Import",
+                                controllerName: "Search",
+                                routeValues: new { kvkNummer = Request["kvknummer"], vestigingNummer = Model.Vestigingsnummer, export = true },
+                                htmlAttributes: new { @class = "btn btn-large btn-warning" })
+                </td>
+            }
+        </div>
+    </div>
+</div>

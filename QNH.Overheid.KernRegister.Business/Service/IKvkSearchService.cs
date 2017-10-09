@@ -1,0 +1,11 @@
+using QNH.Overheid.KernRegister.Business.Model.Entities;
+
+namespace QNH.Overheid.KernRegister.Business.Service
+{
+    public interface IKvkSearchService
+    {
+        KvkInschrijving SearchInschrijvingByKvkNummer(string kvkNummer, bool bypassCache = false);
+
+        Vestiging SearchVestigingByVestigingsNummer(string vestigingsNummer, string kvkNummer = null);
+    }
+}

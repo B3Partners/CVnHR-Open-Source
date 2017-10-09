@@ -1,0 +1,218 @@
+﻿@using System.Globalization
+@model QNH.Overheid.KernRegister.Business.Model.Entities.Vestiging
+
+<div class="row">
+    <div class="col-md-4">
+        Vestigingsnaam:
+    </div>
+    <div class="col-md-8">
+        <strong>@Model.Naam</strong>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Kvknummer:
+    </div>
+    <div class="col-md-8">
+        @Request["kvknummer"]
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Vestigingsnummer:
+    </div>
+    <div class="col-md-8">
+        @Model.Vestigingsnummer
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        HoofdVestiging:
+    </div>
+    <div class="col-md-8">
+        @(Model.IsHoofdvestiging ? "Ja" : "Nee")
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Registratie Datum:
+    </div>
+    <div class="col-md-8">    
+        @try
+        {
+            @(string.IsNullOrEmpty(Model.RegistratieDatumAanvang) || Model.RegistratieDatumAanvang == "00000000"
+            ? ""
+            : DateTime.ParseExact(Model.RegistratieDatumAanvang, "yyyyMMdd", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy"))
+        }
+        catch
+        { 
+            @Model.RegistratieDatumAanvang
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Registratie Datum Einde:
+    </div>
+    <div class="col-md-8">
+        @try
+        { 
+            @(string.IsNullOrEmpty(Model.RegistratieDatumEinde)
+            ? ""
+            : DateTime.ParseExact(Model.RegistratieDatumEinde, "yyyyMMdd", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy"))
+        }
+        catch
+        { 
+            @Model.RegistratieDatumEinde
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        RSIN:
+    </div>
+    <div class="col-md-8">
+        @Model.RSIN
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Aantal medewerkers:
+    </div>
+    <div class="col-md-8">
+        <strong>Fulltime:</strong> @Model.FulltimeWerkzamePersonen
+        | <strong>Parttime:</strong> @Model.ParttimeWerkzamePersonen
+        | <strong>Totaal:</strong> @Model.TotaalWerkzamePersonen
+    </div>
+</div>
+
+
+@*  *** Zijn er niet in Vestiging?!
+    <div>
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Functie Vervullingen</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>FunctieTitel</th>
+                            <th>VolledigeNaam</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var functie in Model.FunctieVervullingen)
+                        {
+                            <tr>
+                                <td>@functie.FunctieTitel</td>
+                                <td>@functie.VolledigeNaam</td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+*@
+
+<div class="row">
+    <div class="col-sm-4">
+        <h3>SBI Activiteiten</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>SBI Code</th>
+                    <th>Omschrijving</th>
+                    <th>HoofdActiviteit?</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var activiteit in Model.SbiActiviteiten.Where(s => s.SbiCode != null))
+                {
+                    <tr>
+                        <td>@activiteit.SbiCode.Code</td>
+                        <td>@activiteit.SbiCode.Omschrijving</td>
+                        <td>@(activiteit.IsHoofdSbiActiviteit ? "Ja" : "Nee")</td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4"><h3>Adres</h3></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-striped table-bordered table-hover vestiging">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Telefoon</th>
+                    <th>Email</th>
+                    <th>BagId</th>
+                    <th>Adres</th>
+
+                    <th>Straat</th>
+                    <th>Huisnummer</th>
+                    <th>Postcode</th>
+                    <th>Woonplaats</th>
+                    <th>Postbus</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2">@Model.Naam</td>
+                    <td rowspan="2">@Model.Telefoon</td>
+                    <td rowspan="2">@Model.Email</td>
+                    <td rowspan="2">
+                        @{
+                            var bagId = (Model.BagId ?? "nvt;nvt").Split(';');
+
+                        }
+                        IdentificatieNummeraanduiding: @bagId[0]
+                        <br />
+                        IdentificatieAdresseerbaarObject: @bagId[1]
+                    </td>
+                    <td>Vestiging</td>
+
+                    <td>@Model.Straat</td>
+                    <td>@Model.Huisnummer@Model.Huisnummertoevoeging</td>
+                    <td>@Model.PostcodeCijfers@Model.PostcodeLetters</td>
+                    <td>@Model.Woonplaats</td>
+
+
+                    <td>nvt</td>
+                </tr>
+                <tr>
+                    <td>Postadres</td>
+                    <td>@Model.PostStraat</td>
+                    <td>@Model.PostHuisnummer@Model.PostHuisnummerToevoeging</td>
+                    <td>@Model.PostPostcodeCijfers@Model.PostPostcodeLetters</td>
+                    <td>@Model.PostWoonplaats</td>
+                    <td>@Model.Postbusnummer</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

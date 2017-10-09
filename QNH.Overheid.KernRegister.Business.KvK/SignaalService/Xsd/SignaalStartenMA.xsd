@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://schemas.kvk.nl/schemas/hrip/signaal/nieuweinschrijving/2016/01"
+           targetNamespace="http://schemas.kvk.nl/schemas/hrip/signaal/nieuweinschrijving/2016/01"
+           xmlns:sig="http://schemas.kvk.nl/schemas/hrip/signaal/2016/01"
+           elementFormDefault="qualified" attributeFormDefault="unqualified"
+           version="1.0">
+
+    <xs:import namespace="http://schemas.kvk.nl/schemas/hrip/signaal/2016/01" schemaLocation="signaaltypes.xsd"/>
+
+    <xs:element name="NieuweInschrijving" type="NieuweInschrijvingType">
+    </xs:element>
+
+    <xs:complexType name="NieuweInschrijvingType">
+        <xs:complexContent>
+            <xs:extension base="sig:SignaalType">
+                <xs:sequence>
+                    <xs:element name="startdatum" type="sig:DatumIncompleetType"/>
+                    <xs:element name="heeftBetrekkingOp" type="sig:MaatschappelijkeActiviteitType"/>
+                    <xs:element name="aanleiding" type="Aanleiding" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Aanleiding">
+        <xs:sequence>
+            <xs:element name="omschrijving" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="kvkNummer" type="sig:KvKNummerType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+</xs:schema>

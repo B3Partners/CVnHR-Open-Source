@@ -1,0 +1,5 @@
+﻿@* BackButtn *@
+
+@helper Render(string text = "Terug", string cssClass = "btn btn-large btn-info") { 
+    <a class="@cssClass" href="#" onclick="javascript: window.location = document.referrer; return false;">@text</a>
+}

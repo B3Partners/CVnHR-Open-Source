@@ -1,0 +1,110 @@
+﻿@using QNH.Overheid.KernRegister.Business.Crm
+@model QNH.Overheid.KernRegister.Beheer.ViewModel.CrmExportResult
+
+@{
+    var title = "Exporteren naar " + Default.CrmApplication;
+
+    if (Model.FinancialProcesType.HasValue)
+    {
+        switch (Model.FinancialProcesType.Value)
+        {
+            case FinancialProcesType.ProbisDebiteuren:
+                title = "Exporteren " + Default.ToDebiteuren;
+                break;
+            case FinancialProcesType.ProbisCrediteuren:
+                title = "Exporteren " + Default.ToCrediteuren;
+                break;
+        }
+    }
+
+    ViewBag.Title = title;
+    var vestiging = !string.IsNullOrEmpty(Request["vestigingNummer"]);
+}
+
+<h2>@title</h2>
+
+@if (IocConfig.UseMockCrm)
+{
+    <strong>@Default.CrmApplication Mock, use for mock: 09036504 OR Vestiging 000005329256 (success) 01173103 (import) or any (error)</strong>
+}
+
+<h4>@Default.ApplicationName @(vestiging ? "Vestiging": "Inschrijving")</h4>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        @if (Model.Succes)
+        {
+            <dt>
+                Status
+            </dt>
+            <dd>
+                @Html.Raw(Model.Message.Replace("\n", "<br/>"))
+            </dd>
+        }
+        else if (Model.NoItemsFoundInsertInstead)
+        {
+            
+            <dt>
+                Status
+            </dt>
+            <dd>
+                @(vestiging ? "Vestiging" : "Inschrijving") bestaat nog niet in @Default.CrmApplication
+            </dd>
+            <dt>
+                Bericht
+            </dt>
+            <dd>
+                @Html.Raw(Model.Message.Replace("\n", "<br/>"))
+            </dd>
+            <dt>
+                Actie
+            </dt>
+            <dd>
+                @Html.ActionLink(
+                    linkText: "Aanmaken in " + Default.CrmApplication,
+                    actionName: vestiging ? "ExportVestiging" : "Export",
+                    controllerName: "Vestiging",
+                    routeValues: vestiging
+                                     ? (object)new { vestigingNummer = Model.KvkItem.Vestigingen.First().Vestigingsnummer, createNew = true }
+                                     : (object)new { kvkNummer = Model.KvkItem.KvkNummer, createNew = true },
+                    htmlAttributes: null)
+            </dd>
+        }
+        else
+        {
+            <dt>
+                Status
+            </dt>
+            <dd>
+                Error
+            </dd>
+            <dt>
+                Bericht
+            </dt>
+            <dd>
+                @Html.Raw(Model.Message.Replace("\n", "<br/>"))
+            </dd>
+
+            <dt>
+                Foutberichten
+            </dt>
+            <dd>
+                @if(Model.Errors != null)
+                { 
+                    foreach (var error in Model.Errors)
+                    {
+                        <div>
+                            @Html.Raw(error.Replace("\n", "<br/>"))
+                        </div>
+                    }
+                }
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Terug naar het zoekscherm", "Index", new { searchcriteria = Model.KvkItem.KvkNummer })*@
+    @BackButton.Render("Terug naar het zoekscherm", cssClass: null)
+    |
+    @Html.ActionLink("Bekijk in " + Default.ApplicationName, "Details", "Vestiging", new { kvkNummer = Model.KvkItem.KvkNummer }, null)
+</p>

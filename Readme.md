@@ -1,0 +1,13 @@
+# CVnHR
+
+This project ...
+
+Open Source ...
+
+QNH ...
+
+B3 ...
+
+
+# README "QNH.Overheid.KernRegister.Beheer"
+Lees en schrijf rechten op de APP_DATA is van belang voor Elmah logging

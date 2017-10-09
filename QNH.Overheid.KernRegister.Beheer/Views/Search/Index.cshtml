@@ -1,0 +1,213 @@
+﻿@model QNH.Overheid.KernRegister.Beheer.ViewModels.KvkSearch
+@using System.Configuration
+@using QNH.Overheid.KernRegister.Business.Business
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section customstyles
+{
+    <style>
+        .form-group label {
+            font-size: 20px;
+        }
+
+        .form-group input[type=text] {
+            font-size: 20px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .col-sm-3 img {
+            width: 50%;
+        }
+
+        .form-group input {
+            max-width: 100%;
+        }
+    </style>
+}
+
+<h2>@Default.TitleSearchKvK</h2>
+
+@*Items in cache @RawXmlCache.GetCount()*@
+
+<div class="row">
+    <div class="col-sm-3">
+        <img src="~/Images/kvk-logo.jpg" alt="logo KVK" />
+        <h3>Standaard zoekformulier</h3>
+        <p>Er wordt gezocht in het handelsregister op KVK nummer en bedrijven en vestigingen worden getoond.</p>
+        
+    </div>
+    <div class="col-sm-9">
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="kvkNameSearch" class="col-sm-3 control-label">Zoek op naam</label>
+                <div class="col-sm-9">
+                    <input type="text" id="kvkNameSearch" class="form-control input-lg" placeholder="Zoek op naam" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="button" id="btnKvkNameSearch" name="btnSearch" class="btn btn-primary">Zoek</button>
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("Index", "Search", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+@* TODO: enable search on vestigingsnummer *@
+               <label for="KvkNummer" class="col-sm-3 control-label">KVK nummer</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.KvkSearchCriteria.KvkNummer, new { @class = "form-control input-lg", placeholder = "Voer KVK nummer in" })
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-primary">Zoek</button>
+                </div>
+            </div>
+        }
+
+
+        @if (Model.KvkSearchResult != null && Model.KvkSearchResult.KvkItems != null && Model.KvkSearchResult.KvkItems.Count > 0)
+        {
+            <hr />
+            <h3>Resultaten</h3>
+            <table id="resultTable" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].KvkNummer)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].Naam)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].AantalVestigingen)
+                        </th>
+                        <th>Actie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.KvkSearchResult.KvkItems)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KvkNummer)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Naam)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AantalVestigingen)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { kvkNummer = item.KvkNummer })
+                                @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                                {
+                                    @:|
+                                    @Html.ActionLink("Naar " + Default.ApplicationName, "Import", new { kvkNummer = item.KvkNummer })
+                                    if(item.Vestigingen.Count==1 && User.IsAllowedAllActions(ApplicationActions.Crm))
+                                    { 
+                                        @:|
+                                        @Html.ActionLink("Naar " + Default.ApplicationName + " en " + Default.CrmApplication, "Import", new { kvkNummer = item.KvkNummer, export = true })
+
+                                    }
+                                    if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.Brmo))
+                                    {
+                                        @:|
+                                        @Html.ActionLink("Naar " + Default.BrmoApplication, "Import", new {kvkNummer = item.KvkNummer, Brmo = true})
+                                    }
+                                    if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+                                    {
+                                        @:|
+                                        @Html.ActionLink(Default.ToDebiteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = true})
+                                    }
+                                    if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+                                    {
+                                        @:|
+                                        @Html.ActionLink(Default.ToCrediteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = false })
+                                    }
+}
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        @if (Model.KvkSearchResult != null && Model.KvkSearchResult.SearchedAndNothingFound)
+        {
+            <hr />
+            <h3>Resultaten</h3>
+            <p class="red">Geen inschrijvingen gevonden in het handelsregister</p>
+        }
+
+        @if (Model.KvkSearchResult != null && Model.KvkSearchResult.SearchError != null)
+        {
+            <hr />
+            <h3>Resultaten</h3>
+            <div class="red">
+                Er is een fout opgetreden.
+                <a href="#" class="showdetails">Show details.</a>
+            </div>
+            <div class="errordetails hidden">
+                @Model.KvkSearchResult.SearchError.Message
+                <br />
+                @Model.KvkSearchResult.SearchError.StackTrace
+
+                @{
+                    var inner = Model.KvkSearchResult.SearchError.InnerException;
+                    while (inner != null)
+                    {
+                        <hr />
+                        @inner.Message
+                        <br />
+                        @inner.StackTrace
+
+                        inner = inner.InnerException;
+                    }
+                }
+            </div>
+        }
+
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $(".showdetails").on("click", function (e) {
+                e.preventDefault();
+                $(".errordetails").toggleClass("hidden");
+            });
+
+            $("#btnKvkNameSearch").on("click", goToKvKNameSearch);
+
+            $("#kvkNameSearch").on("keyup", function (e) {
+                if (e.keyCode == 13)
+                    goToKvKNameSearch();
+            });
+        });
+
+        function goToKvKNameSearch(){
+            window.open("http://www.kvk.nl/orderstraat/bedrijf-kiezen/#!shop?q=" + encodeURIComponent($("#kvkNameSearch").val()), '_blank');
+        }
+
+
+        /* TODO
+        $.getJSON("http://zoeken.kvk.nl/JsonSearch.ashx?q=mrw&start=0&callback=?", function(result){
+            console.log(result);
+        });*/
+    </script>
+}

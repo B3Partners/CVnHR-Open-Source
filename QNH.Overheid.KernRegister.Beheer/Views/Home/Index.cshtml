@@ -1,0 +1,13 @@
+﻿@using System.Resources
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <img src="@Url.Content(Default.LogoUrl)" alt="Logo" style="max-width: 100%" />
+    <br />
+    <h1>@Default.ApplicationName</h1>
+    <p class="lead">@Default.HomeScreen</p>
+    <br />
+    <p>@Html.ActionLink("Zoek in "+ Default.ApplicationName, "Index", "Vestiging", null, new { @class = "btn btn-primary btn-large" })</p>
+</div>

@@ -1,0 +1,61 @@
+﻿@using System.Globalization
+@using System.Configuration
+@model QNH.Overheid.KernRegister.Business.Model.Entities.Vestiging
+
+@{
+    ViewBag.Title = "VestigingDetails";
+}
+
+@section customstyles
+{
+
+}
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Detailscherm @Default.ApplicationName Vestiging</h2>
+        </div>
+    </div>
+
+@if (Model == null)
+{
+    <p class="error">Er is iets fout gegaan. Probeer het opnieuw</p>
+}
+else
+{
+    @Html.Partial("_VestigingDetailPartial", Model)
+}
+      
+    <div class="row">
+        <div class="pull-right">
+            @BackButton.Render(cssClass: "btn btn-primary btn-large")
+            @*@Html.ActionLink("Terug naar zoekscherm", "Index", "Vestiging", new { searchcriteria = Request["searchcriteria"] }, new { @class = "btn btn-primary btn-large" })*@
+            @if(User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
+            {
+                @Html.ActionLink(
+                            linkText: "Naar " + Default.CrmApplication,
+                            actionName: "ExportVestiging",
+                            controllerName: "Vestiging",
+                            routeValues: new { vestigingNummer = Model.Vestigingsnummer },
+                            htmlAttributes: new { @class = "btn btn-large btn-warning" })
+            }
+            @if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+            {
+                @Html.ActionLink(linkText: Default.ToDebiteuren,
+                                actionName: "ExportVestigingDebiteuren",
+                                controllerName: "Vestiging",
+                                routeValues: new { vestigingNummer = Model.Vestigingsnummer },
+                                htmlAttributes: new { @class = "btn btn-large btn-warning" })
+            }
+            @if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+            {
+                @Html.ActionLink(linkText: Default.ToCrediteuren,
+                                actionName: "ExportVestigingCrediteuren",
+                                controllerName: "Vestiging",
+                                routeValues: new { vestigingNummer = Model.Vestigingsnummer },
+                                htmlAttributes: new { @class = "btn btn-large btn-warning" })
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://schemas.kvk.nl/schemas/hrip/update/2016/01"
+           targetNamespace="http://schemas.kvk.nl/schemas/hrip/update/2016/01"
+           elementFormDefault="qualified" attributeFormDefault="unqualified"
+           version="1.0">
+
+    <xs:include schemaLocation="updatetypes.xsd"/>
+
+    <xs:element name="UpdateBericht" type="UpdateBerichtType">
+    </xs:element>
+
+    <xs:complexType name="UpdateBerichtType">
+        <xs:complexContent>
+            <xs:extension base="BerichtType">
+                <xs:sequence>
+                    <xs:element name="heeftBetrekkingOp" type="MaatschappelijkeActiviteitType" minOccurs="1"/>
+                    <xs:element name="heeftGewijzigd" type="GegevensblokType" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="BerichtType" abstract="true">
+        <xs:sequence>
+            <xs:element name="berichtId" type="BerichtId" minOccurs="1"/>
+            <xs:element name="registratieId" type="RegistratieIdType" minOccurs="1"/>
+            <xs:element name="registratieTijdstip" type="TijdstipType" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--**** MaatschappelijkeActiviteit ****-->
+    <xs:complexType name="MaatschappelijkeActiviteitType">
+        <xs:sequence>
+            <xs:element name="kvkNummer" type="KvKNummerType"/>
+            <xs:element name="nonMailing" type="EnumeratieType" minOccurs="1"/>
+            <xs:element name="totaalWerkzamePersonen" type="xs:integer" minOccurs="0"/>
+            <xs:element name="heeftAlsEigenaar" type="EigenaarType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="wordtUitgeoefendIn" type="VestigingType" minOccurs="0" maxOccurs="unbounded"/>
+         </xs:sequence>
+    </xs:complexType>
+    
+
+    <!--**** Eigenaar ****-->
+    <xs:complexType name="EigenaarType">
+        <xs:choice>
+            <xs:element name="natuurlijkPersoon" type="NatuurlijkPersoonType"/>
+            <xs:element name="rechtsPersoon" type="NietNatuurlijkPersoonType"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="PersoonType">
+        <xs:sequence>
+            <xs:element name="persoonRechtsvorm" type="Tekst200" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NietNatuurlijkPersoonType">
+        <xs:complexContent>
+            <xs:extension base="PersoonType">
+                <xs:sequence>
+                    <xs:element name="bezoekAdres" type="LocatieType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="rsin" type="RSINummerType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="activiteit" type="ActiviteitType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="NatuurlijkPersoonType">
+        <xs:complexContent>
+            <xs:extension base="PersoonType">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <!--**** Gegevensblok ****-->
+    <xs:complexType name="GegevensblokType">
+        <xs:sequence>
+            <xs:element name="naam" type="EnumeratieType" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--**** Vestiging ****-->
+    <xs:complexType name="VestigingType">
+        <xs:sequence>
+            <xs:element name="vestigingsnummer" type="VestigingsnummerType"/>
+            <xs:element name="bezoekAdres" type="LocatieType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="activiteit" type="ActiviteitType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="isHoofdvestiging" type="EnumeratieType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ActiviteitType">
+        <xs:sequence>
+            <xs:element name="sbiCode" type="xs:string" minOccurs="1"/>
+            <xs:element name="isHoofdactiviteit" type="EnumeratieType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="BerichtId">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="36"/>
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>

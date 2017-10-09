@@ -1,0 +1,11 @@
+<xsd xmlns='http://microsoft.com/dotnet/tools/xsd/'>
+<generateClasses language='CS' namespace='QNH.Overheid.KernRegister.Business.SignaalService'>
+    <schema>InsolventieWijziging.xsd</schema>
+    <schema>Rechtsvormwijziging.xsd</schema>
+    <schema>SignaalStartenMA.xsd</schema>
+    <schema>Signaaltypes.xsd</schema>
+    <schema>Updatebericht.xsd</schema>
+    <schema>Updatetypes.xsd</schema>
+    <schema>VoortzettingEnOverdracht.xsd</schema>
+</generateClasses>
+</xsd>

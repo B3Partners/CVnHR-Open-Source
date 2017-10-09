@@ -1,0 +1,460 @@
+﻿@using System.Globalization
+@model QNH.Overheid.KernRegister.Beheer.ViewModels.KvkItem
+
+<div class="row">
+    <div class="col-md-4">
+        Bedrijfsnaam:
+    </div>
+    <div class="col-md-8">
+        <strong>@Model.Naam</strong>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Kvknummer:
+    </div>
+    <div class="col-md-8">
+        @Model.KvkNummer
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Peilmoment:
+    </div>
+    <div class="col-md-8">
+        @{
+            var peilMoment = DateTime.MinValue;
+        }
+        @if (DateTime.TryParseExact(Model.PeilMoment, "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out peilMoment))
+        {
+           @peilMoment
+        }
+        else
+        {
+            @Model.PeilMoment
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Datum Oprichting:
+    </div>
+    <div class="col-md-8">
+        @{
+            var datum = DateTime.MinValue;
+            DateTime.TryParseExact(Model.Inschrijving.DatumOprichting, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out datum);
+        }
+        @datum.ToString("dd/MM/yyyy")
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Datum Uitschrijving:
+    </div>
+    <div class="col-md-8">
+        @(string.IsNullOrEmpty(Model.Inschrijving.DatumUitschrijving) ? "" : DateTime.ParseExact(Model.Inschrijving.DatumUitschrijving, "yyyyMMdd", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy"))
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Registratie Datum:
+    </div>
+    <div class="col-md-8">
+        @{
+            var datumRegistratieAanvang = DateTime.MinValue;
+            var strDatumRegistratieAanvang = Model.Inschrijving.RegistratieDatumAanvang;
+
+            if (DateTime.TryParseExact(Model.Inschrijving.RegistratieDatumAanvang, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out datumRegistratieAanvang))
+            {
+                strDatumRegistratieAanvang = datumRegistratieAanvang.ToString("dd/MM/yyyy");
+            }
+        }
+        @strDatumRegistratieAanvang
+        @*@Model.Inschrijving.RegistratieDatumAanvang*@
+        @*(string.IsNullOrEmpty(Model.Inschrijving.RegistratieDatumAanvang) ? "" :DateTime.ParseExact(Model.Inschrijving.RegistratieDatumAanvang, "yyyyMMdd", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy"))*@
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Registratie Datum Einde:
+    </div>
+    <div class="col-md-8">
+        @(string.IsNullOrEmpty(Model.Inschrijving.RegistratieDatumEinde) ? "" : DateTime.ParseExact(Model.Inschrijving.RegistratieDatumEinde, "yyyyMMdd", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy"))
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Handelsnamen:
+    </div>
+    <div class="col-md-8">
+        @foreach (var naam in Model.Inschrijving.HandelsNamen)
+        {
+            <div>@naam.Handelsnaam</div>
+        }
+        @if (!Model.Inschrijving.HandelsNamen.Any())
+        {
+            <div style="font-style: italic;">Zoek bij KvK om alle handelsnamen te zien.</div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Berichtenbox:
+    </div>
+    <div class="col-md-8">
+        @Model.Inschrijving.BerichtenBoxNaam
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Aantal medewerkers:
+    </div>
+    <div class="col-md-8">
+        <strong>Fulltime:</strong> @Model.Inschrijving.FulltimeWerkzamePersonen
+        | <strong>Parttime:</strong> @Model.Inschrijving.ParttimeWerkzamePersonen
+        | <strong>Totaal:</strong> @Model.Inschrijving.TotaalWerkzamePersonen
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Aantalvestigingen:
+    </div>
+    <div class="col-md-8">
+        @Model.AantalVestigingen
+    </div>
+</div>
+
+<h3>Eigenaar</h3>
+<div class="row">
+    <div class="col-md-4">
+        Rechtsvorm:
+    </div>
+    <div class="col-md-8">
+        <strong>Uitgebreid:</strong> @Model.Inschrijving.UitgebreideRechtsvorm
+        @if (!string.IsNullOrEmpty(Model.Inschrijving.PersoonRechtsvorm))
+        {
+            @:| <strong>Persoon:</strong> @Model.Inschrijving.PersoonRechtsvorm
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Volledige naam eigenaar:
+    </div>
+    <div class="col-md-8">
+        @Model.Inschrijving.VolledigeNaamEigenaar
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Bijzondere Rechtstoestand:
+    </div>
+    <div class="col-md-8">
+        @(Model.Inschrijving.BijzondereRechtsToestand ?? "nee")
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Reden insolventie:
+    </div>
+    <div class="col-md-8">
+        @if (Model.Inschrijving.BijzondereRechtsToestand != null)
+        {
+            @Model.Inschrijving.RedenInsolventie
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Rechterlijke Uitspraak:
+    </div>
+    <div class="col-md-8">
+        @if (Model.Inschrijving.RechterlijkeUitspraak != null)
+        {
+            @Model.Inschrijving.RechterlijkeUitspraak
+        }
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        Beperking in Rechtshandeling:
+    </div>
+    <div class="col-md-8">
+        @(Model.Inschrijving.BeperkingInRechtshandeling ?? "nee")
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Eigenaar heeft gedeponeerd:
+    </div>
+    <div class="col-md-8">
+        @if (!string.IsNullOrEmpty(Model.Inschrijving.EigenaarHeeftGedeponeerd))
+        {
+            @Model.Inschrijving.EigenaarHeeftGedeponeerd
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Geplaatst Kapitaal:
+    </div>
+    <div class="col-md-8">
+        @if (!string.IsNullOrEmpty(Model.Inschrijving.GeplaatstKapitaal))
+        {
+            @Model.Inschrijving.GeplaatstKapitaal
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        Gestort Kapitaal:
+    </div>
+    <div class="col-md-8">
+        @if (!string.IsNullOrEmpty(Model.Inschrijving.GestortKapitaal))
+        {
+            @Model.Inschrijving.GestortKapitaal
+        }
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <h3>Functie Vervullingen</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Functie</th>
+                    <th>FunctieTitel</th>
+                    <th>VolledigeNaam</th>
+                    <th>LangstZittende?</th>
+                    <th>Schorsing</th>
+                    <th>Bevoegdheid</th>
+                    <th>HandelingsBekwaam</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var functie in Model.Inschrijving.FunctieVervullingen)
+                {
+                    <tr>
+                        <td>@functie.Functie</td>
+                        <td>@functie.FunctieTitel</td>
+                        <td>@functie.VolledigeNaam</td>
+                        <td>@functie.LangstZittende</td>
+                        <td>@functie.Schorsing</td>
+                        <td>@functie.Bevoegdheid</td>
+                        <td>@functie.HandelingsBekwaam</td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <h3>SBI Activiteiten</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>SBI Code</th>
+                    <th>Omschrijving</th>
+                    <th>HoofdActiviteit?</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var activiteit in Model.Inschrijving.SbiActiviteiten.Where(s => s.SbiCode != null))
+                {
+                    <tr>
+                        <td>@activiteit.SbiCode.Code</td>
+                        <td>@activiteit.SbiCode.Omschrijving</td>
+                        <td>@(activiteit.IsHoofdSbiActiviteit ? "Ja" : "Nee")</td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+
+
+@if (Model.Inschrijving.Deponeringen.Any())
+{
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Deponeringen</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>DepotId</th>
+                        <th>DatumDeponering</th>
+                        <th>Type</th>
+                        <th>Gaat over</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var deponering in Model.Inschrijving.Deponeringen)
+                    {
+                        <tr>
+                            <td>@deponering.DepotId</td>
+                            <td>@deponering.DatumDeponering</td>
+                            <td>@deponering.Type</td>
+                            <td>@deponering.GaatOver</td>
+                            <td>@deponering.Status</td>
+                        </tr>
+                    }
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Deponeringen</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            Geen deponeringen
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-sm-4"><h3>Vestigingen</h3></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @{
+            var showInvalidVestigingen = false;
+        }
+        <table class="table table-striped table-bordered table-hover vestiging">
+            <thead>
+                <tr>
+                    <th>Vestigingsnummer</th>
+                    <th>Naam</th>
+                    <th>Telefoon</th>
+                    <th>Email</th>
+                    <th>Hoofdvestiging?</th>
+                    <th>Adres</th>
+
+                    <th>Straat</th>
+                    <th>Huisnummer</th>
+                    <th>Postcode</th>
+                    <th>Woonplaats</th>
+                    <th>Postbus</th>
+
+                    @if(User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                    {
+                        <th>Acties</th>
+                    }
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var vestiging in Model.Vestigingen)
+                {
+                    var valid = vestiging.GeldigTot > DateTime.Now;
+                    showInvalidVestigingen |= !valid;
+                    <tr data-vestigingid="@vestiging.Vestigingsnummer" @(valid ? null : "data-invalid=true")>
+                        <td rowspan="2">@vestiging.Vestigingsnummer</td>
+                        <td rowspan="2">@vestiging.Naam</td>
+                        <td rowspan="2">@vestiging.Telefoon</td>
+                        <td rowspan="2">@vestiging.Email</td>
+                        <td rowspan="2">@(vestiging.IsHoofdvestiging ? "Ja" : "Nee")</td>
+                        <td>Vestiging</td>
+
+                        <td>@vestiging.Straat</td>
+                        <td>@vestiging.Huisnummer@vestiging.Huisnummertoevoeging</td>
+                        <td>@vestiging.PostcodeCijfers@vestiging.PostcodeLetters</td>
+                        <td>@vestiging.Woonplaats</td>
+
+
+                        <td>nvt</td>
+
+                        @if(User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                        {
+                            <td rowspan="2">
+                                @if (User.IsAllowedAllActions(ApplicationActions.Crm))
+                                {
+                                    @Html.ActionLink(
+                                        linkText: "Naar " + Default.CrmApplication,
+                                        actionName: "Import",
+                                        controllerName: "Search",
+                                        routeValues: new { kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, export = true },
+                                        htmlAttributes: null)
+                                }
+                                @if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+                                {
+                                    @:&nbsp;
+                                    @Html.ActionLink(linkText: Default.ToDebiteuren,
+                                        actionName: "Import",
+                                        controllerName: "Search",
+                                        routeValues: new {kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, ToDebiteuren = true},
+                                        htmlAttributes: null)
+                                }
+                                @if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+                                {
+                                    @:&nbsp;
+                                    @Html.ActionLink(linkText: Default.ToCrediteuren,
+                                        actionName: "Import",
+                                        controllerName: "Search",
+                                        routeValues: new {kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, ToCrediteuren = true},
+                                        htmlAttributes: null)
+                                }
+                            </td>
+                        }
+
+                    </tr>
+                    <tr @(valid ? null : "data-invalid=true")>
+                        <td>Postadres</td>
+                        <td>@vestiging.PostStraat</td>
+                        <td>@vestiging.PostHuisnummer@vestiging.PostHuisnummerToevoeging</td>
+                        <td>@vestiging.PostPostcodeCijfers@vestiging.PostPostcodeLetters</td>
+                        <td>@vestiging.PostWoonplaats</td>
+                        <td>@vestiging.Postbusnummer</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (showInvalidVestigingen)
+        {
+            <a href="#" class="btn-showinvalid-vestigingen">Toon ongeldige vestigingen</a>
+        }
+    </div>
+
+</div>

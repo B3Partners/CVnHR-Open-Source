@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02" version="schema.v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="CatalogusTypes.xsd" />
+  <xs:include schemaLocation="CatalogusGegevensGroepen.xsd" />
+  <xs:include schemaLocation="CatalogusMainTypes.xsd" />
+  <xs:element name="naamPersoon" type="NaamPersoonType" />
+  <xs:element name="natuurlijkPersoon" type="NatuurlijkPersoonType" />
+  <xs:element name="buitenlandseVennootschap" type="BuitenlandseVennootschapType" />
+  <xs:element name="eenmanszaakMetMeerdereEigenaren" type="EenmanszaakMetMeerdereEigenarenType" />
+  <xs:element name="rechtspersoon" type="RechtspersoonType" />
+  <xs:element name="rechtspersoonInOprichting" type="RechtspersoonInOprichtingType" />
+  <xs:element name="samenwerkingsverband" type="SamenwerkingsverbandType" />
+  <xs:element name="maatschappelijkeActiviteit" type="MaatschappelijkeActiviteitType" />
+  <xs:element name="onderneming" type="OndernemingType" />
+  <xs:element name="commercieleVestiging" type="CommercieleVestigingType" />
+  <xs:element name="nietCommercieleVestiging" type="NietCommercieleVestigingType" />
+  <xs:element name="binnenlandsAdres" type="BinnenlandsAdresType" />
+  <xs:element name="deponeringen" type="DeponeringenType" />
+</xs:schema>

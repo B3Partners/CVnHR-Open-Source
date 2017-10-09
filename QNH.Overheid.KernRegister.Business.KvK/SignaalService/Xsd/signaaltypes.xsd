@@ -1,0 +1,204 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified" attributeFormDefault="unqualified"
+           xmlns="http://schemas.kvk.nl/schemas/hrip/signaal/2016/01"
+           targetNamespace="http://schemas.kvk.nl/schemas/hrip/signaal/2016/01"
+           version="1.0">
+
+
+    <xs:simpleType name="SignaalIdType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="36"/>
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RegistratieIdType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="SignaalType" abstract="true">
+        <xs:sequence>
+            <xs:element name="signaalId" type="SignaalIdType" minOccurs="1"/>
+            <xs:element name="registratieId" type="RegistratieIdType" minOccurs="1"/>
+            <xs:element name="registratieTijdstip" type="TijdstipType" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!--**** MaatschappelijkeActiviteit ****-->
+    <xs:complexType name="MaatschappelijkeActiviteitType">
+        <xs:sequence>
+            <xs:element name="kvkNummer" type="KvKNummerType"/>
+            <xs:element name="nonMailing" type="EnumeratieType" minOccurs="1"/>
+            <xs:element name="totaalWerkzamePersonen" type="xs:integer" minOccurs="0"/>
+            <xs:element name="heeftAlsEigenaar" type="EigenaarType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="wordtUitgeoefendIn" type="VestigingType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="VestigingType">
+        <xs:sequence>
+            <xs:element name="vestigingsnummer" type="VestigingsnummerType"/>
+            <xs:element name="bezoekAdres" type="LocatieType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="activiteit" type="ActiviteitType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="isHoofdvestiging" type="EnumeratieType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ActiviteitType">
+    <xs:sequence>
+        <xs:element name="sbiCode" type="xs:string" minOccurs="1"/>
+        <xs:element name="isHoofdactiviteit" type="EnumeratieType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    </xs:complexType>
+
+    <!--**** Eigenaar ****-->
+    <xs:complexType name="EigenaarType">
+        <xs:sequence>
+            <xs:element name="natuurlijkPersoon" type="NatuurlijkPersoonType" minOccurs="0"/>
+            <xs:element name="rechtsPersoon" type="RechtsPersoonType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="PersoonType">
+        <xs:sequence>
+            <xs:element name="persoonRechtsvormOud" type="xs:string" minOccurs="0"/>
+            <xs:element name="persoonRechtsvorm" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="NietNatuurlijkPersoonType">
+        <xs:complexContent>
+            <xs:extension base="PersoonType">
+                <xs:sequence>
+                    <xs:element name="rsin" type="RSINummerType" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="RechtsPersoonType">
+        <xs:complexContent>
+            <xs:extension base="NietNatuurlijkPersoonType">
+                <xs:sequence>
+                    <xs:element name="bezoekAdres" type="LocatieType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="activiteit" type="ActiviteitType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="NatuurlijkPersoonType">
+        <xs:complexContent>
+            <xs:extension base="PersoonType">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="EnumeratieType">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="omschrijving" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TijdstipType">
+        <xs:annotation>
+            <xs:documentation>Een tijdstip bestaat uit een complete datum (volgens de gregoriaanse kalender) en tijd.
+                Het formaat van het tijdstip is jjjjmmddhhmmssmmm, waarbij achtereenvolgens: jjjj - jaartal
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{17}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DatumIncompleetType">
+        <xs:annotation>
+            <xs:documentation>Een datum heeft een vast formaat: 8 posities, met als invulling jjjjmmdd (jaar-maand-dag),
+                waarbij alleen cijfers zijn toegestaan.
+                Wanneer een gedeelte van de datum onbekend is, wordt dat gerepresenteerd door nullen. De mogelijke
+                waarden van datum zijn:
+                jjjjmmdd volledige datum
+                jjjjmm00 dag onbekend
+                jjjj0000 maand onbekend
+                00000000 datum onbekend, standaardwaarde
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="KvKNummerType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:complexType name="LocatieType">
+        <xs:sequence>
+            <xs:element name="postcode" type="PostcodeType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--**** Postcode ****-->
+    <xs:complexType name="PostcodeType">
+        <xs:sequence>
+            <xs:element name="cijfercombinatie">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]{4}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="lettercombinatie" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[a-zA-Z]{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="RSINummerType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="VestigingsnummerType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{12}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Tekst200">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="200"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--**** Text ****-->
+    <xs:simpleType name="Text12">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{12}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Text9">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
+

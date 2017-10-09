@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://schemas.kvk.nl/schemas/hrip/signaal/voortzettingenoverdracht/2016/01"
+           targetNamespace="http://schemas.kvk.nl/schemas/hrip/signaal/voortzettingenoverdracht/2016/01"
+           xmlns:sig="http://schemas.kvk.nl/schemas/hrip/signaal/2016/01"
+           elementFormDefault="qualified" attributeFormDefault="unqualified"
+           version="1.0">
+
+    <xs:import namespace="http://schemas.kvk.nl/schemas/hrip/signaal/2016/01" schemaLocation="signaaltypes.xsd"/>
+
+    <xs:element name="VoortzettingEnOverdracht" type="VoortzettingEnOverdrachtSignaalType">
+    </xs:element>
+
+    <xs:complexType name="VoortzettingEnOverdrachtSignaalType">
+        <xs:complexContent>
+            <xs:extension base="sig:SignaalType">
+                <xs:sequence>
+                    <xs:element name="startdatum" type="sig:DatumIncompleetType"/>
+                    <xs:element name="heeftBetrekkingOp" type="sig:MaatschappelijkeActiviteitType"/>
+                    <xs:element name="voortzettingEnOverdracht" type="VoortzettingEnOverdrachtType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="VoortzettingEnOverdrachtType">
+        <xs:sequence>
+            <xs:element name="betrokkenVestigingen" type="BetrokkenVestigingenType" maxOccurs="1"/>
+            <xs:element name="rolBijVoortzettingOverdracht" type="sig:EnumeratieType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="kvkNummer" type="sig:KvKNummerType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="persoonRechtsvorm" type="xs:string" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BetrokkenVestigingenType">
+        <xs:sequence>
+            <xs:element name="vestigingsnummer" type="sig:VestigingsnummerType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

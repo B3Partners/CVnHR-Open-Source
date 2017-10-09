@@ -1,0 +1,101 @@
+﻿@* Helper function to render the taskscheduler script *@
+@using Microsoft.Win32.TaskScheduler 
+
+@helper RenderTaskSchedulerScript(System.Web.Mvc.UrlHelper Url, Trigger trigger, TaskTriggerType triggerType) {
+    <script type="text/javascript">
+    $(function () {
+
+        // Set the datetimepicker
+        var wasDisabled = $("#datetimepicker").is(":disabled");
+        if (wasDisabled)
+            $("#datetimepicker")[0].disabled = false;
+        $('#datetimepicker').datetimepicker({ format: 'D-M-YYYY HH:mm:ss' });
+        if (wasDisabled)
+            $("#datetimepicker")[0].disabled = true;
+
+        $("#datetimepicker").on("blur", function (e) {
+            $(".bootstrap-datetimepicker-widget.dropdown-menu").removeClass("picker-open").hide();
+        });
+        @if (trigger != null && (triggerType != TaskTriggerType.Time || trigger.StartBoundary > DateTime.Now))
+        {
+        @:$('#datetimepicker').data("DateTimePicker").date('@trigger.StartBoundary');
+        }
+
+        var btnStartNow = $("button.btn-start-now").on("click", function () {
+            var btn = this;
+            this.disabled = true;
+            $(btn).text("bezig...");
+            $.post("@Url.Action("StartBatchUpdateNow")", function () {
+                SetRunningState(true);
+                setTimeout(function() {
+                    window.location.reload();
+                }, 2000);
+            });
+        });
+
+        var btnStopNow = $("button.btn-stop-now").on("click", function () {
+            var btn = this;
+            btn.disabled = true;
+            $(btn).text("bezig...");
+            $.post("@Url.Action("StopBatchUpdateNow")", function () {
+                SetRunningState(false);
+            });
+        });
+
+        function SetRunningState(running) {
+            btnStartNow[0].disabled = running;
+            btnStartNow.text(running ? "running" : "Start batchupdate nu");
+            btnStopNow.toggle(running);
+            btnStopNow[0].disabled = !running;
+            btnStopNow.text("Stop nu");
+        }
+
+        var checkStateInterval = setInterval(function () {
+            $.getJSON("@Url.Action("GetCurrentState")", function (result) {
+                SetRunningState(result.CurrentState == "@TaskState.Running");
+
+                $(".task-state").text(result.CurrentState);
+                $(".task-next-runtime").text(result.NextStart);
+                $(".task-last-task-result").text(result.LastResult);
+                $(".task-state-schedule").text(result.ScheduleState);
+            }).fail(function () {
+                clearInterval(checkStateInterval);
+            });
+        }, 2000);
+
+        var btnStartSchedule = $("button.btn-start-schedule, button.btn-stop-schedule").on("click", function () {
+            var btn = this;
+            var enabled = $(this).is(".btn-start-schedule");
+            var time = $('#datetimepicker').val() != "" ? $('#datetimepicker').data("DateTimePicker").date().toDate().toJSON() : null;
+            var triggerType = $("#updateFrequency").val();
+
+            $.post("@Url.Action("SetSchedule")", { time: time, triggerType: triggerType, enabled: enabled }, function (result) {
+                if (result.success) {
+                    $("button.btn-start-schedule, button.btn-stop-schedule").each(function () {
+                        this.disabled = btn == this;
+
+                        $(this).toggle(btn != this);
+                    });
+
+                    var disabled = $("button.btn-start-schedule").is("[disabled]");
+                    $("#updateFrequency, #datetimepicker").each(function () {
+                        this.disabled = disabled;
+                    });
+
+                    $("#datetimepicker + .error").remove();
+                }
+                else {
+                    $("#datetimepicker").after("<p class='error'>" + result.error + "</p>");
+                    //alert(result.error);
+                }
+            }, "json");
+        });
+
+        $(".log-files").on("click", "a", function (e) {
+            e.preventDefault();
+            window.open("@Url.Action("DownloadLogFile")?fileName=" + $(this).attr("data-href"), "_blank");
+        });
+    });
+
+    </script>     
+}

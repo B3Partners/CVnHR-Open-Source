@@ -1,0 +1,80 @@
+﻿@using System.Globalization
+@using System.Configuration
+@model QNH.Overheid.KernRegister.Beheer.ViewModels.KvkItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section customstyles
+{
+    <style>
+        .vestiging tbody tr {
+            cursor: pointer;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Detailscherm handelsregister inschrijving</h2>
+    </div>
+</div>
+
+@Html.Partial("_KvKInschrijvingPartial", Model)
+
+<div class="row">
+    <div class="pull-right">
+
+        @BackButton.Render()
+        @*Html.ActionLink("Terug naar zoekscherm", "Index", "Search", new { kvkNummer = Model.KvkNummer }, new { @class = "btn btn-large btn-info" }) *@
+
+        @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+        {
+            if (User.IsAllowedAllActions(ApplicationActions.Crm))
+            {
+                @:&nbsp; @Html.ActionLink("Naar " + Default.ApplicationName, "Import", "Search", new {kvkNummer = Model.KvkNummer}, new {@class = "btn btn-large btn-success"})
+                @:&nbsp; @Html.ActionLink(
+                             (Model.Vestigingen.Count > 1 ? "Alle vestigingen naar " + Default.ApplicationName + " en " : "Naar " + Default.ApplicationName + " en ") + Default.CrmApplication,
+                             "Import",
+                             "Search",
+                             new {kvkNummer = Model.KvkNummer, export = true}, new {@class = "btn btn-large btn-warning"})
+            }
+            if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.Brmo))
+            {
+                @:&nbsp; @Html.ActionLink("Naar " + Default.BrmoApplication,
+                           "Import",
+                           "Search",
+                           new { kvkNummer = Model.KvkNummer, Brmo = true },
+                           new { @class = "btn btn-large btn-brmo" })
+            }
+
+            if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+            {
+                @:&nbsp;
+                @Html.ActionLink(Default.ToDebiteuren, "Import", 
+                        new { kvkNummer = Model.KvkNummer, ToDebiteuren = true }, 
+                        new { @class = "btn btn-large btn-warning" })
+            }
+            if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+            {
+                @:&nbsp;
+                @Html.ActionLink(Default.ToCrediteuren, "Import", 
+                        new { kvkNummer = Model.KvkNummer, ToCrediteuren = true }, 
+                        new { @class = "btn btn-large btn-warning" })
+            }
+}
+    </div>
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $(".vestiging tbody").on("click", "tr", function () {
+                var id = $(this).attr("data-vestigingId") || $(this).prev("tr").attr("data-vestigingId");
+                window.location = '@Url.Action("VestigingDetails")?kvkNummer=@Model.KvkNummer&vestigingId=' + id;
+            });
+        });
+    </script>
+}

@@ -1,0 +1,56 @@
+﻿@model QNH.Overheid.KernRegister.Beheer.ViewModel.KvKItemDeleteResult
+
+@{
+    ViewBag.Title = "Verwijderen uit " + Default.ApplicationName;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        @if (Model.Success)
+        {
+            if(!Model.AlreadyDeleted)
+            { 
+                <dt>KvKNummer</dt><dd>@Model.KvKNummer</dd>
+                <dt>Naam</dt><dd>@Model.InschrijvingNaam</dd>
+                <dt>
+                     Status
+                </dt>
+                <dd>
+                    Succesvol verwijderd.
+                </dd>
+            }
+            else
+            {
+                <dt>KvKNummer</dt>
+                <dd>@Model.KvKNummer</dd>
+                <dt>
+                    Status
+                </dt>
+                <dd>
+                    Is in het verleden al succesvol verwijderd.
+                </dd>
+            }
+        }
+        else
+        {
+            <dt>
+                Status
+            </dt>
+            <dd>
+                Error
+            </dd>
+            <dt>
+                Bericht
+            </dt>
+            <dd>
+                @Html.Raw(Model.Exception.Message.Replace("\n", "<br/>"))
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @BackButton.Render("Terug naar het zoekscherm", cssClass: null)
+</p>

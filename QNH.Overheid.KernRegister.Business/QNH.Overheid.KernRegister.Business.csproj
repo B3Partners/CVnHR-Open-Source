@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6AE2CB9E-339D-4373-AB92-2E7D2BCD78AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QNH.Overheid.KernRegister.Business</RootNamespace>
+    <AssemblyName>QNH.Overheid.KernRegister.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DrentheTest|AnyCPU'">
+    <OutputPath>bin\DrentheTest\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DrentheTest|x64'">
+    <OutputPath>bin\x64\DrentheTest\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AzureRelease|AnyCPU'">
+    <OutputPath>bin\AzureRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AzureRelease|x64'">
+    <OutputPath>bin\x64\AzureRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DrentheAcceptance|AnyCPU' ">
+    <OutputPath>bin\Acceptance\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DrentheAcceptance|x64' ">
+    <OutputPath>bin\x64\Acceptance\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FlevoTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\FlevoTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'FlevoTest|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\FlevoTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DrentheRelease|AnyCPU'">
+    <OutputPath>bin\DrentheRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DrentheRelease|x64'">
+    <OutputPath>bin\x64\DrentheRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.24160719\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=4.4.3.564, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.4.3\lib\net45\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\ExportProcessing.cs" />
+    <Compile Include="Business\InschrijvingProcessing.cs" />
+    <Compile Include="Business\RawXmlCache.cs" />
+    <Compile Include="Crm\DocBase\DocBaseCredentials.cs" />
+    <Compile Include="Crm\DocBase\DocBaseHelpers.cs" />
+    <Compile Include="Crm\DocBase\DocBaseNoRecordsFoundException.cs" />
+    <Compile Include="Crm\DocBase\DocBaseNotAuthenticatedException.cs" />
+    <Compile Include="Crm\DocBase\DocBaseRepository.cs" />
+    <Compile Include="Crm\ExportResult.cs" />
+    <Compile Include="Crm\FinancialProcesType.cs" />
+    <Compile Include="Crm\IExportCredentials.cs" />
+    <Compile Include="Crm\IExportResult.cs" />
+    <Compile Include="Crm\IExportService.cs" />
+    <Compile Include="Crm\IFinancialExportService.cs" />
+    <Compile Include="Crm\NAdres\NAdresHelpers.cs" />
+    <Compile Include="Crm\NAdres\NAdresRepository.cs" />
+    <Compile Include="Crm\Probis\ProbisRepository.cs" />
+    <Compile Include="Integration\DocBase-Relations-Service.cs" />
+    <Compile Include="Integration\DocBase-Security-Service.cs" />
+    <Compile Include="Integration\WcfExtensions\CookieManagerBehavior.cs" />
+    <Compile Include="Integration\WcfExtensions\CookieManagerMessageInspector.cs" />
+    <Compile Include="KvKSearchApi\Entities\KvKSearchApiParameters.cs" />
+    <Compile Include="KvKSearchApi\IKvkSearchApi.cs" />
+    <Compile Include="Model\Debug\DatabaseDebugInfo.cs" />
+    <Compile Include="Enums\AddInschrijvingResultStatus.cs" />
+    <Compile Include="Model\Entities\DeponeringsStuk.cs" />
+    <Compile Include="Model\Entities\FunctieVervulling.cs" />
+    <Compile Include="Model\Entities\HandelsNaam.cs" />
+    <Compile Include="Model\Entities\KvkInschrijving.cs" />
+    <Compile Include="Model\Entities\SbiActiviteit.cs" />
+    <Compile Include="Model\Entities\SbiCode.cs" />
+    <Compile Include="Model\Entities\Vestiging.cs" />
+    <Compile Include="Model\Entities\VestigingSbiActiviteit.cs" />
+    <Compile Include="Model\EntityComparers\FunctionalEqualsComparer.cs" />
+    <Compile Include="Model\EntityComparers\IFunctionalEquals.cs" />
+    <Compile Include="Model\IKvkInschrijvingRepository.cs" />
+    <Compile Include="Model\IRepository.cs" />
+    <Compile Include="Model\nHibernate\Attributes.cs" />
+    <Compile Include="Model\IRsgbRepository.cs" />
+    <Compile Include="Model\nHibernate\KvkInschrijvingNHRepository.cs" />
+    <Compile Include="Model\nHibernate\MappingConventions.cs" />
+    <Compile Include="Model\nHibernate\NHRepository.cs" />
+    <Compile Include="Model\nHibernate\RsgbRepository.cs" />
+    <Compile Include="Model\TransactionWrapper.cs" />
+    <Compile Include="Model\RSGB\2.2\QNH_VW_DeponeringsStuk.cs" />
+    <Compile Include="Model\RSGB\2.2\QNH_VW_FunctieVervulling.cs" />
+    <Compile Include="Model\RSGB\2.2\QNH_VW_KvkInschrijving.cs" />
+    <Compile Include="Model\RSGB\2.2\QNH_VW_SbiActiviteit.cs" />
+    <Compile Include="Model\RSGB\2.2\QNH_VW_SbiCode.cs" />
+    <Compile Include="Model\RSGB\2.2\QNH_VW_Vestiging.cs" />
+    <Compile Include="Model\RSGB\2.2\QNH_VW_VestigingSbiActiviteit.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\BRMO\BrmoSyncService.cs" />
+    <Compile Include="Service\BRMO\IBrmoSyncService.cs" />
+    <Compile Include="Service\IInschrijvingSyncService.cs" />
+    <Compile Include="Service\InschrijvingSyncService.cs" />
+    <Compile Include="Service\IPostcodeService.cs" />
+    <Compile Include="Service\IKvkSearchService.cs" />
+    <Compile Include="Service\KvK\MissingHoofdVestigingException.cs" />
+    <Compile Include="Service\KvK\Pong.cs" />
+    <Compile Include="Service\KvK\v2_5\KvkDataSearchService.cs" />
+    <Compile Include="Service\KvK\v2_5\KvkSearchServiceExtensions.cs" />
+    <Compile Include="Service\KvK\v30\KvkDataSearchService.cs" />
+    <Compile Include="Service\KvK\v30\KvkSearchServiceExtensions.cs" />
+    <Compile Include="Service\NationaalGeoregisterLocatieService.cs" />
+    <Compile Include="Utility\NHibernateUtils.cs" />
+    <Compile Include="Utility\ProjectionEqualityComparer.cs" />
+    <Compile Include="Utility\StringUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_VestigingSbiActiviteit.sql" />
+    <None Include="Fakes\Documentation\relations.wsdl" />
+    <None Include="Fakes\Documentation\security.wsdl" />
+    <None Include="Model\kernregister.huidig.cd" />
+    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_FunctieVervulling.sql" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Crm\NAdres\CreateDatabaseForLocal.txt" />
+    <Content Include="Crm\NAdres\nAdres-Flevo-Examples.txt" />
+    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_DeponeringsStuk.sql" />
+    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_KvkInschrijving.sql" />
+    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_SbiActiviteit.sql" />
+    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_SbiCode.sql" />
+    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_Vestiging.sql">
+      <SubType>Component</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QNH.Overheid.KernRegister.Business.KvK\QNH.Overheid.KernRegister.Business.KvK.csproj">
+      <Project>{b711469c-e353-464e-8c4d-fbcedf7055bd}</Project>
+      <Name>QNH.Overheid.KernRegister.Business.KvK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QNH.Overheid.KernRegister.Organization\QNH.Overheid.KernRegister.Organization.csproj">
+      <Project>{05ced55b-3ffd-4c56-9bdd-d9d39d44c1a9}</Project>
+      <Name>QNH.Overheid.KernRegister.Organization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

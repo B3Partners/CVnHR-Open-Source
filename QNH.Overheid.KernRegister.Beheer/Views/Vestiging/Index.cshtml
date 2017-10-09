@@ -1,0 +1,260 @@
+﻿@model QNH.Overheid.KernRegister.Beheer.ViewModels.KvkSearch
+@using System.Configuration
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section customstyles
+{
+    <style>
+        .form-group label {
+            font-size: 20px;
+        }
+        .form-group input[type=text] {
+            font-size: 20px;
+        }
+
+        .red {
+            color:red;
+        }
+
+        .col-sm-3 img {
+            width: 80%;
+            margin: 21px 0;
+        }
+
+        .form-group input {
+            max-width: 100%;
+        }
+        button.pagination {
+            color:#fff;
+            font-weight: bold;
+        }
+
+        .form-group .text-small label {
+            font-size: .9em;
+            margin: 0 15px 0 0;
+            cursor: pointer;
+        }
+    </style>
+}
+
+<h2>@Default.TitleSearchApplication</h2>
+
+<div class="row">
+    <div class="col-sm-3">
+        <img src="@Url.Content(Default.LogoUrl)" alt="Logo" />
+        <h3>Zoekformulier @Default.ApplicationName</h3>
+        <p>Hiermee wordt gezocht in de @Default.ApplicationName van @Default.CompanyName.</p>
+        <p>Voer een KVK nummer, vestigingsnummer, naam van een bestuurder/eigenaar of bedrijfsnaam in.</p>
+        <p>Let op: Zoek je naar een bedrijf met een speciaal teken in zijn naam? Zoek dan met een % teken, bijvoorbeeld voor Coöperatie gebruik Co%peratie.</p>
+    </div>
+    <div class="col-sm-9">
+        
+
+        @using (Html.BeginForm("Index", "Vestiging", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label for="GlobalCriterium" id="criteriumlabel" class="col-sm-3 control-label">Zoekcriterium</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.KvkSearchCriteria.GlobalCriterium, new {@id = "searchbox", @class = "form-control input-lg", 
+                                            placeholder = "voer een zoekopdracht in" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9 text-small search-options">
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.All)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.All)
+                    </label>
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.Naam)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.Naam)
+                    </label>
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.KvkNummerSearch)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.KvkNummerSearch)
+                    </label>
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.VestigingsNummer)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.VestigingsNummer)
+                    </label>
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.NaamEigenaar)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.NaamEigenaar)
+                    </label>
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.AantalMedewerkers)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.AantalMedewerkers)
+                    </label>
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.SBICode)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.SBICode)
+                    </label>
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.Adres)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.Adres)
+                    </label>
+                    <label>
+                        @Html.CheckBoxFor(model => model.KvkSearchCriteria.Postcode)
+                        @Html.DisplayNameFor(m => m.KvkSearchCriteria.Postcode)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-primary">Zoek</button>
+                    <button type="reset" id="btnShowall" name="btnShowall" class="btn btn-success">Toon alle</button>
+                </div>
+            </div>
+            @Html.HiddenFor(model=> model.KvkSearchCriteria.Page, new { @id = "page" })
+        }
+
+
+        @if (Model.KvkSearchResult != null && !Model.KvkSearchCriteria.IsEmpty)
+        {
+            <hr />
+            <h3>@Model.KvkSearchResult.TotalFound Resultaten</h3>
+
+            <p style="display:none;">
+                (@(((TimeSpan)ViewBag.TimeElapsed).TotalMilliseconds) ms.)
+            </p>
+
+            if (Model.KvkSearchResult.KvkItems != null && Model.KvkSearchResult.KvkItems.Count > 0)
+            {
+                <table id="resultTable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].KvkNummer)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].Naam)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].AantalVestigingen)
+                            </th>
+                            <th>Actie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.KvkSearchResult.KvkItems)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.KvkNummer)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Naam)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AantalVestigingen)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "Details", new { kvkNummer = item.KvkNummer, searchcriteria = Model.KvkSearchCriteria.GlobalCriterium })
+                                    @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                                    {
+                                        @:|
+                                        @Html.ActionLink("Verwijder", "Delete", new { kvkNummer = item.KvkNummer }) 
+                                        if (item.Vestigingen.Count == 1)
+                                        {
+                                            if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
+                                            {
+                                                @:|
+                                                @Html.ActionLink("Naar " + Default.CrmApplication, 
+                                                    "Export", 
+                                                    new { kvkNummer = item.KvkNummer })
+                                            }
+                                            if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+                                            {
+                                                @:|
+                                                @Html.ActionLink(linkText: Default.ToDebiteuren,
+                                                    actionName: "ExportDebiteuren",
+                                                    routeValues: new { kvkNummer = item.KvkNummer },
+                                                    htmlAttributes: null)
+                                            }
+                                            if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+                                            {
+                                                @:|
+                                                @Html.ActionLink(linkText: Default.ToCrediteuren,
+                                                    actionName: "ExportCrediteuren",
+                                                    routeValues: new { kvkNummer = item.KvkNummer },
+                                                    htmlAttributes: null)
+                                            }
+                                        }
+
+
+                                    }
+
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                if (Model.KvkSearchResult.TotalFound > Model.KvkSearchResult.KvkItems.Count)
+                {
+                    var page = Convert.ToInt32(Request["page"] ?? "0");
+                    if (page > 0)
+                    {
+                        <button class="pagination btn btn-large btn-info" data-page="@(page - 1)">Vorige pagina</button>
+                    }
+                    if (Model.KvkSearchResult.KvkItems.Count == 50)
+                    {
+                        <button class="pagination btn btn-large btn-info" data-page="@(page + 1)">Volgende pagina</button>
+                    }
+                }
+            }
+            else if (Model.KvkSearchResult.SearchedAndNothingFound)
+            {
+                <div class="error red">
+                    Nothing found for: @Model.KvkSearchCriteria.GlobalCriterium
+                </div>
+            }
+            else if (Model.KvkSearchCriteria.GlobalCriterium != null)
+            {
+                <div class="error red">
+                    Something went wrong.
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function() {
+            $("#btnShowall").on("click", function(e) {
+                $("#searchbox").val("%");
+                $("form").submit();
+            });
+
+            $(".pagination").on("click", function(e) {
+                e.preventDefault();
+                $("#page").val($(this).attr("data-page"));
+                $("form").submit();
+            });
+
+            $("input[type=checkbox]", ".search-options").on("change", function(e) {
+                //e.preventDefault();
+                if ($(this).is("#KvkSearchCriteria_All")) {
+                    $("input[type=checkbox]:not(#KvkSearchCriteria_All)", ".search-options").attr("checked", false);
+                    $("#KvkSearchCriteria_All").prop("checked", true);
+                } else {
+                    $(this).attr("checked", true);
+                    $("#KvkSearchCriteria_All").prop("checked", false);
+                }
+                if ($("input[type=checkbox]:checked", ".search-options").length === 0) {
+                    $("#KvkSearchCriteria_All").prop("checked", true);
+                }
+            });
+        })
+    </script>
+}

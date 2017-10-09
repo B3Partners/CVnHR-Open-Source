@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02" version="schema.v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="CatalogusRelaties.xsd" />
+  <xs:include schemaLocation="CatalogusTypes.xsd" />
+  <xs:include schemaLocation="CatalogusGegevensGroepen.xsd" />
+  <xs:complexType name="PersoonType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="bijzondereRechtstoestand" type="BijzondereRechtstoestandType" />
+          <xs:element minOccurs="0" name="beperkingInRechtshandeling" type="BeperkingInRechtshandelingType" />
+          <xs:element minOccurs="0" name="persoonRechtsvorm" type="xs:string" />
+          <xs:element minOccurs="0" name="volledigeNaam" type="xs:string" />
+          <xs:element minOccurs="0" name="uitgebreideRechtsvorm" type="xs:string" />
+          <xs:element minOccurs="0" name="bezoekLocatiePersoon" type="LocatieType" />
+          <xs:element minOccurs="0" name="postLocatiePersoon" type="LocatieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="heeft" type="FunctievervullingRelatieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="is" type="FunctievervullingRelatieType" />
+          <xs:element minOccurs="0" name="isEigenaarVan" type="MaatschappelijkeActiviteitRelatieType" />
+          <xs:element minOccurs="0" name="isVerenigdNaar" type="PersoonRelatieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="isVerenigdMet" type="PersoonRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NaamPersoonType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="PersoonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="naam" type="xs:string" />
+          <xs:element minOccurs="0" name="telefoonnummer" type="TelefoonnummerType" />
+          <xs:element minOccurs="0" name="adres" type="LocatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NatuurlijkPersoonType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="PersoonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="bsn" type="BSNummerType" />
+          <xs:element minOccurs="0" name="geslachtsnaam" type="xs:string" />
+          <xs:element minOccurs="0" name="voorvoegselGeslachtsnaam" type="xs:string" />
+          <xs:element minOccurs="0" name="voornamen" type="xs:string" />
+          <xs:element minOccurs="0" name="geslachtsaanduiding" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="geboorteplaats" type="xs:string" />
+          <xs:element minOccurs="0" name="geboorteland" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="adellijkeTitel" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="aanduidingNaamgebruik" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="geslachtsnaamPartner" type="xs:string" />
+          <xs:element minOccurs="0" name="voorvoegselGeslachtsnaamPartner" type="xs:string" />
+          <xs:element minOccurs="0" name="handlichting" type="HandlichtingType" />
+          <xs:element minOccurs="0" name="geboortedatum" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="overlijdensdatum" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="datumEersteHuwelijk" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="datumGeemigreerd" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="woonLocatie" type="LocatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NietNatuurlijkPersoonType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="PersoonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="rsin" type="RSINummerType" />
+          <xs:element minOccurs="0" name="naamgeving" type="NaamgevingType" />
+          <xs:element minOccurs="0" name="datumUitschrijving" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="buitenlandseRechtstoestand" type="BuitenlandseRechtstoestandType" />
+          <xs:element minOccurs="0" name="ontbinding" type="OntbindingType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="fusie" type="FusieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="splitsing" type="SplitsingType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="heeftGedeponeerd" type="DeponeringRelatieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="isDochterVan" type="AansprakelijkheidRelatieRegistratieType" />
+          <xs:element minOccurs="0" name="deponeringen" type="DeponeringenType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BuitenlandseVennootschapType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="NietNatuurlijkPersoonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="buitenlandseRegistratieGegevens" type="BuitenlandseRegistratieGegevensType" />
+          <xs:element minOccurs="0" name="landVanOprichting" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="landVanVestiging" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="geplaatstKapitaal" type="KapitaalType" />
+          <xs:element minOccurs="0" name="buitenlandseVennootschapGegevens" type="BuitenlandseVennootschapGegevensType" />
+          <xs:element minOccurs="0" name="bezoekLocatie" type="LocatieType" />
+          <xs:element minOccurs="0" name="postLocatie" type="LocatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EenmanszaakMetMeerdereEigenarenType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="NietNatuurlijkPersoonType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AfgeslotenMoederType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="NietNatuurlijkPersoonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="kvkNummer" type="KvKNummerType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RechtspersoonType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="NietNatuurlijkPersoonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="rechtsvorm" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="publiekrechtelijkeRechtsvorm" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="overigePrivaatrechtelijkeRechtsvorm" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="nieuwGemeldeRechtsvorm" type="xs:string" />
+          <xs:element minOccurs="0" name="zetelGegevensBuitenland" type="RechtspersoonGegevensBuitenlandType" />
+          <xs:element minOccurs="0" name="statutaireZetel" type="xs:string" />
+          <xs:element minOccurs="0" name="aanvangStatutaireZetel" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="datumAkteOprichting" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="datumOprichting" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="bedragKostenOprichting" type="GeldType" />
+          <xs:element minOccurs="0" name="datumEersteInschrijvingHandelsregister" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="datumAkteStatutenwijziging" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="datumLaatsteStatutenwijziging" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="rechtsbevoegdheidVereniging" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="ingangStatuten" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="beleggingsMijMetVeranderlijkKapitaal" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="koninklijkErkend" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="stelselInrichting" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="structuur" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="maatschappelijkKapitaal" type="KapitaalType" />
+          <xs:element minOccurs="0" name="geplaatstKapitaal" type="KapitaalType" />
+          <xs:element minOccurs="0" name="gestortKapitaal" type="KapitaalType" />
+          <xs:element minOccurs="0" name="bezoekLocatie" type="LocatieType" />
+          <xs:element minOccurs="0" name="postLocatie" type="LocatieType" />
+          <xs:element minOccurs="0" name="activiteiten" type="ActiviteitenType" />
+          <xs:element minOccurs="0" name="communicatiegegevens" type="CommunicatiegegevensType" />
+          <xs:element minOccurs="0" name="voornemenTotOntbinding" type="VoornemenTotOntbindingType" />
+          <xs:element minOccurs="0" name="activiteitenGestaaktPer" type="DatumIncompleetType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RechtspersoonInOprichtingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="NietNatuurlijkPersoonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="doelRechtsvorm" type="EnumeratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SamenwerkingsverbandType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="NietNatuurlijkPersoonType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="rechtsvorm" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="aantalCommanditaireVennoten" type="xs:integer" />
+          <xs:element minOccurs="0" name="duur" type="DuurType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="commanditairKapitaal" type="CommanditairKapitaalType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FunctievervullingType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="functietitel" type="FunctietitelType" />
+          <xs:element minOccurs="0" name="schorsing" type="SchorsingType" />
+          <xs:choice>
+            <xs:element name="door" type="PersoonRelatieType">
+              <xs:annotation>
+                <xs:documentation>[Persoon] heeft [Functievervulling] door [Persoon]</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="voor" type="PersoonRelatieType">
+              <xs:annotation>
+                <xs:documentation>[Persoon] is [Functievervulling] voor [Persoon]</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AansprakelijkeType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FunctievervullingType">
+        <xs:sequence>
+          <xs:element name="functie" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="handlichting" type="HandlichtingType" />
+          <xs:element minOccurs="0" name="bevoegdheid" type="BevoegdheidAansprakelijkeType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MonistischeBestuurderType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="MetExtraElementenMogenlijkheidType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="registratie" type="RegistratieType" />
+          <xs:element minOccurs="0" name="rol" type="EnumeratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BestuursfunctieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FunctievervullingType">
+        <xs:sequence>
+          <xs:element name="functie" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="bevoegdheid" type="BevoegdheidBestuurderType" />
+          <xs:element minOccurs="0" name="wordtVertegenwoordigdDoor" type="NatuurlijkPersoonRelatieType" />
+          <xs:element minOccurs="0" name="monistischeBestuurder" type="MonistischeBestuurderType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FunctionarisBijzondereRechtstoestandType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FunctievervullingType">
+        <xs:sequence>
+          <xs:element name="functie" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="bevoegdheid" type="BevoegdheidBewindvoerderType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GemachtigdeType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FunctievervullingType">
+        <xs:sequence>
+          <xs:element name="functie" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="volmacht" type="VolmachtType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OverigeFunctionarisType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FunctievervullingType">
+        <xs:sequence>
+          <xs:element name="functie" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="geplaatstKapitaal" type="KapitaalType" />
+          <xs:element minOccurs="0" name="gestortKapitaal" type="KapitaalType" />
+          <xs:element minOccurs="0" name="bevoegdheid" type="BevoegdheidOverigeFunctionarisType" />
+          <xs:element minOccurs="0" name="heeftAfwijkendAansprakelijkheidsbeding" type="EnumeratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PubliekrechtelijkeFunctionarisType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FunctievervullingType">
+        <xs:sequence>
+          <xs:element name="functie" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="bevoegdheid" type="BevoegdheidPubliekrechtelijkeFunctionarisType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MaatschappelijkeActiviteitType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element name="kvkNummer" type="KvKNummerType" />
+          <xs:element minOccurs="0" name="nonMailing" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="pensioenvennootschap" type="EnumeratieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="sbiActiviteit" type="SBIActiviteitType" />
+          <xs:element minOccurs="0" name="incidenteelUitlenenArbeidskrachten" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="bezoekLocatie" type="LocatieType" />
+          <xs:element minOccurs="0" name="postLocatie" type="LocatieType" />
+          <xs:element minOccurs="0" name="communicatiegegevens" type="CommunicatiegegevensType" />
+          <xs:element minOccurs="0" name="naam" type="xs:string" />
+          <xs:element minOccurs="0" name="notitie" type="xs:string" />
+          <xs:element minOccurs="0" name="manifesteertZichAls" type="OndernemingRelatieRegistratieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="wordtUitgeoefendIn" type="NietCommercieleVestigingRelatieRegistratieType" />
+          <xs:element minOccurs="0" name="wordtGeleidVanuit" type="VestigingRelatieType">
+            <xs:annotation>
+              <xs:documentation>Deze relatie geeft de hoofdvestiging aan</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="heeftAlsEigenaar" type="PersoonRelatieRegistratieType" />
+          <xs:element minOccurs="0" name="hadAlsEigenaar" type="PersoonRelatieRegistratieType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="berichtenbox" type="BerichtenboxType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OndernemingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="kvkNummer" type="KvKNummerType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="sbiActiviteit" type="SBIActiviteitType" />
+          <xs:element minOccurs="0" name="voltijdWerkzamePersonen" type="xs:integer" />
+          <xs:element minOccurs="0" name="deeltijdWerkzamePersonen" type="xs:integer" />
+          <xs:element minOccurs="0" name="totaalWerkzamePersonen" type="xs:integer" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="handeltOnder" type="HandelsnaamRelatieRegistratieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="wordtUitgeoefendIn" type="CommercieleVestigingRelatieRegistratieType" />
+          <xs:element minOccurs="0" name="isEenManifestatieVan" type="MaatschappelijkeActiviteitRelatieType" />
+          <xs:element minOccurs="0" name="isOvergenomenVan" type="VoortzettingRelatieRegistratieType" />
+          <xs:element minOccurs="0" name="isOvergedragenNaar" type="VoortzettingRelatieRegistratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VestigingType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="vestigingsnummer" type="VestigingsnummerType" />
+          <xs:element minOccurs="0" name="bezoekLocatie" type="LocatieType" />
+          <xs:element minOccurs="0" name="postLocatie" type="LocatieType" />
+          <xs:element minOccurs="0" name="communicatiegegevens" type="CommunicatiegegevensType" />
+          <xs:element minOccurs="0" name="eersteHandelsnaam" type="xs:string" />
+          <xs:element minOccurs="0" name="isSamengevoegdMet" type="VestigingenRelatieRegistratieType" />
+          <xs:element minOccurs="0" name="isOvergenomenVan" type="VoortzettingRelatieRegistratieType" />
+          <xs:element minOccurs="0" name="isOvergedragenNaar" type="VoortzettingRelatieRegistratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CommercieleVestigingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="VestigingType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="voltijdWerkzamePersonen" type="xs:integer" />
+          <xs:element minOccurs="0" name="deeltijdWerkzamePersonen" type="xs:integer" />
+          <xs:element minOccurs="0" name="totaalWerkzamePersonen" type="xs:integer" />
+          <xs:element minOccurs="0" name="activiteiten" type="ActiviteitenCommercieleVestigingType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="handeltOnder" type="HandelsnaamRelatieRegistratieType" />
+          <xs:element minOccurs="0" name="isEenUitoefeningVan" type="OndernemingRelatieRegistratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NietCommercieleVestigingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="VestigingType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="naamgeving" type="NaamgevingType" />
+          <xs:element minOccurs="0" name="activiteiten" type="ActiviteitenType" />
+          <xs:element minOccurs="0" name="isEenUitoefeningVan" type="MaatschappelijkeActiviteitRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NaamgevingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element name="naam" type="xs:string" />
+          <xs:element minOccurs="0" name="ookGenoemd" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VolmachtType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element name="typeVolmacht" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="isStatutair" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="beperkteVolmacht" type="BeperkteVolmachtType" />
+          <xs:element minOccurs="0" name="heeftBetrekkingOp" type="VestigingenRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HandelsnaamType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element name="naam" type="xs:string" />
+          <xs:element minOccurs="0" name="volgorde" type="xs:integer" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringenType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="MetExtraElementenMogenlijkheidType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="deponering" type="DeponeringRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringNietNatuurlijkPersoonRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="rsin" type="RSINummerType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="MetExtraElementenMogenlijkheidType">
+        <xs:sequence>
+          <xs:element name="depotId" type="DepotIdType" />
+          <xs:element minOccurs="0" name="soortDeponering" type="xs:string" />
+          <xs:element minOccurs="0" name="status" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="datumDeponering" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="uitspraak" type="RechterlijkeUitspraakType" />
+          <xs:element minOccurs="0" name="gaatOver" type="DeponeringRelatieType" />
+          <xs:element minOccurs="0" name="gedeponeerdBij" type="DeponeringNietNatuurlijkPersoonRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringJaarstukType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="boekjaar" type="JaarType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringAansprakelijkheidIntrekkingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringAansprakelijkheidOverblijvendType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringAansprakelijkheidVerklaringType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringAanvullendeMededelingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringBijzondereDeponeringType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="soort" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="fusieSplitsingVoorstel" type="FusieSplitsingVoorstelType" />
+          <xs:element minOccurs="0" name="omschrijving" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringJaarstukHalfjaarKwartaalcijfersType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringJaarstukType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringJaarstukInstemmingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringJaarstukType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="groepsjaarrekeningHouder" type="DeponeringNietNatuurlijkPersoonRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringJaarstukType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringJaarstukJaarrekeningType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringJaarstukType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datumVaststelling" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="vaststelling" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="grootte" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="maandEindeBoekjaar" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="plaatsDeponeringJaarverslag" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="buitenlandseJaarrekening" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="aanvullendeMededeling" type="DeponeringAanvullendeMededelingType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringJaarstukOntheffingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringJaarstukType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="reden" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="groepsjaarrekeninghouder" type="DeponeringNietNatuurlijkPersoonRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringOverigJaarstukType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="DeponeringJaarstukType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="soort" type="EnumeratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BerichtenboxType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="MetExtraElementenMogenlijkheidType">
+        <xs:sequence>
+          <xs:element name="berichtenboxnaam" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FusieSplitsingType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="uitspraak" type="RechterlijkeUitspraakType" />
+          <xs:element minOccurs="0" name="datumAkte" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="status" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="rol" type="EnumeratieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="opTeRichtenVerkrijgendeRechtspersoon" type="OpTeRichtenRechtspersoonType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="toekennendeRechtspersoon" type="NietNatuurlijkPersoonRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FusieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FusieSplitsingType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="opTeRichtenVerdwijnendeRechtspersoon" type="OpTeRichtenRechtspersoonType" />
+          <xs:element minOccurs="0" name="verkrijgendeRechtspersoon" type="NietNatuurlijkPersoonRelatieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="verdwijnendeRechtspersoon" type="NietNatuurlijkPersoonRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SplitsingType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FusieSplitsingType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="opTeRichtenSplitsendeRechtspersoon" type="OpTeRichtenRechtspersoonType" />
+          <xs:element minOccurs="0" name="splitsendeRechtspersoon" type="NietNatuurlijkPersoonRelatieType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="verkrijgendeRechtspersoon" type="NietNatuurlijkPersoonRelatieType" />
+          <xs:element minOccurs="0" name="zuivereSplitsing" type="EnumeratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OpTeRichtenRechtspersoonType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BasisType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="rechtsvorm" type="EnumeratieType" />
+          <xs:element minOccurs="0" name="naam" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

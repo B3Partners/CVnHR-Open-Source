@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://schemas.kvk.nl/schemas/hrip/signaal/insolventiewijziging/2016/01"
+           targetNamespace="http://schemas.kvk.nl/schemas/hrip/signaal/insolventiewijziging/2016/01"
+           xmlns:sig="http://schemas.kvk.nl/schemas/hrip/signaal/2016/01"
+           elementFormDefault="qualified" attributeFormDefault="unqualified"
+           version="1.0">
+
+    <xs:import namespace="http://schemas.kvk.nl/schemas/hrip/signaal/2016/01" schemaLocation="signaaltypes.xsd"/>
+
+    <xs:element name="Insolventiewijziging" type="InsolventiewijzigingType">
+    </xs:element>
+
+    <xs:complexType name="InsolventiewijzigingType">
+        <xs:complexContent>
+            <xs:extension base="sig:SignaalType">
+                <xs:sequence>
+                    <xs:element name="startdatum" type="sig:DatumIncompleetType"/>
+                    <xs:element name="heeftBetrekkingOp" type="sig:MaatschappelijkeActiviteitType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>

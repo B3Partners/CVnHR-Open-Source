@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://acanthis.com/DocNet/WS_API/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://acanthis.com/DocNet/WS_API/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://acanthis.com/DocNet/WS_API/">
+      <s:element name="GetRelationsList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="p_strType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="p_strWhereClause" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationsListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRelationsListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationTypesList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRelationTypesListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRelationTypesListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewRelationIndexFields">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewRelationIndexFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewRelationIndexFieldsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationGeneralFields">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRelationGeneralFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRelationGeneralFieldsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationDefaultAuthorizationProfile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRelationDefaultAuthorizationProfileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRelationDefaultAuthorizationProfileResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewRelationAuthorizationProfiles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewRelationAuthorizationProfilesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewRelationAuthorizationProfilesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExistingRelationAuthorizationProfiles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="relId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExistingRelationAuthorizationProfilesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExistingRelationAuthorizationProfilesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExistingRelationIndexFields">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="relId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetExistingRelationIndexFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExistingRelationIndexFieldsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateRelation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="authorizationProfileID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="processID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="indexFields">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateRelationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateRelationResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteRelation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="relId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="relType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteRelationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteRelationResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateRelation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="relId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="authorizationProfileID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="processID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="indexFields">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateRelationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateRelationResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetRelationsListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRelationsList" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationsListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRelationsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationTypesListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRelationTypesList" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationTypesListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRelationTypesListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewRelationIndexFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewRelationIndexFields" />
+  </wsdl:message>
+  <wsdl:message name="GetNewRelationIndexFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewRelationIndexFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationGeneralFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRelationGeneralFields" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationGeneralFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRelationGeneralFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationDefaultAuthorizationProfileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRelationDefaultAuthorizationProfile" />
+  </wsdl:message>
+  <wsdl:message name="GetRelationDefaultAuthorizationProfileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRelationDefaultAuthorizationProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewRelationAuthorizationProfilesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewRelationAuthorizationProfiles" />
+  </wsdl:message>
+  <wsdl:message name="GetNewRelationAuthorizationProfilesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewRelationAuthorizationProfilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExistingRelationAuthorizationProfilesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExistingRelationAuthorizationProfiles" />
+  </wsdl:message>
+  <wsdl:message name="GetExistingRelationAuthorizationProfilesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExistingRelationAuthorizationProfilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExistingRelationIndexFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExistingRelationIndexFields" />
+  </wsdl:message>
+  <wsdl:message name="GetExistingRelationIndexFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExistingRelationIndexFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateRelationSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateRelation" />
+  </wsdl:message>
+  <wsdl:message name="CreateRelationSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateRelationResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRelationSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteRelation" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRelationSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteRelationResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRelationSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateRelation" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRelationSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateRelationResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RelationsSoap">
+    <wsdl:operation name="GetRelationsList">
+      <wsdl:input message="tns:GetRelationsListSoapIn" />
+      <wsdl:output message="tns:GetRelationsListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationTypesList">
+      <wsdl:input message="tns:GetRelationTypesListSoapIn" />
+      <wsdl:output message="tns:GetRelationTypesListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRelationIndexFields">
+      <wsdl:input message="tns:GetNewRelationIndexFieldsSoapIn" />
+      <wsdl:output message="tns:GetNewRelationIndexFieldsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationGeneralFields">
+      <wsdl:input message="tns:GetRelationGeneralFieldsSoapIn" />
+      <wsdl:output message="tns:GetRelationGeneralFieldsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationDefaultAuthorizationProfile">
+      <wsdl:input message="tns:GetRelationDefaultAuthorizationProfileSoapIn" />
+      <wsdl:output message="tns:GetRelationDefaultAuthorizationProfileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRelationAuthorizationProfiles">
+      <wsdl:input message="tns:GetNewRelationAuthorizationProfilesSoapIn" />
+      <wsdl:output message="tns:GetNewRelationAuthorizationProfilesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExistingRelationAuthorizationProfiles">
+      <wsdl:input message="tns:GetExistingRelationAuthorizationProfilesSoapIn" />
+      <wsdl:output message="tns:GetExistingRelationAuthorizationProfilesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExistingRelationIndexFields">
+      <wsdl:input message="tns:GetExistingRelationIndexFieldsSoapIn" />
+      <wsdl:output message="tns:GetExistingRelationIndexFieldsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRelation">
+      <wsdl:input message="tns:CreateRelationSoapIn" />
+      <wsdl:output message="tns:CreateRelationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRelation">
+      <wsdl:input message="tns:DeleteRelationSoapIn" />
+      <wsdl:output message="tns:DeleteRelationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRelation">
+      <wsdl:input message="tns:UpdateRelationSoapIn" />
+      <wsdl:output message="tns:UpdateRelationSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RelationsSoap" type="tns:RelationsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRelationsList">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationTypesList">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationTypesList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRelationIndexFields">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetNewRelationIndexFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationGeneralFields">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationGeneralFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationDefaultAuthorizationProfile">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationDefaultAuthorizationProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRelationAuthorizationProfiles">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetNewRelationAuthorizationProfiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExistingRelationAuthorizationProfiles">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetExistingRelationAuthorizationProfiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExistingRelationIndexFields">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetExistingRelationIndexFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRelation">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/CreateRelation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRelation">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/DeleteRelation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRelation">
+      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/UpdateRelation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RelationsSoap12" type="tns:RelationsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRelationsList">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationsList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationTypesList">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationTypesList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRelationIndexFields">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetNewRelationIndexFields" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationGeneralFields">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationGeneralFields" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationDefaultAuthorizationProfile">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationDefaultAuthorizationProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewRelationAuthorizationProfiles">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetNewRelationAuthorizationProfiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExistingRelationAuthorizationProfiles">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetExistingRelationAuthorizationProfiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExistingRelationIndexFields">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetExistingRelationIndexFields" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRelation">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/CreateRelation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRelation">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/DeleteRelation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRelation">
+      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/UpdateRelation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Relations">
+    <wsdl:port name="RelationsSoap" binding="tns:RelationsSoap">
+      <soap:address location="http://simi-test/dnwsapi/relations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RelationsSoap12" binding="tns:RelationsSoap12">
+      <soap12:address location="http://simi-test/dnwsapi/relations.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

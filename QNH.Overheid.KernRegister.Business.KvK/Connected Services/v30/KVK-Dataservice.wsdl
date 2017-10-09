@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:cat="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="KVK-Dataservice" targetNamespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02">
+      <xs:import schemaLocation="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02/Catalogus.xsd" namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02" />
+      <xs:complexType name="ProductRequestType">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="klantreferentie" type="cat:Tekst50" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="KvKNummerRequestType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ProductRequestType">
+            <xs:sequence>
+              <xs:element minOccurs="1" maxOccurs="1" name="kvkNummer" type="cat:KvKNummerType" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="KvKNummerOfRSINummerRequestType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ProductRequestType">
+            <xs:choice>
+              <xs:element minOccurs="1" maxOccurs="1" name="kvkNummer" type="cat:KvKNummerType" />
+              <xs:element minOccurs="1" maxOccurs="1" name="rsin" type="cat:RSINummerType" />
+            </xs:choice>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="VestigingsnummerRequestType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ProductRequestType">
+            <xs:sequence>
+              <xs:element minOccurs="1" maxOccurs="1" name="vestigingsnummer" type="cat:VestigingsnummerType" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="VestigingOfRsinOfKvKNummerRequestType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ProductRequestType">
+            <xs:choice>
+              <xs:element minOccurs="1" maxOccurs="1" name="vestigingsnummer" type="cat:VestigingsnummerType" />
+              <xs:element minOccurs="1" maxOccurs="1" name="kvkNummer" type="cat:KvKNummerType" />
+              <xs:element minOccurs="1" maxOccurs="1" name="rsin" type="cat:RSINummerType" />
+            </xs:choice>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="MeldingType">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" />
+          <xs:element name="omschrijving" type="xs:string" />
+          <xs:element minOccurs="0" name="referentie" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResponseType">
+        <xs:sequence>
+          <xs:element name="meldingen">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="fout" type="tns:MeldingType" />
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="waarschuwing" type="tns:MeldingType" />
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="informatie" type="tns:MeldingType" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="peilmoment" type="cat:TijdstipType" />
+      </xs:complexType>
+      <xs:complexType name="MaatschappelijkeActiviteitResponseType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResponseType">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="product">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="cat:maatschappelijkeActiviteit" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="InschrijvingRequestType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:KvKNummerOfRSINummerRequestType" />
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="InschrijvingResponseType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:MaatschappelijkeActiviteitResponseType" />
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="VestigingRequestType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:VestigingOfRsinOfKvKNummerRequestType" />
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="VestigingResponseType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResponseType">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="product">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:choice>
+                      <xs:element ref="cat:commercieleVestiging" />
+                      <xs:element ref="cat:nietCommercieleVestiging" />
+                    </xs:choice>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="ophalenInschrijvingRequest" type="tns:InschrijvingRequestType" />
+      <xs:element name="ophalenInschrijvingResponse" type="tns:InschrijvingResponseType" />
+      <xs:element name="ophalenVestigingRequest" type="tns:VestigingRequestType" />
+      <xs:element name="ophalenVestigingResponse" type="tns:VestigingResponseType" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ophalenInschrijvingRequest">
+    <wsdl:part name="request" element="tns:ophalenInschrijvingRequest" />
+  </wsdl:message>
+  <wsdl:message name="ophalenInschrijvingResponse">
+    <wsdl:part name="response" element="tns:ophalenInschrijvingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ophalenVestigingRequest">
+    <wsdl:part name="request" element="tns:ophalenVestigingRequest" />
+  </wsdl:message>
+  <wsdl:message name="ophalenVestigingResponse">
+    <wsdl:part name="response" element="tns:ophalenVestigingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Dataservice">
+    <wsdl:operation name="ophalenInschrijving">
+      <wsdl:input wsam:Action="http://es.kvk.nl/ophalenInschrijving" message="tns:ophalenInschrijvingRequest" />
+      <wsdl:output wsam:Action="http://es.kvk.nl/ophalenInschrijvingResponse" message="tns:ophalenInschrijvingResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ophalenVestiging">
+      <wsdl:input wsam:Action="http://es.kvk.nl/ophalenVestiging" message="tns:ophalenVestigingRequest" />
+      <wsdl:output wsam:Action="http://es.kvk.nl/ophalenVestigingResponse" message="tns:ophalenVestigingResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DataserviceSoap11" type="tns:Dataservice">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ophalenInschrijving">
+      <soap:operation soapAction="http://es.kvk.nl/ophalenInschrijving" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ophalenVestiging">
+      <soap:operation soapAction="http://es.kvk.nl/ophalenVestiging" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataserviceService">
+    <wsdl:port name="DataserviceSoap11" binding="tns:DataserviceSoap11">
+      <wsp:Policy>
+        <wsam:Addressing>
+          <wsp:Policy>
+            <wsam:AnonymousResponses />
+          </wsp:Policy>
+        </wsam:Addressing>
+      </wsp:Policy>
+      <soap:address location="https://example.com/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

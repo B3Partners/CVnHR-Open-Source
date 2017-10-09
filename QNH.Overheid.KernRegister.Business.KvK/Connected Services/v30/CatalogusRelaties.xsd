@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02" version="schema.v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="CatalogusMainTypes.xsd" />
+  <xs:complexType name="RelatieType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="MetExtraElementenMogenlijkheidType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RelatieRegistratieType" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="relatieRegistratie" type="RegistratieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PersoonRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:choice>
+          <xs:element name="naamPersoon" type="NaamPersoonType" />
+          <xs:element name="natuurlijkPersoon" type="NatuurlijkPersoonType" />
+          <xs:element name="buitenlandseVennootschap" type="BuitenlandseVennootschapType" />
+          <xs:element name="eenmanszaakMetMeerdereEigenaren" type="EenmanszaakMetMeerdereEigenarenType" />
+          <xs:element name="rechtspersoon" type="RechtspersoonType" />
+          <xs:element name="rechtspersoonInOprichting" type="RechtspersoonInOprichtingType" />
+          <xs:element name="samenwerkingsverband" type="SamenwerkingsverbandType" />
+          <xs:element name="afgeslotenMoeder" type="AfgeslotenMoederType" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PersoonRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieRegistratieType">
+        <xs:choice>
+          <xs:element name="naamPersoon" type="NaamPersoonType" />
+          <xs:element name="natuurlijkPersoon" type="NatuurlijkPersoonType" />
+          <xs:element name="buitenlandseVennootschap" type="BuitenlandseVennootschapType" />
+          <xs:element name="eenmanszaakMetMeerdereEigenaren" type="EenmanszaakMetMeerdereEigenarenType" />
+          <xs:element name="rechtspersoon" type="RechtspersoonType" />
+          <xs:element name="rechtspersoonInOprichting" type="RechtspersoonInOprichtingType" />
+          <xs:element name="samenwerkingsverband" type="SamenwerkingsverbandType" />
+          <xs:element name="afgeslotenMoeder" type="AfgeslotenMoederType" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NatuurlijkPersoonRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:sequence>
+          <xs:element name="natuurlijkPersoon" type="NatuurlijkPersoonType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NietNatuurlijkPersoonRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:choice>
+          <xs:element name="buitenlandseVennootschap" type="BuitenlandseVennootschapType" />
+          <xs:element name="eenmanszaakMetMeerdereEigenaren" type="EenmanszaakMetMeerdereEigenarenType" />
+          <xs:element name="rechtspersoon" type="RechtspersoonType" />
+          <xs:element name="rechtspersoonInOprichting" type="RechtspersoonInOprichtingType" />
+          <xs:element name="samenwerkingsverband" type="SamenwerkingsverbandType" />
+          <xs:element name="afgeslotenMoeder" type="AfgeslotenMoederType" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FunctievervullingRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:choice>
+          <xs:element name="aansprakelijke" type="AansprakelijkeType" />
+          <xs:element name="bestuursfunctie" type="BestuursfunctieType" />
+          <xs:element name="functionarisBijzondereRechtstoestand" type="FunctionarisBijzondereRechtstoestandType" />
+          <xs:element name="gemachtigde" type="GemachtigdeType" />
+          <xs:element name="overigeFunctionaris" type="OverigeFunctionarisType" />
+          <xs:element name="publiekrechtelijkeFunctionaris" type="PubliekrechtelijkeFunctionarisType" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MaatschappelijkeActiviteitRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:sequence>
+          <xs:element name="maatschappelijkeActiviteit" type="MaatschappelijkeActiviteitType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MaatschappelijkeActiviteitRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieRegistratieType">
+        <xs:sequence>
+          <xs:element name="maatschappelijkeActiviteit" type="MaatschappelijkeActiviteitType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VoortzettingRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="MaatschappelijkeActiviteitRelatieRegistratieType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="datumVoortzetting" type="DatumIncompleetType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OndernemingRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieRegistratieType">
+        <xs:sequence>
+          <xs:element name="onderneming" type="OndernemingType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OndernemingRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:sequence>
+          <xs:element name="onderneming" type="OndernemingType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VestigingRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:choice>
+          <xs:element name="commercieleVestiging" type="CommercieleVestigingType" />
+          <xs:element name="nietCommercieleVestiging" type="NietCommercieleVestigingType" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VestigingenRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="commercieleVestiging" type="CommercieleVestigingType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="nietCommercieleVestiging" type="NietCommercieleVestigingType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VestigingenRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieRegistratieType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="commercieleVestiging" type="CommercieleVestigingType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="nietCommercieleVestiging" type="NietCommercieleVestigingType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CommercieleVestigingRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieRegistratieType">
+        <xs:sequence>
+          <xs:element name="commercieleVestiging" type="CommercieleVestigingType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NietCommercieleVestigingRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieRegistratieType">
+        <xs:sequence>
+          <xs:element name="nietCommercieleVestiging" type="NietCommercieleVestigingType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HandelsnaamRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieRegistratieType">
+        <xs:sequence>
+          <xs:element name="handelsnaam" type="HandelsnaamType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AansprakelijkheidRelatieRegistratieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieRegistratieType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="moeder" type="NietNatuurlijkPersoonRelatieType" />
+          <xs:element minOccurs="0" name="datumIntrekking" type="DatumIncompleetType" />
+          <xs:element minOccurs="0" name="verklaring" type="DeponeringRelatieType" />
+          <xs:element minOccurs="0" name="intrekking" type="DeponeringRelatieType" />
+          <xs:element minOccurs="0" name="overblijvende" type="DeponeringRelatieType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeponeringRelatieType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="RelatieType">
+        <xs:choice>
+          <xs:element name="aansprakelijkheidVerklaring" type="DeponeringAansprakelijkheidVerklaringType" />
+          <xs:element name="aanvullendeMededeling" type="DeponeringAanvullendeMededelingType" />
+          <xs:element name="bijzondereDeponering" type="DeponeringBijzondereDeponeringType" />
+          <xs:element name="aansprakelijkheidIntrekking" type="DeponeringAansprakelijkheidIntrekkingType" />
+          <xs:element name="jaarstukHalfjaarKwartaalcijfers" type="DeponeringJaarstukHalfjaarKwartaalcijfersType" />
+          <xs:element name="jaarstukInstemming" type="DeponeringJaarstukInstemmingType" />
+          <xs:element name="jaarstukJaarrekening" type="DeponeringJaarstukJaarrekeningType" />
+          <xs:element name="jaarstukJaarrekeningOngewijzigdVastgesteld" type="DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType" />
+          <xs:element name="jaarstukOntheffing" type="DeponeringJaarstukOntheffingType" />
+          <xs:element name="aanprakelijkheidOverblijvend" type="DeponeringAansprakelijkheidOverblijvendType" />
+          <xs:element name="overigJaarstuk" type="DeponeringOverigJaarstukType" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

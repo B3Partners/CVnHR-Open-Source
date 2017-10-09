@@ -1,0 +1,206 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.UI.WebControls.Expressions;
+
+using QNH.Overheid.KernRegister.Beheer.Models;
+using QNH.Overheid.KernRegister.Beheer.ViewModels;
+using QNH.Overheid.KernRegister.Beheer.Utilities;
+using QNH.Overheid.KernRegister.Business.Integration;
+using QNH.Overheid.KernRegister.Business.Model;
+using QNH.Overheid.KernRegister.Business.Model.Entities;
+using QNH.Overheid.KernRegister.Business.Service;
+
+using NLog;
+using QNH.Overheid.KernRegister.Business.Business;
+using QNH.Overheid.KernRegister.Business.Enums;
+using QNH.Overheid.KernRegister.Business.Service.BRMO;
+using Rotativa;
+using StructureMap;
+using StructureMap.Pipeline;
+
+namespace QNH.Overheid.KernRegister.Beheer.Controllers
+{
+    public class SearchController : Controller
+    {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        //
+        // GET: /Search/
+        public ActionResult Index(string kvkNummer)
+        {
+            if (string.IsNullOrEmpty(kvkNummer))
+            {
+                return View(new KvkSearch() { });
+            }
+            var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+
+            try
+            {
+                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
+
+                // Vul het viewmodel met gegevens uit kvkVermelding
+                if (kvkInschrijving != null)
+                {
+                    var kvkSearch = new KvkSearch
+                    {
+                        KvkSearchCriteria = { KvkNummer = kvkInschrijving.KvkNummer },
+                        KvkSearchResult =
+                            new KvkSearchResult
+                            {
+                                KvkItems =
+                                    new List<KvkItem>
+                                    {
+                                        new KvkItem()
+                                        {
+                                            KvkNummer = kvkNummer,
+                                            Naam = kvkInschrijving.InschrijvingNaam, // kvkInschrijving.Naam,
+                                            Vestigingen = kvkInschrijving.Vestigingen.ToList(),
+                                            NaamEigenaar = kvkInschrijving.VolledigeNaamEigenaar,
+                                            AantalMedewerkers = kvkInschrijving.FulltimeWerkzamePersonen
+                                            
+                                        }
+                                    }
+                            }
+                    };
+
+                    return View(kvkSearch);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.ErrorException("Something went wrong while searching for Inschrijving with kvknummer: " + kvkNummer, ex);
+
+                return View(new KvkSearch
+                {
+                    KvkSearchResult = new KvkSearchResult
+                    {
+                        SearchError = ex
+                    }
+                });
+            }
+
+            var emptySearch = new KvkSearch();
+            emptySearch.KvkSearchResult.SearchedAndNothingFound = true;
+
+            return View(emptySearch);
+        }
+
+        [HttpPost]
+        public ActionResult Index(KvkSearch kvkSearch)
+        {
+            return RedirectToAction("Index", new {kvkNummer = kvkSearch.KvkSearchCriteria.KvkNummer});
+        }
+
+        public ActionResult Import(string kvkNummer, 
+            bool export = false, 
+            string vestigingNummer = null, 
+            bool brmo = false,
+            bool toDebiteuren = false,
+            bool toCrediteuren = false)
+        {
+            if (!User.IsAllowedAllActions(ApplicationActions.ManageKvKData)) // do check for all users enabled
+                return RedirectToAction("Index");
+
+            if (brmo && !SettingsHelper.BrmoApplicationEnabled)
+                return RedirectToAction("Index");
+
+            using (var nestedContainer = IocConfig.Container.GetNestedContainer())
+            {
+
+                var service = nestedContainer.GetInstance<IKvkSearchService>();
+                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
+
+                if (brmo)
+                {
+                    var msg = "";
+                    var brmostatus = AddInschrijvingResultStatus.Error;
+                    try
+                    {
+                        // retry with bypassing cache
+                        var xDoc = RawXmlCache.Get(kvkNummer,
+                            () => { kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, true); });
+
+                        var brmoSyncService = nestedContainer.GetInstance<IBrmoSyncService>();
+                        brmostatus = brmoSyncService.UploadXDocumentToBrmo(xDoc);
+                        brmoSyncService.Transform(kvkNummer);
+                    }
+                    catch (Exception ex)
+                    {
+                        msg += " " + ex.Message;
+                        logger.Warn(ex, msg);
+                    }
+                    return
+                        View(new ImportResultViewModel()
+                        {
+                            KvkInschrijving = kvkInschrijving,
+                            Status = brmostatus,
+                            Message = msg
+                        });
+                }
+
+                var storageService = nestedContainer.GetInstance<IInschrijvingSyncService>();
+                var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
+
+                if (export)
+                {
+                    return string.IsNullOrEmpty(vestigingNummer)
+                        ? RedirectToAction("Export", "Vestiging", new {kvkNummer = kvkNummer})
+                        : RedirectToAction("ExportVestiging", "Vestiging", new {vestigingNummer = vestigingNummer});
+                }
+
+                if (toDebiteuren)
+                {
+                    return string.IsNullOrEmpty(vestigingNummer)
+                        ? RedirectToAction("ExportDebiteuren", "Vestiging", new { kvkNummer = kvkNummer })
+                        : RedirectToAction("ExportVestigingDebiteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
+                }
+
+                if (toCrediteuren)
+                {
+                    return string.IsNullOrEmpty(vestigingNummer)
+                        ? RedirectToAction("ExportCrediteuren", "Vestiging", new { kvkNummer = kvkNummer })
+                        : RedirectToAction("ExportVestigingCrediteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
+                }
+
+                var result = new ImportResultViewModel() {KvkInschrijving = kvkInschrijving, Status = status};
+
+                return View(result);
+            }
+        }
+
+        public ActionResult Details(string kvknummer)
+        {
+            var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+            var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvknummer);
+            
+            var kvkItem = new KvkItem()
+            {
+                KvkNummer = kvkInschrijving.KvkNummer,
+                Naam = kvkInschrijving.InschrijvingNaam, // kvkInschrijving.Naam,
+                PeilMoment = kvkInschrijving.Peilmoment,
+                Vestigingen = kvkInschrijving.Vestigingen.ToList(),
+                Inschrijving = kvkInschrijving
+            };
+
+            return View(kvkItem);
+            
+        }
+
+        public ActionResult VestigingDetails(string kvknummer, string vestigingId)
+        {
+            var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+            return View(service.SearchVestigingByVestigingsNummer(vestigingId, kvknummer));
+        }
+    }
+
+    public class ImportResultViewModel
+    {
+        public string Message { get; set; }
+        public KvkInschrijving KvkInschrijving { get; set; }
+        public AddInschrijvingResultStatus Status { get; set; }  
+    }
+}

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B711469C-E353-464E-8C4D-FBCEDF7055BD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QNH.Overheid.KernRegister.Business.KvK</RootNamespace>
+    <AssemblyName>QNH.Overheid.KernRegister.Business.KvK</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\v30\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SignaalService\Types.cs" />
+    <Compile Include="v2.5\CustomInspectMessageBehavior.cs" />
+    <Compile Include="v2.5\CustomMessageInspector.cs" />
+    <Compile Include="v2.5\KvkMaatschappelijkeActiviteitProductValidator.cs" />
+    <Compile Include="v3.0\CustomDataService.cs" />
+    <Compile Include="v3.0\KvkMaatschappelijkeActiviteitProductValidator.cs" />
+    <Compile Include="WcfExtensions\RawXmlActionBehavior.cs" />
+    <Compile Include="WcfExtensions\RawXmlMessageActionInspector.cs" />
+    <Compile Include="WcfExtensions\CustomTextMessageEncoder.cs" />
+    <Compile Include="WcfExtensions\CustomTextMessageEncoderBindingElement.cs" />
+    <Compile Include="WcfExtensions\CustomTextMessageEncoderFactory.cs" />
+    <Compile Include="WcfExtensions\RawXMLBehavior.cs" />
+    <Compile Include="WcfExtensions\RawXMLMessageInspector.cs" />
+    <Compile Include="Service\ValidationMessage.cs" />
+    <Compile Include="Service\ValidationMessageType.cs" />
+    <Compile Include="v2.5\KVK-Dataservice.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="v2.5\CustomDataService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\v30\Catalogus.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\v30\CatalogusGegevensGroepen.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\v30\CatalogusMainTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\v30\CatalogusRelaties.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\v30\CatalogusTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\v30\KVK-Dataservice.wsdl" />
+    <None Include="Connected Services\v30\QNH.Overheid.KernRegister.Business.KvK.v30.InschrijvingResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\v30\QNH.Overheid.KernRegister.Business.KvK.v30.ophalenInschrijvingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\v30\QNH.Overheid.KernRegister.Business.KvK.v30.ophalenVestigingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\v30\QNH.Overheid.KernRegister.Business.KvK.v30.VestigingResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="SignaalService\Xsd\InsolventieWijziging.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SignaalService\Xsd\readme.md" />
+    <None Include="SignaalService\Xsd\Rechtsvormwijziging.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SignaalService\Xsd\SignaalStartenMA.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SignaalService\Xsd\signaaltypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SignaalService\Xsd\Updatebericht.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SignaalService\Xsd\updatetypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SignaalService\Xsd\VoortzettingEnOverdracht.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="v2.5\readme.md" />
+    <None Include="v2.5\WSDL\KvKDataservice.wsdl" />
+    <None Include="v2.5\XSD\Catalogus.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="v2.5\XSD\CatalogusEnumeraties.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="v2.5\XSD\CatalogusGegevensGroepen.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="v2.5\XSD\CatalogusMainTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="v2.5\XSD\CatalogusRelaties.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="v2.5\XSD\CatalogusTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="v3.0\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\v30\configuration91.svcinfo" />
+    <None Include="Connected Services\v30\configuration.svcinfo" />
+    <None Include="Connected Services\v30\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="SignaalService\Xsd\Params.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\v30\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

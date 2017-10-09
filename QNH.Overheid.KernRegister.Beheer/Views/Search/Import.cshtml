@@ -1,0 +1,70 @@
+﻿@using QNH.Overheid.KernRegister.Beheer.Models
+@using QNH.Overheid.KernRegister.Business.Enums
+@using QNH.Overheid.KernRegister.Business.Model
+@model QNH.Overheid.KernRegister.Beheer.Controllers.ImportResultViewModel
+
+@{
+    ViewBag.Title = "Importeren in " + Default.ApplicationName;
+}
+
+<h2>Importeren in @Default.ApplicationName</h2>
+
+<div>
+    <h4>KVK Inschrijving</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Status
+        </dt>
+
+        <dd>
+
+            @if (Model.Status == AddInschrijvingResultStatus.NewInschrijvingAdded)
+            {
+                <text>Nieuwe inschrijving is aangemaakt op basis van de gegevens van het handelsregister</text>
+            }
+            else if (Model.Status == AddInschrijvingResultStatus.InschrijvingAlreadyExists)
+            {
+                <text>De inschrijving kwam overeen met degene die opgeslagen is in @Default.ApplicationName</text>
+            }
+            else if (Model.Status == AddInschrijvingResultStatus.InschrijvingUpdated)
+            {
+                <text>Inschrijving is bijgewerkt met de gegevens van het handelsregister</text>
+            }
+            else if (Model.Status == AddInschrijvingResultStatus.BrmoInschrijvingCreated)
+            {
+                <text>Inschrijving is aan BRMO toegevoegd</text>
+            }
+            else if (Model.Status == AddInschrijvingResultStatus.Error)
+            {
+                <text>Er is een fout opgetreden.</text>
+                if (!string.IsNullOrWhiteSpace(Model.Message))
+                {
+                    <span color='red'>@Model.Message</span>
+                }
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KvkInschrijving.InschrijvingNaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KvkInschrijving.InschrijvingNaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KvkInschrijving.KvkNummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KvkInschrijving.KvkNummer)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Terug naar het zoekscherm", "Index", new { kvkNummer = Model.KvkInschrijving.KvkNummer })*@
+    @BackButton.Render("Terug naar het zoekscherm", cssClass: null)
+    |
+    @Html.ActionLink("Bekijk in " + Default.ApplicationName, "Details", "Vestiging", new { kvkNummer = Model.KvkInschrijving.KvkNummer }, null)
+</p>

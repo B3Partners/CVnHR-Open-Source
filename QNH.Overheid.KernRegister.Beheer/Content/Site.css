@@ -1,0 +1,76 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+tr[data-invalid] {
+    display:none;
+}
+table.table.vestiging tr[data-invalid] td  {
+    background: #FF3333;
+}
+
+p.right {
+    float:right;
+}
+
+p.left {
+    float:left;
+}
+
+/* ensure scrolling of modal window for inschrijving.js */
+.modal {
+    overflow-y: auto;
+}
+
+.btn-brmo, .btn-brmo:hover {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+    background-image: linear-gradient(to bottom, #008800 0%, #008000 100%);
+    color: #fff;
+    border-color: green;
+    background-repeat: repeat-x;
+}
+
+.btn-brmo:hover {
+    background-image: linear-gradient(to top, #008800 0%, #008000 100%);
+}
