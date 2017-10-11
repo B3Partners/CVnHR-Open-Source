@@ -1,0 +1,19 @@
+﻿@model QNH.Overheid.KernRegister.Business.Service.KvK.Pong
+
+@{
+    ViewBag.Title = "Debug Ping";
+}
+
+<h2>App status</h2>
+
+<p>Status : @(Model.IsSuccesful ? "Ping geslaagd" : "Ping ging fout")</p>
+@if (Model.IsSuccesful)
+{
+    <text><p>Responsetime:@Model.ResponseTime.TotalMilliseconds milliseconds</p></text>
+}
+else
+{
+    <text><p>ExceptionMessage: @Model.ExceptionMessage</p></text>
+    <p>Stack: @Model.ExceptionMessage.GetType()</p>
+}
+

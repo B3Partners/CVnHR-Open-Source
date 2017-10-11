@@ -1,0 +1,77 @@
+﻿@model QNH.Overheid.KernRegister.Business.Model.Debug.DatabaseDebugInfo
+
+@{
+    ViewBag.Title = "Debug";
+   
+}
+
+<h2>App status</h2>
+
+@if(Model.Exception != null){
+    <h1>Exception: @Model.Exception.Message</h1>
+    <p>
+        <strong>Stacktrace:</strong>
+        @Model.Exception.StackTrace
+    </p>
+}
+
+<h2>View Elmah log</h2>
+<a href="~/elmah.axd" target="_blank">Click to open elmah log</a>
+
+
+<h3>Database Debug info</h3>
+<div class="row">
+    <div class="col-md-4">Expired Inschrijvingen</div>
+    <div class="col-md-8">@Model.ExpiredInschrijvingenCount</div>
+</div>
+<div class="row">
+    <div class="col-md-4">Expired Vestigingen</div>
+    <div class="col-md-8">@Model.ExpiredVestigingenCount</div>
+</div>
+<div class="row">
+    <div class="col-md-4">Double Vestigingen</div>
+    <div class="col-md-4">@Model.DoubleVestigingen.Count()</div>
+    <div class="col-md-4">@Html.ActionLink("Delete doubles", "DeleteDoubles")</div>
+</div>
+
+<hr/>
+<h2>Database info</h2>
+<ul>
+    <li>@Model.InschrijvingOrphans.Count() Inschrijving orphans</li>
+    <li>@Model.VestigingOrphans.Count() Vestiging orphans</li>
+    <li>@Model.DeponeringsStukOrphans.Count() DeponeringsStuk orphans</li>
+    <li>@Model.FunctieVervullingOrphans.Count() FunctieVervulling orphans</li>
+    <li>@Model.HandelsnaamOrphans.Count() Handelsnaam orphans</li>
+    <li>@Model.SbiActiviteitOrphans.Count() SbiActiviteit orphans</li>
+    <li>@Model.SbiCodeOrphans.Count() SbiCode orphans</li>
+    <li>@Model.VestigingSbiActiviteitOrphans.Count() VestigingSbiActiviteit orphans</li>
+</ul>
+@Html.ActionLink("Delete all", "DeleteReallyAllOrphans")
+
+
+
+@if (Model.InschrijvingOrphans != null && Model.InschrijvingOrphans.Any())
+{
+    <hr/>
+    <h2>Found inschrijving 'orphans'</h2>
+    <ul>
+        @foreach (var inschrijving in Model.InschrijvingOrphans)
+        {
+            <li>@inschrijving.KvkNummer: @inschrijving.InschrijvingNaam (geldig tot: @inschrijving.GeldigTot) (@Html.ActionLink("delete", "DeleteOrphans", new {itemid = inschrijving.KvkNummer}))</li>
+        }
+    </ul>
+    @Html.ActionLink("Delete all", "DeleteAllOrphans")
+}
+
+@if (Model.VestigingOrphans != null && Model.VestigingOrphans.Any())
+{
+    <hr />
+    <h2>Found vestiging 'orphans'</h2>
+    <ul>
+        @foreach (var vestiging in Model.VestigingOrphans)
+        {
+            <li>@vestiging.Vestigingsnummer: @vestiging.Naam (geldig tot: @vestiging.GeldigTot) (@Html.ActionLink("delete", "DeleteOrphans", new {itemid = vestiging.Vestigingsnummer}))</li>
+        }
+    </ul>
+    @Html.ActionLink("Delete all", "DeleteAllOrphans", new { vestiging = true })
+}
