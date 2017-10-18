@@ -23,12 +23,12 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
         private readonly string _klantReferentie;
         private readonly int _cacheInHours;
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger KvkCountingLogger = LogManager.GetLogger("kvkCountingLogger");
+        private static readonly Logger KvkErrorLogger = LogManager.GetLogger("kvkerror");
 
         private static readonly ConcurrentDictionary<string, KvkInschrijving> _cache = new ConcurrentDictionary<string, KvkInschrijving>();
 
         private bool CacheEnabled => _cacheInHours > 0;
-
-        private static readonly Logger kvkErrorLogger = LogManager.GetLogger("kvkerror");
 
         public KvkDataSearchService(Dataservice service)
         {
@@ -56,6 +56,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                 if (inschrijving.OpgevraagdOp.AddHours(_cacheInHours) > DateTime.Now)
                     return inschrijving;
             }
+
+            KvkCountingLogger.Info($"Calling HR-Dataservice v3.0 {kvkNummer}");
 
             // Roep "Dataservice Inschrijving" aan met kvkNummer als sleutel
             // Via deze service verkrijgen we ook de vestigingsnummers (of zelfs complete vestiging informatie!?) van de hoofdvestiging en de nevenvestigingen
@@ -90,7 +92,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                 Logger.Error(msg);
 
                 // Log the specific kvk Error
-                kvkErrorLogger.Error(kvkNummer + " | " + string.Join("; ", errors.Select(e => e.MessageType + ": " + e.Message)));
+                KvkErrorLogger.Error(kvkNummer + " | " + string.Join("; ", errors.Select(e => e.MessageType + ": " + e.Message)));
 
                 throw new Exception(msg);
             }
