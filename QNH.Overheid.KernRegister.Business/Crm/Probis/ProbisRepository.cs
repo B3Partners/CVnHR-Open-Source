@@ -85,7 +85,7 @@ namespace QNH.Overheid.KernRegister.Business.Crm.Probis
                 return new ExportResult(true, changed ? $"De gegevens zijn succesvol geüpdatet in {DisplayName}." : $"Geen wijzigingen gevonden met de gegevens in {DisplayName}.");
             }
             else
-                return new ExportResult(false, $"Er is iets fout gegaan bij de {DisplayName} update", errors: errors);
+                return new ExportResult(false, $"Er is iets fout gegaan bij de {DisplayName} update van {kvkInschrijving.Vestigingen.Count} vestigingen. Aantal fouten: {errors.Count}.", errors: errors);
         }
 
         private IExportResult InsertOrUpdateExternalVestiging(Vestiging vestiging, FinancialProcesType type)

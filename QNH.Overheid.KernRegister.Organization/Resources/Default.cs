@@ -123,21 +123,21 @@ namespace QNH.Overheid.KernRegister.Organization.Resources
         {
             { Organization.Qnh, "Naar [CrediteurenApplication]" },
             { Organization.Drenthe, "Naar PROBIS (Crediteuren)" },
-            { Organization.Flevoland, "[huh?]" }
+            { Organization.Flevoland, "Naar [CrediteurenApplication]" }
         }[CurrentOrganization];
 
         public static string ToDebiteuren => new OrganizationResource()
         {
             { Organization.Qnh, "Naar [DebiteurenApplication]" },
             { Organization.Drenthe, "Naar PROBIS (Debiteuren)" },
-            { Organization.Flevoland, "[huh?]" }
+            { Organization.Flevoland, "Naar [DebiteurenApplication]" }
         }[CurrentOrganization];
 
         public static string FinancialApplication => new OrganizationResource()
         {
             { Organization.Qnh, "[FinancialApplication]" },
             { Organization.Drenthe, "Probis" },
-            { Organization.Flevoland, "" }
+            { Organization.Flevoland, "[FinancialApplication]" }
         }[CurrentOrganization];
 
         /// <summary>

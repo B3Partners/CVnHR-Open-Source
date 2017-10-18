@@ -310,8 +310,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                     .SelectConstructor(() => new ProbisRepository("connectionstring", "displayName"))
                     .Ctor<string>("connectionString")
                     .Is(ConfigurationManager.ConnectionStrings["OracleProbisConnection"]?.ConnectionString ?? "error connectionstring")
-                    .Ctor<string>("displayName").Is(Default.FinancialApplication);
-
+                    .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
             });
         }
     }
