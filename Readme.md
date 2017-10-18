@@ -10,7 +10,7 @@ application either stand-alone or in combination with the BRMO application by B3
 
 Original development is done by QNH Consulting B.V.
 
-__Contact__ Corné Hogerheijde @ QNH
+__Contact__ Corné Hogerheijde @ QNH or B3Partners (TODO)
 
 
 ## Development environment setup
