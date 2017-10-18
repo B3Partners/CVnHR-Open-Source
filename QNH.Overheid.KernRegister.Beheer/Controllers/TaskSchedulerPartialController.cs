@@ -4,12 +4,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using NLog;
-using QNH.Overheid.KernRegister.Beheer.Utilities;
-using QNH.Overheid.KernRegister.Organization.Resources;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -136,7 +133,6 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public TaskSchedulerPartialController(string taskName, string argument)
         {
-            _log.Info($"Task {taskName} with arguments {argument} called by {User?.Identity?.Name ?? "[unknown]"}");
             _taskName = taskName;
             if (!_taskManagers.ContainsKey(taskName)) {
 
@@ -171,12 +167,14 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public JsonResult StartBatchUpdateNow()
         {
+            _log.Info($"Task {ExportTaskManager.TaskName} with arguments {ExportTaskManager.Argument} started by {User?.Identity?.Name ?? "[unknown]"}");
             ExportTaskManager.ScheduledTask.Run();
             return Json(true);
         }
 
         public JsonResult StopBatchUpdateNow()
         {
+            _log.Info($"Task {ExportTaskManager.TaskName} with arguments {ExportTaskManager.Argument} stopped by {User?.Identity?.Name ?? "[unknown]"}");
             ExportTaskManager.ScheduledTask.Stop();
             return Json(true);
         }
@@ -196,6 +194,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         [HttpPost]
         public JsonResult SetSchedule(DateTime? time, string triggerType, bool? enabled)
         {
+            _log.Info($"Task {ExportTaskManager.TaskName} with arguments {ExportTaskManager.Argument} schedule set by {User?.Identity?.Name ?? "[unknown]"}. Time: {time}, triggerType: {triggerType}, enabled: {enabled}.");
+
             if ((!time.HasValue || string.IsNullOrEmpty(triggerType) || !enabled.HasValue) && enabled != false)
                 return Json(new { error = "Set the time!" });
 
