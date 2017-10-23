@@ -61,9 +61,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
 
             // Roep "Dataservice Inschrijving" aan met kvkNummer als sleutel
             // Via deze service verkrijgen we ook de vestigingsnummers (of zelfs complete vestiging informatie!?) van de hoofdvestiging en de nevenvestigingen
-            string peilmoment;
-            IEnumerable<ValidationMessage> errors;
-            KernRegister.Business.KvK.v30.MaatschappelijkeActiviteitType maatschappelijkeActiviteit = GeefMaatschappelijkeActiviteit(kvkNummer, out peilmoment, out errors);
+            var maatschappelijkeActiviteit = GeefMaatschappelijkeActiviteit(kvkNummer, out string peilmoment, out IEnumerable<ValidationMessage> errors);
 
             KvkInschrijving kvkInschrijving = null;
             if (maatschappelijkeActiviteit != null)
