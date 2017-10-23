@@ -267,3 +267,4 @@ __pycache__/
 
 # Do not include local publish option #
 /QNH.Overheid.KernRegister.Beheer/Properties/PublishProfiles/FolderProfile.pubxml
+/QNH.Overheid.KernRegister.Beheer/Config/*.config
