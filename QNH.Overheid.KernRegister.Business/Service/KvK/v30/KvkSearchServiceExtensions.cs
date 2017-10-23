@@ -401,7 +401,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                         if (bestuursFunctie.monistischeBestuurder != null)
                             functie.Bevoegdheid +=
                                 $" (monistischeBestuurder rol: {bestuursFunctie.monistischeBestuurder.rol?.omschrijving})";
-                        functie.FunctieTitel = bestuursFunctie.functie.omschrijving;
+                        functie.FunctieTitel = $"{bestuursFunctie.functie.omschrijving}: {bestuursFunctie.functie.referentieType}";
                         functie.HandelingsBekwaam = "Ja";// IndicatieType.Ja.ToString();
                         if (bestuursFunctie.Item.Item != null
                             && bestuursFunctie.Item.Item.beperkingInRechtshandeling != null)
