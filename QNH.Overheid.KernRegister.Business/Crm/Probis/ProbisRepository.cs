@@ -16,13 +16,17 @@ namespace QNH.Overheid.KernRegister.Business.Crm.Probis
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         public string DisplayName { get; }
 
-        private string ConnectionString { get; set; }
+        private string ConnectionString { get; }
+
+        private string InsertOrUpdateStoredProcedureName { get; }
 
         public ProbisRepository(
             string connectionString,
+            string insertOrUpdateStoredProcedureName,
             string displayName = "Probis")
         {
             ConnectionString = connectionString;
+            InsertOrUpdateStoredProcedureName = insertOrUpdateStoredProcedureName;
             DisplayName = displayName;
         }
 
@@ -90,14 +94,11 @@ namespace QNH.Overheid.KernRegister.Business.Crm.Probis
 
         private IExportResult InsertOrUpdateExternalVestiging(Vestiging vestiging, FinancialProcesType type)
         {
-            // TODO
-            var ns = "XX_RELATIE_INTERFACE_PKG";
-            var sp = "create_customer_or_supplier";
             var result = "error";
             var msg = "";
             using (var myConn = new OracleConnection(ConnectionString))
             {
-                var cmd = new OracleCommand(ns + "." + sp, myConn)
+                var cmd = new OracleCommand(InsertOrUpdateStoredProcedureName, myConn)
                 {
                     CommandType = CommandType.StoredProcedure
                 };

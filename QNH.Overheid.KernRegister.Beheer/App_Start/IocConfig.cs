@@ -304,13 +304,13 @@ namespace QNH.Overheid.KernRegister.Beheer
                 }
 
                 // TODO: make conditionally?? 
-                // TODO: set correct connectionstring
                 // Setup the financial service
+                var probisInsertOrUpdateStoredProcedureName = "XX_RELATIE_INTERFACE_PKG.create_customer_or_supplier";
                 x.For<IFinancialExportService>().Use<ProbisRepository>()
-                    .SelectConstructor(() => new ProbisRepository("connectionstring", "displayName"))
-                    .Ctor<string>("connectionString")
-                    .Is(ConfigurationManager.ConnectionStrings["OracleProbisConnection"]?.ConnectionString ?? "error connectionstring")
-                    .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
+                    .SelectConstructor(() => new ProbisRepository("connectionstring", "insertOrUpdateStoredProcedureName", "displayName"))
+                    .Ctor<string>().Is(ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
+                    .Ctor<string>().Is(ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"] ?? probisInsertOrUpdateStoredProcedureName)
+                    .Ctor<string>().Is(() => Default.FinancialApplication);
             });
         }
     }
