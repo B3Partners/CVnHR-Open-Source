@@ -10,7 +10,7 @@ application either stand-alone or in combination with the BRMO application by B3
 
 Original development is done by QNH Consulting B.V.
 
-__Contact__ Corné Hogerheijde @ QNH or B3Partners (TODO)
+__Contact__ Corné Hogerheijde @ QNH and/or B3Partners (TODO)
 
 
 ## Development environment setup
@@ -19,7 +19,8 @@ Get your development environment up and running by cloning this repo, get a gove
 PKI certificate and arrange a subscription to the HR-Dataservice of the Dutch Chamber 
 of Commerce (KvK).
 - Run visual studio as an administrator
-- Copy config files from Config/examples and fill out with necessary values
+- Copy config files from Config/examples (in both QNH.Overheid.KernRegister.Beheer and 
+  QNH.Overheid.KernRegister.BatchProcess projects) and fill out with necessary values
 - Install the PKI certificate and fill out the values needed in the .config files
 - Create a database on either Oracle or SQL and update .config files accordingly
 - Surfs up dude!
