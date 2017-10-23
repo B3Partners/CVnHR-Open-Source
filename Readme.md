@@ -19,11 +19,9 @@ Get your development environment up and running by cloning this repo, get a gove
 PKI certificate and arrange a subscription to the HR-Dataservice of the Dutch Chamber 
 of Commerce (KvK).
 - Run visual studio as an administrator
-- Ensure a Web.debug.config and web.release.config are created (TODO create default 
-way to easy debug and release with sensitive info without uploading to source control)
-- Install the PKI certificate and fill out the values needed in the app- and web.config
-- Update the web.config (connectionstrings, appsettings and system.servicemodel)
-- Create a database on either Oracle or SQL and update app- and web.config accordingly
+- Copy config files from Config/examples and fill out with necessary values
+- Install the PKI certificate and fill out the values needed in the .config files
+- Create a database on either Oracle or SQL and update .config files accordingly
 - Surfs up dude!
 
 ## README "QNH.Overheid.KernRegister.Beheer"
