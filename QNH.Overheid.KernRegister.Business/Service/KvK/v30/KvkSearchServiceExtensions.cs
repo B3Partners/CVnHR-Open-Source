@@ -377,7 +377,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                         functie.Functie += ": " + overigeFunctionaris.functie.omschrijving;
                         if (overigeFunctionaris.bevoegdheid != null)
                             functie.Bevoegdheid = overigeFunctionaris.bevoegdheid.soort.omschrijving;
-                        functie.HandelingsBekwaam = "Afwijkend Aansprakelijkheidsbeding: " + overigeFunctionaris.heeftAfwijkendAansprakelijkheidsbeding.omschrijving;
+                        functie.HandelingsBekwaam = "Afwijkend Aansprakelijkheidsbeding: " + overigeFunctionaris.heeftAfwijkendAansprakelijkheidsbeding?.omschrijving;
                     }
                     else if (functieVervulling.Item is PubliekrechtelijkeFunctionarisType)
                     {
@@ -505,7 +505,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                                   $"{k.aantal} {k.aandeel}"))); // TODO!
 
             if (kapitaal.bedrag != null)
-                result.AppendFormat("{0} {1} {2}", kapitaal.aandeelSamenstelling == null ? "" : " | ", kapitaal.bedrag.waarde, kapitaal.bedrag.valuta);
+                result.AppendFormat("{0} {1} {2}", kapitaal.aandeelSamenstelling == null ? "" : " | ", kapitaal.bedrag.waarde, kapitaal.bedrag.valuta?.omschrijving);
 
             var notTooLong = result.ToString();
 
