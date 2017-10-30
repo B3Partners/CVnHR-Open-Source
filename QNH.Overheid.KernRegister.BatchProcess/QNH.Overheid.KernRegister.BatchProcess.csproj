@@ -272,14 +272,30 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
-    <Content Include="Config\examples\AppSettings.config" />
-    <Content Include="Config\examples\ConnectionStrings.config" />
-    <Content Include="Config\examples\system.serviceModel.behaviors.config" />
-    <Content Include="Config\examples\system.serviceModel.client.config" />
-    <Content Include="Config\AppSettings.config" />
-    <Content Include="Config\ConnectionStrings.config" />
-    <Content Include="Config\system.serviceModel.behaviors.config" />
-    <Content Include="Config\system.serviceModel.client.config" />
+    <Content Include="Config\examples\AppSettings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\examples\ConnectionStrings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\examples\system.serviceModel.behaviors.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\examples\system.serviceModel.client.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\AppSettings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\ConnectionStrings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\system.serviceModel.behaviors.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\system.serviceModel.client.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Data\CTcheck\CT omgeving test kvknummers.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
