@@ -542,7 +542,8 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
             "PAADRES_1",
             "PAPLAATS",
             "PAGEMEENTE",
-            "PAPROVINCIE"
+            "PAPROVINCIE",
+            "B_BOX_NAAM"
         };
         private static readonly List<string> DoNotOverrideDocBaseIfPostbus = new List<string> {
             "PAPOSTCODE_ZOEK",
@@ -641,6 +642,9 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
             Mapping.Add("VEST_ID", (vestiging) => vestiging.Vestigingsnummer);
             Mapping.Add("RSIN", (vestiging) => vestiging.RSIN);
             Mapping.Add("EORI", (vestiging) => vestiging.EORI);
+
+            Mapping.Add("VK_INDICATIE_BB", (vestiging) => string.IsNullOrWhiteSpace(vestiging.KvkInschrijving?.BerichtenBoxNaam) ? "N" : "J");
+            Mapping.Add("B_BOX_NAAM", (vestiging) => vestiging.KvkInschrijving?.BerichtenBoxNaam);
         }
 
         #endregion
