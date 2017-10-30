@@ -24,7 +24,8 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
                     }
                 }
                 else if (!string.IsNullOrEmpty(value))
-                    rw["Value"] = value;
+                    rw["Value"] = value.Replace("“", "\"").Replace("”", "\"")
+                                       .Replace("‘", "\'").Replace("’", "'");
 
                 break;
             }
@@ -66,7 +67,6 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
             try
             {
                 int.Parse(DateString);
-                bSeperators = false;
             }
             catch
             {
