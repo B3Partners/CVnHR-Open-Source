@@ -278,7 +278,7 @@
     <Content Include="Config\examples\system.serviceModel.client.config" />
     <Content Include="Config\AppSettings.config" />
     <Content Include="Config\ConnectionStrings.config" />
-    <None Include="Config\system.serviceModel.behaviors.config" />
+    <Content Include="Config\system.serviceModel.behaviors.config" />
     <Content Include="Config\system.serviceModel.client.config" />
     <None Include="Data\CTcheck\CT omgeving test kvknummers.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
