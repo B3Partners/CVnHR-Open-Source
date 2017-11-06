@@ -490,8 +490,6 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
             }
 
             kvkInschrijving.BerichtenBoxNaam = maatschappelijkeActiviteit.berichtenbox?.berichtenboxnaam;
-
-
         }
 
         public static string SchrijfKapitaalType(this KapitaalType kapitaal)
