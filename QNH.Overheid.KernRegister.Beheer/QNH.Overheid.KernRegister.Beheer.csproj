@@ -15,7 +15,7 @@
     <AssemblyName>QNH.Overheid.KernRegister.Beheer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort>
     </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -734,7 +734,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>8690</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8690/</IISUrl>
+          <IISUrl>http://kvk.local</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

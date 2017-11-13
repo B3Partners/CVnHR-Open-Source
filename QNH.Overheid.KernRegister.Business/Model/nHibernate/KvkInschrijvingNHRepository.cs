@@ -80,6 +80,7 @@ namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
 
         public Vestiging GetLatestVestiging(string vestigingNummer)
         {
+            // TODO => add check on "registratie datum einde" or make more explicit error message for not up to date repo's
             return GetAllCurrentVestigingen().SingleOrDefault(v => v.Vestigingsnummer == vestigingNummer);
         }
 

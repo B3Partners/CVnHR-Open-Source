@@ -72,7 +72,7 @@ namespace QNH.Overheid.KernRegister.Business.Crm.Probis
 
             var errors = new List<string>();
             // Insert all vestigingen
-            foreach (var vestiging in kvkInschrijving.Vestigingen)
+            foreach (var vestiging in kvkInschrijving.Vestigingen.OrderByDescending(v=> v.IsHoofdvestiging))
             {
                 var vestigingResult = InsertOrUpdateExternalVestiging(vestiging, type);
                 if (!vestigingResult.Succes)

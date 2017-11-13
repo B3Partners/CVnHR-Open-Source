@@ -307,9 +307,9 @@ namespace QNH.Overheid.KernRegister.Beheer
                 // Setup the financial service
                 x.For<IFinancialExportService>().Use<ProbisRepository>()
                     .SelectConstructor(() => new ProbisRepository("connectionstring", "insertOrUpdateStoredProcedureName", "displayName"))
-                    .Ctor<string>().Is(ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
-                    .Ctor<string>().Is(ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"])
-                    .Ctor<string>().Is(() => Default.FinancialApplication);
+                    .Ctor<string>("connectionString").Is(() => ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
+                    .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"])
+                    .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
             });
         }
     }
