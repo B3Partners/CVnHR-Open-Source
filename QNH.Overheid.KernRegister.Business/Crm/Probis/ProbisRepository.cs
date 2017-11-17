@@ -86,10 +86,19 @@ namespace QNH.Overheid.KernRegister.Business.Crm.Probis
             if (!errors.Any())
             {
                 changed |= true; // TODO!!! //newVestigingen.Any();
-                return new ExportResult(true, changed ? $"De gegevens zijn succesvol geüpdatet in {DisplayName}." : $"Geen wijzigingen gevonden met de gegevens in {DisplayName}.");
+                var msg = changed
+                    ? $"De gegevens zijn succesvol geüpdatet in {DisplayName}."
+                    : $"Geen wijzigingen gevonden met de gegevens in {DisplayName}.";
+                _logger.Debug(msg);
+                return new ExportResult(true, msg);
             }
             else
-                return new ExportResult(false, $"Er is iets fout gegaan bij de {DisplayName} update van {kvkInschrijving.Vestigingen.Count} vestigingen. Aantal fouten: {errors.Count}.", errors: errors);
+            {
+                var msg =
+                    $"Er is iets fout gegaan bij de {DisplayName} update van {kvkInschrijving.Vestigingen.Count} vestigingen. Aantal fouten: {errors.Count}.";
+                _logger.Error(msg + $" Errors: {string.Join(" - ", errors)}");
+                return new ExportResult(false, msg, errors: errors);
+            }
         }
 
         private IExportResult InsertOrUpdateExternalVestiging(Vestiging vestiging, FinancialProcesType type)
