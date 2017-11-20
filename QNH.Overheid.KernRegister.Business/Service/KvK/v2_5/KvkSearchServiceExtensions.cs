@@ -173,7 +173,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v2_5
             kvkInschrijving.PersoonRechtsvorm = eigenaar.persoonRechtsvorm;
             kvkInschrijving.UitgebreideRechtsvorm = eigenaar.uitgebreideRechtsvorm;
             kvkInschrijving.VolledigeNaamEigenaar = eigenaar.volledigeNaam;
-
+            
             if (eigenaar is NietNatuurlijkPersoonType)
             {
                 var nnpt = (NietNatuurlijkPersoonType)eigenaar;
@@ -270,7 +270,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v2_5
             {
                 var npt = (NatuurlijkPersoonType)eigenaar;
 
-                kvkInschrijving.DatumOprichting = npt.registratie.datumAanvang;
+                //kvkInschrijving.DatumOprichting = npt.registratie.datumAanvang; // => Is birthdate of the owner... 
+                kvkInschrijving.DatumOprichting = maatschappelijkeActiviteit.registratie.datumAanvang;
                 kvkInschrijving.DatumUitschrijving = npt.registratie.datumEinde;
             }
             else
