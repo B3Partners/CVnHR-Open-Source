@@ -289,7 +289,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                 var npt = (NatuurlijkPersoonType)eigenaar;
 
                 //kvkInschrijving.DatumOprichting = npt.registratie.datumAanvang; // => Is birthdate of the owner... 
-                kvkInschrijving.DatumOprichting = maatschappelijkeActiviteit.registratie.datumAanvang;
+                kvkInschrijving.DatumOprichting = maatschappelijkeActiviteit.registratie?.datumAanvang;
                 kvkInschrijving.DatumUitschrijving = npt.registratie.datumEinde;
             }
             else
