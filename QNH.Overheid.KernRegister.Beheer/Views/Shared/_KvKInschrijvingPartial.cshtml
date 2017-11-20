@@ -385,7 +385,7 @@ else
 
             </thead>
             <tbody>
-                @foreach (var vestiging in Model.Vestigingen)
+                @foreach (var vestiging in Model.Vestigingen.OrderByDescending(v=> v.IsHoofdvestiging).ThenBy(v=> v.Naam))
                 {
                     var valid = vestiging.GeldigTot > DateTime.Now;
                     showInvalidVestigingen |= !valid;

@@ -360,7 +360,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
 
                     functie.FunctieTitel = titel == null
                         ? functie.Functie
-                        : $"{titel.titel}, indicatie Statutair: {titel.isStatutaireTitel}";
+                        : $"{titel.titel}, indicatie Statutair: {titel.isStatutaireTitel.omschrijving}";
 
                     if (functieVervulling.Item is AansprakelijkeType)
                     {
