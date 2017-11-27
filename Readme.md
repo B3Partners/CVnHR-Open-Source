@@ -10,7 +10,7 @@ application either stand-alone or in combination with the BRMO application by B3
 
 Original development is done by QNH Consulting B.V.
 
-__Contact__ Corné Hogerheijde @ QNH and/or B3Partners (TODO)
+__Contact__ CornÃ© Hogerheijde @ QNH and/or B3Partners (info@b3partners.nl)
 
 
 ## Development environment setup
@@ -22,7 +22,7 @@ of Commerce (KvK).
 - Copy config files from Config/examples (in both QNH.Overheid.KernRegister.Beheer and 
   QNH.Overheid.KernRegister.BatchProcess projects) and fill out with necessary values
 - Install the PKI certificate and fill out the values needed in the .config files
-- Create a database on either Oracle or SQL and update .config files accordingly
+- Create a database on either Oracle or MS SQL and update .config files accordingly
 - Surfs up dude!
 
 ## README "QNH.Overheid.KernRegister.Beheer"
