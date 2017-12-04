@@ -96,7 +96,10 @@ namespace QNH.Overheid.KernRegister.Business.Crm.Probis
             else
             {
                 var msg =
-                    $"Er is iets fout gegaan bij de {DisplayName} update van {kvkInschrijving.Vestigingen.Count} vestigingen. Aantal fouten: {errors.Count}.";
+                    $@"Er is iets fout gegaan bij de {DisplayName} update van {kvkInschrijving.Vestigingen.Count} vestigingen. Aantal fouten: {errors.Count}.
+Succesvol verwerkte vestigingen:
+{string.Join("\n", successMsgs)}
+";
                 _logger.Error(msg + $" Errors: {string.Join(" - ", errors)}");
                 return new ExportResult(false, msg, errors: errors);
             }
