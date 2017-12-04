@@ -1,326 +1,162 @@
 
-    drop table KERNREGRELBEH.DEPONERINGSSTUK cascade constraints;
+    drop table if exists KERNREGRELBEH.DEPONERINGSSTUK cascade;
 
-    drop table KERNREGRELBEH.FUNCTIEVERVULLING cascade constraints;
+    drop table if exists KERNREGRELBEH.FUNCTIEVERVULLING cascade;
 
-    drop table KERNREGRELBEH.HANDELSNAAM cascade constraints;
+    drop table if exists KERNREGRELBEH.HANDELSNAAM cascade;
 
-    drop table KERNREGRELBEH.KVKINSCHRIJVING cascade constraints;
+    drop table if exists KERNREGRELBEH.KVKINSCHRIJVING cascade;
 
-    drop table KERNREGRELBEH.SBIACTIVITEIT cascade constraints;
+    drop table if exists KERNREGRELBEH.SBIACTIVITEIT cascade;
 
-    drop table KERNREGRELBEH.SBICODE cascade constraints;
+    drop table if exists KERNREGRELBEH.SBICODE cascade;
 
-    drop table KERNREGRELBEH.VESTIGING cascade constraints;
+    drop table if exists KERNREGRELBEH.VESTIGING cascade;
 
-    drop table KERNREGRELBEH.VESTIGINGSBIACTIVITEIT cascade constraints;
+    drop table if exists KERNREGRELBEH.VESTIGINGSBIACTIVITEIT cascade;
 
-    drop table RSGB.QNH_VW_DEPONERINGSSTUK cascade constraints;
+    drop table if exists RSGB.QNH_VW_DEPONERINGSSTUK cascade;
 
-    drop table RSGB.QNH_VW_FUNCTIEVERVULLING cascade constraints;
+    drop table if exists RSGB.QNH_VW_FUNCTIEVERVULLING cascade;
 
-    drop table RSGB.QNH_VW_KVKINSCHRIJVING cascade constraints;
+    drop table if exists RSGB.QNH_VW_KVKINSCHRIJVING cascade;
 
-    drop table RSGB.QNH_VW_SBIACTIVITEIT cascade constraints;
+    drop table if exists RSGB.QNH_VW_SBIACTIVITEIT cascade;
 
-    drop table RSGB.QNH_VW_SBICODE cascade constraints;
+    drop table if exists RSGB.QNH_VW_SBICODE cascade;
 
-    drop table RSGB.QNH_VW_VESTIGING cascade constraints;
+    drop table if exists RSGB.QNH_VW_VESTIGING cascade;
 
-    drop table RSGB.QNH_VW_VESTIGINGSBIACTIVITEIT cascade constraints;
-
-    drop sequence KERNREGRELBEH.hibernate_sequence;
-
-    drop sequence RSGB.hibernate_sequence;
+    drop table if exists RSGB.QNH_VW_VESTIGINGSBIACTIVITEIT cascade;
 
     create table KERNREGRELBEH.DEPONERINGSSTUK (
-        Id NUMBER(10,0) not null,
-       DEPOTID NVARCHAR2(255),
-       DATUMDEPONERING TIMESTAMP(4),
-       TYPE NVARCHAR2(255),
-       STATUS NVARCHAR2(255),
-       GAATOVER NVARCHAR2(255),
-       KvkInschrijving_id NUMBER(10,0),
+        Id  serial,
+       DEPOTID varchar(255),
+       DATUMDEPONERING timestamp,
+       TYPE varchar(255),
+       STATUS varchar(255),
+       GAATOVER varchar(255),
+       KvkInschrijving_id int4,
        primary key (Id)
     );
 
     create table KERNREGRELBEH.FUNCTIEVERVULLING (
-        Id NUMBER(10,0) not null,
-       FUNCTIE NVARCHAR2(255),
-       FUNCTIETITEL NVARCHAR2(255),
-       VOLLEDIGENAAM NVARCHAR2(255),
-       SCHORSING NVARCHAR2(255),
-       LANGSTZITTENDE NVARCHAR2(255),
-       BEVOEGDHEID NVARCHAR2(255),
-       HANDELINGSBEKWAAM NVARCHAR2(255),
-       KvkInschrijving_id NUMBER(10,0),
+        Id  serial,
+       FUNCTIE varchar(255),
+       FUNCTIETITEL varchar(255),
+       VOLLEDIGENAAM varchar(255),
+       SCHORSING varchar(255),
+       LANGSTZITTENDE varchar(255),
+       BEVOEGDHEID varchar(255),
+       HANDELINGSBEKWAAM varchar(255),
+       KvkInschrijving_id int4,
        primary key (Id)
     );
 
     create table KERNREGRELBEH.HANDELSNAAM (
-        Id NUMBER(10,0) not null,
-       HANDELSNAAM NVARCHAR2(255),
-       KvkInschrijving_id NUMBER(10,0),
+        Id  serial,
+       HANDELSNAAM varchar(255),
+       KvkInschrijving_id int4,
        primary key (Id)
     );
 
     create table KERNREGRELBEH.KVKINSCHRIJVING (
-        Id NUMBER(10,0) not null,
-       NAAM NVARCHAR2(255),
-       KVKNUMMER NVARCHAR2(255),
-       PEILMOMENT NVARCHAR2(255),
-       INGEVOEGDOP TIMESTAMP(4),
-       GELDIGTOT TIMESTAMP(4),
-       OPGEVRAAGDOP TIMESTAMP(4),
-       REGISTRATIEDATUMAANVANG NVARCHAR2(255),
-       REGISTRATIEDATUMEINDE NVARCHAR2(255),
-       DATUMOPRICHTING NVARCHAR2(255),
-       DATUMUITSCHRIJVING NVARCHAR2(255),
-       PERSOONRECHTSVORM NVARCHAR2(255),
-       UITGEBREIDERECHTSVORM NVARCHAR2(255),
-       BIJZONDERERECHTSTOESTAND NVARCHAR2(255),
-       REDENINSOLVENTIE NVARCHAR2(255),
-       BEPERKINGINRECHTSHANDELING NVARCHAR2(255),
-       EIGENAARHEEFTGEDEPONEERD NVARCHAR2(255),
-       VOLLEDIGENAAMEIGENAAR NVARCHAR2(255),
-       FULLTIMEWERKZAMEPERSONEN NVARCHAR2(255),
-       PARTTIMEWERKZAMEPERSONEN NVARCHAR2(255),
-       TOTAALWERKZAMEPERSONEN NVARCHAR2(255),
-       GEPLAATSTKAPITAAL NVARCHAR2(255),
-       GESTORTKAPITAAL NVARCHAR2(255),
-       RECHTERLIJKEUITSPRAAK NVARCHAR2(255),
-       BERICHTENBOXNAAM NVARCHAR2(255),
+        Id  serial,
+       NAAM varchar(255),
+       KVKNUMMER varchar(255),
+       PEILMOMENT varchar(255),
+       INGEVOEGDOP timestamp,
+       GELDIGTOT timestamp,
+       OPGEVRAAGDOP timestamp,
+       REGISTRATIEDATUMAANVANG varchar(255),
+       REGISTRATIEDATUMEINDE varchar(255),
+       DATUMOPRICHTING varchar(255),
+       DATUMUITSCHRIJVING varchar(255),
+       PERSOONRECHTSVORM varchar(255),
+       UITGEBREIDERECHTSVORM varchar(255),
+       BIJZONDERERECHTSTOESTAND varchar(255),
+       REDENINSOLVENTIE varchar(255),
+       BEPERKINGINRECHTSHANDELING varchar(255),
+       EIGENAARHEEFTGEDEPONEERD varchar(255),
+       VOLLEDIGENAAMEIGENAAR varchar(255),
+       FULLTIMEWERKZAMEPERSONEN varchar(255),
+       PARTTIMEWERKZAMEPERSONEN varchar(255),
+       TOTAALWERKZAMEPERSONEN varchar(255),
+       GEPLAATSTKAPITAAL varchar(255),
+       GESTORTKAPITAAL varchar(255),
+       RECHTERLIJKEUITSPRAAK varchar(255),
+       BERICHTENBOXNAAM varchar(255),
        primary key (Id)
     );
 
     create table KERNREGRELBEH.SBIACTIVITEIT (
-        Id NUMBER(10,0) not null,
-       ISHOOFDSBIACTIVITEIT NUMBER(1,0),
-       SbiCode_id NVARCHAR2(255),
-       KvKInschrijving_id NUMBER(10,0),
+        Id  serial,
+       ISHOOFDSBIACTIVITEIT boolean,
+       SbiCode_id varchar(255),
+       KvKInschrijving_id int4,
        primary key (Id)
     );
 
     create table KERNREGRELBEH.SBICODE (
-        Code NVARCHAR2(255) not null,
-       OMSCHRIJVING NVARCHAR2(255),
+        Code varchar(255) not null,
+       OMSCHRIJVING varchar(255),
        primary key (Code)
     );
 
     create table KERNREGRELBEH.VESTIGING (
-        Id NUMBER(10,0) not null,
-       VESTIGINGSNUMMER NVARCHAR2(255),
-       NAAM NVARCHAR2(255),
-       ADRES NVARCHAR2(255),
-       STRAAT NVARCHAR2(255),
-       HUISNUMMER NVARCHAR2(255),
-       HUISNUMMERTOEVOEGING NVARCHAR2(255),
-       POSTCODECIJFERS NVARCHAR2(255),
-       POSTCODELETTERS NVARCHAR2(255),
-       WOONPLAATS NVARCHAR2(255),
-       TELEFOON NVARCHAR2(255),
-       FAX NVARCHAR2(255),
-       EMAIL NVARCHAR2(255),
-       GEMEENTE NVARCHAR2(255),
-       BAGID NVARCHAR2(255),
-       RSIN NVARCHAR2(255),
-       EORI NVARCHAR2(255),
-       INGEVOEGDOP TIMESTAMP(4),
-       GELDIGTOT TIMESTAMP(4),
-       ISHOOFDVESTIGING NUMBER(1,0),
-       POSTBUSNUMMER NVARCHAR2(255),
-       POSTADRES NVARCHAR2(255),
-       POSTSTRAAT NVARCHAR2(255),
-       POSTHUISNUMMER NVARCHAR2(255),
-       POSTHUISNUMMERTOEVOEGING NVARCHAR2(255),
-       POSTPOSTCODECIJFERS NVARCHAR2(255),
-       POSTPOSTCODELETTERS NVARCHAR2(255),
-       POSTWOONPLAATS NVARCHAR2(255),
-       POSTGEMEENTE NVARCHAR2(255),
-       REGISTRATIEDATUMAANVANG NVARCHAR2(255),
-       REGISTRATIEDATUMEINDE NVARCHAR2(255),
-       FULLTIMEWERKZAMEPERSONEN NVARCHAR2(255),
-       PARTTIMEWERKZAMEPERSONEN NVARCHAR2(255),
-       TOTAALWERKZAMEPERSONEN NVARCHAR2(255),
-       KvkInschrijving_id NUMBER(10,0),
+        Id  serial,
+       VESTIGINGSNUMMER varchar(255),
+       NAAM varchar(255),
+       ADRES varchar(255),
+       STRAAT varchar(255),
+       HUISNUMMER varchar(255),
+       HUISNUMMERTOEVOEGING varchar(255),
+       POSTCODECIJFERS varchar(255),
+       POSTCODELETTERS varchar(255),
+       WOONPLAATS varchar(255),
+       TELEFOON varchar(255),
+       FAX varchar(255),
+       EMAIL varchar(255),
+       GEMEENTE varchar(255),
+       BAGID varchar(255),
+       RSIN varchar(255),
+       EORI varchar(255),
+       INGEVOEGDOP timestamp,
+       GELDIGTOT timestamp,
+       ISHOOFDVESTIGING boolean,
+       POSTBUSNUMMER varchar(255),
+       POSTADRES varchar(255),
+       POSTSTRAAT varchar(255),
+       POSTHUISNUMMER varchar(255),
+       POSTHUISNUMMERTOEVOEGING varchar(255),
+       POSTPOSTCODECIJFERS varchar(255),
+       POSTPOSTCODELETTERS varchar(255),
+       POSTWOONPLAATS varchar(255),
+       POSTGEMEENTE varchar(255),
+       REGISTRATIEDATUMAANVANG varchar(255),
+       REGISTRATIEDATUMEINDE varchar(255),
+       FULLTIMEWERKZAMEPERSONEN varchar(255),
+       PARTTIMEWERKZAMEPERSONEN varchar(255),
+       TOTAALWERKZAMEPERSONEN varchar(255),
+       KvkInschrijving_id int4,
        primary key (Id)
     );
 
     create table KERNREGRELBEH.VESTIGINGSBIACTIVITEIT (
-        Id NUMBER(10,0) not null,
-       ISHOOFDSBIACTIVITEIT NUMBER(1,0),
-       SbiCode_id NVARCHAR2(255),
-       Vestiging_id NUMBER(10,0),
+        Id  serial,
+       ISHOOFDSBIACTIVITEIT boolean,
+       SbiCode_id varchar(255),
+       Vestiging_id int4,
        primary key (Id)
     );
 
     create table RSGB.QNH_VW_DEPONERINGSSTUK (
-        Id NUMBER(10,0) not null,
-       DEPOTID NVARCHAR2(255),
-       DATUMDEPONERING TIMESTAMP(4),
-       TYPE NVARCHAR2(255),
-       STATUS NVARCHAR2(255),
-       GAATOVER NVARCHAR2(255),
-       KvkInschrijving_id NUMBER(10,0),
+        Id  serial,
+       DEPOTID varchar(255),
+       DATUMDEPONERING timestamp,
+       TYPE varchar(255),
+       STATUS varchar(255),
+       GAATOVER varchar(255),
+       KvkInschrijving_id int4,
        primary key (Id)
     );
-
-    create table RSGB.QNH_VW_FUNCTIEVERVULLING (
-        Id NUMBER(10,0) not null,
-       FUNCTIE NVARCHAR2(255),
-       FUNCTIETITEL NVARCHAR2(255),
-       VOLLEDIGENAAM NVARCHAR2(255),
-       SCHORSING NVARCHAR2(255),
-       LANGSTZITTENDE NVARCHAR2(255),
-       BEVOEGDHEID NVARCHAR2(255),
-       HANDELINGSBEKWAAM NVARCHAR2(255),
-       KvkInschrijving_id NUMBER(10,0),
-       primary key (Id)
-    );
-
-    create table RSGB.QNH_VW_KVKINSCHRIJVING (
-        Id NUMBER(10,0) not null,
-       NAAM NVARCHAR2(255),
-       KVKNUMMER NVARCHAR2(255),
-       PEILMOMENT NVARCHAR2(255),
-       INGEVOEGDOP TIMESTAMP(4),
-       GELDIGTOT TIMESTAMP(4),
-       OPGEVRAAGDOP TIMESTAMP(4),
-       REGISTRATIEDATUMAANVANG NVARCHAR2(255),
-       REGISTRATIEDATUMEINDE NVARCHAR2(255),
-       DATUMOPRICHTING NVARCHAR2(255),
-       DATUMUITSCHRIJVING NVARCHAR2(255),
-       PERSOONRECHTSVORM NVARCHAR2(255),
-       UITGEBREIDERECHTSVORM NVARCHAR2(255),
-       BIJZONDERERECHTSTOESTAND NVARCHAR2(255),
-       REDENINSOLVENTIE NVARCHAR2(255),
-       BEPERKINGINRECHTSHANDELING NVARCHAR2(255),
-       EIGENAARHEEFTGEDEPONEERD NVARCHAR2(255),
-       VOLLEDIGENAAMEIGENAAR NVARCHAR2(255),
-       FULLTIMEWERKZAMEPERSONEN NVARCHAR2(255),
-       PARTTIMEWERKZAMEPERSONEN NVARCHAR2(255),
-       TOTAALWERKZAMEPERSONEN NVARCHAR2(255),
-       GEPLAATSTKAPITAAL NVARCHAR2(255),
-       GESTORTKAPITAAL NVARCHAR2(255),
-       RECHTERLIJKEUITSPRAAK NVARCHAR2(255),
-       BERICHTENBOXNAAM NVARCHAR2(255),
-       primary key (Id)
-    );
-
-    create table RSGB.QNH_VW_SBIACTIVITEIT (
-        Id NUMBER(10,0) not null,
-       ISHOOFDSBIACTIVITEIT NUMBER(1,0),
-       SbiCode_id NVARCHAR2(255),
-       KvKInschrijving_id NUMBER(10,0),
-       primary key (Id)
-    );
-
-    create table RSGB.QNH_VW_SBICODE (
-        Code NVARCHAR2(255) not null,
-       OMSCHRIJVING NVARCHAR2(255),
-       primary key (Code)
-    );
-
-    create table RSGB.QNH_VW_VESTIGING (
-        Id NUMBER(10,0) not null,
-       VESTIGINGSNUMMER NVARCHAR2(255),
-       NAAM NVARCHAR2(255),
-       ADRES NVARCHAR2(255),
-       STRAAT NVARCHAR2(255),
-       HUISNUMMER NVARCHAR2(255),
-       HUISNUMMERTOEVOEGING NVARCHAR2(255),
-       POSTCODECIJFERS NVARCHAR2(255),
-       POSTCODELETTERS NVARCHAR2(255),
-       WOONPLAATS NVARCHAR2(255),
-       TELEFOON NVARCHAR2(255),
-       FAX NVARCHAR2(255),
-       EMAIL NVARCHAR2(255),
-       GEMEENTE NVARCHAR2(255),
-       BAGID NVARCHAR2(255),
-       RSIN NVARCHAR2(255),
-       EORI NVARCHAR2(255),
-       INGEVOEGDOP TIMESTAMP(4),
-       GELDIGTOT TIMESTAMP(4),
-       ISHOOFDVESTIGING NUMBER(1,0),
-       POSTBUSNUMMER NVARCHAR2(255),
-       POSTADRES NVARCHAR2(255),
-       POSTSTRAAT NVARCHAR2(255),
-       POSTHUISNUMMER NVARCHAR2(255),
-       POSTHUISNUMMERTOEVOEGING NVARCHAR2(255),
-       POSTPOSTCODECIJFERS NVARCHAR2(255),
-       POSTPOSTCODELETTERS NVARCHAR2(255),
-       POSTWOONPLAATS NVARCHAR2(255),
-       POSTGEMEENTE NVARCHAR2(255),
-       REGISTRATIEDATUMAANVANG NVARCHAR2(255),
-       REGISTRATIEDATUMEINDE NVARCHAR2(255),
-       FULLTIMEWERKZAMEPERSONEN NVARCHAR2(255),
-       PARTTIMEWERKZAMEPERSONEN NVARCHAR2(255),
-       TOTAALWERKZAMEPERSONEN NVARCHAR2(255),
-       KvkInschrijving_id NUMBER(10,0),
-       primary key (Id)
-    );
-
-    create table RSGB.QNH_VW_VESTIGINGSBIACTIVITEIT (
-        Id NUMBER(10,0) not null,
-       ISHOOFDSBIACTIVITEIT NUMBER(1,0),
-       SbiCode_id NVARCHAR2(255),
-       Vestiging_id NUMBER(10,0),
-       primary key (Id)
-    );
-
-    alter table KERNREGRELBEH.DEPONERINGSSTUK 
-        add constraint FKE7111DD91DE582D3 
-        foreign key (KvkInschrijving_id) 
-        references KERNREGRELBEH.KVKINSCHRIJVING;
-
-    alter table KERNREGRELBEH.FUNCTIEVERVULLING 
-        add constraint FKD6A1FEFA1DE582D3 
-        foreign key (KvkInschrijving_id) 
-        references KERNREGRELBEH.KVKINSCHRIJVING;
-
-    alter table KERNREGRELBEH.HANDELSNAAM 
-        add constraint FKC66EE6E81DE582D3 
-        foreign key (KvkInschrijving_id) 
-        references KERNREGRELBEH.KVKINSCHRIJVING;
-
-    create index IX_KVKINSCHRIJVING_NAAM on KERNREGRELBEH.KVKINSCHRIJVING (NAAM);
-
-    create index IX_KVKINSCHRIJVING_KVKNUMMER on KERNREGRELBEH.KVKINSCHRIJVING (KVKNUMMER);
-
-    alter table KERNREGRELBEH.SBIACTIVITEIT 
-        add constraint FK771AC42A540ED1A5 
-        foreign key (SbiCode_id) 
-        references KERNREGRELBEH.SBICODE;
-
-    alter table KERNREGRELBEH.SBIACTIVITEIT 
-        add constraint FK771AC42A1DE582D3 
-        foreign key (KvKInschrijving_id) 
-        references KERNREGRELBEH.KVKINSCHRIJVING;
-
-    create index IX_VESTIGING_VESTIGINGSNUMMER on KERNREGRELBEH.VESTIGING (VESTIGINGSNUMMER);
-
-    create index IX_VESTIGING_NAAM on KERNREGRELBEH.VESTIGING (NAAM);
-
-    create index IX_VESTIGING_BAGID on KERNREGRELBEH.VESTIGING (BAGID);
-
-    create index IX_VESTIGING_RSIN on KERNREGRELBEH.VESTIGING (RSIN);
-
-    alter table KERNREGRELBEH.VESTIGING 
-        add constraint FKB0A96C581DE582D3 
-        foreign key (KvkInschrijving_id) 
-        references KERNREGRELBEH.KVKINSCHRIJVING;
-
-    alter table KERNREGRELBEH.VESTIGINGSBIACTIVITEIT 
-        add constraint FK237FB584540ED1A5 
-        foreign key (SbiCode_id) 
-        references KERNREGRELBEH.SBICODE;
-
-    alter table KERNREGRELBEH.VESTIGINGSBIACTIVITEIT 
-        add constraint FK237FB58456465FEB 
-        foreign key (Vestiging_id) 
-        references KERNREGRELBEH.VESTIGING;
-
-    alter table RSGB.QNH_VW_DEPONERINGSSTUK 
-        add constraint FKC943333F1DE582D3 
-        foreign key (KvkInschrijving_id) 
-        references KERNREGRELBEH.KVKINSCHRIJVING;

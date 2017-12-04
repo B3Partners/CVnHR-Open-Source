@@ -60,6 +60,14 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                             connstr.FromConnectionStringWithKey("NHibernateSQLConnection"))
                         .DefaultSchema(schemaName);
                     break;
+                case "NHibernatePostGRESQL":
+                    persistenceConfigurer = PostgreSQLConfiguration.PostgreSQL82
+                        .Driver<NpgsqlDriver>()
+                        .ConnectionString(connst =>
+                            connst.FromConnectionStringWithKey("NHibernatePostGRESQLConnection"))
+                        .Dialect<PostgreSQL82Dialect>()
+                        .DefaultSchema(schemaName);
+                    break;
                 default: // SQLCE
                     persistenceConfigurer = MsSqlCeConfiguration.Standard
                         .Driver<NHibernate.Driver.SqlServerCeDriver>()
@@ -154,6 +162,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                     case "NHibernateOracle":
                     case "NHibernateSQLCE":
                     case "NHibernateSQL":
+                    case "NHibernatePostGRESQL":
                         // nHibernate setup 
                         var schemaName = ConfigurationManager.AppSettings["DatabaseSchemaName"];
 
@@ -175,7 +184,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         // End nHibernate setup
                         break;
                     default:
-                        throw new ConfigurationErrorsException("No valid 'DatabaseProvider' key found in AppSettings. Possible (implemented) values: EF | NHibernateOracle | NHibernateSQLCE");
+                        throw new ConfigurationErrorsException("No valid 'DatabaseProvider' key found in AppSettings. Possible (implemented) values: EF | NHibernateOracle | NHibernateSQLCE | NHibernatePostGRESQL");
                 }
 
                 // Services:
