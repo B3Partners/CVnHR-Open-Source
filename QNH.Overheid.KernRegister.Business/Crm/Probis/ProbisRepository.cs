@@ -71,6 +71,7 @@ namespace QNH.Overheid.KernRegister.Business.Crm.Probis
             // TODO: get all vestigingnummers for kvkid and check if any removed (for logging).
 
             var errors = new List<string>();
+            var successMsgs = new List<string>();
             // Insert all vestigingen
             foreach (var vestiging in kvkInschrijving.Vestigingen.OrderByDescending(v=> v.IsHoofdvestiging).ThenBy(v=> v.Naam))
             {
@@ -79,16 +80,16 @@ namespace QNH.Overheid.KernRegister.Business.Crm.Probis
                 {
                     errors.AddRange(vestigingResult.Errors);
                 }
-                // TODO: check if any changes?
+                else
+                {
+                    successMsgs.Add(vestigingResult.Message);
+                }
             }
 
-            var changed = false;
             if (!errors.Any())
             {
-                changed |= true; // TODO!!! //newVestigingen.Any();
-                var msg = changed
-                    ? $"De gegevens zijn succesvol geüpdatet in {DisplayName}."
-                    : $"Geen wijzigingen gevonden met de gegevens in {DisplayName}.";
+                var msg = $"De gegevens zijn succesvol aangemaak of geüpdatet in {DisplayName}.";
+                msg += "\n" + string.Join("\n", successMsgs);
                 _logger.Debug(msg);
                 return new ExportResult(true, msg);
             }
