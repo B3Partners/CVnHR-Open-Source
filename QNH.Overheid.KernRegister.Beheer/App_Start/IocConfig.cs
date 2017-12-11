@@ -97,7 +97,7 @@ namespace QNH.Overheid.KernRegister.Beheer
 
                     // Create the script and if specified database
                     var scriptDir = AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "/SQL";
-                    var scriptFileName = Path.Combine(scriptDir, "Generated-SQL.sql");
+                    var scriptFileName = Path.Combine(scriptDir, $"Generated-SQL-{dbProvider}.sql");
                     if (CreateDatabase || !File.Exists(scriptFileName))
                     {
                         if (!Directory.Exists(scriptDir))

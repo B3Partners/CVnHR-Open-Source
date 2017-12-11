@@ -15,20 +15,6 @@
 
     drop table if exists KERNREGRELBEH.VESTIGINGSBIACTIVITEIT cascade;
 
-    drop table if exists RSGB.QNH_VW_DEPONERINGSSTUK cascade;
-
-    drop table if exists RSGB.QNH_VW_FUNCTIEVERVULLING cascade;
-
-    drop table if exists RSGB.QNH_VW_KVKINSCHRIJVING cascade;
-
-    drop table if exists RSGB.QNH_VW_SBIACTIVITEIT cascade;
-
-    drop table if exists RSGB.QNH_VW_SBICODE cascade;
-
-    drop table if exists RSGB.QNH_VW_VESTIGING cascade;
-
-    drop table if exists RSGB.QNH_VW_VESTIGINGSBIACTIVITEIT cascade;
-
     create table KERNREGRELBEH.DEPONERINGSSTUK (
         Id  serial,
        DEPOTID varchar(255),
@@ -150,13 +136,54 @@
        primary key (Id)
     );
 
-    create table RSGB.QNH_VW_DEPONERINGSSTUK (
-        Id  serial,
-       DEPOTID varchar(255),
-       DATUMDEPONERING timestamp,
-       TYPE varchar(255),
-       STATUS varchar(255),
-       GAATOVER varchar(255),
-       KvkInschrijving_id int4,
-       primary key (Id)
-    );
+    alter table KERNREGRELBEH.DEPONERINGSSTUK 
+        add constraint FKE7111DD91DE582D3 
+        foreign key (KvkInschrijving_id) 
+        references KERNREGRELBEH.KVKINSCHRIJVING;
+
+    alter table KERNREGRELBEH.FUNCTIEVERVULLING 
+        add constraint FKD6A1FEFA1DE582D3 
+        foreign key (KvkInschrijving_id) 
+        references KERNREGRELBEH.KVKINSCHRIJVING;
+
+    alter table KERNREGRELBEH.HANDELSNAAM 
+        add constraint FKC66EE6E81DE582D3 
+        foreign key (KvkInschrijving_id) 
+        references KERNREGRELBEH.KVKINSCHRIJVING;
+
+    create index IX_KVKINSCHRIJVING_NAAM on KERNREGRELBEH.KVKINSCHRIJVING (NAAM);
+
+    create index IX_KVKINSCHRIJVING_KVKNUMMER on KERNREGRELBEH.KVKINSCHRIJVING (KVKNUMMER);
+
+    alter table KERNREGRELBEH.SBIACTIVITEIT 
+        add constraint FK771AC42A540ED1A5 
+        foreign key (SbiCode_id) 
+        references KERNREGRELBEH.SBICODE;
+
+    alter table KERNREGRELBEH.SBIACTIVITEIT 
+        add constraint FK771AC42A1DE582D3 
+        foreign key (KvKInschrijving_id) 
+        references KERNREGRELBEH.KVKINSCHRIJVING;
+
+    create index IX_VESTIGING_VESTIGINGSNUMMER on KERNREGRELBEH.VESTIGING (VESTIGINGSNUMMER);
+
+    create index IX_VESTIGING_NAAM on KERNREGRELBEH.VESTIGING (NAAM);
+
+    create index IX_VESTIGING_BAGID on KERNREGRELBEH.VESTIGING (BAGID);
+
+    create index IX_VESTIGING_RSIN on KERNREGRELBEH.VESTIGING (RSIN);
+
+    alter table KERNREGRELBEH.VESTIGING 
+        add constraint FKB0A96C581DE582D3 
+        foreign key (KvkInschrijving_id) 
+        references KERNREGRELBEH.KVKINSCHRIJVING;
+
+    alter table KERNREGRELBEH.VESTIGINGSBIACTIVITEIT 
+        add constraint FK237FB584540ED1A5 
+        foreign key (SbiCode_id) 
+        references KERNREGRELBEH.SBICODE;
+
+    alter table KERNREGRELBEH.VESTIGINGSBIACTIVITEIT 
+        add constraint FK237FB58456465FEB 
+        foreign key (Vestiging_id) 
+        references KERNREGRELBEH.VESTIGING;

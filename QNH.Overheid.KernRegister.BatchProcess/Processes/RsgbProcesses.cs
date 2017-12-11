@@ -9,7 +9,6 @@ using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Enums;
 using QNH.Overheid.KernRegister.Business.Integration;
 using QNH.Overheid.KernRegister.Business.Model;
-using QNH.Overheid.KernRegister.Business.Model.RSGB2_2;
 using QNH.Overheid.KernRegister.Business.Service;
 using QNH.Overheid.KernRegister.Business.Service.BRMO;
 
@@ -17,20 +16,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
 {
     public class RsgbProcesses
     {
-        public static void RsgbTest()
-        {
-            var vwRepo = IocConfig.Container.GetInstance<IRsgbRepository<QNH_VW_Vestiging>>();
-            var vwONDRNMNG = IocConfig.Container.GetInstance<IRsgbRepository<QNH_VW_KvkInschrijving>>();
-
-            var vestigingen = vwRepo.Query().Take(3).ToList();
-
-            Console.WriteLine("VESTG COUNT: " + vwRepo.Query().Count());
-            Console.WriteLine("ONDRNMNG COUNT: " + vwONDRNMNG.Query().Count());
-            Console.WriteLine("First 3 VESTG: " + string.Join("-", vestigingen.Select(v => v.Vestigingsnummer + v.Naam)));
-
-            Console.ReadLine();
-        }
-
         // TODO: retry with CSV file??
 
         public static void FillRsgbForZipcodes(int maxDegreeOfParallelism, Logger log, List<string> kvkIds = null)
