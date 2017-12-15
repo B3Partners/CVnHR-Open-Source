@@ -270,13 +270,6 @@
     <Compile Include="Model\nHibernate\NHRepository.cs" />
     <Compile Include="Model\nHibernate\RsgbRepository.cs" />
     <Compile Include="Model\TransactionWrapper.cs" />
-    <Compile Include="Model\RSGB\2.2\QNH_VW_DeponeringsStuk.cs" />
-    <Compile Include="Model\RSGB\2.2\QNH_VW_FunctieVervulling.cs" />
-    <Compile Include="Model\RSGB\2.2\QNH_VW_KvkInschrijving.cs" />
-    <Compile Include="Model\RSGB\2.2\QNH_VW_SbiActiviteit.cs" />
-    <Compile Include="Model\RSGB\2.2\QNH_VW_SbiCode.cs" />
-    <Compile Include="Model\RSGB\2.2\QNH_VW_Vestiging.cs" />
-    <Compile Include="Model\RSGB\2.2\QNH_VW_VestigingSbiActiviteit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BRMO\BrmoSyncService.cs" />
     <Compile Include="Service\BRMO\IBrmoSyncService.cs" />
@@ -296,11 +289,9 @@
     <Compile Include="Utility\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_VestigingSbiActiviteit.sql" />
     <None Include="Fakes\Documentation\relations.wsdl" />
     <None Include="Fakes\Documentation\security.wsdl" />
     <None Include="Model\kernregister.huidig.cd" />
-    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_FunctieVervulling.sql" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -308,13 +299,6 @@
   <ItemGroup>
     <Content Include="Crm\NAdres\CreateDatabaseForLocal.txt" />
     <Content Include="Crm\NAdres\nAdres-Flevo-Examples.txt" />
-    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_DeponeringsStuk.sql" />
-    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_KvkInschrijving.sql" />
-    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_SbiActiviteit.sql" />
-    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_SbiCode.sql" />
-    <Content Include="Model\RSGB\2.2\SQL\QNH_VW_Vestiging.sql">
-      <SubType>Component</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QNH.Overheid.KernRegister.Business.KvK\QNH.Overheid.KernRegister.Business.KvK.csproj">

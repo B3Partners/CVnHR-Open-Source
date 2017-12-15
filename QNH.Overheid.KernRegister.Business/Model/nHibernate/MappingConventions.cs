@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
-using QNH.Overheid.KernRegister.Business.Model.RSGB2_2;
 
 namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
 {
@@ -88,61 +87,6 @@ namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
         public void Override(AutoMapping<SbiCode> mapping)
         {
             mapping.Id(x => x.Code);
-        }
-    }
-
-    public class QNH_VW_DeponeringsStukMapping : IAutoMappingOverride<QNH_VW_DeponeringsStuk>
-    {
-        public void Override(AutoMapping<QNH_VW_DeponeringsStuk> mapping)
-        {
-            mapping.Polymorphism.Explicit().ReadOnly();
-        }
-    }
-
-    public class QNH_VW_FunctieVervullingMapping : IAutoMappingOverride<QNH_VW_FunctieVervulling>
-    {
-        public void Override(AutoMapping<QNH_VW_FunctieVervulling> mapping)
-        {
-            mapping.Polymorphism.Explicit().ReadOnly();
-        }
-    }
-
-    public class QNH_VW_KvkInschrijvingMapping : IAutoMappingOverride<QNH_VW_KvkInschrijving>
-    {
-        public void Override(AutoMapping<QNH_VW_KvkInschrijving> mapping)
-        {
-            mapping.Polymorphism.Explicit().ReadOnly();
-        }
-    }
-    public class QNH_VW_SbiActiviteitMapping : IAutoMappingOverride<QNH_VW_SbiActiviteit>
-    {
-        public void Override(AutoMapping<QNH_VW_SbiActiviteit> mapping)
-        {
-            mapping.Polymorphism.Explicit().ReadOnly();
-        }
-    }
-    public class QNH_VW_SbiCodeMapping : IAutoMappingOverride<QNH_VW_SbiCode>
-    {
-        public void Override(AutoMapping<QNH_VW_SbiCode> mapping)
-        {
-            mapping.Polymorphism.Explicit().ReadOnly();
-            mapping.Id(x => x.Code);
-            
-        }
-    }
-
-    public class QNH_VW_VestigingMapping : IAutoMappingOverride<QNH_VW_Vestiging>
-    {
-        public void Override(AutoMapping<QNH_VW_Vestiging> mapping)
-        {
-            mapping.Polymorphism.Explicit().ReadOnly();
-        }
-    }
-    public class QNH_VW_VestigingSbiActiviteitMapping : IAutoMappingOverride<QNH_VW_VestigingSbiActiviteit>
-    {
-        public void Override(AutoMapping<QNH_VW_VestigingSbiActiviteit> mapping)
-        {
-            mapping.Polymorphism.Explicit().ReadOnly();
         }
     }
 

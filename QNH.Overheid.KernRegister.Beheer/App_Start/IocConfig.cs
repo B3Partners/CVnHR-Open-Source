@@ -29,7 +29,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Threading;
-using StructureMap.Pipeline;
+using NHibernate.Dialect;
 
 namespace QNH.Overheid.KernRegister.Beheer
 {
@@ -56,6 +56,14 @@ namespace QNH.Overheid.KernRegister.Beheer
                         .Driver<Sql2008ClientDriver>()
                         .ConnectionString(connstr =>
                             connstr.FromConnectionStringWithKey("NHibernateSQLConnection"))
+                        .DefaultSchema(schemaName);
+                    break;
+                case "NHibernatePostGRESQL":
+                    persistenceConfigurer = PostgreSQLConfiguration.PostgreSQL82
+                        .Driver<NpgsqlDriver>()
+                        .ConnectionString(connst =>
+                            connst.FromConnectionStringWithKey("NHibernatePostGRESQLConnection"))
+                        .Dialect<PostgreSQL82Dialect>()
                         .DefaultSchema(schemaName);
                     break;
                 default: // SQLCE
@@ -89,7 +97,7 @@ namespace QNH.Overheid.KernRegister.Beheer
 
                     // Create the script and if specified database
                     var scriptDir = AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "/SQL";
-                    var scriptFileName = Path.Combine(scriptDir, "Generated-SQL.sql");
+                    var scriptFileName = Path.Combine(scriptDir, $"Generated-SQL-{dbProvider}.sql");
                     if (CreateDatabase || !File.Exists(scriptFileName))
                     {
                         if (!Directory.Exists(scriptDir))
@@ -154,6 +162,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                     case "NHibernateOracle":
                     case "NHibernateSQLCE":
                     case "NHibernateSQL":
+                    case "NHibernatePostGRESQL":
                         // nHibernate setup.
                         var schemaName = ConfigurationManager.AppSettings["DatabaseSchemaName"];
 
@@ -174,7 +183,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                         // End nHibernate setup
                         break;
                     default:
-                        throw new ConfigurationErrorsException("No valid 'DatabaseProvider' key found in AppSettings. Possible (implemented) values: EF | NHibernateOracle | NHibernateSQLCE");
+                        throw new ConfigurationErrorsException("No valid 'DatabaseProvider' key found in AppSettings. Possible (implemented) values: EF | NHibernateOracle | NHibernateSQLCE | NHibernatePostGRESQL");
                 }
 
                 // Services:
