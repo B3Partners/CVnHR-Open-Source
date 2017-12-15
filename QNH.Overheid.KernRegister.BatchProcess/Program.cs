@@ -96,9 +96,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                     case "S":
                         SanityCheck();
                         break;
-                    case "R":
-                        RsgbProcesses.RsgbTest();
-                        break;
                     case "A":
                         KvKDataserviceV2_5.Test();
                         break;
@@ -124,7 +121,6 @@ QNH.Overheid.KernRegister.BatchProcess
     Z => Get all KvKIds for the zipcodes from any of the csv files found in the Zipcode directory and creates a csv file in the Csv directory
     T => Test Postcode service
     S => SanityCheck
-    R => Test RSGB connection on VESTG and ONDRNMG tabel
     A => Test KvKDataservice Version 2.5
     RSGB => Fill RSGB for the zipcodes provided (e.g. 7283 7705 for zipcodes 7283 and 7705, or 'drenthe' for the total of Drenthe)
 ");
