@@ -12,7 +12,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", ConfigurationName="v30.Dataservice")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", ConfigurationName="v30.Dataservice")]
     public interface Dataservice {
         
         // CODEGEN: Generating message contract since the operation ophalenInschrijving is neither RPC nor document wrapped.
@@ -39,21 +39,21 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class InschrijvingRequestType : KvKNummerOfRSINummerRequestType {
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(InschrijvingRequestType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class KvKNummerOfRSINummerRequestType : ProductRequestType {
         
         private string itemField;
@@ -89,9 +89,9 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType {
         
         /// <remarks/>
@@ -108,11 +108,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(KvKNummerOfRSINummerRequestType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(InschrijvingRequestType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(KvKNummerRequestType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class ProductRequestType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string klantreferentieField;
@@ -140,117 +140,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class GeldType : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private decimal waardeField;
-        
-        private EnumeratieType valutaField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public decimal waarde {
-            get {
-                return this.waardeField;
-            }
-            set {
-                this.waardeField = value;
-                this.RaisePropertyChanged("waarde");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public EnumeratieType valuta {
-            get {
-                return this.valutaField;
-            }
-            set {
-                this.valutaField = value;
-                this.RaisePropertyChanged("valuta");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class EnumeratieType : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string codeField;
-        
-        private string omschrijvingField;
-        
-        private string referentieTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string code {
-            get {
-                return this.codeField;
-            }
-            set {
-                this.codeField = value;
-                this.RaisePropertyChanged("code");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string omschrijving {
-            get {
-                return this.omschrijvingField;
-            }
-            set {
-                this.omschrijvingField = value;
-                this.RaisePropertyChanged("omschrijving");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string referentieType {
-            get {
-                return this.referentieTypeField;
-            }
-            set {
-                this.referentieTypeField = value;
-                this.RaisePropertyChanged("referentieType");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BagIdType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string identificatieNummeraanduidingField;
@@ -292,11 +186,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class PostcodeType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string cijfercombinatieField;
@@ -338,11 +232,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class AdresBinnenOfBuitenlandsType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private MetExtraElementenMogenlijkheidType itemField;
@@ -371,11 +265,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BinnenlandsAdresType : MetExtraElementenMogenlijkheidType {
         
         private string straatnaamField;
@@ -506,9 +400,71 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BerichtenboxType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class EnumeratieType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string codeField;
+        
+        private string omschrijvingField;
+        
+        private string referentieTypeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+                this.RaisePropertyChanged("code");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string omschrijving {
+            get {
+                return this.omschrijvingField;
+            }
+            set {
+                this.omschrijvingField = value;
+                this.RaisePropertyChanged("omschrijving");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string referentieType {
+            get {
+                return this.referentieTypeField;
+            }
+            set {
+                this.referentieTypeField = value;
+                this.RaisePropertyChanged("referentieType");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BeperkingInHandelingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BeperkteVolmachtType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MonistischeBestuurderType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BerichtenboxType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringenType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieSplitsingVoorstelType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringBijzondereDeponeringType))]
@@ -523,48 +479,36 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukInstemmingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukHalfjaarKwartaalcijfersType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommunicatienummerType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ActiviteitenType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ActiviteitenCommercieleVestigingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TelefoonnummerType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctievervullingRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NatuurlijkPersoonRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietNatuurlijkPersoonRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoortzettingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkheidRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringNietNatuurlijkPersoonRelatieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandsAdresType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BinnenlandsAdresType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommunicatienummerType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechterlijkeUitspraakType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BasisType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidPubliekrechtelijkeFunctionarisType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidOverigeFunctionarisType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VolmachtType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidBewindvoerderType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidBestuurderType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidAansprakelijkeType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommanditairKapitaalType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DuurType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoornemenTotOntbindingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommunicatiegegevensType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SBIActiviteitType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonGegevensBuitenlandType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapGegevensType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AandeelType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AandeelSamenstellingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KapitaalType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseRegistratieGegevensType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpTeRichtenRechtspersoonType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieSplitsingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SplitsingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LiquidatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OntbindingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseRechtstoestandType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NaamgevingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandlichtingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchorsingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctietitelType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctievervullingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(PubliekrechtelijkeFunctionarisType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OverigeFunctionarisType))]
@@ -572,9 +516,17 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctionarisBijzondereRechtstoestandType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BestuursfunctieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkeType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LocatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BeperkingInRechtshandelingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BijzondereRechtstoestandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpTeRichtenRechtspersoonType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieSplitsingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SplitsingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NaamgevingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietNatuurlijkPersoonType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AfgeslotenMoederType))]
@@ -585,34 +537,36 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NatuurlijkPersoonType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NaamPersoonType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NatuurlijkPersoonRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietNatuurlijkPersoonRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctievervullingRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoortzettingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkheidRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringNietNatuurlijkPersoonRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringenType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MonistischeBestuurderType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoornemenTotOntbindingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SBIActiviteitType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OntbindingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LiquidatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchorsingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LocatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AandeelType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AandeelSamenstellingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KapitaalType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandlichtingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctietitelType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DuurType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommunicatiegegevensType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommanditairKapitaalType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapGegevensType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseRegistratieGegevensType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonGegevensBuitenlandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseRechtstoestandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BijzondereRechtstoestandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidBewindvoerderType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidPubliekrechtelijkeFunctionarisType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidOverigeFunctionarisType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidBestuurderType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidAansprakelijkeType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BeperkingInRechtshandelingType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public abstract partial class MetExtraElementenMogenlijkheidType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private ExtraElementenTypeExtraElement[] extraElementenField;
@@ -641,11 +595,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class ExtraElementenTypeExtraElement : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string naamField;
@@ -701,34 +655,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class BerichtenboxType : MetExtraElementenMogenlijkheidType {
-        
-        private string berichtenboxnaamField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string berichtenboxnaam {
-            get {
-                return this.berichtenboxnaamField;
-            }
-            set {
-                this.berichtenboxnaamField = value;
-                this.RaisePropertyChanged("berichtenboxnaam");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BeperkingInHandelingType : MetExtraElementenMogenlijkheidType {
         
         private GeldType beperkingInGeldField;
@@ -761,11 +692,57 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class GeldType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private decimal waardeField;
+        
+        private EnumeratieType valutaField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public decimal waarde {
+            get {
+                return this.waardeField;
+            }
+            set {
+                this.waardeField = value;
+                this.RaisePropertyChanged("waarde");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public EnumeratieType valuta {
+            get {
+                return this.valutaField;
+            }
+            set {
+                this.valutaField = value;
+                this.RaisePropertyChanged("valuta");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BeperkteVolmachtType : MetExtraElementenMogenlijkheidType {
         
         private GeldType beperkingInGeldField;
@@ -840,19 +817,31 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class FusieSplitsingVoorstelType : MetExtraElementenMogenlijkheidType {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class MonistischeBestuurderType : MetExtraElementenMogenlijkheidType {
+        
+        private RegistratieType registratieField;
         
         private EnumeratieType rolField;
         
-        private EnumeratieType zuivereSplitsingField;
-        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public RegistratieType registratie {
+            get {
+                return this.registratieField;
+            }
+            set {
+                this.registratieField = value;
+                this.RaisePropertyChanged("registratie");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
         public EnumeratieType rol {
             get {
                 return this.rolField;
@@ -862,18 +851,218 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
                 this.RaisePropertyChanged("rol");
             }
         }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class RegistratieType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string datumAanvangField;
+        
+        private string datumEindeField;
+        
+        private string soortMutatieField;
+        
+        private string registratieTijdstipField;
+        
+        private NoValue registratieTijdstipNoValueField;
+        
+        private bool registratieTijdstipNoValueFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string datumAanvang {
+            get {
+                return this.datumAanvangField;
+            }
+            set {
+                this.datumAanvangField = value;
+                this.RaisePropertyChanged("datumAanvang");
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public EnumeratieType zuivereSplitsing {
+        public string datumEinde {
             get {
-                return this.zuivereSplitsingField;
+                return this.datumEindeField;
             }
             set {
-                this.zuivereSplitsingField = value;
-                this.RaisePropertyChanged("zuivereSplitsing");
+                this.datumEindeField = value;
+                this.RaisePropertyChanged("datumEinde");
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string soortMutatie {
+            get {
+                return this.soortMutatieField;
+            }
+            set {
+                this.soortMutatieField = value;
+                this.RaisePropertyChanged("soortMutatie");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string registratieTijdstip {
+            get {
+                return this.registratieTijdstipField;
+            }
+            set {
+                this.registratieTijdstipField = value;
+                this.RaisePropertyChanged("registratieTijdstip");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public NoValue registratieTijdstipNoValue {
+            get {
+                return this.registratieTijdstipNoValueField;
+            }
+            set {
+                this.registratieTijdstipNoValueField = value;
+                this.RaisePropertyChanged("registratieTijdstipNoValue");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool registratieTijdstipNoValueSpecified {
+            get {
+                return this.registratieTijdstipNoValueFieldSpecified;
+            }
+            set {
+                this.registratieTijdstipNoValueFieldSpecified = value;
+                this.RaisePropertyChanged("registratieTijdstipNoValueSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public enum NoValue {
+        
+        /// <remarks/>
+        nietOndersteund,
+        
+        /// <remarks/>
+        nietGeautoriseerd,
+        
+        /// <remarks/>
+        geenWaarde,
+        
+        /// <remarks/>
+        waardeOnbekend,
+        
+        /// <remarks/>
+        vastgesteldOnbekend,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class BerichtenboxType : MetExtraElementenMogenlijkheidType {
+        
+        private string berichtenboxnaamField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string berichtenboxnaam {
+            get {
+                return this.berichtenboxnaamField;
+            }
+            set {
+                this.berichtenboxnaamField = value;
+                this.RaisePropertyChanged("berichtenboxnaam");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringenType : MetExtraElementenMogenlijkheidType {
+        
+        private DeponeringRelatieType[] deponeringField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("deponering", Order=0)]
+        public DeponeringRelatieType[] deponering {
+            get {
+                return this.deponeringField;
+            }
+            set {
+                this.deponeringField = value;
+                this.RaisePropertyChanged("deponering");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringRelatieType : RelatieType {
+        
+        private DeponeringType itemField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("aanprakelijkheidOverblijvend", typeof(DeponeringAansprakelijkheidOverblijvendType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("aansprakelijkheidIntrekking", typeof(DeponeringAansprakelijkheidIntrekkingType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("aansprakelijkheidVerklaring", typeof(DeponeringAansprakelijkheidVerklaringType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("aanvullendeMededeling", typeof(DeponeringAanvullendeMededelingType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("bijzondereDeponering", typeof(DeponeringBijzondereDeponeringType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("jaarstukHalfjaarKwartaalcijfers", typeof(DeponeringJaarstukHalfjaarKwartaalcijfersType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("jaarstukInstemming", typeof(DeponeringJaarstukInstemmingType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("jaarstukJaarrekening", typeof(DeponeringJaarstukJaarrekeningType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("jaarstukJaarrekeningOngewijzigdVastgesteld", typeof(DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("jaarstukOntheffing", typeof(DeponeringJaarstukOntheffingType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("overigJaarstuk", typeof(DeponeringOverigJaarstukType), Order=0)]
+        public DeponeringType Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                this.RaisePropertyChanged("Item");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringAansprakelijkheidOverblijvendType : DeponeringType {
     }
     
     /// <remarks/>
@@ -889,11 +1078,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukInstemmingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukHalfjaarKwartaalcijfersType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public abstract partial class DeponeringType : MetExtraElementenMogenlijkheidType {
         
         private string depotIdField;
@@ -996,11 +1185,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class RechterlijkeUitspraakType : MetExtraElementenMogenlijkheidType {
         
         private string datumField;
@@ -1047,229 +1236,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringRelatieType : RelatieType {
-        
-        private DeponeringType itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("aanprakelijkheidOverblijvend", typeof(DeponeringAansprakelijkheidOverblijvendType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("aansprakelijkheidIntrekking", typeof(DeponeringAansprakelijkheidIntrekkingType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("aansprakelijkheidVerklaring", typeof(DeponeringAansprakelijkheidVerklaringType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("aanvullendeMededeling", typeof(DeponeringAanvullendeMededelingType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("bijzondereDeponering", typeof(DeponeringBijzondereDeponeringType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("jaarstukHalfjaarKwartaalcijfers", typeof(DeponeringJaarstukHalfjaarKwartaalcijfersType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("jaarstukInstemming", typeof(DeponeringJaarstukInstemmingType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("jaarstukJaarrekening", typeof(DeponeringJaarstukJaarrekeningType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("jaarstukJaarrekeningOngewijzigdVastgesteld", typeof(DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("jaarstukOntheffing", typeof(DeponeringJaarstukOntheffingType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("overigJaarstuk", typeof(DeponeringOverigJaarstukType), Order=0)]
-        public DeponeringType Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-                this.RaisePropertyChanged("Item");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringAansprakelijkheidOverblijvendType : DeponeringType {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringAansprakelijkheidIntrekkingType : DeponeringType {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringAansprakelijkheidVerklaringType : DeponeringType {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringAanvullendeMededelingType : DeponeringType {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringBijzondereDeponeringType : DeponeringType {
-        
-        private EnumeratieType soortField;
-        
-        private FusieSplitsingVoorstelType fusieSplitsingVoorstelField;
-        
-        private string omschrijvingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType soort {
-            get {
-                return this.soortField;
-            }
-            set {
-                this.soortField = value;
-                this.RaisePropertyChanged("soort");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public FusieSplitsingVoorstelType fusieSplitsingVoorstel {
-            get {
-                return this.fusieSplitsingVoorstelField;
-            }
-            set {
-                this.fusieSplitsingVoorstelField = value;
-                this.RaisePropertyChanged("fusieSplitsingVoorstel");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string omschrijving {
-            get {
-                return this.omschrijvingField;
-            }
-            set {
-                this.omschrijvingField = value;
-                this.RaisePropertyChanged("omschrijving");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringJaarstukHalfjaarKwartaalcijfersType : DeponeringJaarstukType {
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringOverigJaarstukType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukOntheffingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukJaarrekeningType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukInstemmingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukHalfjaarKwartaalcijfersType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public abstract partial class DeponeringJaarstukType : DeponeringType {
-        
-        private string boekjaarField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string boekjaar {
-            get {
-                return this.boekjaarField;
-            }
-            set {
-                this.boekjaarField = value;
-                this.RaisePropertyChanged("boekjaar");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringOverigJaarstukType : DeponeringJaarstukType {
-        
-        private EnumeratieType soortField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType soort {
-            get {
-                return this.soortField;
-            }
-            set {
-                this.soortField = value;
-                this.RaisePropertyChanged("soort");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringJaarstukOntheffingType : DeponeringJaarstukType {
-        
-        private EnumeratieType redenField;
-        
-        private DeponeringNietNatuurlijkPersoonRelatieType groepsjaarrekeninghouderField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType reden {
-            get {
-                return this.redenField;
-            }
-            set {
-                this.redenField = value;
-                this.RaisePropertyChanged("reden");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public DeponeringNietNatuurlijkPersoonRelatieType groepsjaarrekeninghouder {
-            get {
-                return this.groepsjaarrekeninghouderField;
-            }
-            set {
-                this.groepsjaarrekeninghouderField = value;
-                this.RaisePropertyChanged("groepsjaarrekeninghouder");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class DeponeringNietNatuurlijkPersoonRelatieType : RelatieType {
         
         private string rsinField;
@@ -1289,39 +1260,39 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctievervullingRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NatuurlijkPersoonRelatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingRelatieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NatuurlijkPersoonRelatieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringRelatieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietNatuurlijkPersoonRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctievervullingRelatieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(RelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieRegistratieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitRelatieRegistratieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoortzettingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieRegistratieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkheidRelatieRegistratieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieRegistratieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringNietNatuurlijkPersoonRelatieType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public abstract partial class RelatieType : MetExtraElementenMogenlijkheidType {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class OndernemingRelatieType : RelatieType {
         
         private OndernemingType ondernemingField;
@@ -1340,11 +1311,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class OndernemingType : BasisType {
         
         private string kvkNummerField;
@@ -1489,11 +1460,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class SBIActiviteitType : BasisType {
         
         private EnumeratieType sbiCodeField;
@@ -1540,40 +1511,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidPubliekrechtelijkeFunctionarisType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidOverigeFunctionarisType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VolmachtType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidBewindvoerderType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidBestuurderType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidAansprakelijkeType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommanditairKapitaalType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DuurType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoornemenTotOntbindingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommunicatiegegevensType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SBIActiviteitType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonGegevensBuitenlandType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapGegevensType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AandeelType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AandeelSamenstellingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KapitaalType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseRegistratieGegevensType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpTeRichtenRechtspersoonType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieSplitsingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SplitsingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LiquidatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OntbindingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseRechtstoestandType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NaamgevingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandlichtingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchorsingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctietitelType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctievervullingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(PubliekrechtelijkeFunctionarisType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(OverigeFunctionarisType))]
@@ -1581,9 +1519,17 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctionarisBijzondereRechtstoestandType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BestuursfunctieType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkeType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LocatieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BeperkingInRechtshandelingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BijzondereRechtstoestandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OpTeRichtenRechtspersoonType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieSplitsingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SplitsingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NaamgevingType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietNatuurlijkPersoonType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AfgeslotenMoederType))]
@@ -1594,11 +1540,36 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NatuurlijkPersoonType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NaamPersoonType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoornemenTotOntbindingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SBIActiviteitType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OntbindingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LiquidatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchorsingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LocatieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AandeelType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AandeelSamenstellingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KapitaalType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandlichtingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctietitelType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DuurType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommunicatiegegevensType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommanditairKapitaalType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapGegevensType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseRegistratieGegevensType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonGegevensBuitenlandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseRechtstoestandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BijzondereRechtstoestandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidBewindvoerderType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidPubliekrechtelijkeFunctionarisType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidOverigeFunctionarisType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidBestuurderType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BevoegdheidAansprakelijkeType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BeperkingInRechtshandelingType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public abstract partial class BasisType : MetExtraElementenMogenlijkheidType {
         
         private RegistratieType registratieField;
@@ -1617,181 +1588,507 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class RegistratieType : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class VolmachtType : BasisType {
         
-        private string datumAanvangField;
+        private EnumeratieType typeVolmachtField;
         
-        private string datumEindeField;
+        private EnumeratieType isStatutairField;
         
-        private string soortMutatieField;
+        private BeperkteVolmachtType beperkteVolmachtField;
         
-        private string registratieTijdstipField;
-        
-        private NoValue registratieTijdstipNoValueField;
-        
-        private bool registratieTijdstipNoValueFieldSpecified;
+        private VestigingenRelatieType heeftBetrekkingOpField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string datumAanvang {
+        public EnumeratieType typeVolmacht {
             get {
-                return this.datumAanvangField;
+                return this.typeVolmachtField;
             }
             set {
-                this.datumAanvangField = value;
-                this.RaisePropertyChanged("datumAanvang");
+                this.typeVolmachtField = value;
+                this.RaisePropertyChanged("typeVolmacht");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string datumEinde {
+        public EnumeratieType isStatutair {
             get {
-                return this.datumEindeField;
+                return this.isStatutairField;
             }
             set {
-                this.datumEindeField = value;
-                this.RaisePropertyChanged("datumEinde");
+                this.isStatutairField = value;
+                this.RaisePropertyChanged("isStatutair");
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string soortMutatie {
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public BeperkteVolmachtType beperkteVolmacht {
             get {
-                return this.soortMutatieField;
+                return this.beperkteVolmachtField;
             }
             set {
-                this.soortMutatieField = value;
-                this.RaisePropertyChanged("soortMutatie");
+                this.beperkteVolmachtField = value;
+                this.RaisePropertyChanged("beperkteVolmacht");
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string registratieTijdstip {
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public VestigingenRelatieType heeftBetrekkingOp {
             get {
-                return this.registratieTijdstipField;
+                return this.heeftBetrekkingOpField;
             }
             set {
-                this.registratieTijdstipField = value;
-                this.RaisePropertyChanged("registratieTijdstip");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public NoValue registratieTijdstipNoValue {
-            get {
-                return this.registratieTijdstipNoValueField;
-            }
-            set {
-                this.registratieTijdstipNoValueField = value;
-                this.RaisePropertyChanged("registratieTijdstipNoValue");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool registratieTijdstipNoValueSpecified {
-            get {
-                return this.registratieTijdstipNoValueFieldSpecified;
-            }
-            set {
-                this.registratieTijdstipNoValueFieldSpecified = value;
-                this.RaisePropertyChanged("registratieTijdstipNoValueSpecified");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                this.heeftBetrekkingOpField = value;
+                this.RaisePropertyChanged("heeftBetrekkingOp");
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public enum NoValue {
-        
-        /// <remarks/>
-        nietOndersteund,
-        
-        /// <remarks/>
-        nietGeautoriseerd,
-        
-        /// <remarks/>
-        geenWaarde,
-        
-        /// <remarks/>
-        waardeOnbekend,
-        
-        /// <remarks/>
-        vastgesteldOnbekend,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class BevoegdheidPubliekrechtelijkeFunctionarisType : BasisType {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class VestigingenRelatieType : RelatieType {
         
-        private EnumeratieType soortField;
+        private CommercieleVestigingType[] commercieleVestigingField;
+        
+        private NietCommercieleVestigingType[] nietCommercieleVestigingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", Order=0)]
+        public CommercieleVestigingType[] commercieleVestiging {
+            get {
+                return this.commercieleVestigingField;
+            }
+            set {
+                this.commercieleVestigingField = value;
+                this.RaisePropertyChanged("commercieleVestiging");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", Order=1)]
+        public NietCommercieleVestigingType[] nietCommercieleVestiging {
+            get {
+                return this.nietCommercieleVestigingField;
+            }
+            set {
+                this.nietCommercieleVestigingField = value;
+                this.RaisePropertyChanged("nietCommercieleVestiging");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class CommercieleVestigingType : VestigingType {
+        
+        private string voltijdWerkzamePersonenField;
+        
+        private string deeltijdWerkzamePersonenField;
+        
+        private string totaalWerkzamePersonenField;
+        
+        private ActiviteitenCommercieleVestigingType activiteitenField;
+        
+        private HandelsnaamRelatieRegistratieType[] handeltOnderField;
+        
+        private OndernemingRelatieRegistratieType isEenUitoefeningVanField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="integer", Order=0)]
+        public string voltijdWerkzamePersonen {
+            get {
+                return this.voltijdWerkzamePersonenField;
+            }
+            set {
+                this.voltijdWerkzamePersonenField = value;
+                this.RaisePropertyChanged("voltijdWerkzamePersonen");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="integer", Order=1)]
+        public string deeltijdWerkzamePersonen {
+            get {
+                return this.deeltijdWerkzamePersonenField;
+            }
+            set {
+                this.deeltijdWerkzamePersonenField = value;
+                this.RaisePropertyChanged("deeltijdWerkzamePersonen");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="integer", Order=2)]
+        public string totaalWerkzamePersonen {
+            get {
+                return this.totaalWerkzamePersonenField;
+            }
+            set {
+                this.totaalWerkzamePersonenField = value;
+                this.RaisePropertyChanged("totaalWerkzamePersonen");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public ActiviteitenCommercieleVestigingType activiteiten {
+            get {
+                return this.activiteitenField;
+            }
+            set {
+                this.activiteitenField = value;
+                this.RaisePropertyChanged("activiteiten");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("handeltOnder", Order=4)]
+        public HandelsnaamRelatieRegistratieType[] handeltOnder {
+            get {
+                return this.handeltOnderField;
+            }
+            set {
+                this.handeltOnderField = value;
+                this.RaisePropertyChanged("handeltOnder");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public OndernemingRelatieRegistratieType isEenUitoefeningVan {
+            get {
+                return this.isEenUitoefeningVanField;
+            }
+            set {
+                this.isEenUitoefeningVanField = value;
+                this.RaisePropertyChanged("isEenUitoefeningVan");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class ActiviteitenCommercieleVestigingType : ActiviteitenType {
+        
+        private EnumeratieType exporteertField;
+        
+        private EnumeratieType importeertField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType soort {
+        public EnumeratieType exporteert {
             get {
-                return this.soortField;
+                return this.exporteertField;
             }
             set {
-                this.soortField = value;
-                this.RaisePropertyChanged("soort");
+                this.exporteertField = value;
+                this.RaisePropertyChanged("exporteert");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public EnumeratieType importeert {
+            get {
+                return this.importeertField;
+            }
+            set {
+                this.importeertField = value;
+                this.RaisePropertyChanged("importeert");
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ActiviteitenCommercieleVestigingType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class BevoegdheidOverigeFunctionarisType : BasisType {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class ActiviteitenType : MetExtraElementenMogenlijkheidType {
         
-        private EnumeratieType soortField;
+        private string omschrijvingField;
+        
+        private SBIActiviteitType[] sbiActiviteitField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType soort {
+        public string omschrijving {
             get {
-                return this.soortField;
+                return this.omschrijvingField;
             }
             set {
-                this.soortField = value;
-                this.RaisePropertyChanged("soort");
+                this.omschrijvingField = value;
+                this.RaisePropertyChanged("omschrijving");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("sbiActiviteit", Order=1)]
+        public SBIActiviteitType[] sbiActiviteit {
+            get {
+                return this.sbiActiviteitField;
+            }
+            set {
+                this.sbiActiviteitField = value;
+                this.RaisePropertyChanged("sbiActiviteit");
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class HandelsnaamRelatieRegistratieType : RelatieRegistratieType {
+        
+        private HandelsnaamType handelsnaamField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public HandelsnaamType handelsnaam {
+            get {
+                return this.handelsnaamField;
+            }
+            set {
+                this.handelsnaamField = value;
+                this.RaisePropertyChanged("handelsnaam");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class HandelsnaamType : BasisType {
+        
+        private string naamField;
+        
+        private string volgordeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string naam {
+            get {
+                return this.naamField;
+            }
+            set {
+                this.naamField = value;
+                this.RaisePropertyChanged("naam");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="integer", Order=1)]
+        public string volgorde {
+            get {
+                return this.volgordeField;
+            }
+            set {
+                this.volgordeField = value;
+                this.RaisePropertyChanged("volgorde");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoortzettingRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkheidRelatieRegistratieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieRegistratieType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public abstract partial class RelatieRegistratieType : RelatieType {
+        
+        private RegistratieType relatieRegistratieField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public RegistratieType relatieRegistratie {
+            get {
+                return this.relatieRegistratieField;
+            }
+            set {
+                this.relatieRegistratieField = value;
+                this.RaisePropertyChanged("relatieRegistratie");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class NietCommercieleVestigingRelatieRegistratieType : RelatieRegistratieType {
+        
+        private NietCommercieleVestigingType nietCommercieleVestigingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public NietCommercieleVestigingType nietCommercieleVestiging {
+            get {
+                return this.nietCommercieleVestigingField;
+            }
+            set {
+                this.nietCommercieleVestigingField = value;
+                this.RaisePropertyChanged("nietCommercieleVestiging");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class NietCommercieleVestigingType : VestigingType {
+        
+        private NaamgevingType naamgevingField;
+        
+        private ActiviteitenType activiteitenField;
+        
+        private MaatschappelijkeActiviteitRelatieType isEenUitoefeningVanField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public NaamgevingType naamgeving {
+            get {
+                return this.naamgevingField;
+            }
+            set {
+                this.naamgevingField = value;
+                this.RaisePropertyChanged("naamgeving");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public ActiviteitenType activiteiten {
+            get {
+                return this.activiteitenField;
+            }
+            set {
+                this.activiteitenField = value;
+                this.RaisePropertyChanged("activiteiten");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public MaatschappelijkeActiviteitRelatieType isEenUitoefeningVan {
+            get {
+                return this.isEenUitoefeningVanField;
+            }
+            set {
+                this.isEenUitoefeningVanField = value;
+                this.RaisePropertyChanged("isEenUitoefeningVan");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class NaamgevingType : BasisType {
+        
+        private string naamField;
+        
+        private string ookGenoemdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string naam {
+            get {
+                return this.naamField;
+            }
+            set {
+                this.naamField = value;
+                this.RaisePropertyChanged("naam");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string ookGenoemd {
+            get {
+                return this.ookGenoemdField;
+            }
+            set {
+                this.ookGenoemdField = value;
+                this.RaisePropertyChanged("ookGenoemd");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class MaatschappelijkeActiviteitRelatieType : RelatieType {
+        
+        private MaatschappelijkeActiviteitType maatschappelijkeActiviteitField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public MaatschappelijkeActiviteitType maatschappelijkeActiviteit {
+            get {
+                return this.maatschappelijkeActiviteitField;
+            }
+            set {
+                this.maatschappelijkeActiviteitField = value;
+                this.RaisePropertyChanged("maatschappelijkeActiviteit");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class MaatschappelijkeActiviteitType : BasisType {
         
         private string kvkNummerField;
@@ -2020,11 +2317,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class LocatieType : BasisType {
         
         private string toevoegingAdresField;
@@ -2085,11 +2382,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class CommunicatiegegevensType : BasisType {
         
         private CommunicatienummerType[] communicatienummerField;
@@ -2136,11 +2433,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class CommunicatienummerType : MetExtraElementenMogenlijkheidType {
         
         private string toegangscodeField;
@@ -2187,11 +2484,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class OndernemingRelatieRegistratieType : RelatieRegistratieType {
         
         private OndernemingType ondernemingField;
@@ -2210,726 +2507,19 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoortzettingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OndernemingRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(HandelsnaamRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingenRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkheidRelatieRegistratieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PersoonRelatieRegistratieType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public abstract partial class RelatieRegistratieType : RelatieType {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class VestigingRelatieType : RelatieType {
         
-        private RegistratieType relatieRegistratieField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public RegistratieType relatieRegistratie {
-            get {
-                return this.relatieRegistratieField;
-            }
-            set {
-                this.relatieRegistratieField = value;
-                this.RaisePropertyChanged("relatieRegistratie");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoortzettingRelatieRegistratieType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class MaatschappelijkeActiviteitRelatieRegistratieType : RelatieRegistratieType {
-        
-        private MaatschappelijkeActiviteitType maatschappelijkeActiviteitField;
+        private VestigingType itemField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public MaatschappelijkeActiviteitType maatschappelijkeActiviteit {
-            get {
-                return this.maatschappelijkeActiviteitField;
-            }
-            set {
-                this.maatschappelijkeActiviteitField = value;
-                this.RaisePropertyChanged("maatschappelijkeActiviteit");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class VoortzettingRelatieRegistratieType : MaatschappelijkeActiviteitRelatieRegistratieType {
-        
-        private string datumVoortzettingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string datumVoortzetting {
-            get {
-                return this.datumVoortzettingField;
-            }
-            set {
-                this.datumVoortzettingField = value;
-                this.RaisePropertyChanged("datumVoortzetting");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class NietCommercieleVestigingRelatieRegistratieType : RelatieRegistratieType {
-        
-        private NietCommercieleVestigingType nietCommercieleVestigingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public NietCommercieleVestigingType nietCommercieleVestiging {
-            get {
-                return this.nietCommercieleVestigingField;
-            }
-            set {
-                this.nietCommercieleVestigingField = value;
-                this.RaisePropertyChanged("nietCommercieleVestiging");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class NietCommercieleVestigingType : VestigingType {
-        
-        private NaamgevingType naamgevingField;
-        
-        private ActiviteitenType activiteitenField;
-        
-        private MaatschappelijkeActiviteitRelatieType isEenUitoefeningVanField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public NaamgevingType naamgeving {
-            get {
-                return this.naamgevingField;
-            }
-            set {
-                this.naamgevingField = value;
-                this.RaisePropertyChanged("naamgeving");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public ActiviteitenType activiteiten {
-            get {
-                return this.activiteitenField;
-            }
-            set {
-                this.activiteitenField = value;
-                this.RaisePropertyChanged("activiteiten");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public MaatschappelijkeActiviteitRelatieType isEenUitoefeningVan {
-            get {
-                return this.isEenUitoefeningVanField;
-            }
-            set {
-                this.isEenUitoefeningVanField = value;
-                this.RaisePropertyChanged("isEenUitoefeningVan");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class NaamgevingType : BasisType {
-        
-        private string naamField;
-        
-        private string ookGenoemdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string naam {
-            get {
-                return this.naamField;
-            }
-            set {
-                this.naamField = value;
-                this.RaisePropertyChanged("naam");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string ookGenoemd {
-            get {
-                return this.ookGenoemdField;
-            }
-            set {
-                this.ookGenoemdField = value;
-                this.RaisePropertyChanged("ookGenoemd");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ActiviteitenCommercieleVestigingType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class ActiviteitenType : MetExtraElementenMogenlijkheidType {
-        
-        private string omschrijvingField;
-        
-        private SBIActiviteitType[] sbiActiviteitField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string omschrijving {
-            get {
-                return this.omschrijvingField;
-            }
-            set {
-                this.omschrijvingField = value;
-                this.RaisePropertyChanged("omschrijving");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("sbiActiviteit", Order=1)]
-        public SBIActiviteitType[] sbiActiviteit {
-            get {
-                return this.sbiActiviteitField;
-            }
-            set {
-                this.sbiActiviteitField = value;
-                this.RaisePropertyChanged("sbiActiviteit");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class ActiviteitenCommercieleVestigingType : ActiviteitenType {
-        
-        private EnumeratieType exporteertField;
-        
-        private EnumeratieType importeertField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType exporteert {
-            get {
-                return this.exporteertField;
-            }
-            set {
-                this.exporteertField = value;
-                this.RaisePropertyChanged("exporteert");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public EnumeratieType importeert {
-            get {
-                return this.importeertField;
-            }
-            set {
-                this.importeertField = value;
-                this.RaisePropertyChanged("importeert");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class MaatschappelijkeActiviteitRelatieType : RelatieType {
-        
-        private MaatschappelijkeActiviteitType maatschappelijkeActiviteitField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public MaatschappelijkeActiviteitType maatschappelijkeActiviteit {
-            get {
-                return this.maatschappelijkeActiviteitField;
-            }
-            set {
-                this.maatschappelijkeActiviteitField = value;
-                this.RaisePropertyChanged("maatschappelijkeActiviteit");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public abstract partial class VestigingType : BasisType {
-        
-        private string vestigingsnummerField;
-        
-        private LocatieType bezoekLocatieField;
-        
-        private LocatieType postLocatieField;
-        
-        private CommunicatiegegevensType communicatiegegevensField;
-        
-        private string eersteHandelsnaamField;
-        
-        private VestigingenRelatieRegistratieType isSamengevoegdMetField;
-        
-        private VoortzettingRelatieRegistratieType isOvergenomenVanField;
-        
-        private VoortzettingRelatieRegistratieType isOvergedragenNaarField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string vestigingsnummer {
-            get {
-                return this.vestigingsnummerField;
-            }
-            set {
-                this.vestigingsnummerField = value;
-                this.RaisePropertyChanged("vestigingsnummer");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public LocatieType bezoekLocatie {
-            get {
-                return this.bezoekLocatieField;
-            }
-            set {
-                this.bezoekLocatieField = value;
-                this.RaisePropertyChanged("bezoekLocatie");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public LocatieType postLocatie {
-            get {
-                return this.postLocatieField;
-            }
-            set {
-                this.postLocatieField = value;
-                this.RaisePropertyChanged("postLocatie");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public CommunicatiegegevensType communicatiegegevens {
-            get {
-                return this.communicatiegegevensField;
-            }
-            set {
-                this.communicatiegegevensField = value;
-                this.RaisePropertyChanged("communicatiegegevens");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string eersteHandelsnaam {
-            get {
-                return this.eersteHandelsnaamField;
-            }
-            set {
-                this.eersteHandelsnaamField = value;
-                this.RaisePropertyChanged("eersteHandelsnaam");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public VestigingenRelatieRegistratieType isSamengevoegdMet {
-            get {
-                return this.isSamengevoegdMetField;
-            }
-            set {
-                this.isSamengevoegdMetField = value;
-                this.RaisePropertyChanged("isSamengevoegdMet");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public VoortzettingRelatieRegistratieType isOvergenomenVan {
-            get {
-                return this.isOvergenomenVanField;
-            }
-            set {
-                this.isOvergenomenVanField = value;
-                this.RaisePropertyChanged("isOvergenomenVan");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public VoortzettingRelatieRegistratieType isOvergedragenNaar {
-            get {
-                return this.isOvergedragenNaarField;
-            }
-            set {
-                this.isOvergedragenNaarField = value;
-                this.RaisePropertyChanged("isOvergedragenNaar");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class VestigingenRelatieRegistratieType : RelatieRegistratieType {
-        
-        private CommercieleVestigingType[] commercieleVestigingField;
-        
-        private NietCommercieleVestigingType[] nietCommercieleVestigingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", Order=0)]
-        public CommercieleVestigingType[] commercieleVestiging {
-            get {
-                return this.commercieleVestigingField;
-            }
-            set {
-                this.commercieleVestigingField = value;
-                this.RaisePropertyChanged("commercieleVestiging");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", Order=1)]
-        public NietCommercieleVestigingType[] nietCommercieleVestiging {
-            get {
-                return this.nietCommercieleVestigingField;
-            }
-            set {
-                this.nietCommercieleVestigingField = value;
-                this.RaisePropertyChanged("nietCommercieleVestiging");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class CommercieleVestigingType : VestigingType {
-        
-        private string voltijdWerkzamePersonenField;
-        
-        private string deeltijdWerkzamePersonenField;
-        
-        private string totaalWerkzamePersonenField;
-        
-        private ActiviteitenCommercieleVestigingType activiteitenField;
-        
-        private HandelsnaamRelatieRegistratieType[] handeltOnderField;
-        
-        private OndernemingRelatieRegistratieType isEenUitoefeningVanField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="integer", Order=0)]
-        public string voltijdWerkzamePersonen {
-            get {
-                return this.voltijdWerkzamePersonenField;
-            }
-            set {
-                this.voltijdWerkzamePersonenField = value;
-                this.RaisePropertyChanged("voltijdWerkzamePersonen");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="integer", Order=1)]
-        public string deeltijdWerkzamePersonen {
-            get {
-                return this.deeltijdWerkzamePersonenField;
-            }
-            set {
-                this.deeltijdWerkzamePersonenField = value;
-                this.RaisePropertyChanged("deeltijdWerkzamePersonen");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="integer", Order=2)]
-        public string totaalWerkzamePersonen {
-            get {
-                return this.totaalWerkzamePersonenField;
-            }
-            set {
-                this.totaalWerkzamePersonenField = value;
-                this.RaisePropertyChanged("totaalWerkzamePersonen");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public ActiviteitenCommercieleVestigingType activiteiten {
-            get {
-                return this.activiteitenField;
-            }
-            set {
-                this.activiteitenField = value;
-                this.RaisePropertyChanged("activiteiten");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("handeltOnder", Order=4)]
-        public HandelsnaamRelatieRegistratieType[] handeltOnder {
-            get {
-                return this.handeltOnderField;
-            }
-            set {
-                this.handeltOnderField = value;
-                this.RaisePropertyChanged("handeltOnder");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public OndernemingRelatieRegistratieType isEenUitoefeningVan {
-            get {
-                return this.isEenUitoefeningVanField;
-            }
-            set {
-                this.isEenUitoefeningVanField = value;
-                this.RaisePropertyChanged("isEenUitoefeningVan");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class HandelsnaamRelatieRegistratieType : RelatieRegistratieType {
-        
-        private HandelsnaamType handelsnaamField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public HandelsnaamType handelsnaam {
-            get {
-                return this.handelsnaamField;
-            }
-            set {
-                this.handelsnaamField = value;
-                this.RaisePropertyChanged("handelsnaam");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class HandelsnaamType : BasisType {
-        
-        private string naamField;
-        
-        private string volgordeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string naam {
-            get {
-                return this.naamField;
-            }
-            set {
-                this.naamField = value;
-                this.RaisePropertyChanged("naam");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="integer", Order=1)]
-        public string volgorde {
-            get {
-                return this.volgordeField;
-            }
-            set {
-                this.volgordeField = value;
-                this.RaisePropertyChanged("volgorde");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class CommercieleVestigingRelatieRegistratieType : RelatieRegistratieType {
-        
-        private CommercieleVestigingType commercieleVestigingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public CommercieleVestigingType commercieleVestiging {
-            get {
-                return this.commercieleVestigingField;
-            }
-            set {
-                this.commercieleVestigingField = value;
-                this.RaisePropertyChanged("commercieleVestiging");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class AansprakelijkheidRelatieRegistratieType : RelatieRegistratieType {
-        
-        private NietNatuurlijkPersoonRelatieType moederField;
-        
-        private string datumIntrekkingField;
-        
-        private DeponeringRelatieType verklaringField;
-        
-        private DeponeringRelatieType intrekkingField;
-        
-        private DeponeringRelatieType overblijvendeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public NietNatuurlijkPersoonRelatieType moeder {
-            get {
-                return this.moederField;
-            }
-            set {
-                this.moederField = value;
-                this.RaisePropertyChanged("moeder");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string datumIntrekking {
-            get {
-                return this.datumIntrekkingField;
-            }
-            set {
-                this.datumIntrekkingField = value;
-                this.RaisePropertyChanged("datumIntrekking");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public DeponeringRelatieType verklaring {
-            get {
-                return this.verklaringField;
-            }
-            set {
-                this.verklaringField = value;
-                this.RaisePropertyChanged("verklaring");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public DeponeringRelatieType intrekking {
-            get {
-                return this.intrekkingField;
-            }
-            set {
-                this.intrekkingField = value;
-                this.RaisePropertyChanged("intrekking");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public DeponeringRelatieType overblijvende {
-            get {
-                return this.overblijvendeField;
-            }
-            set {
-                this.overblijvendeField = value;
-                this.RaisePropertyChanged("overblijvende");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class NietNatuurlijkPersoonRelatieType : RelatieType {
-        
-        private NietNatuurlijkPersoonType itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("afgeslotenMoeder", typeof(AfgeslotenMoederType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("buitenlandseVennootschap", typeof(BuitenlandseVennootschapType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("eenmanszaakMetMeerdereEigenaren", typeof(EenmanszaakMetMeerdereEigenarenType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("rechtspersoon", typeof(RechtspersoonType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("rechtspersoonInOprichting", typeof(RechtspersoonInOprichtingType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("samenwerkingsverband", typeof(SamenwerkingsverbandType), Order=0)]
-        public NietNatuurlijkPersoonType Item {
+        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", typeof(CommercieleVestigingType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", typeof(NietCommercieleVestigingType), Order=0)]
+        public VestigingType Item {
             get {
                 return this.itemField;
             }
@@ -2941,11 +2531,41 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class PersoonRelatieRegistratieType : RelatieRegistratieType {
+        
+        private PersoonType itemField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("afgeslotenMoeder", typeof(AfgeslotenMoederType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("buitenlandseVennootschap", typeof(BuitenlandseVennootschapType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("eenmanszaakMetMeerdereEigenaren", typeof(EenmanszaakMetMeerdereEigenarenType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("naamPersoon", typeof(NaamPersoonType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("natuurlijkPersoon", typeof(NatuurlijkPersoonType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("rechtspersoon", typeof(RechtspersoonType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("rechtspersoonInOprichting", typeof(RechtspersoonInOprichtingType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("samenwerkingsverband", typeof(SamenwerkingsverbandType), Order=0)]
+        public PersoonType Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                this.RaisePropertyChanged("Item");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class AfgeslotenMoederType : NietNatuurlijkPersoonType {
         
         private string kvkNummerField;
@@ -2970,11 +2590,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EenmanszaakMetMeerdereEigenarenType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public abstract partial class NietNatuurlijkPersoonType : PersoonType {
         
         private string rsinField;
@@ -3119,18 +2739,18 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BuitenlandseRechtstoestandType : BasisType {
         
         private string beschrijvingField;
         
         private RechterlijkeUitspraakType itemField;
         
-        private ItemChoiceType5 itemElementNameField;
+        private ItemChoiceType4 itemElementNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -3161,7 +2781,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType5 ItemElementName {
+        public ItemChoiceType4 ItemElementName {
             get {
                 return this.itemElementNameField;
             }
@@ -3173,10 +2793,10 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
-    public enum ItemChoiceType5 {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    public enum ItemChoiceType4 {
         
         /// <remarks/>
         uitspraakAanvang,
@@ -3186,11 +2806,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class OntbindingType : BasisType {
         
         private EnumeratieType aanleidingField;
@@ -3223,20 +2843,20 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class LiquidatieType : BasisType {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class FusieType : FusieSplitsingType {
         
         private OpTeRichtenRechtspersoonType[] opTeRichtenVerdwijnendeRechtspersoonField;
@@ -3283,11 +2903,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class OpTeRichtenRechtspersoonType : BasisType {
         
         private EnumeratieType rechtsvormField;
@@ -3320,901 +2940,23 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SplitsingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public abstract partial class FusieSplitsingType : BasisType {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class NietNatuurlijkPersoonRelatieType : RelatieType {
         
-        private RechterlijkeUitspraakType uitspraakField;
-        
-        private string datumAkteField;
-        
-        private EnumeratieType statusField;
-        
-        private EnumeratieType rolField;
-        
-        private OpTeRichtenRechtspersoonType[] opTeRichtenVerkrijgendeRechtspersoonField;
-        
-        private NietNatuurlijkPersoonRelatieType[] toekennendeRechtspersoonField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public RechterlijkeUitspraakType uitspraak {
-            get {
-                return this.uitspraakField;
-            }
-            set {
-                this.uitspraakField = value;
-                this.RaisePropertyChanged("uitspraak");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string datumAkte {
-            get {
-                return this.datumAkteField;
-            }
-            set {
-                this.datumAkteField = value;
-                this.RaisePropertyChanged("datumAkte");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public EnumeratieType status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-                this.RaisePropertyChanged("status");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public EnumeratieType rol {
-            get {
-                return this.rolField;
-            }
-            set {
-                this.rolField = value;
-                this.RaisePropertyChanged("rol");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("opTeRichtenVerkrijgendeRechtspersoon", Order=4)]
-        public OpTeRichtenRechtspersoonType[] opTeRichtenVerkrijgendeRechtspersoon {
-            get {
-                return this.opTeRichtenVerkrijgendeRechtspersoonField;
-            }
-            set {
-                this.opTeRichtenVerkrijgendeRechtspersoonField = value;
-                this.RaisePropertyChanged("opTeRichtenVerkrijgendeRechtspersoon");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("toekennendeRechtspersoon", Order=5)]
-        public NietNatuurlijkPersoonRelatieType[] toekennendeRechtspersoon {
-            get {
-                return this.toekennendeRechtspersoonField;
-            }
-            set {
-                this.toekennendeRechtspersoonField = value;
-                this.RaisePropertyChanged("toekennendeRechtspersoon");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class SplitsingType : FusieSplitsingType {
-        
-        private OpTeRichtenRechtspersoonType opTeRichtenSplitsendeRechtspersoonField;
-        
-        private NietNatuurlijkPersoonRelatieType splitsendeRechtspersoonField;
-        
-        private NietNatuurlijkPersoonRelatieType[] verkrijgendeRechtspersoonField;
-        
-        private EnumeratieType zuivereSplitsingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public OpTeRichtenRechtspersoonType opTeRichtenSplitsendeRechtspersoon {
-            get {
-                return this.opTeRichtenSplitsendeRechtspersoonField;
-            }
-            set {
-                this.opTeRichtenSplitsendeRechtspersoonField = value;
-                this.RaisePropertyChanged("opTeRichtenSplitsendeRechtspersoon");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public NietNatuurlijkPersoonRelatieType splitsendeRechtspersoon {
-            get {
-                return this.splitsendeRechtspersoonField;
-            }
-            set {
-                this.splitsendeRechtspersoonField = value;
-                this.RaisePropertyChanged("splitsendeRechtspersoon");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("verkrijgendeRechtspersoon", Order=2)]
-        public NietNatuurlijkPersoonRelatieType[] verkrijgendeRechtspersoon {
-            get {
-                return this.verkrijgendeRechtspersoonField;
-            }
-            set {
-                this.verkrijgendeRechtspersoonField = value;
-                this.RaisePropertyChanged("verkrijgendeRechtspersoon");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public EnumeratieType zuivereSplitsing {
-            get {
-                return this.zuivereSplitsingField;
-            }
-            set {
-                this.zuivereSplitsingField = value;
-                this.RaisePropertyChanged("zuivereSplitsing");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class DeponeringenType : MetExtraElementenMogenlijkheidType {
-        
-        private DeponeringRelatieType[] deponeringField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("deponering", Order=0)]
-        public DeponeringRelatieType[] deponering {
-            get {
-                return this.deponeringField;
-            }
-            set {
-                this.deponeringField = value;
-                this.RaisePropertyChanged("deponering");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietNatuurlijkPersoonType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AfgeslotenMoederType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SamenwerkingsverbandType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonInOprichtingType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EenmanszaakMetMeerdereEigenarenType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NatuurlijkPersoonType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NaamPersoonType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public abstract partial class PersoonType : BasisType {
-        
-        private BijzondereRechtstoestandType bijzondereRechtstoestandField;
-        
-        private BeperkingInRechtshandelingType beperkingInRechtshandelingField;
-        
-        private string persoonRechtsvormField;
-        
-        private string volledigeNaamField;
-        
-        private string uitgebreideRechtsvormField;
-        
-        private LocatieType bezoekLocatiePersoonField;
-        
-        private LocatieType postLocatiePersoonField;
-        
-        private FunctievervullingRelatieType[] heeftField;
-        
-        private FunctievervullingRelatieType[] isField;
-        
-        private MaatschappelijkeActiviteitRelatieType isEigenaarVanField;
-        
-        private PersoonRelatieType isVerenigdNaarField;
-        
-        private PersoonRelatieType[] isVerenigdMetField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public BijzondereRechtstoestandType bijzondereRechtstoestand {
-            get {
-                return this.bijzondereRechtstoestandField;
-            }
-            set {
-                this.bijzondereRechtstoestandField = value;
-                this.RaisePropertyChanged("bijzondereRechtstoestand");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public BeperkingInRechtshandelingType beperkingInRechtshandeling {
-            get {
-                return this.beperkingInRechtshandelingField;
-            }
-            set {
-                this.beperkingInRechtshandelingField = value;
-                this.RaisePropertyChanged("beperkingInRechtshandeling");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string persoonRechtsvorm {
-            get {
-                return this.persoonRechtsvormField;
-            }
-            set {
-                this.persoonRechtsvormField = value;
-                this.RaisePropertyChanged("persoonRechtsvorm");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string volledigeNaam {
-            get {
-                return this.volledigeNaamField;
-            }
-            set {
-                this.volledigeNaamField = value;
-                this.RaisePropertyChanged("volledigeNaam");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string uitgebreideRechtsvorm {
-            get {
-                return this.uitgebreideRechtsvormField;
-            }
-            set {
-                this.uitgebreideRechtsvormField = value;
-                this.RaisePropertyChanged("uitgebreideRechtsvorm");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public LocatieType bezoekLocatiePersoon {
-            get {
-                return this.bezoekLocatiePersoonField;
-            }
-            set {
-                this.bezoekLocatiePersoonField = value;
-                this.RaisePropertyChanged("bezoekLocatiePersoon");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public LocatieType postLocatiePersoon {
-            get {
-                return this.postLocatiePersoonField;
-            }
-            set {
-                this.postLocatiePersoonField = value;
-                this.RaisePropertyChanged("postLocatiePersoon");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("heeft", Order=7)]
-        public FunctievervullingRelatieType[] heeft {
-            get {
-                return this.heeftField;
-            }
-            set {
-                this.heeftField = value;
-                this.RaisePropertyChanged("heeft");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("is", Order=8)]
-        public FunctievervullingRelatieType[] @is {
-            get {
-                return this.isField;
-            }
-            set {
-                this.isField = value;
-                this.RaisePropertyChanged("is");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public MaatschappelijkeActiviteitRelatieType isEigenaarVan {
-            get {
-                return this.isEigenaarVanField;
-            }
-            set {
-                this.isEigenaarVanField = value;
-                this.RaisePropertyChanged("isEigenaarVan");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public PersoonRelatieType isVerenigdNaar {
-            get {
-                return this.isVerenigdNaarField;
-            }
-            set {
-                this.isVerenigdNaarField = value;
-                this.RaisePropertyChanged("isVerenigdNaar");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("isVerenigdMet", Order=11)]
-        public PersoonRelatieType[] isVerenigdMet {
-            get {
-                return this.isVerenigdMetField;
-            }
-            set {
-                this.isVerenigdMetField = value;
-                this.RaisePropertyChanged("isVerenigdMet");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class BijzondereRechtstoestandType : BasisType {
-        
-        private EnumeratieType soortField;
-        
-        private RechterlijkeUitspraakType itemField;
-        
-        private ItemChoiceType2 itemElementNameField;
-        
-        private EnumeratieType redenEindeInsolventieField;
-        
-        private EnumeratieType statusField;
-        
-        private string duurField;
-        
-        private EnumeratieType isVerlengdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType soort {
-            get {
-                return this.soortField;
-            }
-            set {
-                this.soortField = value;
-                this.RaisePropertyChanged("soort");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("uitspraakAanvang", typeof(RechterlijkeUitspraakType), Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute("uitspraakEinde", typeof(RechterlijkeUitspraakType), Order=1)]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-        public RechterlijkeUitspraakType Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-                this.RaisePropertyChanged("Item");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType2 ItemElementName {
-            get {
-                return this.itemElementNameField;
-            }
-            set {
-                this.itemElementNameField = value;
-                this.RaisePropertyChanged("ItemElementName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public EnumeratieType redenEindeInsolventie {
-            get {
-                return this.redenEindeInsolventieField;
-            }
-            set {
-                this.redenEindeInsolventieField = value;
-                this.RaisePropertyChanged("redenEindeInsolventie");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public EnumeratieType status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-                this.RaisePropertyChanged("status");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string duur {
-            get {
-                return this.duurField;
-            }
-            set {
-                this.duurField = value;
-                this.RaisePropertyChanged("duur");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public EnumeratieType isVerlengd {
-            get {
-                return this.isVerlengdField;
-            }
-            set {
-                this.isVerlengdField = value;
-                this.RaisePropertyChanged("isVerlengd");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
-    public enum ItemChoiceType2 {
-        
-        /// <remarks/>
-        uitspraakAanvang,
-        
-        /// <remarks/>
-        uitspraakEinde,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class BeperkingInRechtshandelingType : BasisType {
-        
-        private EnumeratieType soortField;
-        
-        private RechterlijkeUitspraakType itemField;
-        
-        private ItemChoiceType3 itemElementNameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType soort {
-            get {
-                return this.soortField;
-            }
-            set {
-                this.soortField = value;
-                this.RaisePropertyChanged("soort");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("uitspraakAanvang", typeof(RechterlijkeUitspraakType), Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute("uitspraakEinde", typeof(RechterlijkeUitspraakType), Order=1)]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-        public RechterlijkeUitspraakType Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-                this.RaisePropertyChanged("Item");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType3 ItemElementName {
-            get {
-                return this.itemElementNameField;
-            }
-            set {
-                this.itemElementNameField = value;
-                this.RaisePropertyChanged("ItemElementName");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
-    public enum ItemChoiceType3 {
-        
-        /// <remarks/>
-        uitspraakAanvang,
-        
-        /// <remarks/>
-        uitspraakEinde,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class FunctievervullingRelatieType : RelatieType {
-        
-        private FunctievervullingType itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("aansprakelijke", typeof(AansprakelijkeType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("bestuursfunctie", typeof(BestuursfunctieType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("functionarisBijzondereRechtstoestand", typeof(FunctionarisBijzondereRechtstoestandType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("gemachtigde", typeof(GemachtigdeType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("overigeFunctionaris", typeof(OverigeFunctionarisType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("publiekrechtelijkeFunctionaris", typeof(PubliekrechtelijkeFunctionarisType), Order=0)]
-        public FunctievervullingType Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-                this.RaisePropertyChanged("Item");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class AansprakelijkeType : FunctievervullingType {
-        
-        private EnumeratieType functieField;
-        
-        private HandlichtingType handlichtingField;
-        
-        private BevoegdheidAansprakelijkeType bevoegdheidField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType functie {
-            get {
-                return this.functieField;
-            }
-            set {
-                this.functieField = value;
-                this.RaisePropertyChanged("functie");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public HandlichtingType handlichting {
-            get {
-                return this.handlichtingField;
-            }
-            set {
-                this.handlichtingField = value;
-                this.RaisePropertyChanged("handlichting");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public BevoegdheidAansprakelijkeType bevoegdheid {
-            get {
-                return this.bevoegdheidField;
-            }
-            set {
-                this.bevoegdheidField = value;
-                this.RaisePropertyChanged("bevoegdheid");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class HandlichtingType : BasisType {
-        
-        private EnumeratieType isVerleendField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType isVerleend {
-            get {
-                return this.isVerleendField;
-            }
-            set {
-                this.isVerleendField = value;
-                this.RaisePropertyChanged("isVerleend");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class BevoegdheidAansprakelijkeType : BasisType {
-        
-        private EnumeratieType soortField;
-        
-        private GeldType beperkingInEurosField;
-        
-        private EnumeratieType overigeBeperkingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType soort {
-            get {
-                return this.soortField;
-            }
-            set {
-                this.soortField = value;
-                this.RaisePropertyChanged("soort");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public GeldType beperkingInEuros {
-            get {
-                return this.beperkingInEurosField;
-            }
-            set {
-                this.beperkingInEurosField = value;
-                this.RaisePropertyChanged("beperkingInEuros");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public EnumeratieType overigeBeperking {
-            get {
-                return this.overigeBeperkingField;
-            }
-            set {
-                this.overigeBeperkingField = value;
-                this.RaisePropertyChanged("overigeBeperking");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PubliekrechtelijkeFunctionarisType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OverigeFunctionarisType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(GemachtigdeType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctionarisBijzondereRechtstoestandType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BestuursfunctieType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkeType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public abstract partial class FunctievervullingType : BasisType {
-        
-        private FunctietitelType functietitelField;
-        
-        private SchorsingType schorsingField;
-        
-        private PersoonRelatieType itemField;
-        
-        private ItemChoiceType6 itemElementNameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public FunctietitelType functietitel {
-            get {
-                return this.functietitelField;
-            }
-            set {
-                this.functietitelField = value;
-                this.RaisePropertyChanged("functietitel");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public SchorsingType schorsing {
-            get {
-                return this.schorsingField;
-            }
-            set {
-                this.schorsingField = value;
-                this.RaisePropertyChanged("schorsing");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("door", typeof(PersoonRelatieType), Order=2)]
-        [System.Xml.Serialization.XmlElementAttribute("voor", typeof(PersoonRelatieType), Order=2)]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-        public PersoonRelatieType Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-                this.RaisePropertyChanged("Item");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType6 ItemElementName {
-            get {
-                return this.itemElementNameField;
-            }
-            set {
-                this.itemElementNameField = value;
-                this.RaisePropertyChanged("ItemElementName");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class FunctietitelType : BasisType {
-        
-        private string titelField;
-        
-        private EnumeratieType isStatutaireTitelField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string titel {
-            get {
-                return this.titelField;
-            }
-            set {
-                this.titelField = value;
-                this.RaisePropertyChanged("titel");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public EnumeratieType isStatutaireTitel {
-            get {
-                return this.isStatutaireTitelField;
-            }
-            set {
-                this.isStatutaireTitelField = value;
-                this.RaisePropertyChanged("isStatutaireTitel");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class SchorsingType : BasisType {
-        
-        private RechterlijkeUitspraakType itemField;
-        
-        private ItemChoiceType4 itemElementNameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("uitspraakAanvang", typeof(RechterlijkeUitspraakType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("uitspraakEinde", typeof(RechterlijkeUitspraakType), Order=0)]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-        public RechterlijkeUitspraakType Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-                this.RaisePropertyChanged("Item");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType4 ItemElementName {
-            get {
-                return this.itemElementNameField;
-            }
-            set {
-                this.itemElementNameField = value;
-                this.RaisePropertyChanged("ItemElementName");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
-    public enum ItemChoiceType4 {
-        
-        /// <remarks/>
-        uitspraakAanvang,
-        
-        /// <remarks/>
-        uitspraakEinde,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class PersoonRelatieType : RelatieType {
-        
-        private PersoonType itemField;
+        private NietNatuurlijkPersoonType itemField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("afgeslotenMoeder", typeof(AfgeslotenMoederType), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("buitenlandseVennootschap", typeof(BuitenlandseVennootschapType), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("eenmanszaakMetMeerdereEigenaren", typeof(EenmanszaakMetMeerdereEigenarenType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("naamPersoon", typeof(NaamPersoonType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("natuurlijkPersoon", typeof(NatuurlijkPersoonType), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("rechtspersoon", typeof(RechtspersoonType), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("rechtspersoonInOprichting", typeof(RechtspersoonInOprichtingType), Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("samenwerkingsverband", typeof(SamenwerkingsverbandType), Order=0)]
-        public PersoonType Item {
+        public NietNatuurlijkPersoonType Item {
             get {
                 return this.itemField;
             }
@@ -4226,11 +2968,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BuitenlandseVennootschapType : NietNatuurlijkPersoonType {
         
         private BuitenlandseRegistratieGegevensType buitenlandseRegistratieGegevensField;
@@ -4333,11 +3075,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BuitenlandseRegistratieGegevensType : BasisType {
         
         private string naamField;
@@ -4412,11 +3154,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class KapitaalType : BasisType {
         
         private GeldType bedragField;
@@ -4449,11 +3191,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class AandeelSamenstellingType : BasisType {
         
         private decimal aantalField;
@@ -4486,11 +3228,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class AandeelType : BasisType {
         
         private string soortField;
@@ -4523,11 +3265,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BuitenlandseVennootschapGegevensType : BasisType {
         
         private EnumeratieType heeftHoofdvestigingBuitenNederlandField;
@@ -4630,355 +3372,20 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class EenmanszaakMetMeerdereEigenarenType : NietNatuurlijkPersoonType {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class NaamPersoonType : PersoonType {
-        
-        private string naamField;
-        
-        private TelefoonnummerType telefoonnummerField;
-        
-        private LocatieType adresField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string naam {
-            get {
-                return this.naamField;
-            }
-            set {
-                this.naamField = value;
-                this.RaisePropertyChanged("naam");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public TelefoonnummerType telefoonnummer {
-            get {
-                return this.telefoonnummerField;
-            }
-            set {
-                this.telefoonnummerField = value;
-                this.RaisePropertyChanged("telefoonnummer");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public LocatieType adres {
-            get {
-                return this.adresField;
-            }
-            set {
-                this.adresField = value;
-                this.RaisePropertyChanged("adres");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class TelefoonnummerType : MetExtraElementenMogenlijkheidType {
-        
-        private string toegangscodeField;
-        
-        private string nummerField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string toegangscode {
-            get {
-                return this.toegangscodeField;
-            }
-            set {
-                this.toegangscodeField = value;
-                this.RaisePropertyChanged("toegangscode");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string nummer {
-            get {
-                return this.nummerField;
-            }
-            set {
-                this.nummerField = value;
-                this.RaisePropertyChanged("nummer");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class NatuurlijkPersoonType : PersoonType {
-        
-        private string bsnField;
-        
-        private string geslachtsnaamField;
-        
-        private string voorvoegselGeslachtsnaamField;
-        
-        private string voornamenField;
-        
-        private EnumeratieType geslachtsaanduidingField;
-        
-        private string geboorteplaatsField;
-        
-        private EnumeratieType geboortelandField;
-        
-        private EnumeratieType adellijkeTitelField;
-        
-        private EnumeratieType aanduidingNaamgebruikField;
-        
-        private string geslachtsnaamPartnerField;
-        
-        private string voorvoegselGeslachtsnaamPartnerField;
-        
-        private HandlichtingType handlichtingField;
-        
-        private string geboortedatumField;
-        
-        private string overlijdensdatumField;
-        
-        private string datumEersteHuwelijkField;
-        
-        private string datumGeemigreerdField;
-        
-        private LocatieType woonLocatieField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string bsn {
-            get {
-                return this.bsnField;
-            }
-            set {
-                this.bsnField = value;
-                this.RaisePropertyChanged("bsn");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string geslachtsnaam {
-            get {
-                return this.geslachtsnaamField;
-            }
-            set {
-                this.geslachtsnaamField = value;
-                this.RaisePropertyChanged("geslachtsnaam");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string voorvoegselGeslachtsnaam {
-            get {
-                return this.voorvoegselGeslachtsnaamField;
-            }
-            set {
-                this.voorvoegselGeslachtsnaamField = value;
-                this.RaisePropertyChanged("voorvoegselGeslachtsnaam");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string voornamen {
-            get {
-                return this.voornamenField;
-            }
-            set {
-                this.voornamenField = value;
-                this.RaisePropertyChanged("voornamen");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public EnumeratieType geslachtsaanduiding {
-            get {
-                return this.geslachtsaanduidingField;
-            }
-            set {
-                this.geslachtsaanduidingField = value;
-                this.RaisePropertyChanged("geslachtsaanduiding");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string geboorteplaats {
-            get {
-                return this.geboorteplaatsField;
-            }
-            set {
-                this.geboorteplaatsField = value;
-                this.RaisePropertyChanged("geboorteplaats");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public EnumeratieType geboorteland {
-            get {
-                return this.geboortelandField;
-            }
-            set {
-                this.geboortelandField = value;
-                this.RaisePropertyChanged("geboorteland");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public EnumeratieType adellijkeTitel {
-            get {
-                return this.adellijkeTitelField;
-            }
-            set {
-                this.adellijkeTitelField = value;
-                this.RaisePropertyChanged("adellijkeTitel");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public EnumeratieType aanduidingNaamgebruik {
-            get {
-                return this.aanduidingNaamgebruikField;
-            }
-            set {
-                this.aanduidingNaamgebruikField = value;
-                this.RaisePropertyChanged("aanduidingNaamgebruik");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public string geslachtsnaamPartner {
-            get {
-                return this.geslachtsnaamPartnerField;
-            }
-            set {
-                this.geslachtsnaamPartnerField = value;
-                this.RaisePropertyChanged("geslachtsnaamPartner");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public string voorvoegselGeslachtsnaamPartner {
-            get {
-                return this.voorvoegselGeslachtsnaamPartnerField;
-            }
-            set {
-                this.voorvoegselGeslachtsnaamPartnerField = value;
-                this.RaisePropertyChanged("voorvoegselGeslachtsnaamPartner");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public HandlichtingType handlichting {
-            get {
-                return this.handlichtingField;
-            }
-            set {
-                this.handlichtingField = value;
-                this.RaisePropertyChanged("handlichting");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string geboortedatum {
-            get {
-                return this.geboortedatumField;
-            }
-            set {
-                this.geboortedatumField = value;
-                this.RaisePropertyChanged("geboortedatum");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public string overlijdensdatum {
-            get {
-                return this.overlijdensdatumField;
-            }
-            set {
-                this.overlijdensdatumField = value;
-                this.RaisePropertyChanged("overlijdensdatum");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public string datumEersteHuwelijk {
-            get {
-                return this.datumEersteHuwelijkField;
-            }
-            set {
-                this.datumEersteHuwelijkField = value;
-                this.RaisePropertyChanged("datumEersteHuwelijk");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
-        public string datumGeemigreerd {
-            get {
-                return this.datumGeemigreerdField;
-            }
-            set {
-                this.datumGeemigreerdField = value;
-                this.RaisePropertyChanged("datumGeemigreerd");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
-        public LocatieType woonLocatie {
-            get {
-                return this.woonLocatieField;
-            }
-            set {
-                this.woonLocatieField = value;
-                this.RaisePropertyChanged("woonLocatie");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class RechtspersoonType : NietNatuurlijkPersoonType {
         
         private EnumeratieType rechtsvormField;
@@ -5375,11 +3782,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class RechtspersoonGegevensBuitenlandType : BasisType {
         
         private string naamField;
@@ -5440,20 +3847,20 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class VoornemenTotOntbindingType : BasisType {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class RechtspersoonInOprichtingType : NietNatuurlijkPersoonType {
         
         private EnumeratieType doelRechtsvormField;
@@ -5472,11 +3879,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class SamenwerkingsverbandType : NietNatuurlijkPersoonType {
         
         private EnumeratieType rechtsvormField;
@@ -5537,11 +3944,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class DuurType : BasisType {
         
         private object itemField;
@@ -5561,11 +3968,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class CommanditairKapitaalType : BasisType {
         
         private GeldType bedragField;
@@ -5598,9 +4005,1306 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SplitsingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FusieType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public abstract partial class FusieSplitsingType : BasisType {
+        
+        private RechterlijkeUitspraakType uitspraakField;
+        
+        private string datumAkteField;
+        
+        private EnumeratieType statusField;
+        
+        private EnumeratieType rolField;
+        
+        private OpTeRichtenRechtspersoonType[] opTeRichtenVerkrijgendeRechtspersoonField;
+        
+        private NietNatuurlijkPersoonRelatieType[] toekennendeRechtspersoonField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public RechterlijkeUitspraakType uitspraak {
+            get {
+                return this.uitspraakField;
+            }
+            set {
+                this.uitspraakField = value;
+                this.RaisePropertyChanged("uitspraak");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string datumAkte {
+            get {
+                return this.datumAkteField;
+            }
+            set {
+                this.datumAkteField = value;
+                this.RaisePropertyChanged("datumAkte");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public EnumeratieType status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+                this.RaisePropertyChanged("status");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public EnumeratieType rol {
+            get {
+                return this.rolField;
+            }
+            set {
+                this.rolField = value;
+                this.RaisePropertyChanged("rol");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("opTeRichtenVerkrijgendeRechtspersoon", Order=4)]
+        public OpTeRichtenRechtspersoonType[] opTeRichtenVerkrijgendeRechtspersoon {
+            get {
+                return this.opTeRichtenVerkrijgendeRechtspersoonField;
+            }
+            set {
+                this.opTeRichtenVerkrijgendeRechtspersoonField = value;
+                this.RaisePropertyChanged("opTeRichtenVerkrijgendeRechtspersoon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("toekennendeRechtspersoon", Order=5)]
+        public NietNatuurlijkPersoonRelatieType[] toekennendeRechtspersoon {
+            get {
+                return this.toekennendeRechtspersoonField;
+            }
+            set {
+                this.toekennendeRechtspersoonField = value;
+                this.RaisePropertyChanged("toekennendeRechtspersoon");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class SplitsingType : FusieSplitsingType {
+        
+        private OpTeRichtenRechtspersoonType opTeRichtenSplitsendeRechtspersoonField;
+        
+        private NietNatuurlijkPersoonRelatieType splitsendeRechtspersoonField;
+        
+        private NietNatuurlijkPersoonRelatieType[] verkrijgendeRechtspersoonField;
+        
+        private EnumeratieType zuivereSplitsingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public OpTeRichtenRechtspersoonType opTeRichtenSplitsendeRechtspersoon {
+            get {
+                return this.opTeRichtenSplitsendeRechtspersoonField;
+            }
+            set {
+                this.opTeRichtenSplitsendeRechtspersoonField = value;
+                this.RaisePropertyChanged("opTeRichtenSplitsendeRechtspersoon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public NietNatuurlijkPersoonRelatieType splitsendeRechtspersoon {
+            get {
+                return this.splitsendeRechtspersoonField;
+            }
+            set {
+                this.splitsendeRechtspersoonField = value;
+                this.RaisePropertyChanged("splitsendeRechtspersoon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("verkrijgendeRechtspersoon", Order=2)]
+        public NietNatuurlijkPersoonRelatieType[] verkrijgendeRechtspersoon {
+            get {
+                return this.verkrijgendeRechtspersoonField;
+            }
+            set {
+                this.verkrijgendeRechtspersoonField = value;
+                this.RaisePropertyChanged("verkrijgendeRechtspersoon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public EnumeratieType zuivereSplitsing {
+            get {
+                return this.zuivereSplitsingField;
+            }
+            set {
+                this.zuivereSplitsingField = value;
+                this.RaisePropertyChanged("zuivereSplitsing");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class AansprakelijkheidRelatieRegistratieType : RelatieRegistratieType {
+        
+        private NietNatuurlijkPersoonRelatieType moederField;
+        
+        private string datumIntrekkingField;
+        
+        private DeponeringRelatieType verklaringField;
+        
+        private DeponeringRelatieType intrekkingField;
+        
+        private DeponeringRelatieType overblijvendeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public NietNatuurlijkPersoonRelatieType moeder {
+            get {
+                return this.moederField;
+            }
+            set {
+                this.moederField = value;
+                this.RaisePropertyChanged("moeder");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string datumIntrekking {
+            get {
+                return this.datumIntrekkingField;
+            }
+            set {
+                this.datumIntrekkingField = value;
+                this.RaisePropertyChanged("datumIntrekking");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public DeponeringRelatieType verklaring {
+            get {
+                return this.verklaringField;
+            }
+            set {
+                this.verklaringField = value;
+                this.RaisePropertyChanged("verklaring");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public DeponeringRelatieType intrekking {
+            get {
+                return this.intrekkingField;
+            }
+            set {
+                this.intrekkingField = value;
+                this.RaisePropertyChanged("intrekking");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public DeponeringRelatieType overblijvende {
+            get {
+                return this.overblijvendeField;
+            }
+            set {
+                this.overblijvendeField = value;
+                this.RaisePropertyChanged("overblijvende");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietNatuurlijkPersoonType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AfgeslotenMoederType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SamenwerkingsverbandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonInOprichtingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RechtspersoonType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EenmanszaakMetMeerdereEigenarenType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BuitenlandseVennootschapType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NatuurlijkPersoonType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NaamPersoonType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public abstract partial class PersoonType : BasisType {
+        
+        private BijzondereRechtstoestandType bijzondereRechtstoestandField;
+        
+        private BeperkingInRechtshandelingType beperkingInRechtshandelingField;
+        
+        private string persoonRechtsvormField;
+        
+        private string volledigeNaamField;
+        
+        private string uitgebreideRechtsvormField;
+        
+        private LocatieType bezoekLocatiePersoonField;
+        
+        private LocatieType postLocatiePersoonField;
+        
+        private FunctievervullingRelatieType[] heeftField;
+        
+        private FunctievervullingRelatieType[] isField;
+        
+        private MaatschappelijkeActiviteitRelatieType isEigenaarVanField;
+        
+        private PersoonRelatieType isVerenigdNaarField;
+        
+        private PersoonRelatieType[] isVerenigdMetField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public BijzondereRechtstoestandType bijzondereRechtstoestand {
+            get {
+                return this.bijzondereRechtstoestandField;
+            }
+            set {
+                this.bijzondereRechtstoestandField = value;
+                this.RaisePropertyChanged("bijzondereRechtstoestand");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public BeperkingInRechtshandelingType beperkingInRechtshandeling {
+            get {
+                return this.beperkingInRechtshandelingField;
+            }
+            set {
+                this.beperkingInRechtshandelingField = value;
+                this.RaisePropertyChanged("beperkingInRechtshandeling");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string persoonRechtsvorm {
+            get {
+                return this.persoonRechtsvormField;
+            }
+            set {
+                this.persoonRechtsvormField = value;
+                this.RaisePropertyChanged("persoonRechtsvorm");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string volledigeNaam {
+            get {
+                return this.volledigeNaamField;
+            }
+            set {
+                this.volledigeNaamField = value;
+                this.RaisePropertyChanged("volledigeNaam");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string uitgebreideRechtsvorm {
+            get {
+                return this.uitgebreideRechtsvormField;
+            }
+            set {
+                this.uitgebreideRechtsvormField = value;
+                this.RaisePropertyChanged("uitgebreideRechtsvorm");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public LocatieType bezoekLocatiePersoon {
+            get {
+                return this.bezoekLocatiePersoonField;
+            }
+            set {
+                this.bezoekLocatiePersoonField = value;
+                this.RaisePropertyChanged("bezoekLocatiePersoon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public LocatieType postLocatiePersoon {
+            get {
+                return this.postLocatiePersoonField;
+            }
+            set {
+                this.postLocatiePersoonField = value;
+                this.RaisePropertyChanged("postLocatiePersoon");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("heeft", Order=7)]
+        public FunctievervullingRelatieType[] heeft {
+            get {
+                return this.heeftField;
+            }
+            set {
+                this.heeftField = value;
+                this.RaisePropertyChanged("heeft");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("is", Order=8)]
+        public FunctievervullingRelatieType[] @is {
+            get {
+                return this.isField;
+            }
+            set {
+                this.isField = value;
+                this.RaisePropertyChanged("is");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public MaatschappelijkeActiviteitRelatieType isEigenaarVan {
+            get {
+                return this.isEigenaarVanField;
+            }
+            set {
+                this.isEigenaarVanField = value;
+                this.RaisePropertyChanged("isEigenaarVan");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public PersoonRelatieType isVerenigdNaar {
+            get {
+                return this.isVerenigdNaarField;
+            }
+            set {
+                this.isVerenigdNaarField = value;
+                this.RaisePropertyChanged("isVerenigdNaar");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("isVerenigdMet", Order=11)]
+        public PersoonRelatieType[] isVerenigdMet {
+            get {
+                return this.isVerenigdMetField;
+            }
+            set {
+                this.isVerenigdMetField = value;
+                this.RaisePropertyChanged("isVerenigdMet");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class BijzondereRechtstoestandType : BasisType {
+        
+        private EnumeratieType soortField;
+        
+        private RechterlijkeUitspraakType itemField;
+        
+        private ItemChoiceType3 itemElementNameField;
+        
+        private EnumeratieType redenEindeInsolventieField;
+        
+        private EnumeratieType statusField;
+        
+        private string duurField;
+        
+        private EnumeratieType isVerlengdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType soort {
+            get {
+                return this.soortField;
+            }
+            set {
+                this.soortField = value;
+                this.RaisePropertyChanged("soort");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("uitspraakAanvang", typeof(RechterlijkeUitspraakType), Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute("uitspraakEinde", typeof(RechterlijkeUitspraakType), Order=1)]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+        public RechterlijkeUitspraakType Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                this.RaisePropertyChanged("Item");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemChoiceType3 ItemElementName {
+            get {
+                return this.itemElementNameField;
+            }
+            set {
+                this.itemElementNameField = value;
+                this.RaisePropertyChanged("ItemElementName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public EnumeratieType redenEindeInsolventie {
+            get {
+                return this.redenEindeInsolventieField;
+            }
+            set {
+                this.redenEindeInsolventieField = value;
+                this.RaisePropertyChanged("redenEindeInsolventie");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public EnumeratieType status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+                this.RaisePropertyChanged("status");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string duur {
+            get {
+                return this.duurField;
+            }
+            set {
+                this.duurField = value;
+                this.RaisePropertyChanged("duur");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public EnumeratieType isVerlengd {
+            get {
+                return this.isVerlengdField;
+            }
+            set {
+                this.isVerlengdField = value;
+                this.RaisePropertyChanged("isVerlengd");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    public enum ItemChoiceType3 {
+        
+        /// <remarks/>
+        uitspraakAanvang,
+        
+        /// <remarks/>
+        uitspraakEinde,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class BeperkingInRechtshandelingType : BasisType {
+        
+        private EnumeratieType soortField;
+        
+        private RechterlijkeUitspraakType itemField;
+        
+        private ItemChoiceType2 itemElementNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType soort {
+            get {
+                return this.soortField;
+            }
+            set {
+                this.soortField = value;
+                this.RaisePropertyChanged("soort");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("uitspraakAanvang", typeof(RechterlijkeUitspraakType), Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute("uitspraakEinde", typeof(RechterlijkeUitspraakType), Order=1)]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+        public RechterlijkeUitspraakType Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                this.RaisePropertyChanged("Item");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemChoiceType2 ItemElementName {
+            get {
+                return this.itemElementNameField;
+            }
+            set {
+                this.itemElementNameField = value;
+                this.RaisePropertyChanged("ItemElementName");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    public enum ItemChoiceType2 {
+        
+        /// <remarks/>
+        uitspraakAanvang,
+        
+        /// <remarks/>
+        uitspraakEinde,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class FunctievervullingRelatieType : RelatieType {
+        
+        private FunctievervullingType itemField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("aansprakelijke", typeof(AansprakelijkeType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("bestuursfunctie", typeof(BestuursfunctieType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("functionarisBijzondereRechtstoestand", typeof(FunctionarisBijzondereRechtstoestandType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("gemachtigde", typeof(GemachtigdeType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("overigeFunctionaris", typeof(OverigeFunctionarisType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("publiekrechtelijkeFunctionaris", typeof(PubliekrechtelijkeFunctionarisType), Order=0)]
+        public FunctievervullingType Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                this.RaisePropertyChanged("Item");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class AansprakelijkeType : FunctievervullingType {
+        
+        private EnumeratieType functieField;
+        
+        private HandlichtingType handlichtingField;
+        
+        private BevoegdheidAansprakelijkeType bevoegdheidField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType functie {
+            get {
+                return this.functieField;
+            }
+            set {
+                this.functieField = value;
+                this.RaisePropertyChanged("functie");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public HandlichtingType handlichting {
+            get {
+                return this.handlichtingField;
+            }
+            set {
+                this.handlichtingField = value;
+                this.RaisePropertyChanged("handlichting");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public BevoegdheidAansprakelijkeType bevoegdheid {
+            get {
+                return this.bevoegdheidField;
+            }
+            set {
+                this.bevoegdheidField = value;
+                this.RaisePropertyChanged("bevoegdheid");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class HandlichtingType : BasisType {
+        
+        private EnumeratieType isVerleendField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType isVerleend {
+            get {
+                return this.isVerleendField;
+            }
+            set {
+                this.isVerleendField = value;
+                this.RaisePropertyChanged("isVerleend");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class BevoegdheidAansprakelijkeType : BasisType {
+        
+        private EnumeratieType soortField;
+        
+        private GeldType beperkingInEurosField;
+        
+        private EnumeratieType overigeBeperkingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType soort {
+            get {
+                return this.soortField;
+            }
+            set {
+                this.soortField = value;
+                this.RaisePropertyChanged("soort");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public GeldType beperkingInEuros {
+            get {
+                return this.beperkingInEurosField;
+            }
+            set {
+                this.beperkingInEurosField = value;
+                this.RaisePropertyChanged("beperkingInEuros");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public EnumeratieType overigeBeperking {
+            get {
+                return this.overigeBeperkingField;
+            }
+            set {
+                this.overigeBeperkingField = value;
+                this.RaisePropertyChanged("overigeBeperking");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PubliekrechtelijkeFunctionarisType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OverigeFunctionarisType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(GemachtigdeType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FunctionarisBijzondereRechtstoestandType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BestuursfunctieType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AansprakelijkeType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public abstract partial class FunctievervullingType : BasisType {
+        
+        private FunctietitelType functietitelField;
+        
+        private SchorsingType schorsingField;
+        
+        private PersoonRelatieType itemField;
+        
+        private ItemChoiceType6 itemElementNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public FunctietitelType functietitel {
+            get {
+                return this.functietitelField;
+            }
+            set {
+                this.functietitelField = value;
+                this.RaisePropertyChanged("functietitel");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public SchorsingType schorsing {
+            get {
+                return this.schorsingField;
+            }
+            set {
+                this.schorsingField = value;
+                this.RaisePropertyChanged("schorsing");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("door", typeof(PersoonRelatieType), Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute("voor", typeof(PersoonRelatieType), Order=2)]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+        public PersoonRelatieType Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                this.RaisePropertyChanged("Item");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemChoiceType6 ItemElementName {
+            get {
+                return this.itemElementNameField;
+            }
+            set {
+                this.itemElementNameField = value;
+                this.RaisePropertyChanged("ItemElementName");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class FunctietitelType : BasisType {
+        
+        private string titelField;
+        
+        private EnumeratieType isStatutaireTitelField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string titel {
+            get {
+                return this.titelField;
+            }
+            set {
+                this.titelField = value;
+                this.RaisePropertyChanged("titel");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public EnumeratieType isStatutaireTitel {
+            get {
+                return this.isStatutaireTitelField;
+            }
+            set {
+                this.isStatutaireTitelField = value;
+                this.RaisePropertyChanged("isStatutaireTitel");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class SchorsingType : BasisType {
+        
+        private RechterlijkeUitspraakType itemField;
+        
+        private ItemChoiceType5 itemElementNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("uitspraakAanvang", typeof(RechterlijkeUitspraakType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("uitspraakEinde", typeof(RechterlijkeUitspraakType), Order=0)]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+        public RechterlijkeUitspraakType Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                this.RaisePropertyChanged("Item");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemChoiceType5 ItemElementName {
+            get {
+                return this.itemElementNameField;
+            }
+            set {
+                this.itemElementNameField = value;
+                this.RaisePropertyChanged("ItemElementName");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    public enum ItemChoiceType5 {
+        
+        /// <remarks/>
+        uitspraakAanvang,
+        
+        /// <remarks/>
+        uitspraakEinde,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class PersoonRelatieType : RelatieType {
+        
+        private PersoonType itemField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("afgeslotenMoeder", typeof(AfgeslotenMoederType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("buitenlandseVennootschap", typeof(BuitenlandseVennootschapType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("eenmanszaakMetMeerdereEigenaren", typeof(EenmanszaakMetMeerdereEigenarenType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("naamPersoon", typeof(NaamPersoonType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("natuurlijkPersoon", typeof(NatuurlijkPersoonType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("rechtspersoon", typeof(RechtspersoonType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("rechtspersoonInOprichting", typeof(RechtspersoonInOprichtingType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("samenwerkingsverband", typeof(SamenwerkingsverbandType), Order=0)]
+        public PersoonType Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                this.RaisePropertyChanged("Item");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class NaamPersoonType : PersoonType {
+        
+        private string naamField;
+        
+        private TelefoonnummerType telefoonnummerField;
+        
+        private LocatieType adresField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string naam {
+            get {
+                return this.naamField;
+            }
+            set {
+                this.naamField = value;
+                this.RaisePropertyChanged("naam");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public TelefoonnummerType telefoonnummer {
+            get {
+                return this.telefoonnummerField;
+            }
+            set {
+                this.telefoonnummerField = value;
+                this.RaisePropertyChanged("telefoonnummer");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public LocatieType adres {
+            get {
+                return this.adresField;
+            }
+            set {
+                this.adresField = value;
+                this.RaisePropertyChanged("adres");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class TelefoonnummerType : MetExtraElementenMogenlijkheidType {
+        
+        private string toegangscodeField;
+        
+        private string nummerField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string toegangscode {
+            get {
+                return this.toegangscodeField;
+            }
+            set {
+                this.toegangscodeField = value;
+                this.RaisePropertyChanged("toegangscode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string nummer {
+            get {
+                return this.nummerField;
+            }
+            set {
+                this.nummerField = value;
+                this.RaisePropertyChanged("nummer");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class NatuurlijkPersoonType : PersoonType {
+        
+        private string bsnField;
+        
+        private string geslachtsnaamField;
+        
+        private string voorvoegselGeslachtsnaamField;
+        
+        private string voornamenField;
+        
+        private EnumeratieType geslachtsaanduidingField;
+        
+        private string geboorteplaatsField;
+        
+        private EnumeratieType geboortelandField;
+        
+        private EnumeratieType adellijkeTitelField;
+        
+        private EnumeratieType aanduidingNaamgebruikField;
+        
+        private string geslachtsnaamPartnerField;
+        
+        private string voorvoegselGeslachtsnaamPartnerField;
+        
+        private HandlichtingType handlichtingField;
+        
+        private string geboortedatumField;
+        
+        private string overlijdensdatumField;
+        
+        private string datumEersteHuwelijkField;
+        
+        private string datumGeemigreerdField;
+        
+        private LocatieType woonLocatieField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string bsn {
+            get {
+                return this.bsnField;
+            }
+            set {
+                this.bsnField = value;
+                this.RaisePropertyChanged("bsn");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string geslachtsnaam {
+            get {
+                return this.geslachtsnaamField;
+            }
+            set {
+                this.geslachtsnaamField = value;
+                this.RaisePropertyChanged("geslachtsnaam");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string voorvoegselGeslachtsnaam {
+            get {
+                return this.voorvoegselGeslachtsnaamField;
+            }
+            set {
+                this.voorvoegselGeslachtsnaamField = value;
+                this.RaisePropertyChanged("voorvoegselGeslachtsnaam");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string voornamen {
+            get {
+                return this.voornamenField;
+            }
+            set {
+                this.voornamenField = value;
+                this.RaisePropertyChanged("voornamen");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public EnumeratieType geslachtsaanduiding {
+            get {
+                return this.geslachtsaanduidingField;
+            }
+            set {
+                this.geslachtsaanduidingField = value;
+                this.RaisePropertyChanged("geslachtsaanduiding");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string geboorteplaats {
+            get {
+                return this.geboorteplaatsField;
+            }
+            set {
+                this.geboorteplaatsField = value;
+                this.RaisePropertyChanged("geboorteplaats");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public EnumeratieType geboorteland {
+            get {
+                return this.geboortelandField;
+            }
+            set {
+                this.geboortelandField = value;
+                this.RaisePropertyChanged("geboorteland");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public EnumeratieType adellijkeTitel {
+            get {
+                return this.adellijkeTitelField;
+            }
+            set {
+                this.adellijkeTitelField = value;
+                this.RaisePropertyChanged("adellijkeTitel");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public EnumeratieType aanduidingNaamgebruik {
+            get {
+                return this.aanduidingNaamgebruikField;
+            }
+            set {
+                this.aanduidingNaamgebruikField = value;
+                this.RaisePropertyChanged("aanduidingNaamgebruik");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string geslachtsnaamPartner {
+            get {
+                return this.geslachtsnaamPartnerField;
+            }
+            set {
+                this.geslachtsnaamPartnerField = value;
+                this.RaisePropertyChanged("geslachtsnaamPartner");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string voorvoegselGeslachtsnaamPartner {
+            get {
+                return this.voorvoegselGeslachtsnaamPartnerField;
+            }
+            set {
+                this.voorvoegselGeslachtsnaamPartnerField = value;
+                this.RaisePropertyChanged("voorvoegselGeslachtsnaamPartner");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public HandlichtingType handlichting {
+            get {
+                return this.handlichtingField;
+            }
+            set {
+                this.handlichtingField = value;
+                this.RaisePropertyChanged("handlichting");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string geboortedatum {
+            get {
+                return this.geboortedatumField;
+            }
+            set {
+                this.geboortedatumField = value;
+                this.RaisePropertyChanged("geboortedatum");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string overlijdensdatum {
+            get {
+                return this.overlijdensdatumField;
+            }
+            set {
+                this.overlijdensdatumField = value;
+                this.RaisePropertyChanged("overlijdensdatum");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public string datumEersteHuwelijk {
+            get {
+                return this.datumEersteHuwelijkField;
+            }
+            set {
+                this.datumEersteHuwelijkField = value;
+                this.RaisePropertyChanged("datumEersteHuwelijk");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public string datumGeemigreerd {
+            get {
+                return this.datumGeemigreerdField;
+            }
+            set {
+                this.datumGeemigreerdField = value;
+                this.RaisePropertyChanged("datumGeemigreerd");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public LocatieType woonLocatie {
+            get {
+                return this.woonLocatieField;
+            }
+            set {
+                this.woonLocatieField = value;
+                this.RaisePropertyChanged("woonLocatie");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType6 {
         
         /// <remarks/>
@@ -5611,11 +5315,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class PubliekrechtelijkeFunctionarisType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5648,11 +5352,34 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class BevoegdheidPubliekrechtelijkeFunctionarisType : BasisType {
+        
+        private EnumeratieType soortField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType soort {
+            get {
+                return this.soortField;
+            }
+            set {
+                this.soortField = value;
+                this.RaisePropertyChanged("soort");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class OverigeFunctionarisType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5727,11 +5454,34 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class BevoegdheidOverigeFunctionarisType : BasisType {
+        
+        private EnumeratieType soortField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType soort {
+            get {
+                return this.soortField;
+            }
+            set {
+                this.soortField = value;
+                this.RaisePropertyChanged("soort");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class GemachtigdeType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5764,113 +5514,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class VolmachtType : BasisType {
-        
-        private EnumeratieType typeVolmachtField;
-        
-        private EnumeratieType isStatutairField;
-        
-        private BeperkteVolmachtType beperkteVolmachtField;
-        
-        private VestigingenRelatieType heeftBetrekkingOpField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public EnumeratieType typeVolmacht {
-            get {
-                return this.typeVolmachtField;
-            }
-            set {
-                this.typeVolmachtField = value;
-                this.RaisePropertyChanged("typeVolmacht");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public EnumeratieType isStatutair {
-            get {
-                return this.isStatutairField;
-            }
-            set {
-                this.isStatutairField = value;
-                this.RaisePropertyChanged("isStatutair");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public BeperkteVolmachtType beperkteVolmacht {
-            get {
-                return this.beperkteVolmachtField;
-            }
-            set {
-                this.beperkteVolmachtField = value;
-                this.RaisePropertyChanged("beperkteVolmacht");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public VestigingenRelatieType heeftBetrekkingOp {
-            get {
-                return this.heeftBetrekkingOpField;
-            }
-            set {
-                this.heeftBetrekkingOpField = value;
-                this.RaisePropertyChanged("heeftBetrekkingOp");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class VestigingenRelatieType : RelatieType {
-        
-        private CommercieleVestigingType[] commercieleVestigingField;
-        
-        private NietCommercieleVestigingType[] nietCommercieleVestigingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", Order=0)]
-        public CommercieleVestigingType[] commercieleVestiging {
-            get {
-                return this.commercieleVestigingField;
-            }
-            set {
-                this.commercieleVestigingField = value;
-                this.RaisePropertyChanged("commercieleVestiging");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", Order=1)]
-        public NietCommercieleVestigingType[] nietCommercieleVestiging {
-            get {
-                return this.nietCommercieleVestigingField;
-            }
-            set {
-                this.nietCommercieleVestigingField = value;
-                this.RaisePropertyChanged("nietCommercieleVestiging");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class FunctionarisBijzondereRechtstoestandType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5903,11 +5551,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BevoegdheidBewindvoerderType : BasisType {
         
         private EnumeratieType soortField;
@@ -5926,11 +5574,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BestuursfunctieType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5991,11 +5639,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BevoegdheidBestuurderType : BasisType {
         
         private EnumeratieType soortField;
@@ -6028,11 +5676,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class NatuurlijkPersoonRelatieType : RelatieType {
         
         private NatuurlijkPersoonType natuurlijkPersoonField;
@@ -6051,31 +5699,300 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NietCommercieleVestigingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommercieleVestigingType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class MonistischeBestuurderType : MetExtraElementenMogenlijkheidType {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public abstract partial class VestigingType : BasisType {
         
-        private RegistratieType registratieField;
+        private string vestigingsnummerField;
         
-        private EnumeratieType rolField;
+        private LocatieType bezoekLocatieField;
+        
+        private LocatieType postLocatieField;
+        
+        private CommunicatiegegevensType communicatiegegevensField;
+        
+        private string eersteHandelsnaamField;
+        
+        private VestigingenRelatieRegistratieType isSamengevoegdMetField;
+        
+        private VoortzettingRelatieRegistratieType isOvergenomenVanField;
+        
+        private VoortzettingRelatieRegistratieType isOvergedragenNaarField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public RegistratieType registratie {
+        public string vestigingsnummer {
             get {
-                return this.registratieField;
+                return this.vestigingsnummerField;
             }
             set {
-                this.registratieField = value;
-                this.RaisePropertyChanged("registratie");
+                this.vestigingsnummerField = value;
+                this.RaisePropertyChanged("vestigingsnummer");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public LocatieType bezoekLocatie {
+            get {
+                return this.bezoekLocatieField;
+            }
+            set {
+                this.bezoekLocatieField = value;
+                this.RaisePropertyChanged("bezoekLocatie");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public LocatieType postLocatie {
+            get {
+                return this.postLocatieField;
+            }
+            set {
+                this.postLocatieField = value;
+                this.RaisePropertyChanged("postLocatie");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public CommunicatiegegevensType communicatiegegevens {
+            get {
+                return this.communicatiegegevensField;
+            }
+            set {
+                this.communicatiegegevensField = value;
+                this.RaisePropertyChanged("communicatiegegevens");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string eersteHandelsnaam {
+            get {
+                return this.eersteHandelsnaamField;
+            }
+            set {
+                this.eersteHandelsnaamField = value;
+                this.RaisePropertyChanged("eersteHandelsnaam");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public VestigingenRelatieRegistratieType isSamengevoegdMet {
+            get {
+                return this.isSamengevoegdMetField;
+            }
+            set {
+                this.isSamengevoegdMetField = value;
+                this.RaisePropertyChanged("isSamengevoegdMet");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public VoortzettingRelatieRegistratieType isOvergenomenVan {
+            get {
+                return this.isOvergenomenVanField;
+            }
+            set {
+                this.isOvergenomenVanField = value;
+                this.RaisePropertyChanged("isOvergenomenVan");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public VoortzettingRelatieRegistratieType isOvergedragenNaar {
+            get {
+                return this.isOvergedragenNaarField;
+            }
+            set {
+                this.isOvergedragenNaarField = value;
+                this.RaisePropertyChanged("isOvergedragenNaar");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class VestigingenRelatieRegistratieType : RelatieRegistratieType {
+        
+        private CommercieleVestigingType[] commercieleVestigingField;
+        
+        private NietCommercieleVestigingType[] nietCommercieleVestigingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", Order=0)]
+        public CommercieleVestigingType[] commercieleVestiging {
+            get {
+                return this.commercieleVestigingField;
+            }
+            set {
+                this.commercieleVestigingField = value;
+                this.RaisePropertyChanged("commercieleVestiging");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", Order=1)]
+        public NietCommercieleVestigingType[] nietCommercieleVestiging {
+            get {
+                return this.nietCommercieleVestigingField;
+            }
+            set {
+                this.nietCommercieleVestigingField = value;
+                this.RaisePropertyChanged("nietCommercieleVestiging");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class VoortzettingRelatieRegistratieType : MaatschappelijkeActiviteitRelatieRegistratieType {
+        
+        private string datumVoortzettingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string datumVoortzetting {
+            get {
+                return this.datumVoortzettingField;
+            }
+            set {
+                this.datumVoortzettingField = value;
+                this.RaisePropertyChanged("datumVoortzetting");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(VoortzettingRelatieRegistratieType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class MaatschappelijkeActiviteitRelatieRegistratieType : RelatieRegistratieType {
+        
+        private MaatschappelijkeActiviteitType maatschappelijkeActiviteitField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public MaatschappelijkeActiviteitType maatschappelijkeActiviteit {
+            get {
+                return this.maatschappelijkeActiviteitField;
+            }
+            set {
+                this.maatschappelijkeActiviteitField = value;
+                this.RaisePropertyChanged("maatschappelijkeActiviteit");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class CommercieleVestigingRelatieRegistratieType : RelatieRegistratieType {
+        
+        private CommercieleVestigingType commercieleVestigingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public CommercieleVestigingType commercieleVestiging {
+            get {
+                return this.commercieleVestigingField;
+            }
+            set {
+                this.commercieleVestigingField = value;
+                this.RaisePropertyChanged("commercieleVestiging");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringBijzondereDeponeringType : DeponeringType {
+        
+        private EnumeratieType soortField;
+        
+        private FusieSplitsingVoorstelType fusieSplitsingVoorstelField;
+        
+        private string omschrijvingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType soort {
+            get {
+                return this.soortField;
+            }
+            set {
+                this.soortField = value;
+                this.RaisePropertyChanged("soort");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public FusieSplitsingVoorstelType fusieSplitsingVoorstel {
+            get {
+                return this.fusieSplitsingVoorstelField;
+            }
+            set {
+                this.fusieSplitsingVoorstelField = value;
+                this.RaisePropertyChanged("fusieSplitsingVoorstel");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string omschrijving {
+            get {
+                return this.omschrijvingField;
+            }
+            set {
+                this.omschrijvingField = value;
+                this.RaisePropertyChanged("omschrijving");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class FusieSplitsingVoorstelType : MetExtraElementenMogenlijkheidType {
+        
+        private EnumeratieType rolField;
+        
+        private EnumeratieType zuivereSplitsingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public EnumeratieType rol {
             get {
                 return this.rolField;
@@ -6085,68 +6002,142 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
                 this.RaisePropertyChanged("rol");
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class PersoonRelatieRegistratieType : RelatieRegistratieType {
-        
-        private PersoonType itemField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("afgeslotenMoeder", typeof(AfgeslotenMoederType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("buitenlandseVennootschap", typeof(BuitenlandseVennootschapType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("eenmanszaakMetMeerdereEigenaren", typeof(EenmanszaakMetMeerdereEigenarenType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("naamPersoon", typeof(NaamPersoonType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("natuurlijkPersoon", typeof(NatuurlijkPersoonType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("rechtspersoon", typeof(RechtspersoonType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("rechtspersoonInOprichting", typeof(RechtspersoonInOprichtingType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("samenwerkingsverband", typeof(SamenwerkingsverbandType), Order=0)]
-        public PersoonType Item {
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public EnumeratieType zuivereSplitsing {
             get {
-                return this.itemField;
+                return this.zuivereSplitsingField;
             }
             set {
-                this.itemField = value;
-                this.RaisePropertyChanged("Item");
+                this.zuivereSplitsingField = value;
+                this.RaisePropertyChanged("zuivereSplitsing");
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
-    public partial class VestigingRelatieType : RelatieType {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringAansprakelijkheidVerklaringType : DeponeringType {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringAansprakelijkheidIntrekkingType : DeponeringType {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringAanvullendeMededelingType : DeponeringType {
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringOverigJaarstukType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukOntheffingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukJaarrekeningType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukInstemmingType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DeponeringJaarstukHalfjaarKwartaalcijfersType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public abstract partial class DeponeringJaarstukType : DeponeringType {
         
-        private VestigingType itemField;
+        private string boekjaarField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", typeof(CommercieleVestigingType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", typeof(NietCommercieleVestigingType), Order=0)]
-        public VestigingType Item {
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string boekjaar {
             get {
-                return this.itemField;
+                return this.boekjaarField;
             }
             set {
-                this.itemField = value;
-                this.RaisePropertyChanged("Item");
+                this.boekjaarField = value;
+                this.RaisePropertyChanged("boekjaar");
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringOverigJaarstukType : DeponeringJaarstukType {
+        
+        private EnumeratieType soortField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType soort {
+            get {
+                return this.soortField;
+            }
+            set {
+                this.soortField = value;
+                this.RaisePropertyChanged("soort");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringJaarstukOntheffingType : DeponeringJaarstukType {
+        
+        private EnumeratieType redenField;
+        
+        private DeponeringNietNatuurlijkPersoonRelatieType groepsjaarrekeninghouderField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public EnumeratieType reden {
+            get {
+                return this.redenField;
+            }
+            set {
+                this.redenField = value;
+                this.RaisePropertyChanged("reden");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public DeponeringNietNatuurlijkPersoonRelatieType groepsjaarrekeninghouder {
+            get {
+                return this.groepsjaarrekeninghouderField;
+            }
+            set {
+                this.groepsjaarrekeninghouderField = value;
+                this.RaisePropertyChanged("groepsjaarrekeninghouder");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class DeponeringJaarstukJaarrekeningType : DeponeringJaarstukType {
         
         private string datumVaststellingField;
@@ -6249,20 +6240,20 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType : DeponeringJaarstukType {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class DeponeringJaarstukInstemmingType : DeponeringJaarstukType {
         
         private DeponeringNietNatuurlijkPersoonRelatieType groepsjaarrekeningHouderField;
@@ -6281,11 +6272,20 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    public partial class DeponeringJaarstukHalfjaarKwartaalcijfersType : DeponeringJaarstukType {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
     public partial class BuitenlandsAdresType : MetExtraElementenMogenlijkheidType {
         
         private string straatHuisnummerField;
@@ -6346,11 +6346,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class MeldingType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string codeField;
@@ -6409,11 +6409,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingResponseType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MaatschappelijkeActiviteitResponseType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(InschrijvingResponseType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class ResponseType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private ResponseTypeMeldingen meldingenField;
@@ -6455,11 +6455,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class ResponseTypeMeldingen : object, System.ComponentModel.INotifyPropertyChanged {
         
         private MeldingType[] foutField;
@@ -6515,11 +6515,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class VestigingResponseType : ResponseType {
         
         private VestigingResponseTypeProduct productField;
@@ -6538,18 +6538,18 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class VestigingResponseTypeProduct : object, System.ComponentModel.INotifyPropertyChanged {
         
         private VestigingType itemField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", typeof(CommercieleVestigingType), Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", typeof(NietCommercieleVestigingType), Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", typeof(CommercieleVestigingType), Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", typeof(NietCommercieleVestigingType), Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", Order=0)]
         public VestigingType Item {
             get {
                 return this.itemField;
@@ -6572,11 +6572,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(InschrijvingResponseType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class MaatschappelijkeActiviteitResponseType : ResponseType {
         
         private MaatschappelijkeActiviteitResponseTypeProduct productField;
@@ -6595,17 +6595,17 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class MaatschappelijkeActiviteitResponseTypeProduct : object, System.ComponentModel.INotifyPropertyChanged {
         
         private MaatschappelijkeActiviteitType maatschappelijkeActiviteitField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", Order=0)]
         public MaatschappelijkeActiviteitType maatschappelijkeActiviteit {
             get {
                 return this.maatschappelijkeActiviteitField;
@@ -6627,21 +6627,21 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class InschrijvingResponseType : MaatschappelijkeActiviteitResponseType {
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(VestigingRequestType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class VestigingOfRsinOfKvKNummerRequestType : ProductRequestType {
         
         private string itemField;
@@ -6678,9 +6678,9 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType1 {
         
         /// <remarks/>
@@ -6694,20 +6694,20 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class VestigingRequestType : VestigingOfRsinOfKvKNummerRequestType {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class VestigingsnummerRequestType : ProductRequestType {
         
         private string vestigingsnummerField;
@@ -6726,11 +6726,11 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
     public partial class KvKNummerRequestType : ProductRequestType {
         
         private string kvkNummerField;
@@ -6754,7 +6754,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ophalenInschrijvingRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenInschrijvingRequest", Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenInschrijvingRequest", Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", Order=0)]
         public QNH.Overheid.KernRegister.Business.KvK.v30.InschrijvingRequestType ophalenInschrijvingRequest1;
         
         public ophalenInschrijvingRequest() {
@@ -6771,7 +6771,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ophalenInschrijvingResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenInschrijvingResponse", Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenInschrijvingResponse", Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", Order=0)]
         public QNH.Overheid.KernRegister.Business.KvK.v30.InschrijvingResponseType ophalenInschrijvingResponse1;
         
         public ophalenInschrijvingResponse() {
@@ -6788,7 +6788,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ophalenVestigingRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenVestigingRequest", Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenVestigingRequest", Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", Order=0)]
         public QNH.Overheid.KernRegister.Business.KvK.v30.VestigingRequestType ophalenVestigingRequest1;
         
         public ophalenVestigingRequest() {
@@ -6805,7 +6805,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ophalenVestigingResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenVestigingResponse", Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenVestigingResponse", Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", Order=0)]
         public QNH.Overheid.KernRegister.Business.KvK.v30.VestigingResponseType ophalenVestigingResponse1;
         
         public ophalenVestigingResponse() {
