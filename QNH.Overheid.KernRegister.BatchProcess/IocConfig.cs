@@ -172,15 +172,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         x.For(typeof(IRepository<>)).Use(typeof(NHRepository<>)).AlwaysUnique();
                         x.For<IKvkInschrijvingRepository>().Use<KvkInschrijvingNHRepository>().AlwaysUnique();
 
-                        if (SettingsHelper.BrmoApplicationEnabled)
-                        {
-                            x.For(typeof(IRsgbRepository<>)).Use(typeof(RsgbRepository<>))
-                                .Ctor<ISession>()
-                                .Is((ctx) => ctx.GetInstance<ISessionFactory>()
-                                                .OpenSession(new OracleConnection(
-                                                    ConfigurationManager.ConnectionStrings["OracleRsgbConnection"].ConnectionString)));
-                        }
-
                         // End nHibernate setup
                         break;
                     default:

@@ -264,11 +264,9 @@
     <Compile Include="Model\IKvkInschrijvingRepository.cs" />
     <Compile Include="Model\IRepository.cs" />
     <Compile Include="Model\nHibernate\Attributes.cs" />
-    <Compile Include="Model\IRsgbRepository.cs" />
     <Compile Include="Model\nHibernate\KvkInschrijvingNHRepository.cs" />
     <Compile Include="Model\nHibernate\MappingConventions.cs" />
     <Compile Include="Model\nHibernate\NHRepository.cs" />
-    <Compile Include="Model\nHibernate\RsgbRepository.cs" />
     <Compile Include="Model\TransactionWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BRMO\BrmoSyncService.cs" />
