@@ -1,22 +1,24 @@
 
-    drop table if exists KERNREGRELBEH.DEPONERINGSSTUK cascade;
+    drop table KERNREGRELBEH.DEPONERINGSSTUK cascade;
 
-    drop table if exists KERNREGRELBEH.FUNCTIEVERVULLING cascade;
+    drop table KERNREGRELBEH.FUNCTIEVERVULLING cascade;
 
-    drop table if exists KERNREGRELBEH.HANDELSNAAM cascade;
+    drop table KERNREGRELBEH.HANDELSNAAM cascade;
 
-    drop table if exists KERNREGRELBEH.KVKINSCHRIJVING cascade;
+    drop table KERNREGRELBEH.KVKINSCHRIJVING cascade;
 
-    drop table if exists KERNREGRELBEH.SBIACTIVITEIT cascade;
+    drop table KERNREGRELBEH.SBIACTIVITEIT cascade;
 
-    drop table if exists KERNREGRELBEH.SBICODE cascade;
+    drop table KERNREGRELBEH.SBICODE cascade;
 
-    drop table if exists KERNREGRELBEH.VESTIGING cascade;
+    drop table KERNREGRELBEH.VESTIGING cascade;
 
-    drop table if exists KERNREGRELBEH.VESTIGINGSBIACTIVITEIT cascade;
+    drop table KERNREGRELBEH.VESTIGINGSBIACTIVITEIT cascade;
+
+    drop sequence KERNREGRELBEH.hibernate_sequence;
 
     create table KERNREGRELBEH.DEPONERINGSSTUK (
-        Id  serial,
+        Id int4 not null,
        DEPOTID varchar(255),
        DATUMDEPONERING timestamp,
        TYPE varchar(255),
@@ -27,7 +29,7 @@
     );
 
     create table KERNREGRELBEH.FUNCTIEVERVULLING (
-        Id  serial,
+        Id int4 not null,
        FUNCTIE varchar(255),
        FUNCTIETITEL varchar(255),
        VOLLEDIGENAAM varchar(255),
@@ -40,14 +42,14 @@
     );
 
     create table KERNREGRELBEH.HANDELSNAAM (
-        Id  serial,
+        Id int4 not null,
        HANDELSNAAM varchar(255),
        KvkInschrijving_id int4,
        primary key (Id)
     );
 
     create table KERNREGRELBEH.KVKINSCHRIJVING (
-        Id  serial,
+        Id int4 not null,
        NAAM varchar(255),
        KVKNUMMER varchar(255),
        PEILMOMENT varchar(255),
@@ -76,7 +78,7 @@
     );
 
     create table KERNREGRELBEH.SBIACTIVITEIT (
-        Id  serial,
+        Id int4 not null,
        ISHOOFDSBIACTIVITEIT boolean,
        SbiCode_id varchar(255),
        KvKInschrijving_id int4,
@@ -90,7 +92,7 @@
     );
 
     create table KERNREGRELBEH.VESTIGING (
-        Id  serial,
+        Id int4 not null,
        VESTIGINGSNUMMER varchar(255),
        NAAM varchar(255),
        ADRES varchar(255),
@@ -129,7 +131,7 @@
     );
 
     create table KERNREGRELBEH.VESTIGINGSBIACTIVITEIT (
-        Id  serial,
+        Id int4 not null,
        ISHOOFDSBIACTIVITEIT boolean,
        SbiCode_id varchar(255),
        Vestiging_id int4,
@@ -187,3 +189,5 @@
         add constraint FK237FB58456465FEB 
         foreign key (Vestiging_id) 
         references KERNREGRELBEH.VESTIGING;
+
+    create sequence KERNREGRELBEH.hibernate_sequence;
