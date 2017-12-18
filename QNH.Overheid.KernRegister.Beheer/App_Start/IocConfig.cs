@@ -59,11 +59,11 @@ namespace QNH.Overheid.KernRegister.Beheer
                         .DefaultSchema(schemaName);
                     break;
                 case "NHibernatePostGRESQL":
-                    persistenceConfigurer = PostgreSQLConfiguration.PostgreSQL82
+                    persistenceConfigurer = PostgreSQLConfiguration.Standard
                         .Driver<NpgsqlDriver>()
                         .ConnectionString(connst =>
                             connst.FromConnectionStringWithKey("NHibernatePostGRESQLConnection"))
-                        .Dialect<PostgreSQL82Dialect>()
+                        .Dialect<PostgreSQLDialect>()
                         .DefaultSchema(schemaName);
                     break;
                 default: // SQLCE
