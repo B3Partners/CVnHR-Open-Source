@@ -4,6 +4,7 @@ namespace QNH.Overheid.KernRegister.Organization.Resources
     {
         Qnh,
         Drenthe,
-        Flevoland
+        Flevoland,
+        B3Partners
     }
 }
