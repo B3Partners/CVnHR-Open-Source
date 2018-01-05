@@ -27,6 +27,9 @@ namespace QNH.Overheid.KernRegister.Beheer.App_Start
                 case "flevo":
                     Default.CurrentOrganization = Organization.Resources.Organization.Flevoland;
                     break;
+                case "b3par":
+                    Default.CurrentOrganization = Organization.Resources.Organization.B3Partners;
+                    break;
                 default:
                     Default.CurrentOrganization = Organization.Resources.Organization.Qnh;
                     break;
