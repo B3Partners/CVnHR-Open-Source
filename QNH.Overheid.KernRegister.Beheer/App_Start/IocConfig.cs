@@ -30,6 +30,7 @@ using System.Configuration;
 using System.IO;
 using System.Threading;
 using NHibernate.Dialect;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer
 {
@@ -311,6 +312,11 @@ namespace QNH.Overheid.KernRegister.Beheer
                     .Ctor<string>("connectionString").Is(() => ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
                     .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"])
                     .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
+
+                // Setup the usermanager
+                x.For<IUserManager>().Use<HardCodedUserManager>()
+                    .SelectConstructor(()=> new HardCodedUserManager("userNameToUseWhenEmpty"))
+                    .Ctor<string>("userNameToUseWhenEmpty").Is(() => "corne"); //TODO: find nicer development way
             });
         }
     }

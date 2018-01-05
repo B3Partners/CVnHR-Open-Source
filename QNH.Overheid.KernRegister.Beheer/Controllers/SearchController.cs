@@ -21,6 +21,7 @@ using QNH.Overheid.KernRegister.Business.Service.BRMO;
 using Rotativa;
 using StructureMap;
 using StructureMap.Pipeline;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
