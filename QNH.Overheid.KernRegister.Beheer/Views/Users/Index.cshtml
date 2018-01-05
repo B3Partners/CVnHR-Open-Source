@@ -24,30 +24,30 @@
                         </a>
 
                         <div class="collapse" id="@value.Key.ToString()">
-                            @if (value.Value.Any())
-                            {
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Gebruiker</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var user in value.Value)
-                                        {
-                                            <tr>
-                                                <td>@user</td>
-                                                <td>
-                                                    <button class="btn btn-danger btn-sm btn-remove" type="submit" data-user="@user" data-action="@value.Key">
-                                                        verwijder
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
+                            @{ 
+                                var show = value.Value.Any() ? null : "hidden";
                             }
+                            <table class="table table-striped table-bordered table-hover table-users-@value.Key @show">
+                                <thead>
+                                    <tr>
+                                        <th>Gebruiker</th>
+                                        <th>Acties</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in value.Value)
+                                    {
+                                        <tr>
+                                            <td>@user</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm btn-remove" type="submit" data-user="@user" data-action="@value.Key">
+                                                    verwijder
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
 
                             <fieldset class="form-group form-inline">
                                 <input class="form-control" type="text" placeholder="Gebruikersnaam" />
@@ -68,21 +68,47 @@
 @section scripts {
     <!-- TODO: add scripts? -->
 
-    <script type="text/javascript">
+<script type="text/javascript">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
 
-            $(".btn-remove").on("click", function (e) {
+            $(".table").on("click", ".btn-remove", function (e) {
                 var user = $(this).attr("data-user");
                 var action = $(this).attr("data-action");
-                console.log("TODO delete user and action", user, action);
+                var row = $(this).parents("tr");
+
+                $.post("/Users/RemoveUser", { action: action, username: user }, function (result) {
+                    row.remove();
+                    console.log($(".table-users-" + action + " tbody tr").length);
+                    if ($(".table-users-" + action + " tbody tr").length < 1) {
+                        $(".table-users-" + action).addClass("hidden");
+                    }
+                }).fail(function (error, error2, msg) {
+                    //console.log(error, error2, msg);
+                    alert("Error! Please contact administrator! " + msg);
+                });
             });
 
             $(".btn-add").on("click", function (e) {
-                var user = $(this).prev("input").val();
+                var input = $(this).prev("input");
+                var user = input.val();
                 var action = $(this).attr("data-action");
-                console.log("TODO add user and action", user, action);
+
+                $.post("/Users/AddUser", { action: action, username: user }, function (result) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(user));
+                    row.append($("<td><button class=\"btn btn-danger btn-sm btn-remove\" type=\"submit\" data-user=\""
+                        + user + "\" data-action=\""+ action +"\">verwijder</button></td>"));
+                    $(".table-users-" + action + " tbody").append(row);
+                    $(".table-users-" + action).removeClass("hidden");
+                    input.val("");
+                }).fail(function (error, error2, msg) {
+                    //console.log(error, error2, msg);
+                    alert("Error! Please contact administrator! " + msg);
+                });
+
+                //console.log("TODO add user and action", user, action);
             });
         });
-    </script>
+</script>
 }
