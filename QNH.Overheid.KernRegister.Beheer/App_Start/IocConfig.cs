@@ -316,7 +316,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                 // Setup the usermanager
                 x.For<IUserManager>().Use<HardCodedUserManager>()
                     .SelectConstructor(()=> new HardCodedUserManager("userNameToUseWhenEmpty"))
-                    .Ctor<string>("userNameToUseWhenEmpty").Is(() => "corne"); //TODO: find nicer development way
+                    .Ctor<string>("userNameToUseWhenEmpty").Is(() => ConfigurationManager.AppSettings["UsernameToUseWhenEmpty"]);
             });
         }
     }
