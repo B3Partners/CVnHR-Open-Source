@@ -18,6 +18,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
         IList<ApplicationActions> GetUserActions(string username);
 
         IList<string> GetUsersForActions(ApplicationActions action);
+
+        IDictionary<ApplicationActions, IEnumerable<string>> GetAllUserActions();
     }
 
     // Used for testing for now
@@ -84,5 +86,36 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             }
             return _userActions.ContainsKey(username) && actions.Any(a => _userActions[username].Contains(a));
         }
+
+        public IDictionary<ApplicationActions, IEnumerable<string>> GetAllUserActions()
+        {
+            return Enum.GetValues(typeof(ApplicationActions))
+                .OfType<ApplicationActions>()
+                .ToDictionary(
+                    key => key,
+                    value => _userActions.Where(ua => ua.Value.Contains(value)).Select(ua => ua.Key)
+                );
+        }
+    }
+
+    // TODO
+    public class BrmoUserManager
+    {
+        /*
+         *  Queries to use
+         *  
+            UPDATE GEBRUIKER_ 
+            SET WACHTWOORD = '[cvnhr windows authentication]'
+            WHERE GEBRUIKERSNAAM = 'corne';
+
+            INSERT INTO GEBRUIKER_
+            VALUES('corne', '[cvnhr windows authentication]');
+
+            INSERT INTO GROEP_
+            VALUES('CVnHR_Admin', 'Admin groep voor CVnHR');
+
+            INSERT INTO GEBRUIKER_GROEPEN
+            VALUES ('corne', 'CVnHR_Admin');
+        */
     }
 }

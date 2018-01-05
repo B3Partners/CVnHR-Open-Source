@@ -318,6 +318,7 @@
     <Compile Include="Controllers\Api\SignaalController.cs" />
     <Compile Include="Controllers\BackloadDemoController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InschrijvingController.cs" />
@@ -526,6 +527,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Users\Index.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>
