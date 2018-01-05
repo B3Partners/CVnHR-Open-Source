@@ -83,7 +83,7 @@
                     var userName = Server.UrlDecode(Request["DisplayUsername"]) ?? User.Identity.Name;
                     if (string.IsNullOrEmpty(userName) && true)
                     {
-                        userName = "Corné Hogerheijde";
+                        userName = "[unknown user]";
                     }
                 }
                 &copy; @DateTime.Now.Year - beheerapplicatie @Default.ApplicationName (@SettingsHelper.Environment) - v. @ViewContext.Controller.GetType().Assembly.GetName().Version
