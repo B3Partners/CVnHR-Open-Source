@@ -22,6 +22,7 @@ using System.Text;
 using QNH.Overheid.KernRegister.Business.Crm;
 using QNH.Overheid.KernRegister.Business.Model.EntityComparers;
 using Rotativa;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
