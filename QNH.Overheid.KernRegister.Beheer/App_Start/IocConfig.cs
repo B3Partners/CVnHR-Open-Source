@@ -314,7 +314,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                     .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
 
                 // Setup the usermanager
-                x.For<IUserManager>().Use<HardCodedUserManager>()
+                x.ForSingletonOf<IUserManager>().Use<HardCodedUserManager>() // Use singleton for hardcoded!
                     .SelectConstructor(()=> new HardCodedUserManager("userNameToUseWhenEmpty"))
                     .Ctor<string>("userNameToUseWhenEmpty").Is(() => ConfigurationManager.AppSettings["UsernameToUseWhenEmpty"]);
             });

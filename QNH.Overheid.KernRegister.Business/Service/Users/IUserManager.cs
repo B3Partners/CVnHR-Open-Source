@@ -13,7 +13,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
 
         bool IsAllowedAnyActions(string username, params ApplicationActions[] actions);
 
-        void AddUserToAction(ApplicationActions action, string username);
+        string AddUserToAction(ApplicationActions action, string username);
+        string RemoveUserFromAction(ApplicationActions action, string username);
 
         IList<ApplicationActions> GetUserActions(string username);
 
@@ -37,16 +38,23 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             _userNameToUseWhenEmpty = userNameToUseWhenEmpty;
         }
 
-        public void AddUserToAction(ApplicationActions action, string username)
+        public string AddUserToAction(ApplicationActions action, string username)
         {
             if (string.IsNullOrWhiteSpace(username))
             {
                 throw new ArgumentException("username cannot be null or whitespace.");
             }
-            if (_userActions.ContainsKey(username))
-                _userActions[username].Add(action);
+            if (_userActions.ContainsKey(username)) {
+                var actions = _userActions[username];
+                if (!actions.Contains(action))
+                    actions.Add(action);
+                else
+                    return "Action for user already exists!";
+            }
             else
                 _userActions.Add(username, new[] { action }.ToList());
+
+            return "success";
         }
 
         public IList<ApplicationActions> GetUserActions(string username)
@@ -95,6 +103,26 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
                     key => key,
                     value => _userActions.Where(ua => ua.Value.Contains(value)).Select(ua => ua.Key)
                 );
+        }
+
+        public string RemoveUserFromAction(ApplicationActions action, string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                throw new ArgumentException("username cannot be null or whitespace.");
+            }
+            if (_userActions.ContainsKey(username))
+            {
+                var actions = _userActions[username];
+                if (actions.Contains(action))
+                    actions.Remove(action);
+                else
+                    return "Action for user does not exist!";
+            }
+            else
+                return "Action for user does not exist!";
+
+            return "success";
         }
     }
 

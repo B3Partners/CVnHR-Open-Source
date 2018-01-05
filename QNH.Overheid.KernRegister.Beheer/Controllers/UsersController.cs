@@ -1,5 +1,6 @@
 ﻿using QNH.Overheid.KernRegister.Business.Service.Users;
 using System.Web.Mvc;
+using QNH.Overheid.KernRegister.Beheer.Utilities;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -17,6 +18,27 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult Index()
         {
             return View(_userManager.GetAllUserActions());
+        }
+
+        [HttpPost]
+        public ActionResult AddUser(ApplicationActions action, string username)
+        {
+            if (!User.IsAllowedAllActions(ApplicationActions.Admin))
+                return new HttpUnauthorizedResult("Only admin functionality!"); // ugly
+
+            var result = _userManager.AddUserToAction(action, username);
+
+            return Json(result);
+        }
+
+        public ActionResult RemoveUser(ApplicationActions action, string username)
+        {
+            if (!User.IsAllowedAllActions(ApplicationActions.Admin))
+                return new HttpUnauthorizedResult("Only admin functionality!"); // ugly
+
+            var result = _userManager.RemoveUserFromAction(action, username);
+
+            return Json(result);
         }
     }
 }
