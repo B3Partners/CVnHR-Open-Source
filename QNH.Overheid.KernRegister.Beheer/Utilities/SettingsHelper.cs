@@ -34,5 +34,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
         public static bool BrmoApplicationEnabled => !string.IsNullOrWhiteSpace(BrmoApplicationBaseUrl);
 
         public static string UsernameToUseWhenEmpty => ConfigurationManager.AppSettings["UsernameToUseWhenEmpty"];
+
+        public static bool UseHardCodedUserManagerForTesting => 
+            Convert.ToBoolean(ConfigurationManager.AppSettings["UseHardCodedUserManagerForTesting"] ?? "False");
     }
 }

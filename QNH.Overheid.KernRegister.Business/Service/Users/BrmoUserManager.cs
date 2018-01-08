@@ -33,15 +33,18 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
         private readonly IDbConnection _connection;
         private readonly string _schemaName;
         private readonly string _userNameToUseWhenEmpty;
+        private readonly string _parameterChar;
 
         public BrmoUserManager(
             IDbConnection connection, 
             string schemaName,
-            string userNameToUseWhenEmpty = null)
+            string userNameToUseWhenEmpty = null,
+            string parameterChar = ":")
         {
             _connection = connection;
             _schemaName = schemaName;
             _userNameToUseWhenEmpty = userNameToUseWhenEmpty;
+            _parameterChar = parameterChar;
         }
 
         public string AddUserToAction(ApplicationActions action, string username)
@@ -54,22 +57,22 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             // Create user if not exists.
             var usercount = _connection.ExecuteScalar<int>($@"SELECT COUNT(*)
                             FROM {_schemaName}.GEBRUIKER_
-                            WHERE GEBRUIKERSNAAM = :username", new { username });
+                            WHERE GEBRUIKERSNAAM = {_parameterChar}username", new { username });
             if (usercount == 0)
             {
                 _connection.Execute($@"INSERT INTO {_schemaName}.GEBRUIKER_ (GEBRUIKERSNAAM, WACHTWOORD) 
-                                        VALUES(:GebruikersNaam, :Wachtwoord)",
+                                        VALUES({_parameterChar}GebruikersNaam, {_parameterChar}Wachtwoord)",
                                         new { GebruikersNaam = username, Wachtwoord = "[cvnhr windows authentication]" });
             }
 
             // Create group if not exists.
             var groupCount = _connection.ExecuteScalar<int>($@"SELECT COUNT(*) 
                             FROM {_schemaName}.GROEP_
-                            WHERE NAAM = :action", new { action = action.ToString() });
+                            WHERE NAAM = {_parameterChar}action", new { action = action.ToString() });
             if (groupCount == 0)
             {
                 _connection.Execute($@"INSERT INTO {_schemaName}.GROEP_ (NAAM, BESCHRIJVING) 
-                                        VALUES(:Naam, :Beschrijving)",
+                                        VALUES({_parameterChar}Naam, {_parameterChar}Beschrijving)",
                                         new {
                                             Naam = action.ToString(),
                                             Beschrijving = action.GetDescription()
@@ -80,14 +83,15 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             var userActionCount = _connection.ExecuteScalar<int>($@"
                                     SELECT count(*)
                                     FROM {_schemaName}.GEBRUIKER_GROEPEN
-                                    WHERE GEBRUIKERSNAAM = :username AND GROEP_ = :action", 
+                                    WHERE GEBRUIKERSNAAM = {_parameterChar}username AND GROEP_ = {_parameterChar}action", 
                                 new { username, action = action.ToString() });
 
             // Insert the action for this user
             if (userActionCount == 0)
             {
                 _connection.Execute($@"INSERT INTO {_schemaName}.GEBRUIKER_GROEPEN (GEBRUIKERSNAAM, GROEP_)
-                                        VALUES(:username, :action)", new { username, action = action.ToString() });
+                                        VALUES({_parameterChar}username, {_parameterChar}action)", 
+                                        new { username, action = action.ToString() });
             }
             else
                 return "Action for user already exists!";
@@ -125,7 +129,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
                 $@"SELECT GROEP_ as ""Groep"" 
                         FROM {_schemaName}.GEBRUIKER_GROEPEN 
                         WHERE 
-                            GEBRUIKERSNAAM = :username 
+                            GEBRUIKERSNAAM = {_parameterChar}username 
                             AND GROEP_ LIKE 'CVnHR_%'",
                 new { username });
         }
@@ -152,7 +156,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             if (userActions.Contains(action.ToString()))
             {
                 _connection.Execute($@"DELETE FROM {_schemaName}.GEBRUIKER_GROEPEN 
-                                        WHERE GEBRUIKERSNAAM = :username AND GROEP_ = :action",
+                                        WHERE GEBRUIKERSNAAM = {_parameterChar}username AND GROEP_ = {_parameterChar}action",
                                         new { username, action = action.ToString() });
             }
             else

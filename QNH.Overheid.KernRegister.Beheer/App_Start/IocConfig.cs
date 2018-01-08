@@ -32,13 +32,14 @@ using System.Threading;
 using NHibernate.Dialect;
 using QNH.Overheid.KernRegister.Business.Service.Users;
 using System.Data;
+using System.Data.SqlClient;
+using Npgsql;
+using System.Data.SqlServerCe;
 
 namespace QNH.Overheid.KernRegister.Beheer
 {
     public static class IocConfig
     {
-        public static bool UseMockCrm => Properties.Settings.Default.UseMockCrm;
-
         public static bool CreateDatabase => Convert.ToBoolean( ConfigurationManager.AppSettings["CreateDatabase"] );
 
         private static ISessionFactory GetSessionFactory(string dbProvider, string schemaName)
@@ -265,21 +266,12 @@ namespace QNH.Overheid.KernRegister.Beheer
                 switch (ConfigurationManager.AppSettings["CrmToUse"]) // Default.CrmApplication)
                 {
                     case "DocBase":
-                        if (UseMockCrm)
-                        {
-                            //x.For<SecuritySoap>().Use("", UnitTestMockStuff.CreateSecuritySoapMock);
-                            //x.For<RelationsSoap>().Use("", UnitTestMockStuff.CreateRelationsSoapMock);
-                            //x.For<IExportService>().Use(UnitTestMockStuff.CreateDocBaseMock);
-                        }
-                        else
-                        {
-                            x.For<SecuritySoap>().Use<SecuritySoapClient>()
+                        x.For<SecuritySoap>().Use<SecuritySoapClient>()
                                 .SelectConstructor(() => new SecuritySoapClient())
                                 .SetProperty(ssc => ssc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                            x.For<RelationsSoap>().Use<RelationsSoapClient>()
-                                .SelectConstructor(() => new RelationsSoapClient())
-                                .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                        }
+                        x.For<RelationsSoap>().Use<RelationsSoapClient>()
+                            .SelectConstructor(() => new RelationsSoapClient())
+                            .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
 
                         // We need a postcode service for DocBase Municipality
                         x.ForSingletonOf<IPostcodeService>().Use(new NationaalGeoregisterLocatieService(
@@ -314,19 +306,55 @@ namespace QNH.Overheid.KernRegister.Beheer
                     .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"])
                     .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
 
-                // Setup the usermanager
-                //x.ForSingletonOf<IUserManager>().Use<HardCodedUserManager>() // Use singleton for hardcoded!
-                //    .SelectConstructor(() => new HardCodedUserManager("userNameToUseWhenEmpty"))
-                //    .Ctor<string>("userNameToUseWhenEmpty").Is(() => SettingsHelper.UsernameToUseWhenEmpty);
+                /* 
+                 * Setup the usermanager 
+                 */
+                if (SettingsHelper.UseHardCodedUserManagerForTesting)
+                {
+                    x.ForSingletonOf<IUserManager>().Use<HardCodedUserManager>() // Use singleton for hardcoded!
+                        .SelectConstructor(() => new HardCodedUserManager("userNameToUseWhenEmpty"))
+                        .Ctor<string>("userNameToUseWhenEmpty").Is(() => SettingsHelper.UsernameToUseWhenEmpty);
+                }
+                else
+                {
+                    var brmoStagingConnectionString = ConfigurationManager.ConnectionStrings["BrmoStagingConnection"]?.ConnectionString;
+                    var brmoStagingSchemaName = ConfigurationManager.AppSettings["BrmoStagingDatabaseSchemaName"];
+                    if (string.IsNullOrWhiteSpace(brmoStagingSchemaName))
+                    {
+                        brmoStagingSchemaName = ConfigurationManager.AppSettings["DatabaseSchemaName"];
+                    }
+                    if (string.IsNullOrWhiteSpace(brmoStagingConnectionString))
+                        x.For<IDbConnection>().Use((ctx) => ctx.GetInstance<ISession>().Connection);
+                    else
+                        x.For<IDbConnection>().Use((ctx) => GetbrmoStagingDbConnection(brmoStagingConnectionString));
 
-                //// enough? (of course this is the default connection.
-                var brmoUserSchemaName = ConfigurationManager.AppSettings["DatabaseSchemaName"];
-                x.For<IDbConnection>().Use((ctx) => ctx.GetInstance<ISession>().Connection);
-                x.For<IUserManager>().Use<BrmoUserManager>()
-                .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "userNameToUseWhenEmpty"))
-                    .Ctor<string>("schemaName").Is(brmoUserSchemaName)
-                    .Ctor<string>("userNameToUseWhenEmpty").Is(() => SettingsHelper.UsernameToUseWhenEmpty);
+                    x.For<IUserManager>().Use<BrmoUserManager>()
+                        .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "userNameToUseWhenEmpty", "parameterChar"))
+                        //.Ctor<IDbConnection>("connection").Is((ctx) => ctx.GetInstance<IDbConnection>())
+                        // TODO: why is this not working?
+                        .Ctor<string>("schemaName").Is(brmoStagingSchemaName)
+                        .Ctor<string>("userNameToUseWhenEmpty").Is(SettingsHelper.UsernameToUseWhenEmpty)
+                        .Ctor<string>("parameterChar").Is(dbProvider.Contains("Oracle") ? ":" : "@"); // TODO: in config?
+                }
             });
+        }
+
+        private static IDbConnection GetbrmoStagingDbConnection(string brmoStagingConnectionString)
+        {
+            var brmoStagingDbProvider = ConfigurationManager.AppSettings["BrmoStagingDbProvider"];
+            switch (brmoStagingDbProvider)
+            {
+                case "NHibernateOracle":
+                    return new OracleConnection(brmoStagingConnectionString);
+                case "NHibernateSQL":
+                    return new SqlConnection(brmoStagingConnectionString);
+                case "NHibernatePostGRESQL":
+                    return new NpgsqlConnection(brmoStagingConnectionString);
+                case "NHibernateSQLCE":
+                    return new SqlCeConnection(brmoStagingConnectionString);
+                default:
+                    throw new ConfigurationErrorsException("Unknown BrmoStagingDbProvider!");
+            }
         }
     }
 

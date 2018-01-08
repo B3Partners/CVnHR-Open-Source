@@ -520,8 +520,6 @@
     <Content Include="Config\system.serviceModel.client.config" />
     <Content Include="Config\examples\system.serviceModel.client.config" />
     <Content Include="Config\examples\system.serviceModel.behaviors.config" />
-    <Content Include="Config\ApplicationSettings.config" />
-    <Content Include="Config\examples\ApplicationSettings.config" />
     <Content Include="Config\system.serviceModel.behaviors.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
