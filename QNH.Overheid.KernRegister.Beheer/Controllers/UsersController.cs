@@ -17,7 +17,14 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         // GET: /Export/
         public ActionResult Index()
         {
-            return View(_userManager.GetAllUserActions());
+            var userActions = _userManager.GetAllUserActions();
+            if (userActions.Count < 1) // Initial startup
+            {
+                _userManager.AddUserToAction(ApplicationActions.CVnHR_Admin, SettingsHelper.UsernameToUseWhenEmpty);
+                userActions = _userManager.GetAllUserActions();
+            }
+
+            return View(userActions);
         }
 
         [HttpPost]

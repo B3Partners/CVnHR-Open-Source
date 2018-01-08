@@ -32,5 +32,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
         public static string BrmoApplicationBaseUrl => ConfigurationManager.AppSettings["BrmoApplicationBaseUrl"];
 
         public static bool BrmoApplicationEnabled => !string.IsNullOrWhiteSpace(BrmoApplicationBaseUrl);
+
+        public static string UsernameToUseWhenEmpty => ConfigurationManager.AppSettings["UsernameToUseWhenEmpty"];
     }
 }

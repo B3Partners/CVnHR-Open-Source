@@ -11,29 +11,27 @@ using System.Linq;
 using System.Text;
 using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
+using QNH.Overheid.KernRegister.Business.Model.Entities.Brmo;
 
 namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
 {
     public class CustomMappingConfiguration : DefaultAutomappingConfiguration
     {
-        private readonly bool _brmoEnabled;
-
-        public CustomMappingConfiguration(bool brmoEnabled)
+        private static readonly List<string> _nameSpacesToMap = new List<string>()
         {
-            _brmoEnabled = brmoEnabled;
-        }
+            "QNH.Overheid.KernRegister.Business.Model.Entities",
+            //"QNH.Overheid.KernRegister.Business.Model.Entities.Brmo"
+        };
 
         public override bool IsConcreteBaseType(Type type)
         {
             // Allow inheritance of classes
-            return type.Namespace == "QNH.Overheid.KernRegister.Business.Model.Entities"
-                || (_brmoEnabled && type.Namespace == "QNH.Overheid.KernRegister.Business.Model.RSGB2_2");
+            return _nameSpacesToMap.Contains(type.Namespace);
         }
 
         public override bool ShouldMap(Type type)
         {
-            return (type.Namespace == "QNH.Overheid.KernRegister.Business.Model.Entities" 
-                || (_brmoEnabled && type.Namespace == "QNH.Overheid.KernRegister.Business.Model.RSGB2_2"))
+            return _nameSpacesToMap.Contains(type.Namespace)
                 && base.ShouldMap(type);
         }
 

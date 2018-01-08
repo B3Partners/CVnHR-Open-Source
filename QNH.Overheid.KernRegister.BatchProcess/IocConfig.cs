@@ -119,7 +119,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                 .Mappings(mappings => mappings
                             .AutoMappings.Add(
                                 AutoMap
-                                    .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration(SettingsHelper.BrmoApplicationEnabled))
+                                    .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration())
                                     .UseOverridesFromAssemblyOf<KvkInschrijving>()
                                     .Conventions.Setup(c =>
                                     {

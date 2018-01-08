@@ -31,6 +31,7 @@ using System.IO;
 using System.Threading;
 using NHibernate.Dialect;
 using QNH.Overheid.KernRegister.Business.Service.Users;
+using System.Data;
 
 namespace QNH.Overheid.KernRegister.Beheer
 {
@@ -119,7 +120,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                 .Mappings(mappings => mappings
                             .AutoMappings.Add(
                                 AutoMap
-                                    .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration(SettingsHelper.BrmoApplicationEnabled))
+                                    .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration())
                                     .UseOverridesFromAssemblyOf<KvkInschrijving>()
                     //.Where(t => t.Namespace == "QNH.Overheid.KernRegister.Business.Model.Entities")
                                     .Conventions.Setup(c =>
@@ -172,7 +173,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                         x.For<ISession>().Use((ctx) => ctx.GetInstance<ISessionFactory>().OpenSession()).AlwaysUnique();
                         x.For(typeof(IRepository<>)).Use(typeof(NHRepository<>)).AlwaysUnique();
                         x.For<IKvkInschrijvingRepository>().Use<KvkInschrijvingNHRepository>().AlwaysUnique();
-
+                        
                         // End nHibernate setup
                         break;
                     default:
@@ -314,9 +315,17 @@ namespace QNH.Overheid.KernRegister.Beheer
                     .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
 
                 // Setup the usermanager
-                x.ForSingletonOf<IUserManager>().Use<HardCodedUserManager>() // Use singleton for hardcoded!
-                    .SelectConstructor(()=> new HardCodedUserManager("userNameToUseWhenEmpty"))
-                    .Ctor<string>("userNameToUseWhenEmpty").Is(() => ConfigurationManager.AppSettings["UsernameToUseWhenEmpty"]);
+                //x.ForSingletonOf<IUserManager>().Use<HardCodedUserManager>() // Use singleton for hardcoded!
+                //    .SelectConstructor(() => new HardCodedUserManager("userNameToUseWhenEmpty"))
+                //    .Ctor<string>("userNameToUseWhenEmpty").Is(() => SettingsHelper.UsernameToUseWhenEmpty);
+
+                //// enough? (of course this is the default connection.
+                var brmoUserSchemaName = ConfigurationManager.AppSettings["DatabaseSchemaName"];
+                x.For<IDbConnection>().Use((ctx) => ctx.GetInstance<ISession>().Connection);
+                x.For<IUserManager>().Use<BrmoUserManager>()
+                .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "userNameToUseWhenEmpty"))
+                    .Ctor<string>("schemaName").Is(brmoUserSchemaName)
+                    .Ctor<string>("userNameToUseWhenEmpty").Is(() => SettingsHelper.UsernameToUseWhenEmpty);
             });
         }
     }

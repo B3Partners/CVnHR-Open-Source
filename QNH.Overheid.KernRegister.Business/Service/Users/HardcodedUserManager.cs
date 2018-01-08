@@ -12,7 +12,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
     {
         private Dictionary<string, IList<ApplicationActions>> _userActions = new Dictionary<string, IList<ApplicationActions>>()
         {
-            { "corne", new[] { ApplicationActions.CVnHR_Admin, ApplicationActions.CVnHR_ManageKvKData }.ToList() },
+            //{ "corne", new[] { ApplicationActions.CVnHR_Admin, ApplicationActions.CVnHR_ManageKvKData }.ToList() },
         };
 
         private readonly string _userNameToUseWhenEmpty;
