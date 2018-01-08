@@ -156,20 +156,20 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Details", "Details", new { kvkNummer = item.KvkNummer, searchcriteria = Model.KvkSearchCriteria.GlobalCriterium })
-                                    @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                                    @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                                     {
                                         @:|
                                         @Html.ActionLink("Verwijder", "Delete", new { kvkNummer = item.KvkNummer }) 
                                         if (item.Vestigingen.Count == 1)
                                         {
-                                            if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
+                                            if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData, ApplicationActions.CVnHR_Crm))
                                             {
                                                 @:|
                                                 @Html.ActionLink("Naar " + Default.CrmApplication, 
                                                     "Export", 
                                                     new { kvkNummer = item.KvkNummer })
                                             }
-                                            if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+                                            if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
                                             {
                                                 @:|
                                                 @Html.ActionLink(linkText: Default.ToDebiteuren,
@@ -177,7 +177,7 @@
                                                     routeValues: new { kvkNummer = item.KvkNummer },
                                                     htmlAttributes: null)
                                             }
-                                            if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+                                            if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
                                             {
                                                 @:|
                                                 @Html.ActionLink(linkText: Default.ToCrediteuren,

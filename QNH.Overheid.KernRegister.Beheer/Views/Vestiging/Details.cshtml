@@ -38,21 +38,21 @@ else
             @BackButton.Render(cssClass: "btn btn-success btn-large")
             @*@Html.ActionLink("Terug naar zoekscherm", "Index", "Vestiging", new { searchcriteria = Request["searchcriteria"] }, new { @class = "btn btn-success btn-large" })*@
             
-            @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
+            @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData, ApplicationActions.CVnHR_Crm))
             {
                 @Html.ActionLink("Alle vestigingen naar " + Default.CrmApplication, 
                     "Export", 
                     new { kvkNummer = Model.KvkNummer }, 
                     new { @class = "btn btn-large btn-warning" })
             }
-            @if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+            @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
             {
                 @Html.ActionLink(linkText: Default.ToDebiteuren,
                                 actionName: "ExportDebiteuren",
                                 routeValues: new { kvkNummer = Model.KvkNummer },
                                 htmlAttributes: new { @class = "btn btn-large btn-warning" })
             }
-            @if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+            @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
             {
                 @Html.ActionLink(linkText: Default.ToCrediteuren,
                                 actionName: "ExportCrediteuren",

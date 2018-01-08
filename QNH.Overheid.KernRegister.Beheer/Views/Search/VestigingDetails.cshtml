@@ -25,7 +25,7 @@
             @BackButton.Render(cssClass: "btn btn-large btn-primary")
             @*@Html.ActionLink("Terug naar zoekscherm", "Index", "Search", new { kvkNummer = Request["kvknummer"] }, new { @class = "btn btn-primary btn-large" })*@
 
-            @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
+            @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData, ApplicationActions.CVnHR_Crm))
             {
                 <td rowspan="2">
                     @Html.ActionLink(

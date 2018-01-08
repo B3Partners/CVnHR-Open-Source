@@ -103,7 +103,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             bool toDebiteuren = false,
             bool toCrediteuren = false)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.ManageKvKData)) // do check for all users enabled
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData)) // do check for all users enabled
                 return RedirectToAction("Index");
 
             if (brmo && !SettingsHelper.BrmoApplicationEnabled)
