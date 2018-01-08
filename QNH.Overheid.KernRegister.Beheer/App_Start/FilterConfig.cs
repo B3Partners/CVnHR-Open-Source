@@ -73,7 +73,9 @@ namespace QNH.Overheid.KernRegister.Beheer
             var user = filterContext.HttpContext.User;
 
             // Check if the user either may view or manage the page (or is admin)
-            if(!user.IsAllowedAnyActions(ApplicationActions.ViewKvKData, ApplicationActions.ManageKvKData, ApplicationActions.Admin))
+            if(!user.IsAllowedAnyActions(ApplicationActions.CVnHR_ViewKvKData, 
+                ApplicationActions.CVnHR_ManageKvKData, 
+                ApplicationActions.CVnHR_Admin))
                 HandleUnauthorizedRequest(filterContext);
             else
                 base.OnAuthorization(filterContext);

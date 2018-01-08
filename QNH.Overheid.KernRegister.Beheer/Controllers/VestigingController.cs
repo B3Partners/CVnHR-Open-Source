@@ -353,7 +353,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult Delete(string kvkNummer)
         {
-            if(!User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+            if(!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                 return RedirectToAction("Index");
 
             KvkInschrijving inschrijving = null;
@@ -401,7 +401,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult Export(string kvkNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                 return RedirectToAction("Index");
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
@@ -435,7 +435,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult ExportVestiging(string vestigingNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                 return RedirectToAction("Index");
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
@@ -505,8 +505,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         private ActionResult Export(string kvkNummer, bool createNew, bool immediatelyCreateNewIfExists,
             FinancialProcesType type)
         {
-            if ((type == FinancialProcesType.ProbisDebiteuren && !User.IsAllowedAllActions(ApplicationActions.Debiteuren)) 
-                || (type == FinancialProcesType.ProbisCrediteuren && !User.IsAllowedAllActions(ApplicationActions.Crediteuren)))
+            if ((type == FinancialProcesType.ProbisDebiteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren)) 
+                || (type == FinancialProcesType.ProbisCrediteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren)))
             {
                 var msg = $"Action Export for type {type} not allowed for user! {User.Identity.Name}";
                 logger.Warn(msg);
@@ -560,8 +560,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         private ActionResult ExportVestiging(string vestigingNummer, bool createNew, bool immediatelyCreateNewIfExists, FinancialProcesType type)
         {
-            if ((type == FinancialProcesType.ProbisDebiteuren && !User.IsAllowedAllActions(ApplicationActions.Debiteuren))
-                || (type == FinancialProcesType.ProbisCrediteuren && !User.IsAllowedAllActions(ApplicationActions.Crediteuren)))
+            if ((type == FinancialProcesType.ProbisDebiteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
+                || (type == FinancialProcesType.ProbisCrediteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren)))
             {
                 var msg = $"Action ExportVestiging for type {type} not allowed for user! {User.Identity.Name}";
                 logger.Warn(msg);

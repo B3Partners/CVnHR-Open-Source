@@ -23,7 +23,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         [HttpPost]
         public ActionResult AddUser(ApplicationActions action, string username)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.Admin))
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin))
                 return new HttpUnauthorizedResult("Only admin functionality!"); // ugly
 
             var result = _userManager.AddUserToAction(action, username);
@@ -33,7 +33,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult RemoveUser(ApplicationActions action, string username)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.Admin))
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin))
                 return new HttpUnauthorizedResult("Only admin functionality!"); // ugly
 
             var result = _userManager.RemoveUserFromAction(action, username);

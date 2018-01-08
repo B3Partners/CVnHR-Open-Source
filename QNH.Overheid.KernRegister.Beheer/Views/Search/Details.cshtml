@@ -29,9 +29,9 @@
         @BackButton.Render()
         @*Html.ActionLink("Terug naar zoekscherm", "Index", "Search", new { kvkNummer = Model.KvkNummer }, new { @class = "btn btn-large btn-info" }) *@
 
-        @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
         {
-            if (User.IsAllowedAllActions(ApplicationActions.Crm))
+            if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crm))
             {
                 @:&nbsp; @Html.ActionLink("Naar " + Default.ApplicationName, "Import", "Search", new {kvkNummer = Model.KvkNummer}, new {@class = "btn btn-large btn-success"})
                 @:&nbsp; @Html.ActionLink(
@@ -40,7 +40,7 @@
                              "Search",
                              new {kvkNummer = Model.KvkNummer, export = true}, new {@class = "btn btn-large btn-warning"})
             }
-            if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.Brmo))
+            if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
             {
                 @:&nbsp; @Html.ActionLink("Naar " + Default.BrmoApplication,
                            "Import",
@@ -49,14 +49,14 @@
                            new { @class = "btn btn-large btn-brmo" })
             }
 
-            if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+            if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
             {
                 @:&nbsp;
                 @Html.ActionLink(Default.ToDebiteuren, "Import", 
                         new { kvkNummer = Model.KvkNummer, ToDebiteuren = true }, 
                         new { @class = "btn btn-large btn-warning" })
             }
-            if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+            if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
             {
                 @:&nbsp;
                 @Html.ActionLink(Default.ToCrediteuren, "Import", 

@@ -377,7 +377,7 @@ else
                     <th>Woonplaats</th>
                     <th>Postbus</th>
 
-                    @if(User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                    @if(User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                     {
                         <th>Acties</th>
                     }
@@ -405,10 +405,10 @@ else
 
                         <td>nvt</td>
 
-                        @if(User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                        @if(User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                         {
                             <td rowspan="2">
-                                @if (User.IsAllowedAllActions(ApplicationActions.Crm))
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crm))
                                 {
                                     @Html.ActionLink(
                                         linkText: "Naar " + Default.CrmApplication,
@@ -417,7 +417,7 @@ else
                                         routeValues: new { kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, export = true },
                                         htmlAttributes: null)
                                 }
-                                @if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
                                 {
                                     @:&nbsp;
                                     @Html.ActionLink(linkText: Default.ToDebiteuren,
@@ -426,7 +426,7 @@ else
                                         routeValues: new {kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, ToDebiteuren = true},
                                         htmlAttributes: null)
                                 }
-                                @if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
                                 {
                                     @:&nbsp;
                                     @Html.ActionLink(linkText: Default.ToCrediteuren,
