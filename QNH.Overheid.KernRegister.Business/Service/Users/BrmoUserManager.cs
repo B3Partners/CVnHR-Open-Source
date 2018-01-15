@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using NHibernate;
 using QNH.Overheid.KernRegister.Business.Model.Entities.Brmo;
+using QNH.Overheid.KernRegister.Organization.Resources;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace QNH.Overheid.KernRegister.Business.Service.Users
 {
-    // TODO
     public class BrmoUserManager : IUserManager
     {
         /*
@@ -130,7 +130,10 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
                 $@"SELECT GROEP_ as ""Groep"" 
                         FROM {_schemaName}.GEBRUIKER_GROEPEN 
                         WHERE 
-                            GEBRUIKERSNAAM = {_parameterChar}username 
+                            (
+                                GEBRUIKERSNAAM = {_parameterChar}username
+                                OR GEBRUIKERSNAAM = '{Default.CVnHREveryone}'
+                            )
                             AND GROEP_ LIKE 'CVnHR_%'",
                 new { username });
         }

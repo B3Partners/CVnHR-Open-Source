@@ -288,8 +288,10 @@
     <Compile Include="Service\KvK\v30\KvkDataSearchService.cs" />
     <Compile Include="Service\KvK\v30\KvkSearchServiceExtensions.cs" />
     <Compile Include="Service\NationaalGeoregisterLocatieService.cs" />
+    <Compile Include="Service\Users\ApplicationActionDescriptions.cs" />
     <Compile Include="Service\Users\ApplicationActions.cs" />
     <Compile Include="Service\Users\BrmoUserManager.cs" />
+    <Compile Include="Service\Users\DisplayNameAttribute.cs" />
     <Compile Include="Service\Users\HardcodedUserManager.cs" />
     <Compile Include="Service\Users\IUserManager.cs" />
     <Compile Include="Utility\NHibernateUtils.cs" />
