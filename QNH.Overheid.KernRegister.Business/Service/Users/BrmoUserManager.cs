@@ -73,7 +73,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             {
                 _connection.Execute($@"INSERT INTO {_schemaName}.GROEP_ (NAAM, BESCHRIJVING) 
                                         VALUES({_parameterChar}Naam, {_parameterChar}Beschrijving)",
-                                        new {
+                                        new
+                                        {
                                             Naam = action.ToString(),
                                             Beschrijving = action.GetDescription()
                                         });
@@ -83,14 +84,14 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             var userActionCount = _connection.ExecuteScalar<int>($@"
                                     SELECT count(*)
                                     FROM {_schemaName}.GEBRUIKER_GROEPEN
-                                    WHERE GEBRUIKERSNAAM = {_parameterChar}username AND GROEP_ = {_parameterChar}action", 
+                                    WHERE GEBRUIKERSNAAM = {_parameterChar}username AND GROEP_ = {_parameterChar}action",
                                 new { username, action = action.ToString() });
 
             // Insert the action for this user
             if (userActionCount == 0)
             {
                 _connection.Execute($@"INSERT INTO {_schemaName}.GEBRUIKER_GROEPEN (GEBRUIKERSNAAM, GROEP_)
-                                        VALUES({_parameterChar}username, {_parameterChar}action)", 
+                                        VALUES({_parameterChar}username, {_parameterChar}action)",
                                         new { username, action = action.ToString() });
             }
             else
@@ -156,8 +157,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             if (userActions.Contains(action.ToString()))
             {
                 _connection.Execute($@"DELETE FROM {_schemaName}.GEBRUIKER_GROEPEN 
-                                        WHERE GEBRUIKERSNAAM = {_parameterChar}username AND GROEP_ = {_parameterChar}action",
-                                        new { username, action = action.ToString() });
+                                    WHERE GEBRUIKERSNAAM = {_parameterChar}username AND GROEP_ = {_parameterChar}action",
+                                    new { username, action = action.ToString() });
             }
             else
                 return "Action for user does not exist!";

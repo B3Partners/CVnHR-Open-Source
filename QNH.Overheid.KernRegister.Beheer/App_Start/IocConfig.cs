@@ -319,22 +319,24 @@ namespace QNH.Overheid.KernRegister.Beheer
                 {
                     var brmoStagingConnectionString = ConfigurationManager.ConnectionStrings["BrmoStagingConnection"]?.ConnectionString;
                     var brmoStagingSchemaName = ConfigurationManager.AppSettings["BrmoStagingDatabaseSchemaName"];
-                    if (string.IsNullOrWhiteSpace(brmoStagingSchemaName))
-                    {
-                        brmoStagingSchemaName = ConfigurationManager.AppSettings["DatabaseSchemaName"];
-                    }
+                    var brmoStagingDatabaseParameterCharacter = ConfigurationManager.AppSettings["BrmoStagingDatabaseParameterCharacter"] 
+                            ?? (dbProvider.ToLowerInvariant().Contains("oracle") ? ":" : "@");
+
+                    // If left empty, just use the default connectionstring (needs the user tables)
                     if (string.IsNullOrWhiteSpace(brmoStagingConnectionString))
+                    {
                         x.For<IDbConnection>().Use((ctx) => ctx.GetInstance<ISession>().Connection);
+                        // use the default schemaname from the connection
+                        brmoStagingSchemaName = ConfigurationManager.AppSettings["DatabaseSchemaName"]; 
+                    }
                     else
                         x.For<IDbConnection>().Use((ctx) => GetbrmoStagingDbConnection(brmoStagingConnectionString));
 
                     x.For<IUserManager>().Use<BrmoUserManager>()
                         .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "userNameToUseWhenEmpty", "parameterChar"))
-                        //.Ctor<IDbConnection>("connection").Is((ctx) => ctx.GetInstance<IDbConnection>())
-                        // TODO: why is this not working?
                         .Ctor<string>("schemaName").Is(brmoStagingSchemaName)
                         .Ctor<string>("userNameToUseWhenEmpty").Is(SettingsHelper.UsernameToUseWhenEmpty)
-                        .Ctor<string>("parameterChar").Is(dbProvider.Contains("Oracle") ? ":" : "@"); // TODO: in config?
+                        .Ctor<string>("parameterChar").Is(brmoStagingDatabaseParameterCharacter);
                 }
             });
         }
