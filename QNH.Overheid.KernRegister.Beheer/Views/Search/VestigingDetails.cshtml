@@ -23,9 +23,8 @@
     <div class="row">
         <div class="pull-right">
             @BackButton.Render(cssClass: "btn btn-large btn-primary")
-            @*@Html.ActionLink("Terug naar zoekscherm", "Index", "Search", new { kvkNummer = Request["kvknummer"] }, new { @class = "btn btn-primary btn-large" })*@
 
-            @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData, ApplicationActions.CVnHR_Crm))
+            @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
             {
                 <td rowspan="2">
                     @Html.ActionLink(

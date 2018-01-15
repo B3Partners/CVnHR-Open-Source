@@ -53,13 +53,13 @@
                                 @Html.ActionLink(Default.SearchExternal, "Index", "Search")
                             </li>
                         }
-                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_SyncKvKData))
                         {
                             <li class="@(url.Contains("/inschrijving") ? "active" : null)">
                                 @Html.ActionLink(Default.ToApplication, "Index", "Inschrijving")
                             </li>
                         }
-                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crm))
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_SyncCrm))
                         {
                             <li class="@(url.Contains("/export") ? "active" : null)">
                                 @Html.ActionLink(Default.ToCrm, "Index", "Export")

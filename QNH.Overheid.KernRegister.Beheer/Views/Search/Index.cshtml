@@ -40,7 +40,7 @@
         <img src="~/Images/kvk-logo.jpg" alt="logo KVK" />
         <h3>Standaard zoekformulier</h3>
         <p>Er wordt gezocht in het handelsregister op KVK nummer en bedrijven en vestigingen worden getoond.</p>
-        
+
     </div>
     <div class="col-sm-9">
 
@@ -63,8 +63,8 @@
             @Html.AntiForgeryToken()
 
             <div class="form-group">
-@* TODO: enable search on vestigingsnummer *@
-               <label for="KvkNummer" class="col-sm-3 control-label">KVK nummer</label>
+                @* TODO: enable search on vestigingsnummer *@
+                <label for="KvkNummer" class="col-sm-3 control-label">KVK nummer</label>
                 <div class="col-sm-9">
                     @Html.TextBoxFor(model => model.KvkSearchCriteria.KvkNummer, new { @class = "form-control input-lg", placeholder = "Voer KVK nummer in" })
                 </div>
@@ -112,33 +112,32 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "Details", new { kvkNummer = item.KvkNummer })
+
                                 @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                                 {
                                     @:|
                                     @Html.ActionLink("Naar " + Default.ApplicationName, "Import", new { kvkNummer = item.KvkNummer })
-                                    if(item.Vestigingen.Count==1 && User.IsAllowedAllActions(ApplicationActions.CVnHR_Crm))
-                                    { 
-                                        @:|
-                                        @Html.ActionLink("Naar " + Default.ApplicationName + " en " + Default.CrmApplication, "Import", new { kvkNummer = item.KvkNummer, export = true })
-
-                                    }
-                                    if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
-                                    {
-                                        @:|
-                                        @Html.ActionLink("Naar " + Default.BrmoApplication, "Import", new {kvkNummer = item.KvkNummer, Brmo = true})
-                                    }
-                                    if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
-                                    {
-                                        @:|
-                                        @Html.ActionLink(Default.ToDebiteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = true})
-                                    }
-                                    if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
-                                    {
-                                        @:|
-                                        @Html.ActionLink(Default.ToCrediteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = false })
-                                    }
-}
-
+                                }
+                                @if (item.Vestigingen.Count == 1 && User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
+                                {
+                                    @:|
+                                    @Html.ActionLink("Naar " + Default.ApplicationName + " en " + Default.CrmApplication, "Import", new { kvkNummer = item.KvkNummer, export = true })
+                                }
+                                @if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
+                                {
+                                    @:|
+                                    @Html.ActionLink("Naar " + Default.BrmoApplication, "Import", new { kvkNummer = item.KvkNummer, Brmo = true })
+                                }
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
+                                {
+                                    @:|
+                                    @Html.ActionLink(Default.ToDebiteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = true })
+                                }
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
+                                {
+                                    @:|
+                                    @Html.ActionLink(Default.ToCrediteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = false })
+                                }
                             </td>
                         </tr>
                     }
@@ -200,14 +199,14 @@
             });
         });
 
-        function goToKvKNameSearch(){
+        function goToKvKNameSearch() {
             window.open("http://www.kvk.nl/orderstraat/bedrijf-kiezen/#!shop?q=" + encodeURIComponent($("#kvkNameSearch").val()), '_blank');
         }
 
 
-        /* TODO
-        $.getJSON("http://zoeken.kvk.nl/JsonSearch.ashx?q=mrw&start=0&callback=?", function(result){
-            console.log(result);
-        });*/
+            /* TODO
+            $.getJSON("http://zoeken.kvk.nl/JsonSearch.ashx?q=mrw&start=0&callback=?", function(result){
+                console.log(result);
+            });*/
     </script>
 }

@@ -31,7 +31,7 @@ else
         <div class="pull-right">
             @BackButton.Render(cssClass: "btn btn-primary btn-large")
             @*@Html.ActionLink("Terug naar zoekscherm", "Index", "Vestiging", new { searchcriteria = Request["searchcriteria"] }, new { @class = "btn btn-primary btn-large" })*@
-            @if(User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData, ApplicationActions.CVnHR_Crm))
+            @if(User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
             {
                 @Html.ActionLink(
                             linkText: "Naar " + Default.CrmApplication,

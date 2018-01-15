@@ -10,19 +10,33 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
 {
     public enum ApplicationActions
     {
-        [DisplayName("Kvk data bekijken"), Description("Gebruiker mag kvk gegevens zien")]
+        [DisplayName("Kvk en CVnHR data bekijken"), 
+            Description("Gebruiker mag KvK en CVnHR gegevens zien en zoeken.")]
         CVnHR_ViewKvKData,
-        [DisplayName("Kvk data beheren"),Description("Gebruiker mag synchroniseren met KvK")]
+        [DisplayName("Kvk data toevoegen/verwijderen"),
+            Description("Gebruiker mag KvK gegevens invoeren in de CVnHR.")]
         CVnHR_ManageKvKData,
-        [DisplayName("Crm/Dms data doorzetten"),Description("Gebruiker mag doorzetten naar Crm/Dms")]
-        CVnHR_Crm,
-        [DisplayName("Brmo"), Description("Gebruiker mag doorzetten naar BRMO")]
+        [DisplayName("Kvk data synchroniseren"),
+            Description("Gebruiker mag KvK-CVnHR synchronisatie batches starten en stoppen.")]
+        CVnHR_SyncKvKData,
+        [DisplayName("Crm/Dms data doorzetten"),
+            Description("Gebruiker mag kvk gegevens doorzetten naar Crm/Dms")]
+        CVnHR_ManageCrm,
+        [DisplayName("Crm/Dms data synchroniseren"),
+            Description("Gebruiker mag CVnHR-Crm/Dms synchronisatie batches starten en stoppen.")]
+        CVnHR_SyncCrm,
+        [DisplayName("Brmo"), 
+            Description(@"Gebruiker mag kvk gegevens doorzetten naar de BRMO en krijgt een link naar de BRMO in het menu. 
+Heeft daarnaast nog wel BRMO inloggegevens nodig.")]
         CVnHR_Brmo,
-        [DisplayName("Debiteuren"),Description("Gebruiker mag doorzetten naar Debiteuren")]
+        [DisplayName("Debiteuren"),
+            Description("Gebruiker mag KvK en CVnHR gegevens doorzetten naar Debiteuren in het Financiele systeem")]
         CVnHR_Debiteuren,
-        [DisplayName("Crediteuren"), Description("Gebruiker mag doorzetten naar Crediteuren")]
+        [DisplayName("Crediteuren"), 
+            Description("Gebruiker mag KvK en CVnHR gegevens doorzetten naar Crediteurn in het Financiele systeem")]
         CVnHR_Crediteuren,
-        [DisplayName("Administrator"), Description("Administrator functie (Gebruikersbeheer)")]
+        [DisplayName("Administrator"), 
+            Description("Administrator functie (Gebruikersbeheer)")]
         CVnHR_Admin
     }
 }

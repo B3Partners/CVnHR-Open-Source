@@ -377,9 +377,9 @@ else
                     <th>Woonplaats</th>
                     <th>Postbus</th>
 
-                    @if(User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
+                    @if(User.IsAllowedAnyActions(ApplicationActions.CVnHR_ManageCrm, ApplicationActions.CVnHR_Debiteuren, ApplicationActions.CVnHR_Crediteuren))
                     {
-                        <th>Acties</th>
+                    <th>Acties</th>
                     }
                 </tr>
 
@@ -405,10 +405,10 @@ else
 
                         <td>nvt</td>
 
-                        @if(User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
+                        @if(User.IsAllowedAnyActions(ApplicationActions.CVnHR_ManageCrm, ApplicationActions.CVnHR_Debiteuren, ApplicationActions.CVnHR_Crediteuren))
                         {
                             <td rowspan="2">
-                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crm))
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
                                 {
                                     @Html.ActionLink(
                                         linkText: "Naar " + Default.CrmApplication,
