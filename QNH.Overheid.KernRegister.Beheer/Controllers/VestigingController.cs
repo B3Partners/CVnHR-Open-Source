@@ -26,6 +26,7 @@ using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
+    [CVnHRAuthorize(ApplicationActions.CVnHR_ViewKvKData)]
     public class VestigingController : Controller
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();

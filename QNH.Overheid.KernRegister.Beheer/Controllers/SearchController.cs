@@ -25,6 +25,7 @@ using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
+    [CVnHRAuthorize(ApplicationActions.CVnHR_ViewKvKData)]
     public class SearchController : Controller
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
@@ -196,12 +197,5 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             var service = IocConfig.Container.GetInstance<IKvkSearchService>();
             return View(service.SearchVestigingByVestigingsNummer(vestigingId, kvknummer));
         }
-    }
-
-    public class ImportResultViewModel
-    {
-        public string Message { get; set; }
-        public KvkInschrijving KvkInschrijving { get; set; }
-        public AddInschrijvingResultStatus Status { get; set; }  
     }
 }

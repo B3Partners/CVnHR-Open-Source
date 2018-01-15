@@ -31,22 +31,12 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         [HttpPost]
         public ActionResult AddUser(ApplicationActions action, string username)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin))
-                return new HttpUnauthorizedResult("Only admin functionality!"); // ugly
-
-            var result = _userManager.AddUserToAction(action, username);
-
-            return Json(result);
+            return Json(_userManager.AddUserToAction(action, username));
         }
 
         public ActionResult RemoveUser(ApplicationActions action, string username)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin))
-                return new HttpUnauthorizedResult("Only admin functionality!"); // ugly
-
-            var result = _userManager.RemoveUserFromAction(action, username);
-
-            return Json(result);
+            return Json(_userManager.RemoveUserFromAction(action, username));
         }
     }
 }
