@@ -39,7 +39,7 @@
                 </button>
                 @Html.ActionLink(Default.HomeButton, "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
-            @if (!AuthorizeSimpleFilter.EnsureAuthenticatedUser || User.Identity.IsAuthenticated)
+            @if (!SettingsHelper.EnsureAuthenticatedUser || User.Identity.IsAuthenticated)
             {
                 var url = Request.Url.AbsolutePath.ToLower();
                 <div class="navbar-collapse collapse">
@@ -81,7 +81,7 @@
                 </div>
             }
 
-            @if (AuthorizeSimpleFilter.EnsureAuthenticatedUser && User.Identity.IsAuthenticated)
+            @if (SettingsHelper.EnsureAuthenticatedUser && User.Identity.IsAuthenticated)
             {
                 <div style="position:absolute; top:5px; right: 1.5em; color:#fff;">
                     @using (Html.BeginForm("logoff", "Account", FormMethod.Post, new { id = "logoutForm" }))

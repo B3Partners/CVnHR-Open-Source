@@ -317,6 +317,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\SignaalController.cs" />
     <Compile Include="Controllers\BackloadDemoController.cs" />
+    <Compile Include="Filters\CVnHRAuthorizeAttribute.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ExportController.cs" />
@@ -332,6 +333,8 @@
     <Compile Include="DependencyResolution\SignalRStructureMapDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
     <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
+    <Compile Include="Filters\AuthorizeSimpleFilter.cs" />
+    <Compile Include="Filters\IEEnsureCorrectVersionHeaderFilter.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
