@@ -25,7 +25,7 @@ using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
-    [CVnHRAuthorize(ApplicationActions.CVnHR_Crm)]
+    [CVnHRAuthorize(ApplicationActions.CVnHR_SyncCrm)]
     public class ExportController : TaskSchedulerPartialController
     {        
         //private IUnitOfWork _unitOfWork;
@@ -48,7 +48,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         
     }
 
-    [CVnHRAuthorize(ApplicationActions.CVnHR_Crm)]
+    [CVnHRAuthorize(ApplicationActions.CVnHR_SyncCrm)]
     [HubName("csvExportHub")]
     public class CsvExportHub : Hub
     {

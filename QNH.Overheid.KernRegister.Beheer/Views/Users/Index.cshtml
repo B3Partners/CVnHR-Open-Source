@@ -25,6 +25,7 @@
                         </a>
 
                         <div class="collapse" id="@value.Key.ToString()">
+                            <p>@value.Key.GetDescription()</p>
                             @{ 
                                 var show = value.Value.Any() || value.Key == ApplicationActions.CVnHR_Admin 
                                     ? null : "hidden";
