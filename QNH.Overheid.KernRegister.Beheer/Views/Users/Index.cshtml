@@ -26,7 +26,8 @@
 
                         <div class="collapse" id="@value.Key.ToString()">
                             @{ 
-                                var show = value.Value.Any() ? null : "hidden";
+                                var show = value.Value.Any() || value.Key == ApplicationActions.CVnHR_Admin 
+                                    ? null : "hidden";
                             }
                             <table class="table table-striped table-bordered table-hover table-users-@value.Key @show">
                                 <thead>
@@ -36,6 +37,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if (value.Key == ApplicationActions.CVnHR_Admin)
+                                    {
+                                        foreach (var user in SettingsHelper.InitialUserAdministrators)
+                                        {
+                                            <tr>
+                                                <td>@user</td>
+                                                <td>[config]</td>
+                                            </tr>
+                                        }
+                                    }
                                     @foreach (var user in value.Value)
                                     {
                                         <tr>

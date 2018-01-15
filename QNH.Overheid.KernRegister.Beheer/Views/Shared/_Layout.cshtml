@@ -71,7 +71,7 @@
                                 <a href="@SettingsHelper.BrmoApplicationBaseUrl" target="_blank">@Default.ToBrmo</a>
                             </li>
                         }
-                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin))
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin) || User.IsInitialAdmin())
                         {
                             <li class="@(url.Contains("/users") ? "active" : null)">
                                 @Html.ActionLink("Gebruikersbeheer", "Index", "Users")

@@ -9,12 +9,12 @@ using System.Web.Mvc;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
+    [CVnHRAuthorize(ApplicationActions.CVnHR_Admin)]
     public class CVnHRAuthorizeAttribute : AuthorizeAttribute, IAuthorizationFilter
     {
         private ApplicationActions[] _actions;
         private static readonly ApplicationActions[] _allActions 
             = Enum.GetValues(typeof(ApplicationActions)).OfType<ApplicationActions>().ToArray();
-        private static readonly List<string> _initialAdministrators = SettingsHelper.InitialUserAdministrators;
 
         public CVnHRAuthorizeAttribute(params ApplicationActions[] actions)
         {
@@ -30,7 +30,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
             // Only check if this user is set as initialAdministrator in AppSettings.config
             // when not authorized.
-            if (!authorized && _initialAdministrators.Contains(httpContext.User.GetUserName()))
+            if (!authorized && httpContext.User.IsInitialAdmin())
             {
                 // Only allow pages without authorization and Admin pages to the initialAdministrators.
                 return !_actions.Any() 
