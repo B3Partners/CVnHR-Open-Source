@@ -40,7 +40,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
 
         public static bool IsInitialAdmin(this IPrincipal user)
         {
-            return SettingsHelper.InitialUserAdministrators.Contains(user.GetUserName());
+            return SettingsHelper.InitialUserAdministrators.Contains(user.GetUserName(), StringComparer.InvariantCultureIgnoreCase);
         }
     }
 }
