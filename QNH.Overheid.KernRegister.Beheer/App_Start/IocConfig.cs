@@ -298,13 +298,17 @@ namespace QNH.Overheid.KernRegister.Beheer
                         throw new ConfigurationErrorsException("CrmApplication from settings is unknown to the application. Value searched for: " + ConfigurationManager.AppSettings["CrmToUse"]);
                 }
 
-                // TODO: make conditionally?? 
                 // Setup the financial service
-                x.For<IFinancialExportService>().Use<ProbisRepository>()
-                    .SelectConstructor(() => new ProbisRepository("connectionstring", "insertOrUpdateStoredProcedureName", "displayName"))
-                    .Ctor<string>("connectionString").Is(() => ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
-                    .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"])
-                    .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
+                var probisInsertOrUpdateStoredProcedureName = ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"];
+                if(!string.IsNullOrWhiteSpace(probisInsertOrUpdateStoredProcedureName)
+                    && !string.IsNullOrWhiteSpace(ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString))
+                {
+                    x.For<IFinancialExportService>().Use<ProbisRepository>()
+                        .SelectConstructor(() => new ProbisRepository("connectionstring", "insertOrUpdateStoredProcedureName", "displayName"))
+                        .Ctor<string>("connectionString").Is(() => ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
+                        .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => probisInsertOrUpdateStoredProcedureName)
+                        .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
+                }
 
                 /* 
                  * Setup the usermanager 
