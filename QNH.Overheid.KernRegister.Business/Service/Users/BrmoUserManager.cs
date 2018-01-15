@@ -32,18 +32,15 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
 
         private readonly IDbConnection _connection;
         private readonly string _schemaName;
-        private readonly string _userNameToUseWhenEmpty;
         private readonly string _parameterChar;
 
         public BrmoUserManager(
             IDbConnection connection, 
             string schemaName,
-            string userNameToUseWhenEmpty = null,
             string parameterChar = ":")
         {
             _connection = connection;
             _schemaName = schemaName;
-            _userNameToUseWhenEmpty = userNameToUseWhenEmpty;
             _parameterChar = parameterChar;
         }
 
@@ -120,10 +117,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
         {
             if (string.IsNullOrWhiteSpace(username))
             {
-                if (_userNameToUseWhenEmpty == null)
-                    throw new ArgumentException("username cannot be null or whitespace.");
-                else
-                    username = _userNameToUseWhenEmpty;
+                throw new ArgumentException("username cannot be null or whitespace.");
             }
 
             return _connection.Query<string>(

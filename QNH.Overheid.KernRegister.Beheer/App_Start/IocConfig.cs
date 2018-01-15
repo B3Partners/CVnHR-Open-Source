@@ -337,9 +337,8 @@ namespace QNH.Overheid.KernRegister.Beheer
                         x.For<IDbConnection>().Use((ctx) => GetbrmoStagingDbConnection(brmoStagingConnectionString));
 
                     x.For<IUserManager>().Use<BrmoUserManager>()
-                        .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "userNameToUseWhenEmpty", "parameterChar"))
+                        .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "parameterChar"))
                         .Ctor<string>("schemaName").Is(brmoStagingSchemaName)
-                        .Ctor<string>("userNameToUseWhenEmpty").Is(SettingsHelper.UsernameToUseWhenEmpty)
                         .Ctor<string>("parameterChar").Is(brmoStagingDatabaseParameterCharacter);
                 }
             });

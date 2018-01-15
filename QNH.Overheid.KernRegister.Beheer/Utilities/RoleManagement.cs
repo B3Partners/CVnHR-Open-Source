@@ -17,12 +17,25 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
 
         public static bool IsAllowedAllActions(this IPrincipal user, params ApplicationActions[] actions)
         {
-            return UserManager.IsAllowedAllActions(user.Identity.Name, actions);
+            return UserManager.IsAllowedAllActions(user.GetUserName(), actions);
         }
 
         public static bool IsAllowedAnyActions(this IPrincipal user, params ApplicationActions[] actions)
         {
-            return UserManager.IsAllowedAnyActions(user.Identity.Name, actions);
+            return UserManager.IsAllowedAnyActions(user.GetUserName(), actions);
+        }
+
+        public static string GetUserName(this IPrincipal user)
+        {
+            var username = user.Identity.Name;
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                if (SettingsHelper.UsernameToUseWhenEmpty == null)
+                    throw new ArgumentException("username cannot be null or whitespace. Set the application setting 'UsernameToUseWhenEmpty' in /Config/AppSettings.config");
+                else
+                    username = SettingsHelper.UsernameToUseWhenEmpty;
+            }
+            return username;
         }
     }
 }
