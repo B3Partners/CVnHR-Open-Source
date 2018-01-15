@@ -37,5 +37,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
 
         public static bool UseHardCodedUserManagerForTesting => 
             Convert.ToBoolean(ConfigurationManager.AppSettings["UseHardCodedUserManagerForTesting"] ?? "False");
+
+        public static bool EnsureAuthenticatedUser => Convert.ToBoolean(ConfigurationManager.AppSettings["EnsureAuthenticatedUser"]);
     }
 }

@@ -11,7 +11,6 @@ using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Utilities
 {
-    // TODO: setup authentication and rolemanagement other then windows
     public static class RoleManagement
     {
         private static IUserManager UserManager => IocConfig.Container.GetInstance<IUserManager>();

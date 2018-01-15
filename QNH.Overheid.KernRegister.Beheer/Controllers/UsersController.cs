@@ -4,6 +4,7 @@ using QNH.Overheid.KernRegister.Beheer.Utilities;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
+    [CVnHRAuthorize(ApplicationActions.CVnHR_Admin)]
     public class UsersController : Controller
     {
         private readonly IUserManager _userManager;
