@@ -95,5 +95,10 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
 
             return "success";
         }
+
+        public void Dispose()
+        {
+            // noop
+        }
     }
 }

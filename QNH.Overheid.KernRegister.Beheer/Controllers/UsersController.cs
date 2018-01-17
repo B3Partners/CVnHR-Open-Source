@@ -35,9 +35,9 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (_userManager is IDisposable)
+            if (disposing)
             {
-                ((IDisposable)_userManager).Dispose();
+                _userManager.Dispose();
             }
             base.Dispose(disposing);
         }
