@@ -63,7 +63,7 @@
                             </table>
 
                             <fieldset class="form-group form-inline">
-                                <input class="form-control" type="text" placeholder="Gebruikersnaam" />
+                                <input class="form-control" type="text" placeholder="Gebruikersnaam" value="@SettingsHelper.UserManagerPrefillUserName" />
                                 <button class="btn btn-info btn-sm btn-add" data-action="@value.Key" type="submit">Voeg toe</button>
                             </fieldset>
                             <hr />
@@ -90,7 +90,7 @@
                 var action = $(this).attr("data-action");
                 var row = $(this).parents("tr");
 
-                $.post("/Users/RemoveUser", { action: action, username: user }, function (result) {
+                $.post("Users/RemoveUser", { action: action, username: user }, function (result) {
                     row.remove();
                     console.log($(".table-users-" + action + " tbody tr").length);
                     if ($(".table-users-" + action + " tbody tr").length < 1) {
@@ -107,7 +107,7 @@
                 var user = input.val();
                 var action = $(this).attr("data-action");
 
-                $.post("/Users/AddUser", { action: action, username: user }, function (result) {
+                $.post("Users/AddUser", { action: action, username: user }, function (result) {
                     var row = $("<tr>");
                     row.append($("<td>").text(user));
                     row.append($("<td><button class=\"btn btn-danger btn-sm btn-remove\" type=\"submit\" data-user=\""

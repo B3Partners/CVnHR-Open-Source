@@ -44,5 +44,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
             ConfigurationManager.AppSettings["InitialUserAdministrators"]
                 .Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .ToList();
+
+        public static string UserManagerPrefillUserName => ConfigurationManager.AppSettings["UserManagerPrefillUserName"] ?? string.Empty;
     }
 }

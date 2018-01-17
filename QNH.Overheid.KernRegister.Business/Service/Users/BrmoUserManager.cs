@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace QNH.Overheid.KernRegister.Business.Service.Users
 {
-    public class BrmoUserManager : IUserManager
+    public class BrmoUserManager : IUserManager, IDisposable
     {
         /*
          *  Queries to use
@@ -161,6 +161,11 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
                 return "Action for user does not exist!";
 
             return "success";
+        }
+
+        public void Dispose()
+        {
+            _connection.Dispose();
         }
     }
 }
