@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace QNH.Overheid.KernRegister.Business.Service.Users
 {
-    public class BrmoUserManager : IUserManager, IDisposable
+    public class BrmoUserManager : IUserManager
     {
         /*
          *  Queries to use

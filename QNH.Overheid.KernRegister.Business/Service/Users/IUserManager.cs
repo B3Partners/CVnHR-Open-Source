@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QNH.Overheid.KernRegister.Business.Service.Users
 {
-    public interface IUserManager
+    public interface IUserManager : IDisposable
     {
         bool IsAllowedAllActions(string username, params ApplicationActions[] actions);
         bool IsAllowedAnyActions(string username, params ApplicationActions[] actions);

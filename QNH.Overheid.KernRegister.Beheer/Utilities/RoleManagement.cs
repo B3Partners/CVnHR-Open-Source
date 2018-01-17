@@ -13,16 +13,20 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
 {
     public static class RoleManagement
     {
-        private static IUserManager UserManager => IocConfig.Container.GetInstance<IUserManager>();
-
         public static bool IsAllowedAllActions(this IPrincipal user, params ApplicationActions[] actions)
         {
-            return UserManager.IsAllowedAllActions(user.GetUserName(), actions);
+            using (var userManager = IocConfig.Container.GetInstance<IUserManager>())
+            {
+                return userManager.IsAllowedAllActions(user.GetUserName(), actions);
+            }
         }
 
         public static bool IsAllowedAnyActions(this IPrincipal user, params ApplicationActions[] actions)
         {
-            return UserManager.IsAllowedAnyActions(user.GetUserName(), actions);
+            using (var userManager = IocConfig.Container.GetInstance<IUserManager>())
+            {
+                return userManager.IsAllowedAnyActions(user.GetUserName(), actions);
+            }
         }
 
         public static string GetUserName(this IPrincipal user)
