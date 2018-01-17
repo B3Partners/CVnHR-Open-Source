@@ -339,7 +339,8 @@ namespace QNH.Overheid.KernRegister.Beheer
                     x.For<IUserManager>().Use<BrmoUserManager>()
                         .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "parameterChar"))
                         .Ctor<string>("schemaName").Is(brmoStagingSchemaName)
-                        .Ctor<string>("parameterChar").Is(brmoStagingDatabaseParameterCharacter);
+                        .Ctor<string>("parameterChar").Is(brmoStagingDatabaseParameterCharacter)
+                        .AlwaysUnique();
                 }
             });
         }

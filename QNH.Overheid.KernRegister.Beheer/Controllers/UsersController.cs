@@ -1,6 +1,7 @@
 ﻿using QNH.Overheid.KernRegister.Business.Service.Users;
 using System.Web.Mvc;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
+using System;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -30,6 +31,15 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult RemoveUser(ApplicationActions action, string username)
         {
             return Json(_userManager.RemoveUserFromAction(action, username));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (_userManager is IDisposable)
+            {
+                ((IDisposable)_userManager).Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
