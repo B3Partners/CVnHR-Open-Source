@@ -37,8 +37,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess
 {
     public class IocConfig
     {
-        public static bool UseMockCrm => false;
-
         public static bool CreateDatabase => false;
 
         private static ISessionFactory GetSessionFactory(string dbProvider, string schemaName)
@@ -261,21 +259,12 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                 switch (ConfigurationManager.AppSettings["CrmToUse"]) // Default.CrmApplication)
                 {
                     case "DocBase":
-                        if (UseMockCrm)
-                        {
-                            //x.For<SecuritySoap>().Use("", UnitTestMockStuff.CreateSecuritySoapMock);
-                            //x.For<RelationsSoap>().Use("", UnitTestMockStuff.CreateRelationsSoapMock);
-                            //x.For<IExportService>().Use(UnitTestMockStuff.CreateDocBaseMock);
-                        }
-                        else
-                        {
-                            x.For<SecuritySoap>().Use<SecuritySoapClient>()
+                        x.For<SecuritySoap>().Use<SecuritySoapClient>()
                                 .SelectConstructor(() => new SecuritySoapClient())
                                 .SetProperty(ssc => ssc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                            x.For<RelationsSoap>().Use<RelationsSoapClient>()
-                                .SelectConstructor(() => new RelationsSoapClient())
-                                .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                        }
+                        x.For<RelationsSoap>().Use<RelationsSoapClient>()
+                            .SelectConstructor(() => new RelationsSoapClient())
+                            .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
 
                         // We need a postcode service for DocBase Municipality
                         x.ForSingletonOf<IPostcodeService>().Use(new NationaalGeoregisterLocatieService(
