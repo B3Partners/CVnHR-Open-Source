@@ -12,7 +12,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", ConfigurationName="v30.Dataservice")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", ConfigurationName="v30.Dataservice")]
     public interface Dataservice {
         
         // CODEGEN: Generating message contract since the operation ophalenInschrijving is neither RPC nor document wrapped.
@@ -43,7 +43,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class InschrijvingRequestType : KvKNummerOfRSINummerRequestType {
     }
     
@@ -53,7 +53,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class KvKNummerOfRSINummerRequestType : ProductRequestType {
         
         private string itemField;
@@ -91,7 +91,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType {
         
         /// <remarks/>
@@ -112,7 +112,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class ProductRequestType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string klantreferentieField;
@@ -144,7 +144,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BagIdType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string identificatieNummeraanduidingField;
@@ -190,7 +190,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class PostcodeType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string cijfercombinatieField;
@@ -236,7 +236,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class AdresBinnenOfBuitenlandsType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private MetExtraElementenMogenlijkheidType itemField;
@@ -269,7 +269,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BinnenlandsAdresType : MetExtraElementenMogenlijkheidType {
         
         private string straatnaamField;
@@ -404,7 +404,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class EnumeratieType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string codeField;
@@ -566,7 +566,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class MetExtraElementenMogenlijkheidType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private ExtraElementenTypeExtraElement[] extraElementenField;
@@ -599,7 +599,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class ExtraElementenTypeExtraElement : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string naamField;
@@ -659,7 +659,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BeperkingInHandelingType : MetExtraElementenMogenlijkheidType {
         
         private GeldType beperkingInGeldField;
@@ -696,7 +696,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class GeldType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private decimal waardeField;
@@ -742,7 +742,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BeperkteVolmachtType : MetExtraElementenMogenlijkheidType {
         
         private GeldType beperkingInGeldField;
@@ -821,7 +821,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class MonistischeBestuurderType : MetExtraElementenMogenlijkheidType {
         
         private RegistratieType registratieField;
@@ -858,7 +858,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class RegistratieType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string datumAanvangField;
@@ -958,7 +958,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public enum NoValue {
         
         /// <remarks/>
@@ -982,7 +982,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BerichtenboxType : MetExtraElementenMogenlijkheidType {
         
         private string berichtenboxnaamField;
@@ -1005,7 +1005,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringenType : MetExtraElementenMogenlijkheidType {
         
         private DeponeringRelatieType[] deponeringField;
@@ -1028,7 +1028,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringRelatieType : RelatieType {
         
         private DeponeringType itemField;
@@ -1061,7 +1061,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringAansprakelijkheidOverblijvendType : DeponeringType {
     }
     
@@ -1082,7 +1082,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class DeponeringType : MetExtraElementenMogenlijkheidType {
         
         private string depotIdField;
@@ -1189,7 +1189,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class RechterlijkeUitspraakType : MetExtraElementenMogenlijkheidType {
         
         private string datumField;
@@ -1240,7 +1240,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringNietNatuurlijkPersoonRelatieType : RelatieType {
         
         private string rsinField;
@@ -1283,7 +1283,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class RelatieType : MetExtraElementenMogenlijkheidType {
     }
     
@@ -1292,7 +1292,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class OndernemingRelatieType : RelatieType {
         
         private OndernemingType ondernemingField;
@@ -1315,7 +1315,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class OndernemingType : BasisType {
         
         private string kvkNummerField;
@@ -1464,7 +1464,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class SBIActiviteitType : BasisType {
         
         private EnumeratieType sbiCodeField;
@@ -1569,7 +1569,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class BasisType : MetExtraElementenMogenlijkheidType {
         
         private RegistratieType registratieField;
@@ -1592,7 +1592,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class VolmachtType : BasisType {
         
         private EnumeratieType typeVolmachtField;
@@ -1657,7 +1657,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class VestigingenRelatieType : RelatieType {
         
         private CommercieleVestigingType[] commercieleVestigingField;
@@ -1694,7 +1694,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class CommercieleVestigingType : VestigingType {
         
         private string voltijdWerkzamePersonenField;
@@ -1787,7 +1787,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class ActiviteitenCommercieleVestigingType : ActiviteitenType {
         
         private EnumeratieType exporteertField;
@@ -1825,7 +1825,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class ActiviteitenType : MetExtraElementenMogenlijkheidType {
         
         private string omschrijvingField;
@@ -1862,7 +1862,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class HandelsnaamRelatieRegistratieType : RelatieRegistratieType {
         
         private HandelsnaamType handelsnaamField;
@@ -1885,7 +1885,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class HandelsnaamType : BasisType {
         
         private string naamField;
@@ -1931,7 +1931,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class RelatieRegistratieType : RelatieType {
         
         private RegistratieType relatieRegistratieField;
@@ -1954,7 +1954,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class NietCommercieleVestigingRelatieRegistratieType : RelatieRegistratieType {
         
         private NietCommercieleVestigingType nietCommercieleVestigingField;
@@ -1977,7 +1977,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class NietCommercieleVestigingType : VestigingType {
         
         private NaamgevingType naamgevingField;
@@ -2028,7 +2028,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class NaamgevingType : BasisType {
         
         private string naamField;
@@ -2065,7 +2065,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class MaatschappelijkeActiviteitRelatieType : RelatieType {
         
         private MaatschappelijkeActiviteitType maatschappelijkeActiviteitField;
@@ -2088,7 +2088,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class MaatschappelijkeActiviteitType : BasisType {
         
         private string kvkNummerField;
@@ -2321,7 +2321,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class LocatieType : BasisType {
         
         private string toevoegingAdresField;
@@ -2386,7 +2386,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class CommunicatiegegevensType : BasisType {
         
         private CommunicatienummerType[] communicatienummerField;
@@ -2437,7 +2437,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class CommunicatienummerType : MetExtraElementenMogenlijkheidType {
         
         private string toegangscodeField;
@@ -2488,7 +2488,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class OndernemingRelatieRegistratieType : RelatieRegistratieType {
         
         private OndernemingType ondernemingField;
@@ -2511,7 +2511,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class VestigingRelatieType : RelatieType {
         
         private VestigingType itemField;
@@ -2535,7 +2535,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class PersoonRelatieRegistratieType : RelatieRegistratieType {
         
         private PersoonType itemField;
@@ -2565,7 +2565,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class AfgeslotenMoederType : NietNatuurlijkPersoonType {
         
         private string kvkNummerField;
@@ -2594,7 +2594,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class NietNatuurlijkPersoonType : PersoonType {
         
         private string rsinField;
@@ -2743,7 +2743,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BuitenlandseRechtstoestandType : BasisType {
         
         private string beschrijvingField;
@@ -2795,7 +2795,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType4 {
         
         /// <remarks/>
@@ -2810,7 +2810,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class OntbindingType : BasisType {
         
         private EnumeratieType aanleidingField;
@@ -2847,7 +2847,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class LiquidatieType : BasisType {
     }
     
@@ -2856,7 +2856,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class FusieType : FusieSplitsingType {
         
         private OpTeRichtenRechtspersoonType[] opTeRichtenVerdwijnendeRechtspersoonField;
@@ -2907,7 +2907,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class OpTeRichtenRechtspersoonType : BasisType {
         
         private EnumeratieType rechtsvormField;
@@ -2944,7 +2944,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class NietNatuurlijkPersoonRelatieType : RelatieType {
         
         private NietNatuurlijkPersoonType itemField;
@@ -2972,7 +2972,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BuitenlandseVennootschapType : NietNatuurlijkPersoonType {
         
         private BuitenlandseRegistratieGegevensType buitenlandseRegistratieGegevensField;
@@ -3079,7 +3079,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BuitenlandseRegistratieGegevensType : BasisType {
         
         private string naamField;
@@ -3158,7 +3158,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class KapitaalType : BasisType {
         
         private GeldType bedragField;
@@ -3195,7 +3195,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class AandeelSamenstellingType : BasisType {
         
         private decimal aantalField;
@@ -3232,7 +3232,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class AandeelType : BasisType {
         
         private string soortField;
@@ -3269,7 +3269,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BuitenlandseVennootschapGegevensType : BasisType {
         
         private EnumeratieType heeftHoofdvestigingBuitenNederlandField;
@@ -3376,7 +3376,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class EenmanszaakMetMeerdereEigenarenType : NietNatuurlijkPersoonType {
     }
     
@@ -3385,7 +3385,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class RechtspersoonType : NietNatuurlijkPersoonType {
         
         private EnumeratieType rechtsvormField;
@@ -3786,7 +3786,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class RechtspersoonGegevensBuitenlandType : BasisType {
         
         private string naamField;
@@ -3851,7 +3851,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class VoornemenTotOntbindingType : BasisType {
     }
     
@@ -3860,7 +3860,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class RechtspersoonInOprichtingType : NietNatuurlijkPersoonType {
         
         private EnumeratieType doelRechtsvormField;
@@ -3883,7 +3883,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class SamenwerkingsverbandType : NietNatuurlijkPersoonType {
         
         private EnumeratieType rechtsvormField;
@@ -3948,7 +3948,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DuurType : BasisType {
         
         private object itemField;
@@ -3972,7 +3972,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class CommanditairKapitaalType : BasisType {
         
         private GeldType bedragField;
@@ -4011,7 +4011,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class FusieSplitsingType : BasisType {
         
         private RechterlijkeUitspraakType uitspraakField;
@@ -4104,7 +4104,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class SplitsingType : FusieSplitsingType {
         
         private OpTeRichtenRechtspersoonType opTeRichtenSplitsendeRechtspersoonField;
@@ -4169,7 +4169,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class AansprakelijkheidRelatieRegistratieType : RelatieRegistratieType {
         
         private NietNatuurlijkPersoonRelatieType moederField;
@@ -4257,7 +4257,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class PersoonType : BasisType {
         
         private BijzondereRechtstoestandType bijzondereRechtstoestandField;
@@ -4434,7 +4434,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BijzondereRechtstoestandType : BasisType {
         
         private EnumeratieType soortField;
@@ -4542,7 +4542,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType3 {
         
         /// <remarks/>
@@ -4557,7 +4557,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BeperkingInRechtshandelingType : BasisType {
         
         private EnumeratieType soortField;
@@ -4609,7 +4609,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType2 {
         
         /// <remarks/>
@@ -4624,7 +4624,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class FunctievervullingRelatieType : RelatieType {
         
         private FunctievervullingType itemField;
@@ -4652,7 +4652,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class AansprakelijkeType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -4703,7 +4703,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class HandlichtingType : BasisType {
         
         private EnumeratieType isVerleendField;
@@ -4726,7 +4726,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BevoegdheidAansprakelijkeType : BasisType {
         
         private EnumeratieType soortField;
@@ -4783,7 +4783,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class FunctievervullingType : BasisType {
         
         private FunctietitelType functietitelField;
@@ -4851,7 +4851,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class FunctietitelType : BasisType {
         
         private string titelField;
@@ -4888,7 +4888,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class SchorsingType : BasisType {
         
         private RechterlijkeUitspraakType itemField;
@@ -4926,7 +4926,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType5 {
         
         /// <remarks/>
@@ -4941,7 +4941,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class PersoonRelatieType : RelatieType {
         
         private PersoonType itemField;
@@ -4971,7 +4971,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class NaamPersoonType : PersoonType {
         
         private string naamField;
@@ -5022,7 +5022,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class TelefoonnummerType : MetExtraElementenMogenlijkheidType {
         
         private string toegangscodeField;
@@ -5059,7 +5059,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class NatuurlijkPersoonType : PersoonType {
         
         private string bsnField;
@@ -5304,7 +5304,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType6 {
         
         /// <remarks/>
@@ -5319,7 +5319,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class PubliekrechtelijkeFunctionarisType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5356,7 +5356,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BevoegdheidPubliekrechtelijkeFunctionarisType : BasisType {
         
         private EnumeratieType soortField;
@@ -5379,7 +5379,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class OverigeFunctionarisType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5458,7 +5458,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BevoegdheidOverigeFunctionarisType : BasisType {
         
         private EnumeratieType soortField;
@@ -5481,7 +5481,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class GemachtigdeType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5518,7 +5518,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class FunctionarisBijzondereRechtstoestandType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5555,7 +5555,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BevoegdheidBewindvoerderType : BasisType {
         
         private EnumeratieType soortField;
@@ -5578,7 +5578,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BestuursfunctieType : FunctievervullingType {
         
         private EnumeratieType functieField;
@@ -5643,7 +5643,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BevoegdheidBestuurderType : BasisType {
         
         private EnumeratieType soortField;
@@ -5680,7 +5680,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class NatuurlijkPersoonRelatieType : RelatieType {
         
         private NatuurlijkPersoonType natuurlijkPersoonField;
@@ -5705,7 +5705,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class VestigingType : BasisType {
         
         private string vestigingsnummerField;
@@ -5826,7 +5826,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class VestigingenRelatieRegistratieType : RelatieRegistratieType {
         
         private CommercieleVestigingType[] commercieleVestigingField;
@@ -5863,7 +5863,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class VoortzettingRelatieRegistratieType : MaatschappelijkeActiviteitRelatieRegistratieType {
         
         private string datumVoortzettingField;
@@ -5887,7 +5887,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class MaatschappelijkeActiviteitRelatieRegistratieType : RelatieRegistratieType {
         
         private MaatschappelijkeActiviteitType maatschappelijkeActiviteitField;
@@ -5910,7 +5910,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class CommercieleVestigingRelatieRegistratieType : RelatieRegistratieType {
         
         private CommercieleVestigingType commercieleVestigingField;
@@ -5933,7 +5933,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringBijzondereDeponeringType : DeponeringType {
         
         private EnumeratieType soortField;
@@ -5984,7 +5984,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class FusieSplitsingVoorstelType : MetExtraElementenMogenlijkheidType {
         
         private EnumeratieType rolField;
@@ -6021,7 +6021,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringAansprakelijkheidVerklaringType : DeponeringType {
     }
     
@@ -6030,7 +6030,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringAansprakelijkheidIntrekkingType : DeponeringType {
     }
     
@@ -6039,7 +6039,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringAanvullendeMededelingType : DeponeringType {
     }
     
@@ -6054,7 +6054,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public abstract partial class DeponeringJaarstukType : DeponeringType {
         
         private string boekjaarField;
@@ -6077,7 +6077,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringOverigJaarstukType : DeponeringJaarstukType {
         
         private EnumeratieType soortField;
@@ -6100,7 +6100,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringJaarstukOntheffingType : DeponeringJaarstukType {
         
         private EnumeratieType redenField;
@@ -6137,7 +6137,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringJaarstukJaarrekeningType : DeponeringJaarstukType {
         
         private string datumVaststellingField;
@@ -6244,7 +6244,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringJaarstukJaarrekeningOngewijzigdVastgesteldType : DeponeringJaarstukType {
     }
     
@@ -6253,7 +6253,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringJaarstukInstemmingType : DeponeringJaarstukType {
         
         private DeponeringNietNatuurlijkPersoonRelatieType groepsjaarrekeningHouderField;
@@ -6276,7 +6276,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class DeponeringJaarstukHalfjaarKwartaalcijfersType : DeponeringJaarstukType {
     }
     
@@ -6285,7 +6285,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02")]
     public partial class BuitenlandsAdresType : MetExtraElementenMogenlijkheidType {
         
         private string straatHuisnummerField;
@@ -6350,7 +6350,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class MeldingType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string codeField;
@@ -6413,7 +6413,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class ResponseType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private ResponseTypeMeldingen meldingenField;
@@ -6459,7 +6459,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class ResponseTypeMeldingen : object, System.ComponentModel.INotifyPropertyChanged {
         
         private MeldingType[] foutField;
@@ -6519,7 +6519,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class VestigingResponseType : ResponseType {
         
         private VestigingResponseTypeProduct productField;
@@ -6542,14 +6542,14 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class VestigingResponseTypeProduct : object, System.ComponentModel.INotifyPropertyChanged {
         
         private VestigingType itemField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", typeof(CommercieleVestigingType), Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", typeof(NietCommercieleVestigingType), Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("commercieleVestiging", typeof(CommercieleVestigingType), Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("nietCommercieleVestiging", typeof(NietCommercieleVestigingType), Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", Order=0)]
         public VestigingType Item {
             get {
                 return this.itemField;
@@ -6576,7 +6576,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class MaatschappelijkeActiviteitResponseType : ResponseType {
         
         private MaatschappelijkeActiviteitResponseTypeProduct productField;
@@ -6599,13 +6599,13 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class MaatschappelijkeActiviteitResponseTypeProduct : object, System.ComponentModel.INotifyPropertyChanged {
         
         private MaatschappelijkeActiviteitType maatschappelijkeActiviteitField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://schemas.kvk.nl/schemas/kvk/dataservice/catalogus/2015/02", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/catalogus/2015/02", Order=0)]
         public MaatschappelijkeActiviteitType maatschappelijkeActiviteit {
             get {
                 return this.maatschappelijkeActiviteitField;
@@ -6631,7 +6631,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class InschrijvingResponseType : MaatschappelijkeActiviteitResponseType {
     }
     
@@ -6641,7 +6641,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class VestigingOfRsinOfKvKNummerRequestType : ProductRequestType {
         
         private string itemField;
@@ -6680,7 +6680,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2556.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", IncludeInSchema=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", IncludeInSchema=false)]
     public enum ItemChoiceType1 {
         
         /// <remarks/>
@@ -6698,7 +6698,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class VestigingRequestType : VestigingOfRsinOfKvKNummerRequestType {
     }
     
@@ -6707,7 +6707,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class VestigingsnummerRequestType : ProductRequestType {
         
         private string vestigingsnummerField;
@@ -6730,7 +6730,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02")]
     public partial class KvKNummerRequestType : ProductRequestType {
         
         private string kvkNummerField;
@@ -6754,7 +6754,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ophalenInschrijvingRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenInschrijvingRequest", Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenInschrijvingRequest", Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", Order=0)]
         public QNH.Overheid.KernRegister.Business.KvK.v30.InschrijvingRequestType ophalenInschrijvingRequest1;
         
         public ophalenInschrijvingRequest() {
@@ -6771,7 +6771,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ophalenInschrijvingResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenInschrijvingResponse", Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenInschrijvingResponse", Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", Order=0)]
         public QNH.Overheid.KernRegister.Business.KvK.v30.InschrijvingResponseType ophalenInschrijvingResponse1;
         
         public ophalenInschrijvingResponse() {
@@ -6788,7 +6788,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ophalenVestigingRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenVestigingRequest", Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenVestigingRequest", Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", Order=0)]
         public QNH.Overheid.KernRegister.Business.KvK.v30.VestigingRequestType ophalenVestigingRequest1;
         
         public ophalenVestigingRequest() {
@@ -6805,7 +6805,7 @@ namespace QNH.Overheid.KernRegister.Business.KvK.v30 {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class ophalenVestigingResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenVestigingResponse", Namespace="http://schemas.kvk.nl/contracts/kvk/dataservice/catalogus/2015/02", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ophalenVestigingResponse", Namespace="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", Order=0)]
         public QNH.Overheid.KernRegister.Business.KvK.v30.VestigingResponseType ophalenVestigingResponse1;
         
         public ophalenVestigingResponse() {

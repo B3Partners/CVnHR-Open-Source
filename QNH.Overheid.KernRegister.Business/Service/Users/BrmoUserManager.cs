@@ -135,13 +135,13 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
         public bool IsAllowedAllActions(string username, params ApplicationActions[] actions)
         {
             var userActions = GetUserActions(username);
-            return actions.All(a => userActions.Contains(a.ToString()));
+            return actions.All(a => userActions.Contains(a.ToString(), StringComparer.InvariantCultureIgnoreCase));
         }
 
         public bool IsAllowedAnyActions(string username, params ApplicationActions[] actions)
         {
             var userActions = GetUserActions(username);
-            return actions.Any(a => userActions.Contains(a.ToString()));
+            return actions.Any(a => userActions.Contains(a.ToString(), StringComparer.InvariantCultureIgnoreCase));
         }
 
         public string RemoveUserFromAction(ApplicationActions action, string username)
