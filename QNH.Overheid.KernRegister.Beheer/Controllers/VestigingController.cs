@@ -402,7 +402,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult Export(string kvkNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
                 return RedirectToAction("Index");
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
@@ -436,7 +436,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult ExportVestiging(string vestigingNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
                 return RedirectToAction("Index");
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();

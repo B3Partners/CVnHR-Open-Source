@@ -107,12 +107,17 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData)) // do check for all users enabled
                 return RedirectToAction("Index");
 
+            if (export)
+            {
+                // TODO
+                throw new NotImplementedException("TODO!!");
+            }
+
             if (brmo && !SettingsHelper.BrmoApplicationEnabled)
                 return RedirectToAction("Index");
 
             using (var nestedContainer = IocConfig.Container.GetNestedContainer())
             {
-
                 var service = nestedContainer.GetInstance<IKvkSearchService>();
                 var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
 
