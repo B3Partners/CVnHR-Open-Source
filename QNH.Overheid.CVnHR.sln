@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QNH.Overheid.KernRegister.Beheer", "QNH.Overheid.KernRegister.Beheer\QNH.Overheid.KernRegister.Beheer.csproj", "{2FCBA8C1-BBB4-4E37-BA0D-FF3F8BA8CEA4}"
 EndProject
@@ -21,12 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{5A606AD4-994B-4720-B9AA-9299423E6FEF}"
 	ProjectSection(SolutionItems) = preProject
+		Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add NonMailing.sql = Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add NonMailing.sql
 		Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add User Tables.sql = Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add User Tables.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Projects", "Test Projects", "{F4F644B2-1D9D-4B88-9B48-68D6E46F5FB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QNH.Overheid.CVnHR.Api.Tests", "Test Projects\QNH.Overheid.CVnHR.Api.Tests\QNH.Overheid.CVnHR.Api.Tests.csproj", "{41C47E04-7CA8-4898-852E-6A7DF1BE0C91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QNH.Overheid.CVnHR.Api.Tests", "Test Projects\QNH.Overheid.CVnHR.Api.Tests\QNH.Overheid.CVnHR.Api.Tests.csproj", "{41C47E04-7CA8-4898-852E-6A7DF1BE0C91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
