@@ -42,14 +42,14 @@
                      (Model.Vestigingen.Count > 1 ? "Alle vestigingen naar " + Default.ApplicationName + " en " : "Naar " + Default.ApplicationName + " en ") + Default.CrmApplication,
                      "Import",
                      "Search",
-                     new { kvkNummer = Model.KvkNummer, export = true }, new { @class = "btn btn-large btn-warning" })
+                     new { kvkNummer = Model.KvkNummer, toCrm = true }, new { @class = "btn btn-large btn-warning" })
         }
         @if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
         {
             @:&nbsp; @Html.ActionLink("Naar " + Default.BrmoApplication,
                    "Import",
                    "Search",
-                   new { kvkNummer = Model.KvkNummer, Brmo = true },
+                   new { kvkNummer = Model.KvkNummer, toBrmo = true },
                    new { @class = "btn btn-large btn-brmo" })
         }
 

@@ -414,7 +414,7 @@ else
                                         linkText: "Naar " + Default.CrmApplication,
                                         actionName: "Import",
                                         controllerName: "Search",
-                                        routeValues: new { kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, export = true },
+                                        routeValues: new { kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, toCrm = true },
                                         htmlAttributes: null)
                                 }
                                 @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
