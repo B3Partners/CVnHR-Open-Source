@@ -121,12 +121,12 @@
                                 @if (item.Vestigingen.Count == 1 && User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
                                 {
                                     @:|
-                                    @Html.ActionLink("Naar " + Default.ApplicationName + " en " + Default.CrmApplication, "Import", new { kvkNummer = item.KvkNummer, export = true })
+                                    @Html.ActionLink("Naar " + Default.ApplicationName + " en " + Default.CrmApplication, "Import", new { kvkNummer = item.KvkNummer, toCrm = true })
                                 }
                                 @if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
                                 {
                                     @:|
-                                    @Html.ActionLink("Naar " + Default.BrmoApplication, "Import", new { kvkNummer = item.KvkNummer, Brmo = true })
+                                    @Html.ActionLink("Naar " + Default.BrmoApplication, "Import", new { kvkNummer = item.KvkNummer, toBrmo = true })
                                 }
                                 @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
                                 {

@@ -98,30 +98,36 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         }
 
         public ActionResult Import(string kvkNummer, 
-            bool export = false, 
-            string vestigingNummer = null, 
-            bool brmo = false,
+            string vestigingNummer = null,
+            bool toCrm = false,
+            bool toBrmo = false,
             bool toDebiteuren = false,
             bool toCrediteuren = false)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData)) // do check for all users enabled
+            var anyExport = toCrm || toDebiteuren || toCrediteuren || toBrmo;
+            if (!anyExport && !User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                 return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageKvKData });
-
-            if (export)
+            else if (toCrm && !User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageCrm });
+            else if (toDebiteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_Debiteuren });
+            else if (toCrediteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_Crediteuren });
+            else if (toBrmo)
             {
-                // TODO
-                throw new NotImplementedException("TODO!!");
-            }
-
-            if (brmo && !SettingsHelper.BrmoApplicationEnabled)
-                return RedirectToAction("Index");
+                if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
+                    return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_Brmo });
+                else if(!SettingsHelper.BrmoApplicationEnabled)
+                    return RedirectToAction("Index");
+            } 
+            
 
             using (var nestedContainer = IocConfig.Container.GetNestedContainer())
             {
                 var service = nestedContainer.GetInstance<IKvkSearchService>();
                 var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
 
-                if (brmo)
+                if (toBrmo)
                 {
                     var msg = "";
                     var brmostatus = AddInschrijvingResultStatus.Error;
@@ -152,7 +158,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 var storageService = nestedContainer.GetInstance<IInschrijvingSyncService>();
                 var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
 
-                if (export)
+                if (toCrm)
                 {
                     return string.IsNullOrEmpty(vestigingNummer)
                         ? RedirectToAction("Export", "Vestiging", new {kvkNummer = kvkNummer})
