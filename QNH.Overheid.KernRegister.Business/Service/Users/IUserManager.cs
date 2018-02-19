@@ -14,5 +14,6 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
         string AddUserToAction(ApplicationActions action, string username);
         string RemoveUserFromAction(ApplicationActions action, string username);
         IDictionary<ApplicationActions, IEnumerable<string>> GetAllUserActions();
+        IEnumerable<string> GetAdministrators();
     }
 }

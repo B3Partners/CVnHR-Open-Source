@@ -168,6 +168,14 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             return "success";
         }
 
+        public IEnumerable<string> GetAdministrators()
+        {
+            return _connection.Query<string>($@"
+                                SELECT DISTINCT GEBRUIKERSNAAM as ""GebruikersNaam""
+                                    FROM {_schemaName}.GEBRUIKER_GROEPEN
+                                    WHERE GROEP_ LIKE '{ApplicationActions.CVnHR_Admin.ToString()}'");
+        }
+
         public void Dispose()
         {
             _connection.Dispose();

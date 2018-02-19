@@ -355,7 +355,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult Delete(string kvkNummer)
         {
             if(!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
-                return RedirectToAction("Index");
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageKvKData });
 
             KvkInschrijving inschrijving = null;
 
@@ -403,7 +403,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult Export(string kvkNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
         {
             if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
-                return RedirectToAction("Index");
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageCrm });
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
             var inschrijving = repo.GetLatestInschrijving(kvkNummer);
@@ -437,7 +437,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult ExportVestiging(string vestigingNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
         {
             if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
-                return RedirectToAction("Index");
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageCrm });
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
             var vestiging = repo.GetLatestVestiging(vestigingNummer);

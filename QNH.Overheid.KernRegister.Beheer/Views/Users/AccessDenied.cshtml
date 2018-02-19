@@ -1,0 +1,77 @@
+﻿@model AccessDeniedModel
+
+@using System.Linq;
+@{
+    ViewBag.Title = "Manage users";
+}
+
+<div>
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-9">
+            <h3 style="color: red">Geen toegang</h3>
+            <p>Voor deze actie zijn de volgende rechten nodig: @string.Join(", ", Model.DeniedPermission.Select(p=> p.GetDisplayName()))</p>
+            <p>Vraag je leidinggevende of een CVnHR administrator om deze rechten.</p>
+            <h4>Administrators:</h4>
+            <ul>
+                @foreach (var user in Model.Administrators)
+                {
+                    <li>@user</li>
+                }
+            </ul>
+
+        </div>
+    </div>
+
+
+</div>
+
+@section scripts {
+    <!-- TODO: add scripts? -->
+
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $(".table").on("click", ".btn-remove", function (e) {
+                var user = $(this).attr("data-user");
+                var action = $(this).attr("data-action");
+                var row = $(this).parents("tr");
+
+                $.post("Users/RemoveUser", { action: action, username: user }, function (result) {
+                    row.remove();
+                    console.log($(".table-users-" + action + " tbody tr").length);
+                    if ($(".table-users-" + action + " tbody tr").length < 1) {
+                        $(".table-users-" + action).addClass("hidden");
+                    }
+                }).fail(function (error, error2, msg) {
+                    //console.log(error, error2, msg);
+                    alert("Error! Please contact administrator! " + msg);
+                });
+            });
+
+            $(".btn-add").on("click", function (e) {
+                var input = $(this).prev("input");
+                var user = input.val();
+                var action = $(this).attr("data-action");
+
+                $.post("Users/AddUser", { action: action, username: user }, function (result) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(user));
+                    row.append($("<td><button class=\"btn btn-danger btn-sm btn-remove\" type=\"submit\" data-user=\""
+                        + user + "\" data-action=\"" + action + "\">verwijder</button></td>"));
+                    $(".table-users-" + action + " tbody").append(row);
+                    $(".table-users-" + action).removeClass("hidden");
+                    input.val("");
+                }).fail(function (error, error2, msg) {
+                    //console.log(error, error2, msg);
+                    alert("Error! Please contact administrator! " + msg);
+                });
+
+                //console.log("TODO add user and action", user, action);
+            });
+        });
+    </script>
+}
