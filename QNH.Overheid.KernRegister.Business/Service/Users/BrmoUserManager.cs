@@ -33,15 +33,18 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
         private readonly IDbConnection _connection;
         private readonly string _schemaName;
         private readonly string _parameterChar;
+        private readonly bool _usernameCaseInsensitiveSearch;
 
         public BrmoUserManager(
             IDbConnection connection, 
             string schemaName,
-            string parameterChar = ":")
+            string parameterChar = ":",
+            bool usernameCaseInsensitiveSearch = false)
         {
             _connection = connection;
             _schemaName = schemaName;
             _parameterChar = parameterChar;
+            _usernameCaseInsensitiveSearch = usernameCaseInsensitiveSearch;
         }
 
         public string AddUserToAction(ApplicationActions action, string username)
@@ -119,13 +122,15 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             {
                 throw new ArgumentException("username cannot be null or whitespace.");
             }
-
+            var gebruikersNaamComparison = _usernameCaseInsensitiveSearch
+                ? $"UPPER(GEBRUIKERSNAAM) = UPPER({_parameterChar}username)"
+                : $"GEBRUIKERSNAAM = {_parameterChar}username";
             return _connection.Query<string>(
                 $@"SELECT GROEP_ as ""Groep"" 
                         FROM {_schemaName}.GEBRUIKER_GROEPEN 
                         WHERE 
                             (
-                                GEBRUIKERSNAAM = {_parameterChar}username
+                                {gebruikersNaamComparison}
                                 OR GEBRUIKERSNAAM = '{Default.CVnHREveryone}'
                             )
                             AND GROEP_ LIKE 'CVnHR_%'",

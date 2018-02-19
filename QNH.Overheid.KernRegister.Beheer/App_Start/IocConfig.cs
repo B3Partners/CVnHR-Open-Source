@@ -325,6 +325,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                     var brmoStagingSchemaName = ConfigurationManager.AppSettings["BrmoStagingDatabaseSchemaName"];
                     var brmoStagingDatabaseParameterCharacter = ConfigurationManager.AppSettings["BrmoStagingDatabaseParameterCharacter"] 
                             ?? (dbProvider.ToLowerInvariant().Contains("oracle") ? ":" : "@");
+                    var brmoStagingUsernameCaseInsensitiveSearch = Convert.ToBoolean(ConfigurationManager.AppSettings["BrmoStagingUsernameCaseInsensitiveSearch"]);
 
                     // If left empty, just use the default connectionstring (needs the user tables)
                     if (string.IsNullOrWhiteSpace(brmoStagingConnectionString))
@@ -337,9 +338,10 @@ namespace QNH.Overheid.KernRegister.Beheer
                         x.For<IDbConnection>().Use((ctx) => GetbrmoStagingDbConnection(brmoStagingConnectionString));
 
                     x.For<IUserManager>().Use<BrmoUserManager>()
-                        .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "parameterChar"))
+                        .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "parameterChar", false))
                         .Ctor<string>("schemaName").Is(brmoStagingSchemaName)
                         .Ctor<string>("parameterChar").Is(brmoStagingDatabaseParameterCharacter)
+                        .Ctor<bool>("usernameCaseInsensitiveSearch").Is(brmoStagingUsernameCaseInsensitiveSearch)
                         .AlwaysUnique();
                 }
             });
