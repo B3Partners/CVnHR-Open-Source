@@ -33,7 +33,7 @@ Heeft daarnaast nog wel BRMO inloggegevens nodig.")]
             Description("Gebruiker mag KvK en CVnHR gegevens doorzetten naar Debiteuren in het Financiele systeem")]
         CVnHR_Debiteuren,
         [DisplayName("Crediteuren"), 
-            Description("Gebruiker mag KvK en CVnHR gegevens doorzetten naar Crediteurn in het Financiele systeem")]
+            Description("Gebruiker mag KvK en CVnHR gegevens doorzetten naar Crediteuren in het Financiele systeem")]
         CVnHR_Crediteuren,
         [DisplayName("Administrator"), 
             Description("Administrator functie (Gebruikersbeheer)")]
