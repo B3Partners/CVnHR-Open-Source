@@ -175,6 +175,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
             else
                 kvkInschrijving.RegistratieDatumAanvang = KvkDataSearchService.VALUENOTPROVIDED;
 
+            kvkInschrijving.NonMailing = maatschappelijkeActiviteit.nonMailing?.omschrijving;
+
             // Set the rechtsvorm
             var eigenaar = maatschappelijkeActiviteit.heeftAlsEigenaar.Item;
 
