@@ -105,7 +105,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             bool toCrediteuren = false)
         {
             if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData)) // do check for all users enabled
-                return RedirectToAction("Index");
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageKvKData });
 
             if (export)
             {

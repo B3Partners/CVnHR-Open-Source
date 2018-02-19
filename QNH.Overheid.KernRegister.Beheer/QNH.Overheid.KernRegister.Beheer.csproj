@@ -342,6 +342,7 @@
     <Compile Include="Utilities\KvKTypesXmlFormatter.cs" />
     <Compile Include="Utilities\RoleManagement.cs" />
     <Compile Include="Utilities\SettingsHelper.cs" />
+    <Compile Include="ViewModel\AccessDeniedModel.cs" />
     <Compile Include="ViewModel\DocBaseExportResult.cs" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\Backload\content-types\128\Excel.png" />
@@ -528,6 +529,7 @@
     </None>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\AccessDenied.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>

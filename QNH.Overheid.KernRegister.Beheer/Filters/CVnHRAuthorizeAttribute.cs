@@ -41,5 +41,11 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 return authorized;
             }
         }
+
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            filterContext.HttpContext.Response.Redirect($"/Users/AccessDenied?actions={string.Join(",",_actions)}");
+            base.HandleUnauthorizedRequest(filterContext);
+        }
     }
 }

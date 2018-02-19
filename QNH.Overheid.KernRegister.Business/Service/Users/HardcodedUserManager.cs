@@ -96,6 +96,12 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             return "success";
         }
 
+        public IEnumerable<string> GetAdministrators()
+        {
+            return _userActions.Where(ua => ua.Value.Contains(ApplicationActions.CVnHR_Admin))
+                .Select(ua => ua.Key);
+        }
+
         public void Dispose()
         {
             // noop

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
 using System;
+using System.Linq;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -20,6 +21,19 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult Index()
         {
             return View(_userManager.GetAllUserActions());
+        }
+
+        [AllowAnonymous]
+        public ActionResult AccessDenied(string actions)
+        {
+            var deniedPermissions = (actions ?? "")
+                .Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(a => Enum.Parse(typeof(ApplicationActions), a)).Cast<ApplicationActions>();
+            return View(new AccessDeniedModel
+            {
+                Administrators = SettingsHelper.InitialUserAdministrators.Concat(_userManager.GetAdministrators()),
+                DeniedPermission = deniedPermissions
+            });
         }
 
         [HttpPost]
