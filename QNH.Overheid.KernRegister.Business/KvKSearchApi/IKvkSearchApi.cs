@@ -9,14 +9,6 @@ namespace QNH.Overheid.KernRegister.Business.KvKSearchApi
 {
     public interface IKvkSearchApi
     {
-        KvkSearchApiResult Search(KvkSearchApiParameters parameters);
-    }
-
-    public class KvkSearchApi : IKvkSearchApi
-    {
-        public KvkSearchApiResult Search(KvkSearchApiParameters parameters)
-        {
-            throw new NotImplementedException();
-        }
+        Task<KvkSearchApiResult> Search(KvkSearchApiParameters parameters);
     }
 }

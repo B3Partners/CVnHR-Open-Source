@@ -195,9 +195,11 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -248,7 +250,9 @@
     <Compile Include="Integration\WcfExtensions\CookieManagerBehavior.cs" />
     <Compile Include="Integration\WcfExtensions\CookieManagerMessageInspector.cs" />
     <Compile Include="KvKSearchApi\Entities\KvKSearchApiParameters.cs" />
+    <Compile Include="KvKSearchApi\Entities\KvkSearchApiResult.cs" />
     <Compile Include="KvKSearchApi\IKvkSearchApi.cs" />
+    <Compile Include="KvKSearchApi\KvkSearchApi.cs" />
     <Compile Include="Model\Debug\DatabaseDebugInfo.cs" />
     <Compile Include="Enums\AddInschrijvingResultStatus.cs" />
     <Compile Include="Model\Entities\DeponeringsStuk.cs" />
