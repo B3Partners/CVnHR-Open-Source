@@ -58,6 +58,23 @@
             </div>
         </div>
 
+        <div class="hidden name-search-table">
+            <div class="row header">
+                <div class="col-sm-2">Kvknummer</div>
+                <div class="col-sm-4">Naam</div>
+                <div class="col-sm-4">Adres</div>
+                <div class="col-sm-2">Actie</div>
+                <hr/>
+            </div>
+            <div class="row template">
+                <div class="col-sm-2 kvknummer"></div>
+                <div class="col-sm-4 naam"></div>
+                <div class="col-sm-4 adres"></div>
+                <div class="col-sm-2 actie"></div>
+                <hr />
+            </div>
+        </div>
+
         @using (Html.BeginForm("Index", "Search", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
@@ -201,13 +218,32 @@
         });
 
         function goToKvKNameSearch(){
-            window.open("http://www.kvk.nl/orderstraat/bedrijf-kiezen/#!shop?q=" + encodeURIComponent($("#kvkNameSearch").val()), '_blank');
+            //window.open("http://www.kvk.nl/orderstraat/bedrijf-kiezen/#!shop?q=" + encodeURIComponent($("#kvkNameSearch").val()), '_blank');
+
+            var nameToSearch = $("#kvkNameSearch").val();
+            $.post('@Url.Action("SearchByName", new { name = "[name]"})'.replace('%5Bname%5D', nameToSearch))
+                .then(function (result) { console.log(result); fillNameSearchTable(result); })
+                .fail(function (error) { alert(error); console.error(error); });
         }
 
-
-        /* TODO
-        $.getJSON("http://zoeken.kvk.nl/JsonSearch.ashx?q=mrw&start=0&callback=?", function(result){
-            console.log(result);
-        });*/
+        function fillNameSearchTable(result) {
+            var table = $(".name-search-table");
+            var template = $(".template", table);
+            $.each(result.Items, (i, item) => {
+                var t = template.clone();
+                $(".kvknummer", t).text(item.KvkNumber);
+                var tradeNames = item.TradeNames || { BusinessName: "[??]" };
+                console.log(tradeNames);
+                $(".naam", t).text(tradeNames.BusinessName || tradeNames.ShortBusinessName);
+                var adres = item.Addresses ? item.Addresses[0] : { };
+                $(".adres", t).text(`${adres.Street} ${adres.HouseNumber} ${adres.HouseNumberAddition}, ${adres.City}`);
+                var link = $("<a>").addClass("link-button").attr("href", "@Url.Action("Index")" + "?kvkNummer=" + item.KvkNumber)
+                    .text("Zoek");
+                $(".actie", t).append(link);
+                table.append(t);
+            });
+            template.remove();
+            table.show().removeClass("hidden");
+        }
     </script>
 }

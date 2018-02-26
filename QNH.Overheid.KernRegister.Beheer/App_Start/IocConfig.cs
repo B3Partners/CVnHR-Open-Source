@@ -30,6 +30,7 @@ using System.Configuration;
 using System.IO;
 using System.Threading;
 using NHibernate.Dialect;
+using QNH.Overheid.KernRegister.Business.KvKSearchApi;
 
 namespace QNH.Overheid.KernRegister.Beheer
 {
@@ -319,6 +320,13 @@ namespace QNH.Overheid.KernRegister.Beheer
                     .Ctor<string>("connectionString").Is(() => ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
                     .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"])
                     .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
+
+
+                x.For<IKvkSearchApi>().Use<KvkSearchApi>()
+                    .SelectConstructor(() => new KvkSearchApi("baseUrl", "searchUrl", "apiKey"))
+                    .Ctor<string>("baseUrl").Is(ConfigurationManager.AppSettings["KvkSearchApi.BaseUrl"])
+                    .Ctor<string>("searchUrl").Is(ConfigurationManager.AppSettings["KvkSearchApi.SearchUrl"])
+                    .Ctor<string>("apiKey").Is(ConfigurationManager.AppSettings["KvkSearchApi.ApiKey"]);
             });
         }
     }
