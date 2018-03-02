@@ -11,6 +11,7 @@ using WebMatrix.WebData;
 using QNH.Overheid.KernRegister.Beheer.Filters;
 using QNH.Overheid.KernRegister.Beheer.Models;
 using System.Configuration;
+using QNH.Overheid.KernRegister.Beheer.Utilities;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -24,7 +25,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (AuthorizeSimpleFilter.EnsureAuthenticatedUser)
+            if (SettingsHelper.EnsureAuthenticatedUser)
                 CreateAdminUser();
 
             ViewBag.ReturnUrl = returnUrl;

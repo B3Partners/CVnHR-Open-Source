@@ -7,63 +7,44 @@ using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using NHibernate.Util;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Utilities
 {
-    public enum ApplicationActions
-    {
-        ViewKvKData,
-        ManageKvKData,
-        Crm,
-        Brmo,
-        Debiteuren,
-        Crediteuren,
-        Admin
-    }
-
-    // TODO: setup authentication and rolemanagement other then windows
     public static class RoleManagement
     {
-        private static readonly Dictionary<ApplicationActions, StringCollection> RoleActionMapping = new Dictionary
-            <ApplicationActions, StringCollection>
-            {
-                {ApplicationActions.ViewKvKData, Settings.Default.RoleView },
-                {ApplicationActions.Admin, Settings.Default.AdministratorRole },
-                {ApplicationActions.ManageKvKData, Settings.Default.RoleManage },
-                {ApplicationActions.Crm, Settings.Default.CrmRole },
-                {ApplicationActions.Brmo, Settings.Default.BrmoRole },
-                {ApplicationActions.Crediteuren, Settings.Default.CrediteurenRole },
-                {ApplicationActions.Debiteuren, Settings.Default.DebiteurenRole }
-            };
-
         public static bool IsAllowedAllActions(this IPrincipal user, params ApplicationActions[] actions)
         {
-            if (!System.Web.Security.Roles.Enabled)
+            using (var userManager = IocConfig.Container.GetInstance<IUserManager>())
             {
-                return true;
+                return userManager.IsAllowedAllActions(user.GetUserName(), actions);
             }
-
-            var allowedActionMappings = RoleActionMapping.Where(ram => actions.Contains(ram.Key));
-            return allowedActionMappings.All(
-                    aa => aa.Value
-                        .OfType<string>()
-                        .Any(
-                            roleOrName =>
-                                roleOrName == "*" || user.IsInRole(roleOrName) ||
-                                user.Identity.Name.EndsWith(roleOrName, StringComparison.InvariantCultureIgnoreCase)));
         }
 
         public static bool IsAllowedAnyActions(this IPrincipal user, params ApplicationActions[] actions)
         {
-            if (!System.Web.Security.Roles.Enabled)
+            using (var userManager = IocConfig.Container.GetInstance<IUserManager>())
             {
-                return true;
+                return userManager.IsAllowedAnyActions(user.GetUserName(), actions);
             }
+        }
 
-            var allowedActions = RoleActionMapping.Where(ram => actions.Contains(ram.Key)).SelectMany(ram => ram.Value.OfType<string>());
-            return allowedActions.Any(roleOrName =>
-                    roleOrName == "*" || user.IsInRole(roleOrName) ||
-                    user.Identity.Name.EndsWith(roleOrName, StringComparison.InvariantCultureIgnoreCase));
+        public static string GetUserName(this IPrincipal user)
+        {
+            var username = user.Identity.Name;
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                if (SettingsHelper.UsernameToUseWhenEmpty == null)
+                    throw new ArgumentException("username cannot be null or whitespace. Set the application setting 'UsernameToUseWhenEmpty' in /Config/AppSettings.config");
+                else
+                    username = SettingsHelper.UsernameToUseWhenEmpty;
+            }
+            return username;
+        }
+
+        public static bool IsInitialAdmin(this IPrincipal user)
+        {
+            return SettingsHelper.InitialUserAdministrators.Contains(user.GetUserName(), StringComparer.InvariantCultureIgnoreCase);
         }
     }
 }

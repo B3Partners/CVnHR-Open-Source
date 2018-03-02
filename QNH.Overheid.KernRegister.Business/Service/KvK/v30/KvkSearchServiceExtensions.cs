@@ -175,6 +175,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
             else
                 kvkInschrijving.RegistratieDatumAanvang = KvkDataSearchService.VALUENOTPROVIDED;
 
+            kvkInschrijving.NonMailing = maatschappelijkeActiviteit.nonMailing?.omschrijving;
+
             // Set the rechtsvorm
             var eigenaar = maatschappelijkeActiviteit.heeftAlsEigenaar.Item;
 
@@ -355,7 +357,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                                                                     .Replace("v30.", ""),
                         VolledigeNaam = persoon.volledigeNaam ?? (persoon is NaamPersoonType ? ((NaamPersoonType)persoon).naam : ""),
                         Schorsing = functieVervulling.Item.schorsing != null ? "Ja" : "Nee",//TODO IndicatieType.Ja.ToString() : IndicatieType.Nee.ToString(),
-                        LangstZittende = "" // functieVervulling.Item.functietite.ItemElementName.ToString() //TODO .langstzittende.ToString()
+                        //LangstZittende = "" // functieVervulling.Item.functietite.ItemElementName.ToString() //TODO .langstzittende.ToString()
                     };
 
                     functie.FunctieTitel = titel == null
@@ -367,15 +369,19 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                         var aansprakelijke = functieVervulling.Item as AansprakelijkeType;
                         if (aansprakelijke.bevoegdheid != null)
                             functie.Bevoegdheid =
-                                $"{aansprakelijke.bevoegdheid.soort.omschrijving} (beperking: {(aansprakelijke.bevoegdheid.beperkingInEuros == null ? "Nee" : aansprakelijke.bevoegdheid.beperkingInEuros.waarde + " " + aansprakelijke.bevoegdheid.beperkingInEuros.valuta)}, overige beperking: {aansprakelijke.bevoegdheid.overigeBeperking.omschrijving})";// TODO IndicatieType.Nee.ToString() 
+                                $"{aansprakelijke.bevoegdheid.soort.omschrijving} (beperking: {(aansprakelijke.bevoegdheid.beperkingInEuros == null ? "Nee" : aansprakelijke.bevoegdheid.beperkingInEuros.waarde + " " + aansprakelijke.bevoegdheid.beperkingInEuros.valuta.omschrijving)}, overige beperking: {aansprakelijke.bevoegdheid.overigeBeperking.omschrijving})";// TODO IndicatieType.Nee.ToString() 
 
-                        functie.HandelingsBekwaam =
-                            $"{aansprakelijke.handlichting?.isVerleend?.code} - {aansprakelijke.handlichting.isVerleend.omschrijving} - {aansprakelijke.handlichting.isVerleend.referentieType}";
+                        functie.Functie += $" ({aansprakelijke.functie.omschrijving}, {aansprakelijke.functie.referentieType})";
+
+                        functie.HandelingsBekwaam = aansprakelijke.handlichting == null ? null
+                            : $"{aansprakelijke.handlichting?.isVerleend?.code} - {aansprakelijke.handlichting?.isVerleend?.omschrijving} - {aansprakelijke.handlichting?.isVerleend?.referentieType}";
                     }
                     else if (functieVervulling.Item is OverigeFunctionarisType)
                     {
                         var overigeFunctionaris = functieVervulling.Item as OverigeFunctionarisType;
-                        functie.Functie += ": " + overigeFunctionaris.functie.omschrijving;
+
+                        functie.Functie += $" ({overigeFunctionaris.functie.omschrijving}, {overigeFunctionaris.functie.referentieType})";
+
                         if (overigeFunctionaris.bevoegdheid != null)
                             functie.Bevoegdheid = overigeFunctionaris.bevoegdheid.soort.omschrijving;
                         functie.HandelingsBekwaam = "Afwijkend Aansprakelijkheidsbeding: " + overigeFunctionaris.heeftAfwijkendAansprakelijkheidsbeding?.omschrijving;
@@ -383,7 +389,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                     else if (functieVervulling.Item is PubliekrechtelijkeFunctionarisType)
                     {
                         var publiekrechtelijkeFunctionaris = functieVervulling.Item as PubliekrechtelijkeFunctionarisType;
-                        functie.Functie += ": " + publiekrechtelijkeFunctionaris.functie.omschrijving;
+                        functie.Functie += $" ({publiekrechtelijkeFunctionaris.functie.omschrijving}, {publiekrechtelijkeFunctionaris.functie.referentieType})";
                         if (publiekrechtelijkeFunctionaris.bevoegdheid != null)
                             functie.Bevoegdheid = publiekrechtelijkeFunctionaris.bevoegdheid.soort.omschrijving;
                         functie.HandelingsBekwaam = "Ja"; //TODO IndicatieType.Ja.ToString();
@@ -395,7 +401,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                     else if (functieVervulling.Item is BestuursfunctieType)
                     {
                         var bestuursFunctie = functieVervulling.Item as BestuursfunctieType;
-                        functie.Functie += ": " + bestuursFunctie.functie.omschrijving + ", " + bestuursFunctie.functie.referentieType;
+                        functie.Functie += $" ({bestuursFunctie.functie.omschrijving}, {bestuursFunctie.functie.referentieType})";
                         if (bestuursFunctie.bevoegdheid != null)
                             functie.Bevoegdheid =
                                 $"{bestuursFunctie.bevoegdheid.soort.omschrijving} (met andere personen: {bestuursFunctie.bevoegdheid.isBevoegdMetAnderePersonen.omschrijving}, {bestuursFunctie.bevoegdheid.isBevoegdMetAnderePersonen.referentieType})";
@@ -413,7 +419,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                     else if (functieVervulling.Item is GemachtigdeType)
                     {
                         var gemachtigde = functieVervulling.Item as GemachtigdeType;
-                        functie.Functie += ": " + gemachtigde.functie.omschrijving;
+                        functie.Functie += $" ({gemachtigde.functie.omschrijving}, {gemachtigde.functie.referentieType})";
                         if (gemachtigde.volmacht != null)
                             functie.Bevoegdheid = $"Volmacht: {gemachtigde.volmacht.typeVolmacht.code}, {gemachtigde.volmacht.typeVolmacht.omschrijving}";
                         //.Item.ToString().Replace("Type", "");
@@ -426,7 +432,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                     else if (functieVervulling.Item is FunctionarisBijzondereRechtstoestandType)
                     {
                         var functionaris = functieVervulling.Item as FunctionarisBijzondereRechtstoestandType;
-
+                        functie.Functie += $" ({functionaris.functie?.omschrijving}, {functionaris.functie?.referentieType})";
                         #region Types of Functionarissen
                         //if (functionaris is BewindvoerderType)
                         //{ 

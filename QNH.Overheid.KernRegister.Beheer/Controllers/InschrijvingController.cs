@@ -13,9 +13,11 @@ using Microsoft.AspNet.SignalR.Hubs;
 using NLog;
 using System.Configuration;
 using QNH.Overheid.KernRegister.Organization.Resources;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
+    [CVnHRAuthorize(ApplicationActions.CVnHR_ManageKvKData)]
     public class InschrijvingController : TaskSchedulerPartialController
     {
 
@@ -32,6 +34,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         }
     }
 
+    [CVnHRAuthorize(ApplicationActions.CVnHR_ManageKvKData)]
     [HubName("csvImportHub")]
     public class CsvImportHub : Hub
     {

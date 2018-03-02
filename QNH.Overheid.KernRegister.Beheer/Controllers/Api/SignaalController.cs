@@ -6,6 +6,7 @@ using QNH.Overheid.KernRegister.Business.SignaalService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -26,109 +27,91 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
 
         // POST: api/Signaal
         [HttpPost, ActionName("NieuweInschrijving")]
-        public async Task NieuweInschrijving([FromBody]NieuweInschrijvingType inschrijving)
+        public async Task NieuweInschrijving(HttpRequestMessage request)
         {
-            if (inschrijving == null)
+            if (request == null)
             {
-                throw new ArgumentException("inschrijving");
+                throw new ArgumentException("request");
             }
 
-            var kvkNummer = inschrijving.heeftBetrekkingOp.kvkNummer;
-            _log.Trace($"Received new inschrijving with signaalId {inschrijving.signaalId} with KvkNummer: {kvkNummer}");
-            _log.Trace($"Aanleiding: {inschrijving?.aanleiding?.omschrijving}");
+            var kvkNummer = ParseKvKnummerFromHttpRequestMessage(request);
+            _log.Info($"Received new NieuweInschrijving with KvkNummer: {kvkNummer}");
 
             UpdateOrInsertInschrijving(kvkNummer);
         }
 
         // POST: api/Signaal
         [HttpPost, ActionName("NieuweInschrijvingBrmo")]
-        public async Task NieuweInschrijvingBrmo([FromBody]NieuweInschrijvingType inschrijving)
+        public async Task NieuweInschrijvingBrmo(HttpRequestMessage request)
         {
-            if (inschrijving == null)
+            if (request == null)
             {
-                throw new ArgumentException("inschrijving");
+                throw new ArgumentException("request");
             }
 
-            var kvkNummer = inschrijving.heeftBetrekkingOp.kvkNummer;
-            _log.Trace($"Received new inschrijving with signaalId {inschrijving.signaalId} with KvkNummer: {kvkNummer}");
-            _log.Trace($"Aanleiding: {inschrijving.aanleiding.omschrijving}");
+            var kvkNummer = ParseKvKnummerFromHttpRequestMessage(request);
+            _log.Info($"Received new NieuweInschrijvingBrmo with KvkNummer: {kvkNummer}");
 
             UpdateOrInsertInschrijvingBrmo(kvkNummer);
         }
 
         [HttpPost, ActionName("Signaal")]
-        public async Task Signaal([FromBody]SignaalType signaal)
+        public async Task Signaal(HttpRequestMessage request)
         {
-            var kvkNummer = GetKvKNummerFromSignaal(signaal);
-            _log.Trace($"Received new signaal with signaalId {signaal?.signaalId} with KvkNummer: {kvkNummer}");
+            var kvkNummer = ParseKvKnummerFromHttpRequestMessage(request);
+            _log.Info($"Received new Signaal with KvkNummer: {kvkNummer}");
             UpdateOrInsertInschrijving(kvkNummer);
         }
 
         [HttpPost, ActionName("SignaalBrmo")]
-        public async Task SignaalBrmo([FromBody] SignaalType signaal)
+        public async Task SignaalBrmo(HttpRequestMessage request)
         {
-            var kvkNummer = GetKvKNummerFromSignaal(signaal);
-            _log.Trace($"Received new signaalBrmo with signaalId {signaal.signaalId} with KvkNummer: {kvkNummer}");
+            var kvkNummer = ParseKvKnummerFromHttpRequestMessage(request);
+            _log.Info($"Received new SignaalBrmo with KvkNummer: {kvkNummer}");
             UpdateOrInsertInschrijvingBrmo(kvkNummer);
         }
 
         [HttpPost, ActionName("Bericht")]
-        public async Task Bericht([FromBody] BerichtType bericht)
+        public async Task Bericht(HttpRequestMessage request)
         {
-            var kvkNummer = GetKvkNummerFromBerichtType(bericht);
-            _log.Trace($"Received new Bericht with berichtId {bericht.berichtId} with KvkNummer: {kvkNummer}");
+            var kvkNummer = ParseKvKnummerFromHttpRequestMessage(request);
+            _log.Info($"Received new Bericht with KvkNummer: {kvkNummer}");
             UpdateOrInsertInschrijving(kvkNummer);
         }
 
         [HttpPost, ActionName("BerichtBrmo")]
-        public async Task BerichtBrmo([FromBody] BerichtType bericht)
+        public async Task BerichtBrmo(HttpRequestMessage request)
         {
-            var kvkNummer = GetKvkNummerFromBerichtType(bericht);
-            _log.Trace($"Received new BerichtBrmo with berichtId {bericht.berichtId} with KvkNummer: {kvkNummer}");
+            var kvkNummer = ParseKvKnummerFromHttpRequestMessage(request);
+            _log.Info($"Received new BerichtBrmo with KvkNummer: {kvkNummer}");
             UpdateOrInsertInschrijvingBrmo(kvkNummer);
         }
 
-        private string GetKvKNummerFromSignaal(SignaalType signaal)
+        private string ParseKvKnummerFromHttpRequestMessage(HttpRequestMessage request)
         {
-            string kvkNummer;
-            if (signaal is NieuweInschrijvingType)
+            var xml = request.Content.ReadAsStringAsync().Result;
+            _log.Trace($"Request xml: {xml}");
+
+            if (string.IsNullOrWhiteSpace(xml))
             {
-                kvkNummer = ((NieuweInschrijvingType)signaal)?.heeftBetrekkingOp?.kvkNummer;
-            }
-            else if (signaal is InsolventiewijzigingType)
-            {
-                kvkNummer = ((InsolventiewijzigingType)signaal)?.heeftBetrekkingOp?.kvkNummer;
-            }
-            else if (signaal is VoortzettingEnOverdrachtSignaalType)
-            {
-                kvkNummer = ((VoortzettingEnOverdrachtSignaalType)signaal)?.heeftBetrekkingOp?.kvkNummer;
-            }
-            else if (signaal is RechtsvormwijzigingType)
-            {
-                kvkNummer = ((RechtsvormwijzigingType)signaal)?.heeftBetrekkingOp?.kvkNummer;
-            }
-            else
-            {
-                throw new NotImplementedException($"SignaalType {signaal.GetType()} not implemented...");
+                _log.Error($"Cannot parse kvknummer from empty string! Could not read xml from request. RequestUri: {request.RequestUri}");
+                return null;
             }
 
-            return kvkNummer;
-        }
-
-        private string GetKvkNummerFromBerichtType(BerichtType bericht)
-        {
-            string kvkNummer;
-            var berichtType = bericht as UpdateBerichtType;
-            if (berichtType != null)
+            // TODO: rewrite using Regexes.
+            var closingTag = "</kvknummer";
+            var reverseXml = new string(xml.Reverse().ToArray());
+            var indexOfClosingTag = reverseXml.IndexOf(new string(closingTag.Reverse().ToArray()), StringComparison.InvariantCultureIgnoreCase) + closingTag.Length;
+            if (indexOfClosingTag > 0)
             {
-                kvkNummer = berichtType?.heeftBetrekkingOp?.kvkNummer;
-            }
-            else
-            {
-                throw new NotImplementedException($"BerichtType {bericht.GetType()} not implemented...");
+                var indexOfStartTag = reverseXml.IndexOf(">", indexOfClosingTag, StringComparison.CurrentCultureIgnoreCase);
+                var kvknummer = new string(reverseXml.Substring(indexOfClosingTag, indexOfStartTag - indexOfClosingTag).Reverse().ToArray());
+                _log.Trace($"Parsed kvknummer {kvknummer} from request: {kvknummer}");
+                return kvknummer;
             }
 
-            return kvkNummer;
+            _log.Error($"Xml received does not contain kvknummer! xml: {xml}");
+            return null;
         }
 
         private void UpdateOrInsertInschrijving(string kvkNummer)

@@ -32,5 +32,19 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
         public static string BrmoApplicationBaseUrl => ConfigurationManager.AppSettings["BrmoApplicationBaseUrl"];
 
         public static bool BrmoApplicationEnabled => !string.IsNullOrWhiteSpace(BrmoApplicationBaseUrl);
+
+        public static string UsernameToUseWhenEmpty => ConfigurationManager.AppSettings["UsernameToUseWhenEmpty"];
+
+        public static bool UseHardCodedUserManagerForTesting =>
+            Convert.ToBoolean(ConfigurationManager.AppSettings["UseHardCodedUserManagerForTesting"] ?? "False");
+
+        public static bool EnsureAuthenticatedUser => Convert.ToBoolean(ConfigurationManager.AppSettings["EnsureAuthenticatedUser"]);
+
+        public static List<string> InitialUserAdministrators =>
+            ConfigurationManager.AppSettings["InitialUserAdministrators"]
+                .Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+
+        public static string UserManagerPrefillUserName => ConfigurationManager.AppSettings["UserManagerPrefillUserName"] ?? string.Empty;
     }
 }

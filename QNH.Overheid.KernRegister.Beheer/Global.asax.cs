@@ -1,9 +1,11 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using NLog;
 using QNH.Overheid.KernRegister.Beheer.App_Start;
 using QNH.Overheid.KernRegister.Beheer.DependencyResolution;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
@@ -15,6 +17,8 @@ namespace QNH.Overheid.KernRegister.Beheer
 
     public class MvcApplication : HttpApplication
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         protected void Application_Start()
         {
             CultureConfig.EnsureRegisteredUiCulture(this);
@@ -35,6 +39,16 @@ namespace QNH.Overheid.KernRegister.Beheer
             // Use XmlSerializer
             //GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer = true;
             GlobalConfiguration.Configuration.Formatters.Insert(0, new KvKTypesXmlFormatter());
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            var ex = Server.GetLastError();
+
+            if (ex != null)
+                _logger.Error(ex, "ERROR: Unhandled exception!");
+            else
+                _logger.Error("ERROR! Unhandled exception! Even the exception is unknown...");
         }
     }
 }
