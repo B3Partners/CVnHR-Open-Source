@@ -23,16 +23,15 @@
     <div class="row">
         <div class="pull-right">
             @BackButton.Render(cssClass: "btn btn-large btn-primary")
-            @*@Html.ActionLink("Terug naar zoekscherm", "Index", "Search", new { kvkNummer = Request["kvknummer"] }, new { @class = "btn btn-primary btn-large" })*@
 
-            @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
+            @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
             {
                 <td rowspan="2">
                     @Html.ActionLink(
                                    linkText: "Naar " + Default.ApplicationName + " en " + Default.CrmApplication,
                                 actionName: "Import",
                                 controllerName: "Search",
-                                routeValues: new { kvkNummer = Request["kvknummer"], vestigingNummer = Model.Vestigingsnummer, export = true },
+                                routeValues: new { kvkNummer = Request["kvknummer"], vestigingNummer = Model.Vestigingsnummer, toCrm = true },
                                 htmlAttributes: new { @class = "btn btn-large btn-warning" })
                 </td>
             }

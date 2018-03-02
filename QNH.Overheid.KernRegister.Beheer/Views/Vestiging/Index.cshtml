@@ -11,12 +11,13 @@
         .form-group label {
             font-size: 20px;
         }
+
         .form-group input[type=text] {
             font-size: 20px;
         }
 
         .red {
-            color:red;
+            color: red;
         }
 
         .col-sm-3 img {
@@ -27,8 +28,9 @@
         .form-group input {
             max-width: 100%;
         }
+
         button.pagination {
-            color:#fff;
+            color: #fff;
             font-weight: bold;
         }
 
@@ -51,7 +53,7 @@
         <p>Let op: Zoek je naar een bedrijf met een speciaal teken in zijn naam? Zoek dan met een % teken, bijvoorbeeld voor Coöperatie gebruik Co%peratie.</p>
     </div>
     <div class="col-sm-9">
-        
+
 
         @using (Html.BeginForm("Index", "Vestiging", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
@@ -60,8 +62,12 @@
             <div class="form-group">
                 <label for="GlobalCriterium" id="criteriumlabel" class="col-sm-3 control-label">Zoekcriterium</label>
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.KvkSearchCriteria.GlobalCriterium, new {@id = "searchbox", @class = "form-control input-lg", 
-                                            placeholder = "voer een zoekopdracht in" })
+                    @Html.TextBoxFor(model => model.KvkSearchCriteria.GlobalCriterium, new
+                    {
+                        @id = "searchbox",
+                        @class = "form-control input-lg",
+                        placeholder = "voer een zoekopdracht in"
+                    })
                 </div>
             </div>
             <div class="form-group">
@@ -111,7 +117,7 @@
                     <button type="reset" id="btnShowall" name="btnShowall" class="btn btn-success">Toon alle</button>
                 </div>
             </div>
-            @Html.HiddenFor(model=> model.KvkSearchCriteria.Page, new { @id = "page" })
+            @Html.HiddenFor(model => model.KvkSearchCriteria.Page, new { @id = "page" })
         }
 
 
@@ -156,41 +162,37 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Details", "Details", new { kvkNummer = item.KvkNummer, searchcriteria = Model.KvkSearchCriteria.GlobalCriterium })
-                                    @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                                    @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
                                     {
                                         @:|
-                                        @Html.ActionLink("Verwijder", "Delete", new { kvkNummer = item.KvkNummer }) 
-                                        if (item.Vestigingen.Count == 1)
-                                        {
-                                            if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData, ApplicationActions.Crm))
-                                            {
-                                                @:|
-                                                @Html.ActionLink("Naar " + Default.CrmApplication, 
-                                                    "Export", 
-                                                    new { kvkNummer = item.KvkNummer })
-                                            }
-                                            if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
-                                            {
-                                                @:|
-                                                @Html.ActionLink(linkText: Default.ToDebiteuren,
-                                                    actionName: "ExportDebiteuren",
-                                                    routeValues: new { kvkNummer = item.KvkNummer },
-                                                    htmlAttributes: null)
-                                            }
-                                            if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
-                                            {
-                                                @:|
-                                                @Html.ActionLink(linkText: Default.ToCrediteuren,
-                                                    actionName: "ExportCrediteuren",
-                                                    routeValues: new { kvkNummer = item.KvkNummer },
-                                                    htmlAttributes: null)
-                                            }
-                                        }
-
-
+                                        @Html.ActionLink("Verwijder", "Delete", new { kvkNummer = item.KvkNummer })
                                     }
-
-
+                                    @if (item.Vestigingen.Count == 1)
+                                    {
+                                        if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
+                                        {
+                                            @:|
+                                            @Html.ActionLink("Naar " + Default.CrmApplication,
+                                                     "Export",
+                                                     new { kvkNummer = item.KvkNummer })
+                                        }
+                                        if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
+                                        {
+                                            @:|
+                                            @Html.ActionLink(linkText: Default.ToDebiteuren,
+                                                     actionName: "ExportDebiteuren",
+                                                     routeValues: new { kvkNummer = item.KvkNummer },
+                                                     htmlAttributes: null)
+                                        }
+                                        if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
+                                        {
+                                            @:|
+                                            @Html.ActionLink(linkText: Default.ToCrediteuren,
+                                                     actionName: "ExportCrediteuren",
+                                                     routeValues: new { kvkNummer = item.KvkNummer },
+                                                     htmlAttributes: null)
+                                        }
+                                    }
                                 </td>
                             </tr>
                         }
@@ -230,19 +232,19 @@
 
 @section Scripts {
     <script type="text/javascript">
-        $(function() {
-            $("#btnShowall").on("click", function(e) {
+        $(function () {
+            $("#btnShowall").on("click", function (e) {
                 $("#searchbox").val("%");
                 $("form").submit();
             });
 
-            $(".pagination").on("click", function(e) {
+            $(".pagination").on("click", function (e) {
                 e.preventDefault();
                 $("#page").val($(this).attr("data-page"));
                 $("form").submit();
             });
 
-            $("input[type=checkbox]", ".search-options").on("change", function(e) {
+            $("input[type=checkbox]", ".search-options").on("change", function (e) {
                 //e.preventDefault();
                 if ($(this).is("#KvkSearchCriteria_All")) {
                     $("input[type=checkbox]:not(#KvkSearchCriteria_All)", ".search-options").attr("checked", false);

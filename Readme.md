@@ -25,5 +25,12 @@ of Commerce (KvK).
 - Create a database on either Oracle or MS SQL and update .config files accordingly
 - Surfs up dude!
 
+# Documentation en Configuration
+
+- TODO => link to Config examples
+
+
+
+
 ## README "QNH.Overheid.KernRegister.Beheer"
 APP_DATA and Logs folders need read and write permissions for Elmah logging.
