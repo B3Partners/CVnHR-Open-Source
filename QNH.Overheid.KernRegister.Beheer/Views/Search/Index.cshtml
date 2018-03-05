@@ -271,14 +271,14 @@
             var template = $(".template", table);
 
             // Add items
-            $.each(result.Items, (i, item) => {
+            $.each(result.Items, function(i, item) {
                 var t = template.clone().removeClass("template").addClass("kvk-search-item");
                 $(".kvknummer", t).text(item.KvkNumber);
                 var tradeNames = item.TradeNames || { BusinessName: "[??]" };
                 $(".naam", t).text(tradeNames.BusinessName || tradeNames.ShortBusinessName);
                 var adres = item.Addresses ? item.Addresses[0] : null;
                 if (adres != null) {
-                    $(".adres", t).text(`${adres.Street} ${adres.HouseNumber} ${adres.HouseNumberAddition}, ${adres.City}`);
+                    $(".adres", t).text(adres.Street + " " + adres.HouseNumber + " " + adres.HouseNumberAddition + " " + adres.City);
                 }
                 var link = $("<a>").addClass("link-button").attr("href", "@Url.Action("Index")" + "?kvkNummer=" + item.KvkNumber)
                         .text("Toon");
