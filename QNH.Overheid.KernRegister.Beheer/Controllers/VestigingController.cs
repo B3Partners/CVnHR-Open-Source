@@ -22,9 +22,11 @@ using System.Text;
 using QNH.Overheid.KernRegister.Business.Crm;
 using QNH.Overheid.KernRegister.Business.Model.EntityComparers;
 using Rotativa;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
+    [CVnHRAuthorize(ApplicationActions.CVnHR_ViewKvKData)]
     public class VestigingController : Controller
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
@@ -352,8 +354,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult Delete(string kvkNummer)
         {
-            if(!User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
-                return RedirectToAction("Index");
+            if(!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageKvKData });
 
             KvkInschrijving inschrijving = null;
 
@@ -400,8 +402,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult Export(string kvkNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
-                return RedirectToAction("Index");
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageCrm });
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
             var inschrijving = repo.GetLatestInschrijving(kvkNummer);
@@ -434,8 +436,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult ExportVestiging(string vestigingNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
-                return RedirectToAction("Index");
+            if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageCrm });
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
             var vestiging = repo.GetLatestVestiging(vestigingNummer);
@@ -504,8 +506,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         private ActionResult Export(string kvkNummer, bool createNew, bool immediatelyCreateNewIfExists,
             FinancialProcesType type)
         {
-            if ((type == FinancialProcesType.ProbisDebiteuren && !User.IsAllowedAllActions(ApplicationActions.Debiteuren)) 
-                || (type == FinancialProcesType.ProbisCrediteuren && !User.IsAllowedAllActions(ApplicationActions.Crediteuren)))
+            if ((type == FinancialProcesType.ProbisDebiteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren)) 
+                || (type == FinancialProcesType.ProbisCrediteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren)))
             {
                 var msg = $"Action Export for type {type} not allowed for user! {User.Identity.Name}";
                 logger.Warn(msg);
@@ -559,8 +561,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         private ActionResult ExportVestiging(string vestigingNummer, bool createNew, bool immediatelyCreateNewIfExists, FinancialProcesType type)
         {
-            if ((type == FinancialProcesType.ProbisDebiteuren && !User.IsAllowedAllActions(ApplicationActions.Debiteuren))
-                || (type == FinancialProcesType.ProbisCrediteuren && !User.IsAllowedAllActions(ApplicationActions.Crediteuren)))
+            if ((type == FinancialProcesType.ProbisDebiteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
+                || (type == FinancialProcesType.ProbisCrediteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren)))
             {
                 var msg = $"Action ExportVestiging for type {type} not allowed for user! {User.Identity.Name}";
                 logger.Warn(msg);

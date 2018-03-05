@@ -30,14 +30,17 @@ using System.Configuration;
 using System.IO;
 using System.Threading;
 using NHibernate.Dialect;
+using QNH.Overheid.KernRegister.Business.Service.Users;
+using System.Data;
+using System.Data.SqlClient;
+using Npgsql;
+using System.Data.SqlServerCe;
 using QNH.Overheid.KernRegister.Business.KvKSearchApi;
 
 namespace QNH.Overheid.KernRegister.Beheer
 {
     public static class IocConfig
     {
-        public static bool UseMockCrm => Properties.Settings.Default.UseMockCrm;
-
         public static bool CreateDatabase => Convert.ToBoolean( ConfigurationManager.AppSettings["CreateDatabase"] );
 
         private static ISessionFactory GetSessionFactory(string dbProvider, string schemaName)
@@ -60,11 +63,11 @@ namespace QNH.Overheid.KernRegister.Beheer
                         .DefaultSchema(schemaName);
                     break;
                 case "NHibernatePostGRESQL":
-                    persistenceConfigurer = PostgreSQLConfiguration.PostgreSQL82
+                    persistenceConfigurer = PostgreSQLConfiguration.Standard
                         .Driver<NpgsqlDriver>()
                         .ConnectionString(connst =>
                             connst.FromConnectionStringWithKey("NHibernatePostGRESQLConnection"))
-                        .Dialect<PostgreSQL82Dialect>()
+                        .Dialect<PostgreSQLDialect>()
                         .DefaultSchema(schemaName);
                     break;
                 default: // SQLCE
@@ -119,7 +122,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                 .Mappings(mappings => mappings
                             .AutoMappings.Add(
                                 AutoMap
-                                    .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration(SettingsHelper.BrmoApplicationEnabled))
+                                    .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration())
                                     .UseOverridesFromAssemblyOf<KvkInschrijving>()
                     //.Where(t => t.Namespace == "QNH.Overheid.KernRegister.Business.Model.Entities")
                                     .Conventions.Setup(c =>
@@ -172,15 +175,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                         x.For<ISession>().Use((ctx) => ctx.GetInstance<ISessionFactory>().OpenSession()).AlwaysUnique();
                         x.For(typeof(IRepository<>)).Use(typeof(NHRepository<>)).AlwaysUnique();
                         x.For<IKvkInschrijvingRepository>().Use<KvkInschrijvingNHRepository>().AlwaysUnique();
-
-                        if (SettingsHelper.BrmoApplicationEnabled)
-                        {
-                            x.For(typeof(IRsgbRepository<>)).Use(typeof(RsgbRepository<>))
-                                .Ctor<ISession>()
-                                .Is((ctx) => ctx.GetInstance<ISessionFactory>()
-                                                .OpenSession(new OracleConnection(
-                                                    ConfigurationManager.ConnectionStrings["OracleRsgbConnection"].ConnectionString)));
-                        }
+                        
                         // End nHibernate setup
                         break;
                     default:
@@ -272,21 +267,12 @@ namespace QNH.Overheid.KernRegister.Beheer
                 switch (ConfigurationManager.AppSettings["CrmToUse"]) // Default.CrmApplication)
                 {
                     case "DocBase":
-                        if (UseMockCrm)
-                        {
-                            //x.For<SecuritySoap>().Use("", UnitTestMockStuff.CreateSecuritySoapMock);
-                            //x.For<RelationsSoap>().Use("", UnitTestMockStuff.CreateRelationsSoapMock);
-                            //x.For<IExportService>().Use(UnitTestMockStuff.CreateDocBaseMock);
-                        }
-                        else
-                        {
-                            x.For<SecuritySoap>().Use<SecuritySoapClient>()
+                        x.For<SecuritySoap>().Use<SecuritySoapClient>()
                                 .SelectConstructor(() => new SecuritySoapClient())
                                 .SetProperty(ssc => ssc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                            x.For<RelationsSoap>().Use<RelationsSoapClient>()
-                                .SelectConstructor(() => new RelationsSoapClient())
-                                .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                        }
+                        x.For<RelationsSoap>().Use<RelationsSoapClient>()
+                            .SelectConstructor(() => new RelationsSoapClient())
+                            .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
 
                         // We need a postcode service for DocBase Municipality
                         x.ForSingletonOf<IPostcodeService>().Use(new NationaalGeoregisterLocatieService(
@@ -313,21 +299,31 @@ namespace QNH.Overheid.KernRegister.Beheer
                         throw new ConfigurationErrorsException("CrmApplication from settings is unknown to the application. Value searched for: " + ConfigurationManager.AppSettings["CrmToUse"]);
                 }
 
-                // TODO: make conditionally?? 
                 // Setup the financial service
                 x.For<IFinancialExportService>().Use<ProbisRepository>()
                     .SelectConstructor(() => new ProbisRepository("connectionstring", "insertOrUpdateStoredProcedureName", "displayName"))
                     .Ctor<string>("connectionString").Is(() => ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
                     .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"])
                     .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
-
-
-                x.For<IKvkSearchApi>().Use<KvkSearchApi>()
-                    .SelectConstructor(() => new KvkSearchApi("baseUrl", "searchUrl", "apiKey"))
-                    .Ctor<string>("baseUrl").Is(ConfigurationManager.AppSettings["KvkSearchApi.BaseUrl"])
-                    .Ctor<string>("searchUrl").Is(ConfigurationManager.AppSettings["KvkSearchApi.SearchUrl"])
-                    .Ctor<string>("apiKey").Is(ConfigurationManager.AppSettings["KvkSearchApi.ApiKey"]);
             });
+        }
+
+        private static IDbConnection GetbrmoStagingDbConnection(string brmoStagingConnectionString)
+        {
+            var brmoStagingDbProvider = ConfigurationManager.AppSettings["BrmoStagingDbProvider"];
+            switch (brmoStagingDbProvider)
+            {
+                case "NHibernateOracle":
+                    return new OracleConnection(brmoStagingConnectionString);
+                case "NHibernateSQL":
+                    return new SqlConnection(brmoStagingConnectionString);
+                case "NHibernatePostGRESQL":
+                    return new NpgsqlConnection(brmoStagingConnectionString);
+                case "NHibernateSQLCE":
+                    return new SqlCeConnection(brmoStagingConnectionString);
+                default:
+                    throw new ConfigurationErrorsException("Unknown BrmoStagingDbProvider!");
+            }
         }
     }
 

@@ -12,6 +12,8 @@ namespace QNH.Overheid.KernRegister.Organization.Resources
     /// </summary>
     public class Default
     {
+        public const string CVnHREveryone = "[cvnhr-everyone]";
+
         public static Organization CurrentOrganization { get; set; }
 
         public static string ApplicationName => new OrganizationResource()

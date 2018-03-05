@@ -110,6 +110,14 @@
 </div>
 <div class="row">
     <div class="col-md-4">
+        NonMailing:
+    </div>
+    <div class="col-md-8">
+        @Model.Inschrijving.NonMailing
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
         Aantal medewerkers:
     </div>
     <div class="col-md-8">
@@ -377,9 +385,9 @@ else
                     <th>Woonplaats</th>
                     <th>Postbus</th>
 
-                    @if(User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                    @if(User.IsAllowedAnyActions(ApplicationActions.CVnHR_ManageCrm, ApplicationActions.CVnHR_Debiteuren, ApplicationActions.CVnHR_Crediteuren))
                     {
-                        <th>Acties</th>
+                    <th>Acties</th>
                     }
                 </tr>
 
@@ -405,19 +413,19 @@ else
 
                         <td>nvt</td>
 
-                        @if(User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                        @if(User.IsAllowedAnyActions(ApplicationActions.CVnHR_ManageCrm, ApplicationActions.CVnHR_Debiteuren, ApplicationActions.CVnHR_Crediteuren))
                         {
                             <td rowspan="2">
-                                @if (User.IsAllowedAllActions(ApplicationActions.Crm))
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
                                 {
                                     @Html.ActionLink(
                                         linkText: "Naar " + Default.CrmApplication,
                                         actionName: "Import",
                                         controllerName: "Search",
-                                        routeValues: new { kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, export = true },
+                                        routeValues: new { kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, toCrm = true },
                                         htmlAttributes: null)
                                 }
-                                @if (User.IsAllowedAllActions(ApplicationActions.Debiteuren))
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
                                 {
                                     @:&nbsp;
                                     @Html.ActionLink(linkText: Default.ToDebiteuren,
@@ -426,7 +434,7 @@ else
                                         routeValues: new {kvkNummer = Model.KvkNummer, vestigingNummer = vestiging.Vestigingsnummer, ToDebiteuren = true},
                                         htmlAttributes: null)
                                 }
-                                @if (User.IsAllowedAllActions(ApplicationActions.Crediteuren))
+                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
                                 {
                                     @:&nbsp;
                                     @Html.ActionLink(linkText: Default.ToCrediteuren,

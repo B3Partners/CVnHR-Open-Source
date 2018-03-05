@@ -1,0 +1,122 @@
+﻿@model IDictionary<ApplicationActions, IEnumerable<string>>
+@{
+    ViewBag.Title = "Manage users";
+}
+
+<div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h3>User manager</h3>
+            <p>Stel op deze pagina de rechten in voor alle gebruikers.</p>
+            <p>Gebruik @Default.CVnHREveryone om iedereen rechten te geven voor een bepaalde groep.</p>
+        </div>
+        <div class="col-sm-9">
+            <h3>Gebruikersrechten</h3>
+
+            @foreach (var value in Model)
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a data-toggle="collapse" href="#@value.Key.ToString()" aria-expanded="false">
+                            <h3 data-toggle="tooltip" data-placement="left" title="@value.Key.GetDescription()">
+                                @value.Key.GetDisplayName()
+                            </h3>
+                        </a>
+
+                        <div class="collapse" id="@value.Key.ToString()">
+                            <p>@value.Key.GetDescription()</p>
+                            @{ 
+                                var show = value.Value.Any() || value.Key == ApplicationActions.CVnHR_Admin 
+                                    ? null : "hidden";
+                            }
+                            <table class="table table-striped table-bordered table-hover table-users-@value.Key @show">
+                                <thead>
+                                    <tr>
+                                        <th>Gebruiker</th>
+                                        <th>Acties</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (value.Key == ApplicationActions.CVnHR_Admin)
+                                    {
+                                        foreach (var user in SettingsHelper.InitialUserAdministrators)
+                                        {
+                                            <tr>
+                                                <td>@user</td>
+                                                <td>[config]</td>
+                                            </tr>
+                                        }
+                                    }
+                                    @foreach (var user in value.Value)
+                                    {
+                                        <tr>
+                                            <td>@user</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm btn-remove" type="submit" data-user="@user" data-action="@value.Key">
+                                                    verwijder
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <fieldset class="form-group form-inline">
+                                <input class="form-control" type="text" placeholder="Gebruikersnaam" value="@SettingsHelper.UserManagerPrefillUserName" />
+                                <button class="btn btn-info btn-sm btn-add" data-action="@value.Key" type="submit">Voeg toe</button>
+                            </fieldset>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $(".table").on("click", ".btn-remove", function (e) {
+                var user = $(this).attr("data-user");
+                var action = $(this).attr("data-action");
+                var row = $(this).parents("tr");
+
+                $.post("Users/RemoveUser", { action: action, username: user }, function (result) {
+                    row.remove();
+                    console.log($(".table-users-" + action + " tbody tr").length);
+                    if ($(".table-users-" + action + " tbody tr").length < 1) {
+                        $(".table-users-" + action).addClass("hidden");
+                    }
+                }).fail(function (error, error2, msg) {
+                    //console.log(error, error2, msg);
+                    alert("Error! Please contact administrator! " + msg);
+                });
+            });
+
+            $(".btn-add").on("click", function (e) {
+                var input = $(this).prev("input");
+                var user = input.val();
+                var action = $(this).attr("data-action");
+
+                $.post("Users/AddUser", { action: action, username: user }, function (result) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(user));
+                    row.append($("<td><button class=\"btn btn-danger btn-sm btn-remove\" type=\"submit\" data-user=\""
+                        + user + "\" data-action=\""+ action +"\">verwijder</button></td>"));
+                    $(".table-users-" + action + " tbody").append(row);
+                    $(".table-users-" + action).removeClass("hidden");
+                    input.val("");
+                }).fail(function (error, error2, msg) {
+                    //console.log(error, error2, msg);
+                    alert("Error! Please contact administrator! " + msg);
+                });
+
+                //console.log("TODO add user and action", user, action);
+            });
+        });
+</script>
+}

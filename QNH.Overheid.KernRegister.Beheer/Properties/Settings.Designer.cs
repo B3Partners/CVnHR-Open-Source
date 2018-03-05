@@ -12,7 +12,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,103 +20,6 @@ namespace QNH.Overheid.KernRegister.Beheer.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool UseMockCrm {
-            get {
-                return ((bool)(this["UseMockCrm"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>PROVDRENTHE\App_KernregisterBeheer</string>
-  <string>PROVDRENTHE\App_CVnHRBeheer</string>
-  <string>adm_corneh</string>
-  <string>DESKTOP-MUHRI66\corne.hogerheijde</string>
-  <string>DESKTOP-MUHRI66\beheer</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection RoleManage {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["RoleManage"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>PROVDRENTHE\App_KernregisterRaadplegen</string>
-  <string>PROVDRENTHE\App_CVnHRRaadplegen</string>
-  <string>*</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection RoleView {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["RoleView"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>TEST_CrediteurenRol</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection CrediteurenRole {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CrediteurenRole"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>DebiteurenRol</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection DebiteurenRole {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["DebiteurenRole"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>AdminRole</string>
-  <string>PROVDRENTHE\adm_corneh</string>
-  <string>PROVDRENTHE\corneh</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection AdministratorRole {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["AdministratorRole"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>*</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection CrmRole {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CrmRole"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>*</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection BrmoRole {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["BrmoRole"]));
             }
         }
     }

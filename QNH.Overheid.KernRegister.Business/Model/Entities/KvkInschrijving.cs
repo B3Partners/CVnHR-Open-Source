@@ -85,6 +85,12 @@ namespace QNH.Overheid.KernRegister.Business.Model.Entities
 
         #endregion
 
+        #region v3.0 Additions
+
+        public virtual string NonMailing { get; set; }
+
+        #endregion
+
         public virtual bool FunctionalEquals(KvkInschrijving other)
         {
             if (ReferenceEquals(null, other))
@@ -118,6 +124,7 @@ namespace QNH.Overheid.KernRegister.Business.Model.Entities
                 && string.Equals(GestortKapitaal, other.GestortKapitaal)
                 && string.Equals(BerichtenBoxNaam, other.BerichtenBoxNaam)
                 && string.Equals(RechterlijkeUitspraak, other.RechterlijkeUitspraak)
+                && string.Equals(NonMailing, other.NonMailing)
 
                 && Vestigingen.FunctionalEquals(other.Vestigingen)
                 && FunctieVervullingen.FunctionalEquals(other.FunctieVervullingen)
