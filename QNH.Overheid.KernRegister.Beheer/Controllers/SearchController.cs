@@ -21,12 +21,14 @@ using QNH.Overheid.KernRegister.Business.Service.BRMO;
 using Rotativa;
 using StructureMap;
 using StructureMap.Pipeline;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 using QNH.Overheid.KernRegister.Business.KvKSearchApi.Entities;
 using QNH.Overheid.KernRegister.Business.KvKSearchApi;
 using System.Threading.Tasks;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
+    [CVnHRAuthorize(ApplicationActions.CVnHR_ViewKvKData)]
     public class SearchController : Controller
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
@@ -114,25 +116,36 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         }
 
         public ActionResult Import(string kvkNummer, 
-            bool export = false, 
-            string vestigingNummer = null, 
-            bool brmo = false,
+            string vestigingNummer = null,
+            bool toCrm = false,
+            bool toBrmo = false,
             bool toDebiteuren = false,
             bool toCrediteuren = false)
         {
-            if (!User.IsAllowedAllActions(ApplicationActions.ManageKvKData)) // do check for all users enabled
-                return RedirectToAction("Index");
-
-            if (brmo && !SettingsHelper.BrmoApplicationEnabled)
-                return RedirectToAction("Index");
+            var anyExport = toCrm || toDebiteuren || toCrediteuren || toBrmo;
+            if (!anyExport && !User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageKvKData });
+            else if (toCrm && !User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageCrm });
+            else if (toDebiteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_Debiteuren });
+            else if (toCrediteuren && !User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
+                return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_Crediteuren });
+            else if (toBrmo)
+            {
+                if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
+                    return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_Brmo });
+                else if(!SettingsHelper.BrmoApplicationEnabled)
+                    return RedirectToAction("Index");
+            } 
+            
 
             using (var nestedContainer = IocConfig.Container.GetNestedContainer())
             {
-
                 var service = nestedContainer.GetInstance<IKvkSearchService>();
                 var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
 
-                if (brmo)
+                if (toBrmo)
                 {
                     var msg = "";
                     var brmostatus = AddInschrijvingResultStatus.Error;
@@ -163,7 +176,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 var storageService = nestedContainer.GetInstance<IInschrijvingSyncService>();
                 var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
 
-                if (export)
+                if (toCrm)
                 {
                     return string.IsNullOrEmpty(vestigingNummer)
                         ? RedirectToAction("Export", "Vestiging", new {kvkNummer = kvkNummer})
@@ -213,12 +226,5 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             var service = IocConfig.Container.GetInstance<IKvkSearchService>();
             return View(service.SearchVestigingByVestigingsNummer(vestigingId, kvknummer));
         }
-    }
-
-    public class ImportResultViewModel
-    {
-        public string Message { get; set; }
-        public KvkInschrijving KvkInschrijving { get; set; }
-        public AddInschrijvingResultStatus Status { get; set; }  
     }
 }

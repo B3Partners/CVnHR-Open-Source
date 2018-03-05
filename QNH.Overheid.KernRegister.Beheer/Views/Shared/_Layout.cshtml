@@ -39,30 +39,49 @@
                 </button>
                 @Html.ActionLink(Default.HomeButton, "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
-            @if (!AuthorizeSimpleFilter.EnsureAuthenticatedUser || User.Identity.IsAuthenticated)
+            @if (!SettingsHelper.EnsureAuthenticatedUser || User.Identity.IsAuthenticated)
             {
                 var url = Request.Url.AbsolutePath.ToLower();
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="@(url.Contains("/vestiging") && !url.Contains("/search") ? "active" : null)">@Html.ActionLink(Default.SearchApplication, "Index", "Vestiging")</li>
-                        <li class="@(url.Contains("/search") ? "active" : null)">@Html.ActionLink(Default.SearchExternal, "Index", "Search")</li>
-                        @if (User.IsAllowedAllActions(ApplicationActions.ManageKvKData))
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ViewKvKData))
                         {
-                            <li class="@(url.Contains("/inschrijving") ? "active" : null)">@Html.ActionLink(Default.ToApplication, "Index", "Inschrijving")</li>
-                            <li class="@(url.Contains("/export") ? "active" : null)">@Html.ActionLink(Default.ToCrm, "Index", "Export")</li>
-                            if (SettingsHelper.BrmoApplicationEnabled)
-                            {
-                                <li class="@(url.Contains("/brmo") ? "active" : null)">
-                                    <a href="@SettingsHelper.BrmoApplicationBaseUrl" target="_blank">@Default.ToBrmo</a>
-                                </li>
-                            }
+                            <li class="@(url.Contains("/vestiging") && !url.Contains("/search") ? "active" : null)">
+                                @Html.ActionLink(Default.SearchApplication, "Index", "Vestiging")
+                            </li>
+                            <li class="@(url.Contains("/search") ? "active" : null)">
+                                @Html.ActionLink(Default.SearchExternal, "Index", "Search")
+                            </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_SyncKvKData))
+                        {
+                            <li class="@(url.Contains("/inschrijving") ? "active" : null)">
+                                @Html.ActionLink(Default.ToApplication, "Index", "Inschrijving")
+                            </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_SyncCrm))
+                        {
+                            <li class="@(url.Contains("/export") ? "active" : null)">
+                                @Html.ActionLink(Default.ToCrm, "Index", "Export")
+                            </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo) && SettingsHelper.BrmoApplicationEnabled)
+                        {
+                            <li class="@(url.Contains("/brmo") ? "active" : null)">
+                                <a href="@SettingsHelper.BrmoApplicationBaseUrl" target="_blank">@Default.ToBrmo</a>
+                            </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin) || User.IsInitialAdmin())
+                        {
+                            <li class="@(url.Contains("/users") ? "active" : null)">
+                                @Html.ActionLink("Gebruikersbeheer", "Index", "Users")
+                            </li>
                         }
                     </ul>
-
                 </div>
             }
 
-            @if (AuthorizeSimpleFilter.EnsureAuthenticatedUser && User.Identity.IsAuthenticated)
+            @if (SettingsHelper.EnsureAuthenticatedUser && User.Identity.IsAuthenticated)
             {
                 <div style="position:absolute; top:5px; right: 1.5em; color:#fff;">
                     @using (Html.BeginForm("logoff", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -83,19 +102,19 @@
                     var userName = Server.UrlDecode(Request["DisplayUsername"]) ?? User.Identity.Name;
                     if (string.IsNullOrEmpty(userName) && true)
                     {
-                        userName = "Corné Hogerheijde";
+                        userName = "[unknown user]";
                     }
                 }
                 &copy; @DateTime.Now.Year - beheerapplicatie @Default.ApplicationName (@SettingsHelper.Environment) - v. @ViewContext.Controller.GetType().Assembly.GetName().Version
-                <br/>@userName - Moment van raadpleging: @DateTime.Now.ToString("dd MMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("nl-NL"))
+                <br />@userName - Moment van raadpleging: @DateTime.Now.ToString("dd MMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("nl-NL"))
             </p>
             <p class="right">
                 @Html.ActionLink(
-                    linkText: "Sla pagina op als PDF", 
-                    actionName: "Index",
-                    controllerName: "Pdf",
-                             routeValues: new { url = Request.Url, fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "-" + Default.ApplicationName + ".pdf" },
-                    htmlAttributes: null)
+                                   linkText: "Sla pagina op als PDF",
+                                   actionName: "Index",
+                                   controllerName: "Pdf",
+                                            routeValues: new { url = Request.Url, fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "-" + Default.ApplicationName + ".pdf" },
+                                   htmlAttributes: null)
             </p>
         </footer>
     </div>

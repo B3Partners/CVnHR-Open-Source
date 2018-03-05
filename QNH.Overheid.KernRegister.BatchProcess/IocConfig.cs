@@ -37,8 +37,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess
 {
     public class IocConfig
     {
-        public static bool UseMockCrm => false;
-
         public static bool CreateDatabase => false;
 
         private static ISessionFactory GetSessionFactory(string dbProvider, string schemaName)
@@ -61,11 +59,11 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         .DefaultSchema(schemaName);
                     break;
                 case "NHibernatePostGRESQL":
-                    persistenceConfigurer = PostgreSQLConfiguration.PostgreSQL82
+                    persistenceConfigurer = PostgreSQLConfiguration.Standard
                         .Driver<NpgsqlDriver>()
                         .ConnectionString(connst =>
                             connst.FromConnectionStringWithKey("NHibernatePostGRESQLConnection"))
-                        .Dialect<PostgreSQL82Dialect>()
+                        .Dialect<PostgreSQLDialect>()
                         .DefaultSchema(schemaName);
                     break;
                 default: // SQLCE
@@ -119,7 +117,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                 .Mappings(mappings => mappings
                             .AutoMappings.Add(
                                 AutoMap
-                                    .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration(SettingsHelper.BrmoApplicationEnabled))
+                                    .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration())
                                     .UseOverridesFromAssemblyOf<KvkInschrijving>()
                                     .Conventions.Setup(c =>
                                     {
@@ -171,15 +169,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         x.For<ISession>().Use((ctx) => ctx.GetInstance<ISessionFactory>().OpenSession()).AlwaysUnique();
                         x.For(typeof(IRepository<>)).Use(typeof(NHRepository<>)).AlwaysUnique();
                         x.For<IKvkInschrijvingRepository>().Use<KvkInschrijvingNHRepository>().AlwaysUnique();
-
-                        if (SettingsHelper.BrmoApplicationEnabled)
-                        {
-                            x.For(typeof(IRsgbRepository<>)).Use(typeof(RsgbRepository<>))
-                                .Ctor<ISession>()
-                                .Is((ctx) => ctx.GetInstance<ISessionFactory>()
-                                                .OpenSession(new OracleConnection(
-                                                    ConfigurationManager.ConnectionStrings["OracleRsgbConnection"].ConnectionString)));
-                        }
 
                         // End nHibernate setup
                         break;
@@ -270,21 +259,12 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                 switch (ConfigurationManager.AppSettings["CrmToUse"]) // Default.CrmApplication)
                 {
                     case "DocBase":
-                        if (UseMockCrm)
-                        {
-                            //x.For<SecuritySoap>().Use("", UnitTestMockStuff.CreateSecuritySoapMock);
-                            //x.For<RelationsSoap>().Use("", UnitTestMockStuff.CreateRelationsSoapMock);
-                            //x.For<IExportService>().Use(UnitTestMockStuff.CreateDocBaseMock);
-                        }
-                        else
-                        {
-                            x.For<SecuritySoap>().Use<SecuritySoapClient>()
+                        x.For<SecuritySoap>().Use<SecuritySoapClient>()
                                 .SelectConstructor(() => new SecuritySoapClient())
                                 .SetProperty(ssc => ssc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                            x.For<RelationsSoap>().Use<RelationsSoapClient>()
-                                .SelectConstructor(() => new RelationsSoapClient())
-                                .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                        }
+                        x.For<RelationsSoap>().Use<RelationsSoapClient>()
+                            .SelectConstructor(() => new RelationsSoapClient())
+                            .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
 
                         // We need a postcode service for DocBase Municipality
                         x.ForSingletonOf<IPostcodeService>().Use(new NationaalGeoregisterLocatieService(
