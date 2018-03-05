@@ -201,7 +201,7 @@
 </div>
 
 @section scripts {
-    <script type="text/javascript">
+<script type="text/javascript">
         $(function () {
             $(".showdetails").on("click", function (e) {
                 e.preventDefault();
@@ -217,7 +217,13 @@
         });
 
         function goToKvKNameSearch(){
-            window.open("http://www.kvk.nl/orderstraat/bedrijf-kiezen/#!shop?q=" + encodeURIComponent($("#kvkNameSearch").val()), '_blank');
+            //window.open("http://www.kvk.nl/orderstraat/bedrijf-kiezen/#!shop?q=" + encodeURIComponent($("#kvkNameSearch").val()), '_blank');
+
+            var nameToSearch = $("#kvkNameSearch").val();
+            $.post('@Url.Action("SearchByName", new { name = "[name]"})'.replace('%5Bname%5D', nameToSearch))
+                .then(function (result) { console.log(result); fillNameSearchTable(result); })
+                .fail(function (error) { alert(error); console.error(error); });
+
         }
 
         function fillNameSearchTable(result) {
@@ -239,5 +245,5 @@
             template.remove();
             table.show().removeClass("hidden");
         }
-    </script>
+</script>
 }

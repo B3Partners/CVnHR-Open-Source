@@ -41,7 +41,7 @@ namespace QNH.Overheid.KernRegister.Beheer
 {
     public static class IocConfig
     {
-        public static bool CreateDatabase => Convert.ToBoolean( ConfigurationManager.AppSettings["CreateDatabase"] );
+        public static bool CreateDatabase => Convert.ToBoolean(ConfigurationManager.AppSettings["CreateDatabase"]);
 
         private static ISessionFactory GetSessionFactory(string dbProvider, string schemaName)
         {
@@ -124,7 +124,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                                 AutoMap
                                     .AssemblyOf<KvkInschrijving>(new CustomMappingConfiguration())
                                     .UseOverridesFromAssemblyOf<KvkInschrijving>()
-                    //.Where(t => t.Namespace == "QNH.Overheid.KernRegister.Business.Model.Entities")
+                                    //.Where(t => t.Namespace == "QNH.Overheid.KernRegister.Business.Model.Entities")
                                     .Conventions.Setup(c =>
                                     {
                                         c.Add(DefaultCascade.All());
@@ -162,7 +162,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                 // Database configuration
                 var dbProvider = ConfigurationManager.AppSettings["DatabaseProvider"];
                 switch (dbProvider)
-                { 
+                {
                     case "NHibernateOracle":
                     case "NHibernateSQLCE":
                     case "NHibernateSQL":
@@ -175,7 +175,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                         x.For<ISession>().Use((ctx) => ctx.GetInstance<ISessionFactory>().OpenSession()).AlwaysUnique();
                         x.For(typeof(IRepository<>)).Use(typeof(NHRepository<>)).AlwaysUnique();
                         x.For<IKvkInschrijvingRepository>().Use<KvkInschrijvingNHRepository>().AlwaysUnique();
-                        
+
                         // End nHibernate setup
                         break;
                     default:
@@ -187,7 +187,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                 #region SearchService
                 var searchServiceCacheTimeInHours = Convert.ToInt32(ConfigurationManager.AppSettings["SearchServiceCacheTimeInHours"] ?? "24");
                 RawXmlCache.CacheInHours = searchServiceCacheTimeInHours;
-                
+
                 // Set up KvkSearchService
                 var hrDataserviceVersionNumber = ConfigurationManager.AppSettings["HR-DataserviceVersionNumber"];
                 if (hrDataserviceVersionNumber == "2.5")
@@ -260,7 +260,7 @@ namespace QNH.Overheid.KernRegister.Beheer
                             Password = ConfigurationManager.AppSettings["BrmoApplicationPassword"] ?? "brmo",
                         });
                 }
-                
+
                 #endregion
 
                 // Select the CrmApplication to use
@@ -300,11 +300,58 @@ namespace QNH.Overheid.KernRegister.Beheer
                 }
 
                 // Setup the financial service
-                x.For<IFinancialExportService>().Use<ProbisRepository>()
-                    .SelectConstructor(() => new ProbisRepository("connectionstring", "insertOrUpdateStoredProcedureName", "displayName"))
-                    .Ctor<string>("connectionString").Is(() => ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
-                    .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"])
-                    .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
+                var probisInsertOrUpdateStoredProcedureName = ConfigurationManager.AppSettings["ProbisInsertOrUpdateStoredProcedureName"];
+                if (!string.IsNullOrWhiteSpace(probisInsertOrUpdateStoredProcedureName)
+                    && !string.IsNullOrWhiteSpace(ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString))
+                {
+                    x.For<IFinancialExportService>().Use<ProbisRepository>()
+                        .SelectConstructor(() => new ProbisRepository("connectionstring", "insertOrUpdateStoredProcedureName", "displayName"))
+                        .Ctor<string>("connectionString").Is(() => ConfigurationManager.ConnectionStrings["OracleProbisConnection"].ConnectionString)
+                        .Ctor<string>("insertOrUpdateStoredProcedureName").Is(() => probisInsertOrUpdateStoredProcedureName)
+                        .Ctor<string>("displayName").Is(() => Default.FinancialApplication);
+                }
+
+                /* 
+                 * Setup the usermanager 
+                 */
+                if (SettingsHelper.UseHardCodedUserManagerForTesting)
+                {
+                    x.ForSingletonOf<IUserManager>().Use<HardCodedUserManager>() // Use singleton for hardcoded!
+                        .SelectConstructor(() => new HardCodedUserManager("userNameToUseWhenEmpty"))
+                        .Ctor<string>("userNameToUseWhenEmpty").Is(() => SettingsHelper.UsernameToUseWhenEmpty);
+                }
+                else
+                {
+                    var brmoStagingConnectionString = ConfigurationManager.ConnectionStrings["BrmoStagingConnection"]?.ConnectionString;
+                    var brmoStagingSchemaName = ConfigurationManager.AppSettings["BrmoStagingDatabaseSchemaName"];
+                    var brmoStagingDatabaseParameterCharacter = ConfigurationManager.AppSettings["BrmoStagingDatabaseParameterCharacter"]
+                            ?? (dbProvider.ToLowerInvariant().Contains("oracle") ? ":" : "@");
+                    var brmoStagingUsernameCaseInsensitiveSearch = Convert.ToBoolean(ConfigurationManager.AppSettings["BrmoStagingUsernameCaseInsensitiveSearch"]);
+
+                    // If left empty, just use the default connectionstring (needs the user tables)
+                    if (string.IsNullOrWhiteSpace(brmoStagingConnectionString))
+                    {
+                        x.For<IDbConnection>().Use((ctx) => ctx.GetInstance<ISession>().Connection);
+                        // use the default schemaname from the connection
+                        brmoStagingSchemaName = ConfigurationManager.AppSettings["DatabaseSchemaName"];
+                    }
+                    else
+                        x.For<IDbConnection>().Use((ctx) => GetbrmoStagingDbConnection(brmoStagingConnectionString));
+
+                    x.For<IUserManager>().Use<BrmoUserManager>()
+                        .SelectConstructor(() => new BrmoUserManager(null, "schemaName", "parameterChar", false))
+                        .Ctor<string>("schemaName").Is(brmoStagingSchemaName)
+                        .Ctor<string>("parameterChar").Is(brmoStagingDatabaseParameterCharacter)
+                        .Ctor<bool>("usernameCaseInsensitiveSearch").Is(brmoStagingUsernameCaseInsensitiveSearch)
+                        .AlwaysUnique();
+                }
+
+                // Setup the KvK Search Api
+                x.For<IKvkSearchApi>().Use<KvkSearchApi>()
+                    .SelectConstructor(() => new KvkSearchApi("baseUrl", "searchUrl", "apiKey"))
+                    .Ctor<string>("baseUrl").Is(ConfigurationManager.AppSettings["KvkSearchApi.BaseUrl"])
+                    .Ctor<string>("searchUrl").Is(ConfigurationManager.AppSettings["KvkSearchApi.SearchUrl"])
+                    .Ctor<string>("apiKey").Is(ConfigurationManager.AppSettings["KvkSearchApi.ApiKey"]);
             });
         }
 
