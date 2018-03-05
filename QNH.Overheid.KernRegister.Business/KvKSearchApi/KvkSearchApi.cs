@@ -26,14 +26,15 @@ namespace QNH.Overheid.KernRegister.Business.KvKSearchApi
         {
             var httpClient = new HttpClient();
 
-            var q = "schermerstraat";
-            var query = "tradeName=mrw&includeFormerTradeNames=true";
-
             var search = new List<string>();
             search.Add(FormattedQueryString);
             if (!string.IsNullOrWhiteSpace(parameters.Q))
             {
                 search.Add($"q={parameters.Q}");
+            }
+            if (parameters.StartPage > 0)
+            {
+                search.Add($"startpage={parameters.StartPage}");
             }
             // TODO: add other parameters
 

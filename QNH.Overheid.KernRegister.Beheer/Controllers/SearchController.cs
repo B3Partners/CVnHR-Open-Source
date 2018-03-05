@@ -108,9 +108,9 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SearchByName(string name)
+        public async Task<ActionResult> SearchByName(string name, int startPage = 0)
         {
-            var kvkSearchApiParameters = new KvkSearchApiParameters() { Q = name };
+            var kvkSearchApiParameters = new KvkSearchApiParameters() { Q = name, StartPage = startPage };
             var result = await _kvkSearchApi.Search(kvkSearchApiParameters);
             return Json(result);
         }
