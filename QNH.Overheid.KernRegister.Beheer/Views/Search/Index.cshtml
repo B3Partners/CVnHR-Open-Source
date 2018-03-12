@@ -283,7 +283,10 @@
             $(".kvk-search-item").remove();
             $.post(currentUrl || originalUrl)
                 .then(function (result) { fillNameSearchTable(result, originalUrl); })
-                .fail(function (error) { alert("Error occored. Please try again! Error:", error.statustext); console.error(error); });
+                .fail(function (error) {
+                    alert("Error occored. Please try again! Error:", error.statustext); console.error(error);
+                    showFooter();
+                });
         }
 
         function fillNameSearchTable(result, originalUrl) {
@@ -328,6 +331,10 @@
 
             table.append(controls);
             table.show().removeClass("hidden");
+            showFooter();
+        }
+
+        function showFooter() {
             $(".table-footer").show().removeClass("hidden");
         }
     </script>
