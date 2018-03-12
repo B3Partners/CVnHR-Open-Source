@@ -109,7 +109,7 @@
                         + user + "\" data-action=\""+ action +"\">verwijder</button></td>"));
                     $(".table-users-" + action + " tbody").append(row);
                     $(".table-users-" + action).removeClass("hidden");
-                    input.val("");
+                    input.val("@SettingsHelper.UserManagerPrefillUserName");
                 }).fail(function (error, error2, msg) {
                     //console.log(error, error2, msg);
                     alert("Error! Please contact administrator! " + msg);
