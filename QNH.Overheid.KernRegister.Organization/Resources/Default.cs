@@ -136,6 +136,14 @@ namespace QNH.Overheid.KernRegister.Organization.Resources
             { Organization.B3Partners, "Naar Brmo"}
         }[CurrentOrganization];
 
+        public static string SyncBrmo => new OrganizationResource()
+        {
+            { Organization.Qnh, "[BrmoApplication] synchroniseren"},
+            { Organization.Drenthe, "Brmo synchroniseren"},
+            { Organization.Flevoland, "Brmo synchroniseren"},
+            { Organization.B3Partners, "Brmo synchroniseren"}
+        }[CurrentOrganization];
+
         public static string ToCrediteuren => new OrganizationResource()
         {
             { Organization.Qnh, "Naar [CrediteurenApplication]" },

@@ -248,6 +248,7 @@
     <Compile Include="Crm\NAdres\NAdresHelpers.cs" />
     <Compile Include="Crm\NAdres\NAdresRepository.cs" />
     <Compile Include="Crm\Probis\ProbisRepository.cs" />
+    <Compile Include="Enums\BrmoProcessTypes.cs" />
     <Compile Include="Integration\DocBase-Relations-Service.cs" />
     <Compile Include="Integration\DocBase-Security-Service.cs" />
     <Compile Include="Integration\WcfExtensions\CookieManagerBehavior.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="Service\InschrijvingSyncService.cs" />
     <Compile Include="Service\IPostcodeService.cs" />
     <Compile Include="Service\IKvkSearchService.cs" />
+    <Compile Include="Service\KvkSearchServiceSelector.cs" />
     <Compile Include="Service\KvK\MissingHoofdVestigingException.cs" />
     <Compile Include="Service\KvK\Pong.cs" />
     <Compile Include="Service\KvK\v2_5\KvkDataSearchService.cs" />

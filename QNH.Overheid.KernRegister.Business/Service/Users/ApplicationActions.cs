@@ -29,6 +29,9 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
             Description(@"Gebruiker mag kvk gegevens doorzetten naar de BRMO en krijgt een link naar de BRMO in het menu. 
 Heeft daarnaast nog wel BRMO inloggegevens nodig.")]
         CVnHR_Brmo,
+        [DisplayName("Brmo Synchroniseren"),
+            Description(@"Gebruiker mag kvk gegevens synchroniseren met de BRMO.")]
+        CVnHR_SyncBrmo,
         [DisplayName("Debiteuren"),
             Description("Gebruiker mag KvK en CVnHR gegevens doorzetten naar Debiteuren in het Financiele systeem")]
         CVnHR_Debiteuren,
