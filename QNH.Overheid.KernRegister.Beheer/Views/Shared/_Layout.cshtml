@@ -67,8 +67,14 @@
                         }
                         @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo) && SettingsHelper.BrmoApplicationEnabled)
                         {
-                            <li class="@(url.Contains("/brmo") ? "active" : null)">
+                            <li class="@(url.Contains("bla/brmo") ? "active" : null)">
                                 <a href="@SettingsHelper.BrmoApplicationBaseUrl" target="_blank">@Default.ToBrmo</a>
+                            </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_SyncBrmo) && SettingsHelper.BrmoApplicationEnabled)
+                        {
+                            <li class="@(url.Contains("/syncbrmo") ? "active" : null)">
+                                @Html.ActionLink(Default.SyncBrmo, "Index", "Brmo")
                             </li>
                         }
                         @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin) || User.IsInitialAdmin())
@@ -110,11 +116,11 @@
             </p>
             <p class="right">
                 @Html.ActionLink(
-                                   linkText: "Sla pagina op als PDF",
-                                   actionName: "Index",
-                                   controllerName: "Pdf",
-                                            routeValues: new { url = Request.Url, fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "-" + Default.ApplicationName + ".pdf" },
-                                   htmlAttributes: null)
+                                        linkText: "Sla pagina op als PDF",
+                                        actionName: "Index",
+                                        controllerName: "Pdf",
+                                                 routeValues: new { url = Request.Url, fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "-" + Default.ApplicationName + ".pdf" },
+                                        htmlAttributes: null)
             </p>
         </footer>
     </div>

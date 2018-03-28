@@ -316,6 +316,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\SignaalController.cs" />
+    <Compile Include="Controllers\BrmoController.cs" />
     <Compile Include="Filters\CVnHRAuthorizeAttribute.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -344,6 +345,7 @@
     <Compile Include="Utilities\SettingsHelper.cs" />
     <Compile Include="ViewModel\AccessDeniedModel.cs" />
     <Compile Include="ViewModel\DocBaseExportResult.cs" />
+    <Compile Include="ViewModel\RsgbTaskSchedulerModel.cs" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\Backload\content-types\128\Excel.png" />
     <Content Include="Content\Backload\content-types\128\File.png" />
@@ -530,6 +532,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\AccessDenied.cshtml" />
+    <Content Include="Views\Brmo\Index.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>

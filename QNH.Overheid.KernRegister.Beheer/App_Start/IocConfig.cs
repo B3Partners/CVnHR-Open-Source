@@ -247,6 +247,11 @@ namespace QNH.Overheid.KernRegister.Beheer
                 else
                     throw new ConfigurationErrorsException($"HR-DataserviceVersionNumber {hrDataserviceVersionNumber} not implemented.");
 
+                // TODO: set this up correctly!
+                //x.ForSingletonOf<IKvkSearchServiceSelector>()
+                //    .Use(new KvkSearchServiceSelector(hrDataserviceVersionNumber, ));
+                    
+
                 // Only store kvk numbers in memory cache when Brmo application is setup
                 if (SettingsHelper.BrmoApplicationEnabled)
                 {
