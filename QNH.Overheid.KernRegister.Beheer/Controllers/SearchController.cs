@@ -22,6 +22,9 @@ using Rotativa;
 using StructureMap;
 using StructureMap.Pipeline;
 using QNH.Overheid.KernRegister.Business.Service.Users;
+using QNH.Overheid.KernRegister.Business.KvKSearchApi.Entities;
+using QNH.Overheid.KernRegister.Business.KvKSearchApi;
+using System.Threading.Tasks;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -29,6 +32,13 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
     public class SearchController : Controller
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        private readonly IKvkSearchApi _kvkSearchApi;
+
+        public SearchController(IKvkSearchApi kvkSearchApi)
+        {
+            _kvkSearchApi = kvkSearchApi;
+        }
 
         //
         // GET: /Search/
@@ -95,6 +105,14 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult Index(KvkSearch kvkSearch)
         {
             return RedirectToAction("Index", new {kvkNummer = kvkSearch.KvkSearchCriteria.KvkNummer});
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SearchByName(string name, int startPage = 0)
+        {
+            var kvkSearchApiParameters = new KvkSearchApiParameters() { Q = name, StartPage = startPage };
+            var result = await _kvkSearchApi.Search(kvkSearchApiParameters);
+            return Json(result);
         }
 
         public ActionResult Import(string kvkNummer, 

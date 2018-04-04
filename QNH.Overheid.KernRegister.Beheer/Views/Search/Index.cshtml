@@ -28,6 +28,31 @@
         .form-group input {
             max-width: 100%;
         }
+
+        .template, .loadingDiv {
+            display: none;
+        }
+
+        .name-search-table .header, .controls {
+            font-weight: bold;
+        }
+
+            .controls span {
+                padding: 6px 0px;
+                display: inline-block;
+            }
+
+        .kvk-search-item, .name-search-table .header {
+            border-bottom: 1px solid;
+        }
+
+            .kvk-search-item.controls {
+                border-bottom: none;
+            }
+
+        .next, .prev {
+            float: right;
+        }
     </style>
 }
 
@@ -46,140 +71,173 @@
 
         <div class="form-horizontal">
             <div class="form-group">
-                <label for="kvkNameSearch" class="col-sm-3 control-label">Zoek op naam</label>
+                <label for="kvkNameSearch" class="col-sm-3 control-label">Zoek</label>
                 <div class="col-sm-9">
-                    <input type="text" id="kvkNameSearch" class="form-control input-lg" placeholder="Zoek op naam" />
+                    <input type="text" id="kvkNameSearch" class="form-control input-lg" placeholder="Vrij zoeken op naam, plaats, omschrijving, etc." />
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
                     <button type="button" id="btnKvkNameSearch" name="btnSearch" class="btn btn-primary">Zoek</button>
+
+
                 </div>
             </div>
         </div>
 
-        @using (Html.BeginForm("Index", "Search", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                @* TODO: enable search on vestigingsnummer *@
-                <label for="KvkNummer" class="col-sm-3 control-label">KVK nummer</label>
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.KvkSearchCriteria.KvkNummer, new { @class = "form-control input-lg", placeholder = "Voer KVK nummer in" })
-                </div>
-
+        <div class="loadingDiv">Ophalen van gegevens bij de kvk... Even geduld a.u.b.</div>
+        <div class="hidden name-search-table col-sm-12">
+            <div>
+                <p>Kies de gewenste organisatie:</p>
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-primary">Zoek</button>
-                </div>
+            <div class="row header">
+                <div class="col-sm-2">Kvknummer</div>
+                <div class="col-sm-4">Naam</div>
+                <div class="col-sm-4">Adres</div>
+                <div class="col-sm-2">Actie</div>
             </div>
-        }
-
-
-        @if (Model.KvkSearchResult != null && Model.KvkSearchResult.KvkItems != null && Model.KvkSearchResult.KvkItems.Count > 0)
-        {
-            <hr />
-            <h3>Resultaten</h3>
-            <table id="resultTable" class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].KvkNummer)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].Naam)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].AantalVestigingen)
-                        </th>
-                        <th>Actie</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.KvkSearchResult.KvkItems)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.KvkNummer)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Naam)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AantalVestigingen)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Details", "Details", new { kvkNummer = item.KvkNummer })
-
-                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
-                                {
-                                    @:|
-                                    @Html.ActionLink("Naar " + Default.ApplicationName, "Import", new { kvkNummer = item.KvkNummer })
-                                }
-                                @if (item.Vestigingen.Count == 1 && User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
-                                {
-                                    @:|
-                                    @Html.ActionLink("Naar " + Default.ApplicationName + " en " + Default.CrmApplication, "Import", new { kvkNummer = item.KvkNummer, toCrm = true })
-                                }
-                                @if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
-                                {
-                                    @:|
-                                    @Html.ActionLink("Naar " + Default.BrmoApplication, "Import", new { kvkNummer = item.KvkNummer, toBrmo = true })
-                                }
-                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
-                                {
-                                    @:|
-                                    @Html.ActionLink(Default.ToDebiteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = true })
-                                }
-                                @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
-                                {
-                                    @:|
-                                    @Html.ActionLink(Default.ToCrediteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = false })
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-
-        @if (Model.KvkSearchResult != null && Model.KvkSearchResult.SearchedAndNothingFound)
-        {
-            <hr />
-            <h3>Resultaten</h3>
-            <p class="red">Geen inschrijvingen gevonden in het handelsregister</p>
-        }
-
-        @if (Model.KvkSearchResult != null && Model.KvkSearchResult.SearchError != null)
-        {
-            <hr />
-            <h3>Resultaten</h3>
-            <div class="red">
-                Er is een fout opgetreden.
-                <a href="#" class="showdetails">Show details.</a>
+            <div class="row template">
+                <div class="col-sm-2 kvknummer"></div>
+                <div class="col-sm-4 naam"></div>
+                <div class="col-sm-4 adres"></div>
+                <div class="col-sm-2 actie"></div>
             </div>
-            <div class="errordetails hidden">
-                @Model.KvkSearchResult.SearchError.Message
+        </div>
+
+        <div class="table-footer hidden form-group">
+            <div class="col-sm-12">
+                <br/>
+                <i>
+                    Niet het gewenste resultaat gevonden of moeite met het maken van de juiste keuze?
+                </i>
                 <br />
-                @Model.KvkSearchResult.SearchError.StackTrace
-
-                @{
-                    var inner = Model.KvkSearchResult.SearchError.InnerException;
-                    while (inner != null)
-                    {
-                        <hr />
-                        @inner.Message
-                        <br />
-                        @inner.StackTrace
-
-                        inner = inner.InnerException;
-                    }
-                }
+                <button type="button" id="btnKvkSearch" name="btnKvkSearch" class="btn btn-warning">Zoek dan verder op de kvk website</button>
             </div>
-        }
+        </div>
 
+        <div class="kvknummer-search">
+            @using (Html.BeginForm("Index", "Search", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @* TODO: enable search on vestigingsnummer *@
+                    <label for="KvkNummer" class="col-sm-3 control-label">KVK nummer</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.KvkSearchCriteria.KvkNummer, new { @class = "form-control input-lg", placeholder = "Voer KVK nummer in" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-primary">Zoek</button>
+                    </div>
+                </div>
+            }
+
+
+            @if (Model.KvkSearchResult != null && Model.KvkSearchResult.KvkItems != null && Model.KvkSearchResult.KvkItems.Count > 0)
+            {
+                <hr />
+                <h3>Resultaten</h3>
+                <table id="resultTable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].KvkNummer)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].Naam)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KvkSearchResult.KvkItems[0].AantalVestigingen)
+                            </th>
+                            <th>Actie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.KvkSearchResult.KvkItems)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.KvkNummer)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Naam)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AantalVestigingen)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "Details", new { kvkNummer = item.KvkNummer })
+
+                                    @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageKvKData))
+                                    {
+                                        @:|
+                                        @Html.ActionLink("Naar " + Default.ApplicationName, "Import", new { kvkNummer = item.KvkNummer })
+                                    }
+                                    @if (item.Vestigingen.Count == 1 && User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
+                                    {
+                                        @:|
+                                        @Html.ActionLink("Naar " + Default.ApplicationName + " en " + Default.CrmApplication, "Import", new { kvkNummer = item.KvkNummer, toCrm = true })
+                                    }
+                                    @if (SettingsHelper.BrmoApplicationEnabled && User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo))
+                                    {
+                                        @:|
+                                        @Html.ActionLink("Naar " + Default.BrmoApplication, "Import", new { kvkNummer = item.KvkNummer, toBrmo = true })
+                                    }
+                                    @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Debiteuren))
+                                    {
+                                        @:|
+                                        @Html.ActionLink(Default.ToDebiteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = true })
+                                    }
+                                    @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
+                                    {
+                                        @:|
+                                        @Html.ActionLink(Default.ToCrediteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = false })
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            @if (Model.KvkSearchResult != null && Model.KvkSearchResult.SearchedAndNothingFound)
+            {
+                <hr />
+                <h3>Resultaten</h3>
+                <p class="red">Geen inschrijvingen gevonden in het handelsregister</p>
+            }
+
+            @if (Model.KvkSearchResult != null && Model.KvkSearchResult.SearchError != null)
+            {
+                <hr />
+                <h3>Resultaten</h3>
+                <div class="red">
+                    Er is een fout opgetreden.
+                    <a href="#" class="showdetails">Show details.</a>
+                </div>
+                <div class="errordetails hidden">
+                    @Model.KvkSearchResult.SearchError.Message
+                    <br />
+                    @Model.KvkSearchResult.SearchError.StackTrace
+
+                    @{
+                        var inner = Model.KvkSearchResult.SearchError.InnerException;
+                        while (inner != null)
+                        {
+                            <hr />
+                            @inner.Message
+                            <br />
+                            @inner.StackTrace
+
+                            inner = inner.InnerException;
+                        }
+                    }
+                </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -191,22 +249,93 @@
                 $(".errordetails").toggleClass("hidden");
             });
 
-            $("#btnKvkNameSearch").on("click", goToKvKNameSearch);
 
+            var $loading = $('.loadingDiv').hide();
+            $(document)
+                .ajaxStart(function () {
+                    $loading.show();
+                })
+                .ajaxStop(function () {
+                    $loading.hide();
+                });
+
+            $("#btnKvkNameSearch").on("click", kvKNameSearch);
             $("#kvkNameSearch").on("keyup", function (e) {
                 if (e.keyCode == 13)
-                    goToKvKNameSearch();
+                    kvKNameSearch();
             });
+
+            $("#btnKvkSearch").on("click", kvkWebsiteSearch);
         });
 
-        function goToKvKNameSearch() {
+        function kvkWebsiteSearch() {
             window.open("http://www.kvk.nl/orderstraat/bedrijf-kiezen/#!shop?q=" + encodeURIComponent($("#kvkNameSearch").val()), '_blank');
         }
 
+        function kvKNameSearch(){
+            var nameToSearch = $("#kvkNameSearch").val();
+            var originalUrl = '@Url.Action("SearchByName", new { name = "[name]"})'.replace('%5Bname%5D', nameToSearch);
+            getNameResult(originalUrl);
+        }
 
-            /* TODO
-            $.getJSON("http://zoeken.kvk.nl/JsonSearch.ashx?q=mrw&start=0&callback=?", function(result){
-                console.log(result);
-            });*/
+        function getNameResult(originalUrl, currentUrl) {
+            $(".kvknummer-search").hide();
+            $(".kvk-search-item").remove();
+            $.post(currentUrl || originalUrl)
+                .then(function (result) { fillNameSearchTable(result, originalUrl); })
+                .fail(function (error) {
+                    alert("Error occored. Please try again! Error:", error.statustext); console.error(error);
+                    showFooter();
+                });
+        }
+
+        function fillNameSearchTable(result, originalUrl) {
+            var table = $(".name-search-table");
+            var template = $(".template", table);
+
+            // Add items
+            $.each(result.Items, function(i, item) {
+                var t = template.clone().removeClass("template").addClass("kvk-search-item");
+                $(".kvknummer", t).text(item.KvkNumber);
+                var tradeNames = item.TradeNames || { BusinessName: "[??]" };
+                $(".naam", t).text(tradeNames.BusinessName || tradeNames.ShortBusinessName);
+                var adres = item.Addresses ? item.Addresses[0] : null;
+                if (adres != null) {
+                    $(".adres", t).text(adres.Street + " " + adres.HouseNumber + " " + adres.HouseNumberAddition + " " + adres.City);
+                }
+                var link = $("<a>").addClass("link-button").attr("href", "@Url.Action("Index")" + "?kvkNummer=" + item.KvkNumber)
+                        .text("Toon");
+                $(".actie", t).append(link);
+                table.append(t);
+            });
+
+            // Add controls
+            var currentPage = result.StartPage;
+            var endPage = parseInt(result.TotalItems / result.ItemsPerPage) + (result.TotalItems % result.ItemsPerPage > 0 ? 1 : 0);
+            var controls = $("<div>").addClass("row").addClass("kvk-search-item").addClass("controls");
+            var items = $("<div>").addClass("col-sm-12")
+                .html("<span>" + result.TotalItems + " resultaten gevonden. Pagina " + currentPage + " van " + endPage + "</span>")
+                .appendTo(controls)
+            if (currentPage < endPage) {
+                var nextLink = $("<a>").addClass("next").addClass("btn")
+                    .on("click", function (e) { getNameResult(originalUrl, originalUrl + "&startPage=" + (parseInt(result.StartPage) + 1)); })
+                    .text("Volgende resultaten");
+                items.append(nextLink);
+            }
+            if (result.StartPage > 1) {
+                var prevLink = $("<a>").addClass("prev").addClass("btn")
+                    .on("click", function (e) { getNameResult(originalUrl, originalUrl + "&startPage=" + (parseInt(result.StartPage) - 1)); })
+                    .text("Vorige resultaten");
+                items.append(prevLink);
+            }
+
+            table.append(controls);
+            table.show().removeClass("hidden");
+            showFooter();
+        }
+
+        function showFooter() {
+            $(".table-footer").show().removeClass("hidden");
+        }
     </script>
 }

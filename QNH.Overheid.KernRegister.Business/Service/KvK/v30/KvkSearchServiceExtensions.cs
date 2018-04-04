@@ -301,36 +301,15 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
             var bijzToestand = eigenaar.bijzondereRechtstoestand;
             if (bijzToestand != null)
             {
-                kvkInschrijving.BijzondereRechtsToestand = bijzToestand.soort.ToString(); // TODO!
-
-                //if (bijzToestand.Item1 is BijzondereRechtstoestandTypeFaillissement)
-                //{
-                //    kvkInschrijving.BijzondereRechtsToestand = "Faillissement";
-                //}
-                //else if (bijzToestand.Item1 is BijzondereRechtstoestandTypeSchuldsanering)
-                //{
-                //    kvkInschrijving.BijzondereRechtsToestand = "Schuldsanering";
-                //}
-                //else if (bijzToestand.Item1 is BijzondereRechtstoestandTypeSurseanceVanBetaling)
-                //{
-                //    var surceanse = bijzToestand.Item1 as BijzondereRechtstoestandTypeSurseanceVanBetaling;
-                //    kvkInschrijving.BijzondereRechtsToestand =
-                //        $"Surseance van betaling (duur: {surceanse.duur}, status: {surceanse.status})";
-                //}
-                //else
-                //{
-                //    throw new NotImplementedException("Unknown bijzToestand.Item: " + bijzToestand.Item1.GetType());
-                //}
-                kvkInschrijving.RedenInsolventie = bijzToestand.redenEindeInsolventie.ToString();
+                kvkInschrijving.BijzondereRechtsToestand = 
+                    $"{bijzToestand.soort.ToOmschrijving()} | duur: {bijzToestand.duur}, isVerlengd: {bijzToestand.isVerlengd.ToOmschrijving()}, status: {bijzToestand.status.ToOmschrijving()}"; ; 
+                kvkInschrijving.RedenInsolventie = bijzToestand.redenEindeInsolventie.ToOmschrijving();
 
                 var uitspraak = bijzToestand.Item;
                 if (uitspraak != null)
                 {
                     kvkInschrijving.RechterlijkeUitspraak = $"{uitspraak.datum}: {uitspraak.naam}, {uitspraak.plaats}";
                 }
-
-                //kvkInschrijving.BijzondereRechtsToestand = 
-                //    bijzToestand.ItemElementName.ToString() + ": " + bijzToestand.redenInsolventie.ToString();
             }
 
             var beperking = eigenaar.beperkingInRechtshandeling;
@@ -518,6 +497,13 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                 notTooLong = notTooLong.Substring(0, 252) + "...";
 
             return notTooLong;
+        }
+
+        public static string ToOmschrijving(this EnumeratieType enumeratieType)
+        {
+            return enumeratieType == null
+                ? null
+                : $"code: {enumeratieType.code}, referentie: {enumeratieType.referentieType} - {enumeratieType.omschrijving}";
         }
     }
 }
