@@ -1,31 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using System.Web.UI.WebControls.Expressions;
-
-using QNH.Overheid.KernRegister.Beheer.Models;
-using QNH.Overheid.KernRegister.Beheer.ViewModels;
+﻿using NLog;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
-using QNH.Overheid.KernRegister.Business.Integration;
-using QNH.Overheid.KernRegister.Business.Model;
-using QNH.Overheid.KernRegister.Business.Model.Entities;
-using QNH.Overheid.KernRegister.Business.Service;
-
-using NLog;
+using QNH.Overheid.KernRegister.Beheer.ViewModels;
 using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Enums;
-using QNH.Overheid.KernRegister.Business.Service.BRMO;
-using Rotativa;
-using StructureMap;
-using StructureMap.Pipeline;
-using QNH.Overheid.KernRegister.Business.Service.Users;
-using QNH.Overheid.KernRegister.Business.KvKSearchApi.Entities;
 using QNH.Overheid.KernRegister.Business.KvKSearchApi;
-using System.Threading.Tasks;
+using QNH.Overheid.KernRegister.Business.KvKSearchApi.Entities;
+using QNH.Overheid.KernRegister.Business.Service;
+using QNH.Overheid.KernRegister.Business.Service.BRMO;
+using QNH.Overheid.KernRegister.Business.Service.Users;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {

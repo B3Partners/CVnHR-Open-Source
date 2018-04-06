@@ -10,9 +10,12 @@ namespace QNH.Overheid.KernRegister.Business.Service.Users
 {
     public enum ApplicationActions
     {
-        [DisplayName("Kvk en CVnHR data bekijken"), 
-            Description("Gebruiker mag KvK en CVnHR gegevens zien en zoeken.")]
+        [DisplayName("Kvk data bekijken"), 
+            Description("Gebruiker mag KvK gegevens zien en zoeken.")]
         CVnHR_ViewKvKData,
+        [DisplayName("CVnHR data bekijken"),
+            Description("Gebruiker CVnHR gegevens zien en zoeken.")]
+        CVnHR_ViewCVnHRData,
         [DisplayName("Kvk data toevoegen/verwijderen"),
             Description("Gebruiker mag KvK gegevens invoeren in de CVnHR.")]
         CVnHR_ManageKvKData,
