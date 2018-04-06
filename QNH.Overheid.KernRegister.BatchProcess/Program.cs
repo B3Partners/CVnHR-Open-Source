@@ -381,7 +381,7 @@ QNH.Overheid.KernRegister.BatchProcess
 
                 Console.Write(consoleMessage);
             };
-            processing.ProcessRecords(records);
+            processing.ProcessRecords(records, "Batchprocess ImportAll");
 
 
         }

@@ -43,7 +43,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v2_5
             _cacheInHours = cacheInHours;
         }
 
-        public KvkInschrijving SearchInschrijvingByKvkNummer(string kvkNummer, bool bypassCache = false)
+        public KvkInschrijving SearchInschrijvingByKvkNummer(string kvkNummer, string requesterName, bool bypassCache = false)
         {
             if (string.IsNullOrWhiteSpace(kvkNummer))
                 return null;
@@ -58,7 +58,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v2_5
                     return inschrijving;
             }
 
-            KvkCountingLogger.Info($"Calling HR-Dataservice v2.5 {kvkNummer}");
+            KvkCountingLogger.Info($"Calling HR-Dataservice v2.5 {kvkNummer} {requesterName}");
 
             // Roep "Dataservice Inschrijving" aan met kvkNummer als sleutel
             // Via deze service verkrijgen we ook de vestigingsnummers (of zelfs complete vestiging informatie!?) van de hoofdvestiging en de nevenvestigingen

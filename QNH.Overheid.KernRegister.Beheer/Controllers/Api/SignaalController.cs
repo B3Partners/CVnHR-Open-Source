@@ -16,6 +16,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
     public class SignaalController : ApiController
     {
         private readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private const string ApiUserName = "Api/Signaal";
 
         // GET: api/Signaal
         public IEnumerable<string> Get() => new [] { "KvkSignaalApi", "QNH", "V1", "Implemented actions:" }
@@ -120,7 +121,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
             try
             {
                 var service = IocConfig.Container.GetInstance<IKvkSearchService>();
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
+                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName);
                 var storageService = IocConfig.Container.GetInstance<IInschrijvingSyncService>();
                 var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
                 _log.Trace($"Inschrijving status: {status}");
@@ -140,11 +141,11 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
                 var service = hrDataserviceVersionNumberBrmo == "2.5"
                     ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
                     : IocConfig.Container.GetInstance<IKvkSearchService>();
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
+                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName);
 
                 // retry with bypassing cache
                 var xDoc = RawXmlCache.Get(kvkNummer,
-                    () => { kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, true); });
+                    () => { kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName, true); });
 
                 var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
                 var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);

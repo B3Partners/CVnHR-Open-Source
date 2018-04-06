@@ -5,7 +5,7 @@ namespace QNH.Overheid.KernRegister.Business.Service
 {
     public interface IKvkSearchService
     {
-        KvkInschrijving SearchInschrijvingByKvkNummer(string kvkNummer, bool bypassCache = false);
+        KvkInschrijving SearchInschrijvingByKvkNummer(string kvkNummer, string requesterName, bool bypassCache = false);
 
         Vestiging SearchVestigingByVestigingsNummer(string vestigingsNummer, string kvkNummer = null);
     }
