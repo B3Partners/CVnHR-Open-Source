@@ -25,6 +25,7 @@ using QNH.Overheid.KernRegister.Business.Service.Users;
 using QNH.Overheid.KernRegister.Business.KvKSearchApi.Entities;
 using QNH.Overheid.KernRegister.Business.KvKSearchApi;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -142,7 +143,10 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
             using (var nestedContainer = IocConfig.Container.GetNestedContainer())
             {
-                var service = nestedContainer.GetInstance<IKvkSearchService>();
+                var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
+                var service = hrDataserviceVersionNumberBrmo == "2.5"
+                    ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
+                    : IocConfig.Container.GetInstance<IKvkSearchService>();
                 var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
 
                 if (toBrmo)
