@@ -45,6 +45,12 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
                 .Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .ToList();
 
+        public static List<string[]> ADDistinguishedNameFilters =>
+            (ConfigurationManager.AppSettings["ADDistinguishedNameFilters"] ?? string.Empty)
+                .Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(f=> f.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                .ToList();
+
         public static string UserManagerPrefillUserName => ConfigurationManager.AppSettings["UserManagerPrefillUserName"] ?? string.Empty;
     }
 }

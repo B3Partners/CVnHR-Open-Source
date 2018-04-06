@@ -3,9 +3,12 @@ using QNH.Overheid.KernRegister.Business.Service.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Mvc;
+
+using System.DirectoryServices.AccountManagement;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -24,6 +27,12 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             var user = httpContext.User;
+
+            if (!user.UserMatchesAnyADDistinguishedNameFilter())
+            {
+                return false;
+            }
+
             var authorized = _actions.Any()
                 ? user.IsAllowedAllActions(_actions)
                 : user.IsAllowedAnyActions(_allActions);
