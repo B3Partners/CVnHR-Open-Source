@@ -44,11 +44,14 @@
                 var url = Request.Url.AbsolutePath.ToLower();
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ViewKvKData))
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ViewCVnHRData))
                         {
                             <li class="@(url.Contains("/vestiging") && !url.Contains("/search") ? "active" : null)">
                                 @Html.ActionLink(Default.SearchApplication, "Index", "Vestiging")
                             </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ViewKvKData))
+                        {
                             <li class="@(url.Contains("/search") ? "active" : null)">
                                 @Html.ActionLink(Default.SearchExternal, "Index", "Search")
                             </li>

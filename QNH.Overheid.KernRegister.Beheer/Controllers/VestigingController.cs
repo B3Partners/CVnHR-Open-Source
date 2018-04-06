@@ -1,32 +1,22 @@
-﻿using System;
+﻿using NLog;
+using QNH.Overheid.KernRegister.Beheer.Utilities;
+using QNH.Overheid.KernRegister.Beheer.ViewModel;
+using QNH.Overheid.KernRegister.Beheer.ViewModels;
+using QNH.Overheid.KernRegister.Business.Crm;
+using QNH.Overheid.KernRegister.Business.Model;
+using QNH.Overheid.KernRegister.Business.Model.Entities;
+using QNH.Overheid.KernRegister.Business.Model.EntityComparers;
+using QNH.Overheid.KernRegister.Business.Service.Users;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 
-using QNH.Overheid.KernRegister.Beheer.ViewModels;
-using QNH.Overheid.KernRegister.Beheer.Utilities;
-using QNH.Overheid.KernRegister.Business.Model;
-using QNH.Overheid.KernRegister.Business.Model.Entities;
-
-using NLog;
-
-using StructureMap;
-using StructureMap.Pipeline;
-using NHibernate.Criterion;
-using QNH.Overheid.KernRegister.Beheer.ViewModel;
-using QNH.Overheid.KernRegister.Business.Utility;
-using NHibernate.Linq;
-using System.Diagnostics;
-using System.Data.Entity;
-using System.Text;
-using QNH.Overheid.KernRegister.Business.Crm;
-using QNH.Overheid.KernRegister.Business.Model.EntityComparers;
-using Rotativa;
-using QNH.Overheid.KernRegister.Business.Service.Users;
-
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
-    [CVnHRAuthorize(ApplicationActions.CVnHR_ViewKvKData)]
+    [CVnHRAuthorize(ApplicationActions.CVnHR_ViewCVnHRData)]
     public class VestigingController : Controller
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
