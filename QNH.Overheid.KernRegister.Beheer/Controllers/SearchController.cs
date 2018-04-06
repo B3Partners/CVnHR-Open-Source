@@ -127,18 +127,18 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 else if(!SettingsHelper.BrmoApplicationEnabled)
                     return RedirectToAction("Index");
             } 
-            
 
             using (var nestedContainer = IocConfig.Container.GetNestedContainer())
             {
-                var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
-                var service = hrDataserviceVersionNumberBrmo == "2.5"
-                    ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
-                    : IocConfig.Container.GetInstance<IKvkSearchService>();
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName());
-
                 if (toBrmo)
                 {
+                    var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
+                    var service = hrDataserviceVersionNumberBrmo == "2.5"
+                        ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
+                        : IocConfig.Container.GetInstance<IKvkSearchService>();
+
+                    var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName());
+
                     var msg = "";
                     var brmostatus = AddInschrijvingResultStatus.Error;
                     try
@@ -164,34 +164,39 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                             Message = msg
                         });
                 }
-
-                var storageService = nestedContainer.GetInstance<IInschrijvingSyncService>();
-                var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
-
-                if (toCrm)
+                else
                 {
-                    return string.IsNullOrEmpty(vestigingNummer)
-                        ? RedirectToAction("Export", "Vestiging", new {kvkNummer = kvkNummer})
-                        : RedirectToAction("ExportVestiging", "Vestiging", new {vestigingNummer = vestigingNummer});
+                    var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+                    var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName());
+
+                    var storageService = nestedContainer.GetInstance<IInschrijvingSyncService>();
+                    var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
+
+                    if (toCrm)
+                    {
+                        return string.IsNullOrEmpty(vestigingNummer)
+                            ? RedirectToAction("Export", "Vestiging", new { kvkNummer = kvkNummer })
+                            : RedirectToAction("ExportVestiging", "Vestiging", new { vestigingNummer = vestigingNummer });
+                    }
+
+                    if (toDebiteuren)
+                    {
+                        return string.IsNullOrEmpty(vestigingNummer)
+                            ? RedirectToAction("ExportDebiteuren", "Vestiging", new { kvkNummer = kvkNummer })
+                            : RedirectToAction("ExportVestigingDebiteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
+                    }
+
+                    if (toCrediteuren)
+                    {
+                        return string.IsNullOrEmpty(vestigingNummer)
+                            ? RedirectToAction("ExportCrediteuren", "Vestiging", new { kvkNummer = kvkNummer })
+                            : RedirectToAction("ExportVestigingCrediteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
+                    }
+
+                    var result = new ImportResultViewModel() { KvkInschrijving = kvkInschrijving, Status = status };
+
+                    return View(result);
                 }
-
-                if (toDebiteuren)
-                {
-                    return string.IsNullOrEmpty(vestigingNummer)
-                        ? RedirectToAction("ExportDebiteuren", "Vestiging", new { kvkNummer = kvkNummer })
-                        : RedirectToAction("ExportVestigingDebiteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
-                }
-
-                if (toCrediteuren)
-                {
-                    return string.IsNullOrEmpty(vestigingNummer)
-                        ? RedirectToAction("ExportCrediteuren", "Vestiging", new { kvkNummer = kvkNummer })
-                        : RedirectToAction("ExportVestigingCrediteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
-                }
-
-                var result = new ImportResultViewModel() {KvkInschrijving = kvkInschrijving, Status = status};
-
-                return View(result);
             }
         }
 
