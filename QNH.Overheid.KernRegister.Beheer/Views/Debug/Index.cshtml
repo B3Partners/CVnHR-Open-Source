@@ -1,13 +1,15 @@
-﻿@model QNH.Overheid.KernRegister.Business.Model.Debug.DatabaseDebugInfo
+﻿@using System.DirectoryServices.AccountManagement;
+@model QNH.Overheid.KernRegister.Business.Model.Debug.DatabaseDebugInfo
 
 @{
     ViewBag.Title = "Debug";
-   
+
 }
 
 <h2>App status</h2>
 
-@if(Model.Exception != null){
+@if (Model.Exception != null)
+{
     <h1>Exception: @Model.Exception.Message</h1>
     <p>
         <strong>Stacktrace:</strong>
@@ -15,9 +17,26 @@
     </p>
 }
 
+@{
+    var user = User;
+    using (var context = new PrincipalContext(ContextType.Domain))
+    {
+        using (var principal = UserPrincipal.FindByIdentity(context, user.Identity.Name))
+        {
+            if (principal != null)
+            {
+                <div>@principal.DistinguishedName)</div>
+            }
+            else
+            {
+                <div>no principal @context.Container</div>
+            }
+        }
+    }
+}
+
 <h2>View Elmah log</h2>
 <a href="~/elmah.axd" target="_blank">Click to open elmah log</a>
-
 
 <h3>Database Debug info</h3>
 <div class="row">
@@ -34,7 +53,7 @@
     <div class="col-md-4">@Html.ActionLink("Delete doubles", "DeleteDoubles")</div>
 </div>
 
-<hr/>
+<hr />
 <h2>Database info</h2>
 <ul>
     <li>@Model.InschrijvingOrphans.Count() Inschrijving orphans</li>
@@ -52,12 +71,12 @@
 
 @if (Model.InschrijvingOrphans != null && Model.InschrijvingOrphans.Any())
 {
-    <hr/>
+    <hr />
     <h2>Found inschrijving 'orphans'</h2>
     <ul>
         @foreach (var inschrijving in Model.InschrijvingOrphans)
         {
-            <li>@inschrijving.KvkNummer: @inschrijving.InschrijvingNaam (geldig tot: @inschrijving.GeldigTot) (@Html.ActionLink("delete", "DeleteOrphans", new {itemid = inschrijving.KvkNummer}))</li>
+            <li>@inschrijving.KvkNummer: @inschrijving.InschrijvingNaam (geldig tot: @inschrijving.GeldigTot) (@Html.ActionLink("delete", "DeleteOrphans", new { itemid = inschrijving.KvkNummer }))</li>
         }
     </ul>
     @Html.ActionLink("Delete all", "DeleteAllOrphans")
@@ -70,7 +89,7 @@
     <ul>
         @foreach (var vestiging in Model.VestigingOrphans)
         {
-            <li>@vestiging.Vestigingsnummer: @vestiging.Naam (geldig tot: @vestiging.GeldigTot) (@Html.ActionLink("delete", "DeleteOrphans", new {itemid = vestiging.Vestigingsnummer}))</li>
+            <li>@vestiging.Vestigingsnummer: @vestiging.Naam (geldig tot: @vestiging.GeldigTot) (@Html.ActionLink("delete", "DeleteOrphans", new { itemid = vestiging.Vestigingsnummer }))</li>
         }
     </ul>
     @Html.ActionLink("Delete all", "DeleteAllOrphans", new { vestiging = true })
