@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using NLog;
@@ -36,7 +37,10 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
             else
                 kvkIds = items;
 
-            var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+            var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
+            var service = hrDataserviceVersionNumberBrmo == "2.5"
+                ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
+                : IocConfig.Container.GetInstance<IKvkSearchService>();
             var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
 
             var errors = new List<Exception>();

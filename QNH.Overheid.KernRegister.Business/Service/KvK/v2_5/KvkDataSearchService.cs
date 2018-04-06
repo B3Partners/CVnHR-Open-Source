@@ -15,7 +15,7 @@ using QNH.Overheid.KernRegister.Business.Model.Entities;
 
 namespace QNH.Overheid.KernRegister.Business.Service.KvK.v2_5
 {
-    public class KvkDataSearchService : IKvkSearchService
+    public class KvkDataSearchService : IKvkSearchServiceV25
     {
         public const string VALUENOTPROVIDED = "[Not provided]";
 

@@ -5,6 +5,7 @@ using QNH.Overheid.KernRegister.Business.Service.BRMO;
 using QNH.Overheid.KernRegister.Business.SignaalService;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -135,7 +136,10 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
         {
             try
             {
-                var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+                var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
+                var service = hrDataserviceVersionNumberBrmo == "2.5"
+                    ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
+                    : IocConfig.Container.GetInstance<IKvkSearchService>();
                 var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
 
                 // retry with bypassing cache
