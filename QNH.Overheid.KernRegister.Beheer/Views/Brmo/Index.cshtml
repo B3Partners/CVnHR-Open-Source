@@ -88,7 +88,7 @@
                 var HRDataserviceVersion = $("#Config_HRDataserviceVersion").val();
                 var BrmoProcessType = $("#Config_BrmoProcessType").val();
                 var PostCodes = $("#Brmo-PostCodes").val();
-                $.post("@Url.Action("SaveConfig")", { PostCodes, HRDataserviceVersion, BrmoProcessType })
+                $.post("@Url.Action("SaveConfig")", { PostCodes: PostCodes, HRDataserviceVersion: HRDataserviceVersion, BrmoProcessType: BrmoProcessType })
                     .fail(function () {
                         alert("Error!");
                     });
