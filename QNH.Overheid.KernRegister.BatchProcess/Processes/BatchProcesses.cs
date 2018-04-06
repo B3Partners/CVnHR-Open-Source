@@ -50,7 +50,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                 {
                     try
                     {
-                        var inschrijving = searchService.SearchInschrijvingByKvkNummer(kvkNummer);
+                        var inschrijving = searchService.SearchInschrijvingByKvkNummer(kvkNummer, "Batchprocess CVnHR");
                         if (inschrijving != null)
                         {
                             var syncService = IocConfig.Container.GetInstance<IInschrijvingSyncService>();

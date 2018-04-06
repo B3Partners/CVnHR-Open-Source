@@ -53,7 +53,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
             try
             {
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
+                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName());
 
                 // Vul het viewmodel met gegevens uit kvkVermelding
                 if (kvkInschrijving != null)
@@ -147,7 +147,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 var service = hrDataserviceVersionNumberBrmo == "2.5"
                     ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
                     : IocConfig.Container.GetInstance<IKvkSearchService>();
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
+                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName());
 
                 if (toBrmo)
                 {
@@ -157,7 +157,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                     {
                         // retry with bypassing cache
                         var xDoc = RawXmlCache.Get(kvkNummer,
-                            () => { kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, true); });
+                            () => { kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName(), true); });
 
                         var brmoSyncService = nestedContainer.GetInstance<IBrmoSyncService>();
                         brmostatus = brmoSyncService.UploadXDocumentToBrmo(xDoc);
@@ -210,7 +210,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult Details(string kvknummer)
         {
             var service = IocConfig.Container.GetInstance<IKvkSearchService>();
-            var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvknummer);
+            var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvknummer, User.GetUserName());
             
             var kvkItem = new KvkItem()
             {
