@@ -18,7 +18,7 @@ using QNH.Overheid.KernRegister.Beheer.Utilities;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
-    [CVnHRAuthorize(ApplicationActions.CVnHR_ManageKvKData)]
+    [CVnHRAuthorize(ApplicationActions.CVnHR_SyncKvKData)]
     public class InschrijvingController : TaskSchedulerPartialController
     {
 
