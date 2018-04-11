@@ -3,12 +3,14 @@ using System.Web.Mvc;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
 using System;
 using System.Linq;
+using NLog;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
     [CVnHRAuthorize(ApplicationActions.CVnHR_Admin)]
     public class UsersController : Controller
     {
+        private static readonly Logger Log = LogManager.GetLogger("authorizationLogger");
         private readonly IUserManager _userManager;
 
         public UsersController(IUserManager userManager)
@@ -29,6 +31,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             var deniedPermissions = (actions ?? "")
                 .Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(a => Enum.Parse(typeof(ApplicationActions), a)).Cast<ApplicationActions>();
+            Log.Warn($"AccessDenied page shown for user: {User.GetUserName()}. DeniedPermissions: {string.Join(",", deniedPermissions)}. Any: {any}");
             return View(new AccessDeniedModel
             {
                 Administrators = SettingsHelper.InitialUserAdministrators.Concat(_userManager.GetAdministrators()),
