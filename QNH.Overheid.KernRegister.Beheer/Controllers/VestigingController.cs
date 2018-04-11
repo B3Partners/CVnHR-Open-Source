@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
-    [CVnHRAuthorize(ApplicationActions.CVnHR_ViewCVnHRData)]
+    [CVnHRAuthorize(true, ApplicationActions.CVnHR_ViewCVnHRData, ApplicationActions.CVnHR_ManageKvKData)]
     public class VestigingController : Controller
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();

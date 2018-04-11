@@ -24,7 +24,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult AccessDenied(string actions)
+        public ActionResult AccessDenied(string actions, bool any = false)
         {
             var deniedPermissions = (actions ?? "")
                 .Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
@@ -32,7 +32,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             return View(new AccessDeniedModel
             {
                 Administrators = SettingsHelper.InitialUserAdministrators.Concat(_userManager.GetAdministrators()),
-                DeniedPermission = deniedPermissions
+                DeniedPermission = deniedPermissions,
+                Any = any
             });
         }
 

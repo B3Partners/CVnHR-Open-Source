@@ -10,5 +10,6 @@ namespace QNH.Overheid.KernRegister.Beheer
     {
         public IEnumerable<string> Administrators { get; set; }
         public IEnumerable<ApplicationActions> DeniedPermission { get; set; }
+        public bool Any { get; internal set; }
     }
 }
