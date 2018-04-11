@@ -9,6 +9,7 @@ using System.Web.Http.Controllers;
 using System.Web.Mvc;
 
 using System.DirectoryServices.AccountManagement;
+using NLog;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -20,6 +21,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         private static readonly ApplicationActions[] _allActions 
             = Enum.GetValues(typeof(ApplicationActions)).OfType<ApplicationActions>().ToArray();
+
+        private static readonly Logger Log = LogManager.GetLogger("authorizationLogger");
 
         public CVnHRAuthorizeAttribute(params ApplicationActions[] actions)
         {
@@ -36,32 +39,35 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             var user = httpContext.User;
+            var authorized = false;
 
             if (!user.UserMatchesAnyADDistinguishedNameFilter())
             {
-                return false;
-            }
-
-            var authorized = _actions.Any()
-                ? (_anyActions ? user.IsAllowedAnyActions(_actions) : user.IsAllowedAllActions(_actions))
-                : user.IsAllowedAnyActions(_allActions);
-
-            // Only check if this user is set as initialAdministrator in AppSettings.config
-            // when not authorized.
-            if (!authorized && httpContext.User.IsInitialAdmin())
-            {
-                // Only allow pages without authorization and Admin pages to the initialAdministrators.
-                return !_actions.Any() 
-                    || _actions.All(a=> a == ApplicationActions.CVnHR_Admin);
+                authorized = false;
             }
             else
             {
-                return authorized;
+                authorized = _actions.Any()
+                    ? (_anyActions ? user.IsAllowedAnyActions(_actions) : user.IsAllowedAllActions(_actions))
+                    : user.IsAllowedAnyActions(_allActions);
+
+                // Only check if this user is set as initialAdministrator in AppSettings.config
+                // when not authorized.
+                if (!authorized && httpContext.User.IsInitialAdmin())
+                {
+                    // Only allow pages without authorization and Admin pages to the initialAdministrators.
+                    authorized = !_actions.Any()
+                        || _actions.All(a => a == ApplicationActions.CVnHR_Admin);
+                }
             }
+
+            Log.Info($"Request: {httpContext.Request.RawUrl} - user: {user.GetUserName()} - AUTHORIZED: {authorized}");
+            return authorized;
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
+            Log.Warn($"Request: {filterContext.RequestContext.HttpContext.Request.RawUrl} - user: {filterContext.HttpContext.User.GetUserName()} - UNAUTHORIZED");
             filterContext.HttpContext.Response.Redirect($"~/Users/AccessDenied?actions={string.Join(",",_actions)}&any={_anyActions}");
             base.HandleUnauthorizedRequest(filterContext);
         }
