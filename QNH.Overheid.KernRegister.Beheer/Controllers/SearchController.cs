@@ -137,7 +137,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                         ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
                         : IocConfig.Container.GetInstance<IKvkSearchService>();
 
-                    var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName());
+                    // for now always bypass cache to ensure correct version in cache.
+                    var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName(), true);
 
                     var msg = "";
                     var brmostatus = AddInschrijvingResultStatus.Error;
