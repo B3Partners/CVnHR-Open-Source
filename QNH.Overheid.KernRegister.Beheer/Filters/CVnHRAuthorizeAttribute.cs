@@ -15,13 +15,22 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
     [CVnHRAuthorize(ApplicationActions.CVnHR_Admin)]
     public class CVnHRAuthorizeAttribute : AuthorizeAttribute, IAuthorizationFilter
     {
-        private ApplicationActions[] _actions;
+        private readonly ApplicationActions[] _actions;
+        private readonly bool _anyActions;
+
         private static readonly ApplicationActions[] _allActions 
             = Enum.GetValues(typeof(ApplicationActions)).OfType<ApplicationActions>().ToArray();
 
         public CVnHRAuthorizeAttribute(params ApplicationActions[] actions)
         {
             _actions = actions;
+            _anyActions = false;
+        }
+
+        public CVnHRAuthorizeAttribute(bool anyActions, params ApplicationActions[] actions)
+        {
+            _actions = actions;
+            _anyActions = anyActions;
         }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
@@ -34,7 +43,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             }
 
             var authorized = _actions.Any()
-                ? user.IsAllowedAllActions(_actions)
+                ? (_anyActions ? user.IsAllowedAnyActions(_actions) : user.IsAllowedAllActions(_actions))
                 : user.IsAllowedAnyActions(_allActions);
 
             // Only check if this user is set as initialAdministrator in AppSettings.config
@@ -53,7 +62,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.HttpContext.Response.Redirect($"~/Users/AccessDenied?actions={string.Join(",",_actions)}");
+            filterContext.HttpContext.Response.Redirect($"~/Users/AccessDenied?actions={string.Join(",",_actions)}&any={_anyActions}");
             base.HandleUnauthorizedRequest(filterContext);
         }
     }
