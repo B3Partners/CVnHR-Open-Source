@@ -15,16 +15,20 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
 {
     public class SignaalController : ApiController
     {
-        private readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private readonly Logger _log = LogManager.GetLogger("apiLogger");
         private const string ApiUserName = "Api/Signaal";
 
         // GET: api/Signaal
-        public IEnumerable<string> Get() => new [] { "KvkSignaalApi", "QNH", "V1", "Implemented actions:" }
-                    .Concat(GetType().GetMethods()
-                                     .Where(method => method.IsPublic && method.GetCustomAttributes(false)
-                                                                                .Any(a=>a is HttpPostAttribute 
-                                                                                        || a is HttpGetAttribute))
-                                     .Select(method=> (Request.RequestUri.ToString() + "/" + method.Name).Replace("//", "/")));
+        public IEnumerable<string> Get()
+        {
+            _log.Info($"Signaal Get called. {Request.RequestUri}");
+            return new[] { "KvkSignaalApi", "QNH", "V1", "Implemented actions:" }
+                      .Concat(GetType().GetMethods()
+                                       .Where(method => method.IsPublic && method.GetCustomAttributes(false)
+                                                                                  .Any(a => a is HttpPostAttribute
+                                                                                          || a is HttpGetAttribute))
+                                       .Select(method => $"{(Request.RequestUri.ToString() + "/" + method.Name).Replace("//", "/")} ({(method.GetCustomAttributes(false).Any(a => a is HttpPostAttribute) ? "POST" : "GET")})"));
+        }
 
 
         // POST: api/Signaal
