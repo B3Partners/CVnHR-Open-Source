@@ -68,8 +68,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             Log.Warn($"Request: {filterContext.RequestContext.HttpContext.Request.RawUrl} - user: {filterContext.HttpContext.User.GetUserName()} - UNAUTHORIZED");
-            filterContext.HttpContext.Response.Redirect($"~/Users/AccessDenied?actions={string.Join(",",_actions)}&any={_anyActions}");
-            base.HandleUnauthorizedRequest(filterContext);
+            filterContext.Result = new RedirectResult($"~/Users/AccessDenied?actions={string.Join(",", _actions)}&any={_anyActions}");
         }
     }
 }
