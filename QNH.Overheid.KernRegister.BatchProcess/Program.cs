@@ -139,7 +139,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                             log("Could not start proces. Zipcodes missing!", new ArgumentException("version")); ;
                             break;
                         }
-                        log($"Starting BRMO task for version {version} with zipCodes {string.Join(" ", zipCodes)}", null);
+                        log($"Starting BRMO task for version {version} with {brmoProcessType} {string.Join(" ", zipCodes)}", null);
                         RsgbProcesses.FillRsgbForZipcodes(MaxDegreeOfParallelism, _brmoLogger, version, brmoProcessType, zipCodes);
                         log("Finished BRMO task", null);
                         break;
