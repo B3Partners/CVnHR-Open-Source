@@ -133,7 +133,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
             catch (Exception ex)
             {
                 _log.Error(ex);
-                throw ex;
+                //throw ex;
             }
         }
 
@@ -159,7 +159,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
             catch (Exception ex)
             {
                 _log.Error(ex);
-                throw ex;
+                //throw ex;
             }
         }
     }

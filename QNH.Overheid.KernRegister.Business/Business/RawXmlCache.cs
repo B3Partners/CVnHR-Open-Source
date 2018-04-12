@@ -30,7 +30,14 @@ namespace QNH.Overheid.KernRegister.Business.Business
                 logger.Info(xDoc.ToString());
                 return;
             }
-            _cache.Add(kvkNummer, xDoc, DateTimeOffset.Now.AddHours(CacheInHours));
+            if (!_cache.Contains(kvkNummer))
+            {
+                _cache.Add(kvkNummer, xDoc, DateTimeOffset.Now.AddHours(CacheInHours));
+            }
+            else
+            {
+                _cache[kvkNummer] = xDoc;
+            }
         }
 
         public static int GetCount() => _cache.Count();
