@@ -194,7 +194,7 @@
                                     @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Crediteuren))
                                     {
                                         @:|
-                                        @Html.ActionLink(Default.ToCrediteuren, "Import", new { kvkNummer = item.KvkNummer, ToDebiteuren = false })
+                                        @Html.ActionLink(Default.ToCrediteuren, "Import", new { kvkNummer = item.KvkNummer, ToCrediteuren = true })
                                     }
                                 </td>
                             </tr>
