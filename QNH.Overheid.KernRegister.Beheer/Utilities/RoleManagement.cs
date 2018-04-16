@@ -32,10 +32,13 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
             {
                 using (var context = new PrincipalContext(ContextType.Domain))
                 {
-                    using (var principal = UserPrincipal.FindByIdentity(context, user.Identity.Name))
+                    using (var principal = UserPrincipal.FindByIdentity(context, user?.Identity?.Name))
                     {
-                        var distinguishedName = principal.DistinguishedName;
-                        return dnFilters.Any(filter => filter.All(f => distinguishedName.Contains(f)));
+                        if (principal != null)
+                        {
+                            var distinguishedName = principal.DistinguishedName;
+                            return dnFilters.Any(filter => filter.All(f => distinguishedName.Contains(f)));
+                        }
                     }
                 }
             }
