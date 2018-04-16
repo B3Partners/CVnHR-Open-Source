@@ -49,6 +49,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Exceptions\KvkServerException.cs" />
     <Compile Include="SignaalService\Types.cs" />
     <Compile Include="v2.5\CustomInspectMessageBehavior.cs" />
     <Compile Include="v2.5\CustomMessageInspector.cs" />

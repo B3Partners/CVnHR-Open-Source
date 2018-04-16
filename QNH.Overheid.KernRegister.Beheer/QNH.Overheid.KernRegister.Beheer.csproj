@@ -186,6 +186,9 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Polly, Version=5.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.5.9.0\lib\net45\Polly.dll</HintPath>
+    </Reference>
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
       <Private>True</Private>
