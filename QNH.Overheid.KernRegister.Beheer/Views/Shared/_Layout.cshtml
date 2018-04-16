@@ -44,11 +44,14 @@
                 var url = Request.Url.AbsolutePath.ToLower();
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ViewKvKData))
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ViewCVnHRData))
                         {
                             <li class="@(url.Contains("/vestiging") && !url.Contains("/search") ? "active" : null)">
                                 @Html.ActionLink(Default.SearchApplication, "Index", "Vestiging")
                             </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_ViewKvKData))
+                        {
                             <li class="@(url.Contains("/search") ? "active" : null)">
                                 @Html.ActionLink(Default.SearchExternal, "Index", "Search")
                             </li>
@@ -67,8 +70,14 @@
                         }
                         @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Brmo) && SettingsHelper.BrmoApplicationEnabled)
                         {
-                            <li class="@(url.Contains("/brmo") ? "active" : null)">
+                            <li class="@(url.Contains("bla/brmo") ? "active" : null)">
                                 <a href="@SettingsHelper.BrmoApplicationBaseUrl" target="_blank">@Default.ToBrmo</a>
+                            </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_SyncBrmo) && SettingsHelper.BrmoApplicationEnabled)
+                        {
+                            <li class="@(url.Contains("/syncbrmo") ? "active" : null)">
+                                @Html.ActionLink(Default.SyncBrmo, "Index", "Brmo")
                             </li>
                         }
                         @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin) || User.IsInitialAdmin())
@@ -110,11 +119,11 @@
             </p>
             <p class="right">
                 @Html.ActionLink(
-                                   linkText: "Sla pagina op als PDF",
-                                   actionName: "Index",
-                                   controllerName: "Pdf",
-                                            routeValues: new { url = Request.Url, fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "-" + Default.ApplicationName + ".pdf" },
-                                   htmlAttributes: null)
+                                        linkText: "Sla pagina op als PDF",
+                                        actionName: "Index",
+                                        controllerName: "Pdf",
+                                                 routeValues: new { url = Request.Url, fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "-" + Default.ApplicationName + ".pdf" },
+                                        htmlAttributes: null)
             </p>
         </footer>
     </div>

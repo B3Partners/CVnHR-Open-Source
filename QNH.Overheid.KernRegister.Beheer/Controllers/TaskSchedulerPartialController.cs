@@ -56,6 +56,12 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                     case "K":
                         logPath = Path.Combine(logPath, "Kernregistratie");
                         break;
+                    case "BRMO":
+                        logPath = Path.Combine(logPath, "Brmo");
+                        break;
+                    default:
+                        logPath = Path.Combine(logPath, Argument);
+                        break;
                 }
                 var directory = Path.Combine(Path.GetDirectoryName(ExecutablePath), logPath);
                 if (Directory.Exists(directory))
@@ -291,6 +297,12 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             else
                 return null;
 
+        }
+
+        protected void UpdateTaskManagerArguments(string arguments)
+        {
+            ExportTaskManager.ScheduledTask.Definition.Actions.Cast<ExecAction>().Single().Arguments = arguments;
+            ExportTaskManager.ScheduledTask.RegisterChanges();
         }
     }
 

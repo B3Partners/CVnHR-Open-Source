@@ -188,64 +188,57 @@ namespace QNH.Overheid.KernRegister.Beheer
                 var searchServiceCacheTimeInHours = Convert.ToInt32(ConfigurationManager.AppSettings["SearchServiceCacheTimeInHours"] ?? "24");
                 RawXmlCache.CacheInHours = searchServiceCacheTimeInHours;
 
+                // KvK HR-Dataservice
+                var dataService = x.For<Dataservice>()
+                    .Use<CustomDataService>()
+                    .SelectConstructor(() => new CustomDataService());
+                var dataServiceV30 = x.For<Business.KvK.v30.Dataservice>()
+                        .Use<Business.KvK.v30.CustomDataService>()
+                        .SelectConstructor(() => new Business.KvK.v30.CustomDataService());
+                if (SettingsHelper.BrmoApplicationEnabled)
+                {
+                    dataService.SetProperty(ds => ds.Endpoint
+                                                    .EndpointBehaviors
+                                                    .Add(new RawXmlActionBehavior(RawXmlCache.Add)));
+                    dataServiceV30.SetProperty(ds => ds.Endpoint
+                                                        .EndpointBehaviors
+                                                        .Add(new RawXmlActionBehavior(RawXmlCache.Add)));
+
+                    // enable to get xml files
+                    if (Convert.ToBoolean(ConfigurationManager.AppSettings["EnableRawXmlBehavior"] ?? "false"))
+                    {
+                        dataService.SetProperty(ds => ds.Endpoint
+                            .EndpointBehaviors
+                            .Add(new RawXMLBehavior(ConfigurationManager.AppSettings["InschrijvingenXmlResponseFile"])));
+                        dataServiceV30.SetProperty(ds => ds.Endpoint
+                                .EndpointBehaviors
+                                .Add(new RawXMLBehavior(ConfigurationManager.AppSettings["InschrijvingenXmlResponseFile"])));
+                    }
+                }
+
                 // Set up KvkSearchService
                 var hrDataserviceVersionNumber = ConfigurationManager.AppSettings["HR-DataserviceVersionNumber"];
                 if (hrDataserviceVersionNumber == "2.5")
                 {
-                    // KvK HR-Dataservice
-                    var dataService = x.For<Dataservice>()
-                        .Use<CustomDataService>()
-                        .SelectConstructor(() => new CustomDataService());
-
                     x.For<IKvkSearchService>().HybridHttpOrThreadLocalScoped().Use<KvkDataSearchService>()
                         .SelectConstructor(() => new KvkDataSearchService(Container.GetInstance<Dataservice>(), "klantReferentie", 0))
                         .Ctor<string>().Is(ConfigurationManager.AppSettings["SearchServiceKlantReferentie"])
                         .Ctor<int>().Is(searchServiceCacheTimeInHours);
-
-                    if (SettingsHelper.BrmoApplicationEnabled)
-                    {
-                        dataService.SetProperty(ds => ds.Endpoint
-                                                        .EndpointBehaviors
-                                                        .Add(new RawXmlActionBehavior(RawXmlCache.Add)));
-
-                        // enable to get xml files
-                        if (Convert.ToBoolean(ConfigurationManager.AppSettings["EnableRawXmlBehavior"] ?? "false"))
-                        {
-                            dataService.SetProperty(ds => ds.Endpoint
-                                .EndpointBehaviors
-                                .Add(new RawXMLBehavior(ConfigurationManager.AppSettings["InschrijvingenXmlResponseFile"])));
-                        }
-                    }
                 }
                 else if (hrDataserviceVersionNumber == "3.0")
                 {
-                    // KvK HR-Dataservice
-                    var dataService = x.For<Business.KvK.v30.Dataservice>()
-                        .Use<Business.KvK.v30.CustomDataService>()
-                        .SelectConstructor(() => new Business.KvK.v30.CustomDataService());
-
                     x.For<IKvkSearchService>().HybridHttpOrThreadLocalScoped().Use<Business.Service.KvK.v30.KvkDataSearchService>()
                         .SelectConstructor(() => new Business.Service.KvK.v30.KvkDataSearchService(Container.GetInstance<Business.KvK.v30.Dataservice>(), "klantReferentie", 0))
                         .Ctor<string>().Is(ConfigurationManager.AppSettings["SearchServiceKlantReferentie"])
                         .Ctor<int>().Is(searchServiceCacheTimeInHours);
-
-                    if (SettingsHelper.BrmoApplicationEnabled)
-                    {
-                        dataService.SetProperty(ds => ds.Endpoint
-                                                        .EndpointBehaviors
-                                                        .Add(new RawXmlActionBehavior(RawXmlCache.Add)));
-
-                        // enable to get xml files
-                        if (Convert.ToBoolean(ConfigurationManager.AppSettings["EnableRawXmlBehavior"] ?? "false"))
-                        {
-                            dataService.SetProperty(ds => ds.Endpoint
-                                .EndpointBehaviors
-                                .Add(new RawXMLBehavior(ConfigurationManager.AppSettings["InschrijvingenXmlResponseFile"])));
-                        }
-                    }
                 }
                 else
                     throw new ConfigurationErrorsException($"HR-DataserviceVersionNumber {hrDataserviceVersionNumber} not implemented.");
+
+                x.For<IKvkSearchServiceV25>().HybridHttpOrThreadLocalScoped().Use<KvkDataSearchService>()
+                        .SelectConstructor(() => new KvkDataSearchService(Container.GetInstance<Dataservice>(), "klantReferentie", 0))
+                        .Ctor<string>().Is(ConfigurationManager.AppSettings["SearchServiceKlantReferentie"])
+                        .Ctor<int>().Is(searchServiceCacheTimeInHours);
 
                 // Only store kvk numbers in memory cache when Brmo application is setup
                 if (SettingsHelper.BrmoApplicationEnabled)
