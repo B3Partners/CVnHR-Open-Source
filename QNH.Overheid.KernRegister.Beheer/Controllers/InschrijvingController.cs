@@ -14,10 +14,11 @@ using NLog;
 using System.Configuration;
 using QNH.Overheid.KernRegister.Organization.Resources;
 using QNH.Overheid.KernRegister.Business.Service.Users;
+using QNH.Overheid.KernRegister.Beheer.Utilities;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
-    [CVnHRAuthorize(ApplicationActions.CVnHR_ManageKvKData)]
+    [CVnHRAuthorize(ApplicationActions.CVnHR_SyncKvKData)]
     public class InschrijvingController : TaskSchedulerPartialController
     {
 
@@ -62,7 +63,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             var maxDegreeOfParallelism = Convert.ToInt32(ConfigurationManager.AppSettings["MaxDegreeOfParallelism"] ?? "1");
             var processing = new InschrijvingProcessing(IocConfig.Container, maxDegreeOfParallelism);
             processing.RecordProcessed += RecordProcessedHandler;
-            processing.ProcessRecords(records);
+            processing.ProcessRecords(records, Context.User.GetUserName());
         }
 
         public void RecordProcessedHandler(object sender, RecordProcessedEventArgs e)

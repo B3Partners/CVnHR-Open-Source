@@ -1,13 +1,9 @@
-﻿using QNH.Overheid.KernRegister.Beheer.Properties;
+﻿using NHibernate.Util;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
+using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Security.Principal;
-using System.Web;
-using NHibernate.Util;
-using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Utilities
 {
@@ -27,6 +23,27 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
             {
                 return userManager.IsAllowedAnyActions(user.GetUserName(), actions);
             }
+        }
+
+        public static bool UserMatchesAnyADDistinguishedNameFilter(this IPrincipal user)
+        {
+            var dnFilters = SettingsHelper.ADDistinguishedNameFilters;
+            if (dnFilters.Any())
+            {
+                using (var context = new PrincipalContext(ContextType.Domain))
+                {
+                    using (var principal = UserPrincipal.FindByIdentity(context, user?.Identity?.Name))
+                    {
+                        if (principal != null)
+                        {
+                            var distinguishedName = principal.DistinguishedName;
+                            return dnFilters.Any(filter => filter.All(f => distinguishedName.Contains(f)));
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
 
         public static string GetUserName(this IPrincipal user)

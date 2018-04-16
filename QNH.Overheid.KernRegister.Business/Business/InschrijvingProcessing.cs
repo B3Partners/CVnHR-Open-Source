@@ -29,7 +29,7 @@ namespace QNH.Overheid.KernRegister.Business.Business
             _maxDegreeOfParallelism = maxDegreeOfParallelism;
         }
 
-        public void ProcessRecords(IEnumerable<InschrijvingRecord> inschrijvingRecords)
+        public void ProcessRecords(IEnumerable<InschrijvingRecord> inschrijvingRecords, string userName)
         {
             // Ensure unique records
             inschrijvingRecords = inschrijvingRecords.Distinct();
@@ -38,7 +38,7 @@ namespace QNH.Overheid.KernRegister.Business.Business
             ProcessInschrijvingen(inschrijvingRecords, 
                 (kvkNummer) => {
                     var searchService = _container.GetInstance<IKvkSearchService>();
-                    return searchService.SearchInschrijvingByKvkNummer(kvkNummer);
+                    return searchService.SearchInschrijvingByKvkNummer(kvkNummer, userName);
                 },
                 (kvkInschrijving) => {
                     var repo = _container.GetInstance<IKvkInschrijvingRepository>();

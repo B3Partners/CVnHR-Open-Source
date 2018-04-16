@@ -1,30 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using System.Web.UI.WebControls.Expressions;
-
-using QNH.Overheid.KernRegister.Beheer.Models;
-using QNH.Overheid.KernRegister.Beheer.ViewModels;
+﻿using NLog;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
-using QNH.Overheid.KernRegister.Business.Integration;
-using QNH.Overheid.KernRegister.Business.Model;
-using QNH.Overheid.KernRegister.Business.Model.Entities;
-using QNH.Overheid.KernRegister.Business.Service;
-
-using NLog;
+using QNH.Overheid.KernRegister.Beheer.ViewModels;
 using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Enums;
-using QNH.Overheid.KernRegister.Business.Service.BRMO;
-using Rotativa;
-using StructureMap;
-using StructureMap.Pipeline;
-using QNH.Overheid.KernRegister.Business.Service.Users;
-using QNH.Overheid.KernRegister.Business.KvKSearchApi.Entities;
 using QNH.Overheid.KernRegister.Business.KvKSearchApi;
+using QNH.Overheid.KernRegister.Business.KvKSearchApi.Entities;
+using QNH.Overheid.KernRegister.Business.Service;
+using QNH.Overheid.KernRegister.Business.Service.BRMO;
+using QNH.Overheid.KernRegister.Business.Service.Users;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -52,7 +41,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
             try
             {
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
+                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName());
 
                 // Vul het viewmodel met gegevens uit kvkVermelding
                 if (kvkInschrijving != null)
@@ -138,22 +127,26 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 else if(!SettingsHelper.BrmoApplicationEnabled)
                     return RedirectToAction("Index");
             } 
-            
 
             using (var nestedContainer = IocConfig.Container.GetNestedContainer())
             {
-                var service = nestedContainer.GetInstance<IKvkSearchService>();
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer);
-
                 if (toBrmo)
                 {
+                    var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
+                    var service = hrDataserviceVersionNumberBrmo == "2.5"
+                        ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
+                        : IocConfig.Container.GetInstance<IKvkSearchService>();
+
+                    // for now always bypass cache to ensure correct version in cache.
+                    var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName(), true);
+
                     var msg = "";
                     var brmostatus = AddInschrijvingResultStatus.Error;
                     try
                     {
                         // retry with bypassing cache
                         var xDoc = RawXmlCache.Get(kvkNummer,
-                            () => { kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, true); });
+                            () => { kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName(), true); });
 
                         var brmoSyncService = nestedContainer.GetInstance<IBrmoSyncService>();
                         brmostatus = brmoSyncService.UploadXDocumentToBrmo(xDoc);
@@ -172,41 +165,46 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                             Message = msg
                         });
                 }
-
-                var storageService = nestedContainer.GetInstance<IInschrijvingSyncService>();
-                var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
-
-                if (toCrm)
+                else
                 {
-                    return string.IsNullOrEmpty(vestigingNummer)
-                        ? RedirectToAction("Export", "Vestiging", new {kvkNummer = kvkNummer})
-                        : RedirectToAction("ExportVestiging", "Vestiging", new {vestigingNummer = vestigingNummer});
+                    var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+                    var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName());
+
+                    var storageService = nestedContainer.GetInstance<IInschrijvingSyncService>();
+                    var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
+
+                    if (toCrm)
+                    {
+                        return string.IsNullOrEmpty(vestigingNummer)
+                            ? RedirectToAction("Export", "Vestiging", new { kvkNummer = kvkNummer })
+                            : RedirectToAction("ExportVestiging", "Vestiging", new { vestigingNummer = vestigingNummer });
+                    }
+
+                    if (toDebiteuren)
+                    {
+                        return string.IsNullOrEmpty(vestigingNummer)
+                            ? RedirectToAction("ExportDebiteuren", "Vestiging", new { kvkNummer = kvkNummer })
+                            : RedirectToAction("ExportVestigingDebiteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
+                    }
+
+                    if (toCrediteuren)
+                    {
+                        return string.IsNullOrEmpty(vestigingNummer)
+                            ? RedirectToAction("ExportCrediteuren", "Vestiging", new { kvkNummer = kvkNummer })
+                            : RedirectToAction("ExportVestigingCrediteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
+                    }
+
+                    var result = new ImportResultViewModel() { KvkInschrijving = kvkInschrijving, Status = status };
+
+                    return View(result);
                 }
-
-                if (toDebiteuren)
-                {
-                    return string.IsNullOrEmpty(vestigingNummer)
-                        ? RedirectToAction("ExportDebiteuren", "Vestiging", new { kvkNummer = kvkNummer })
-                        : RedirectToAction("ExportVestigingDebiteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
-                }
-
-                if (toCrediteuren)
-                {
-                    return string.IsNullOrEmpty(vestigingNummer)
-                        ? RedirectToAction("ExportCrediteuren", "Vestiging", new { kvkNummer = kvkNummer })
-                        : RedirectToAction("ExportVestigingCrediteuren", "Vestiging", new { vestigingNummer = vestigingNummer });
-                }
-
-                var result = new ImportResultViewModel() {KvkInschrijving = kvkInschrijving, Status = status};
-
-                return View(result);
             }
         }
 
         public ActionResult Details(string kvknummer)
         {
             var service = IocConfig.Container.GetInstance<IKvkSearchService>();
-            var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvknummer);
+            var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvknummer, User.GetUserName());
             
             var kvkItem = new KvkItem()
             {

@@ -1,32 +1,22 @@
-﻿using System;
+﻿using NLog;
+using QNH.Overheid.KernRegister.Beheer.Utilities;
+using QNH.Overheid.KernRegister.Beheer.ViewModel;
+using QNH.Overheid.KernRegister.Beheer.ViewModels;
+using QNH.Overheid.KernRegister.Business.Crm;
+using QNH.Overheid.KernRegister.Business.Model;
+using QNH.Overheid.KernRegister.Business.Model.Entities;
+using QNH.Overheid.KernRegister.Business.Model.EntityComparers;
+using QNH.Overheid.KernRegister.Business.Service.Users;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 
-using QNH.Overheid.KernRegister.Beheer.ViewModels;
-using QNH.Overheid.KernRegister.Beheer.Utilities;
-using QNH.Overheid.KernRegister.Business.Model;
-using QNH.Overheid.KernRegister.Business.Model.Entities;
-
-using NLog;
-
-using StructureMap;
-using StructureMap.Pipeline;
-using NHibernate.Criterion;
-using QNH.Overheid.KernRegister.Beheer.ViewModel;
-using QNH.Overheid.KernRegister.Business.Utility;
-using NHibernate.Linq;
-using System.Diagnostics;
-using System.Data.Entity;
-using System.Text;
-using QNH.Overheid.KernRegister.Business.Crm;
-using QNH.Overheid.KernRegister.Business.Model.EntityComparers;
-using Rotativa;
-using QNH.Overheid.KernRegister.Business.Service.Users;
-
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
-    [CVnHRAuthorize(ApplicationActions.CVnHR_ViewKvKData)]
+    [CVnHRAuthorize(true, ApplicationActions.CVnHR_ViewCVnHRData, ApplicationActions.CVnHR_ManageKvKData)]
     public class VestigingController : Controller
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
@@ -404,34 +394,45 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         {
             if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
                 return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageCrm });
-
-            var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
-            var inschrijving = repo.GetLatestInschrijving(kvkNummer);
-
-            var kvkItem = new KvkItem()
+            try
             {
-                KvkNummer = inschrijving.KvkNummer,
-                Naam = inschrijving.InschrijvingNaam, // inschrijving.Naam,
-                Vestigingen = inschrijving.Vestigingen.ToList(),
-                NaamEigenaar = inschrijving.VolledigeNaamEigenaar,
-                AantalMedewerkers = inschrijving.FulltimeWerkzamePersonen
-            };
+                var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
+                var inschrijving = repo.GetLatestInschrijving(kvkNummer);
 
-            var exportService = IocConfig.Container.GetInstance<IExportService>();
+                var kvkItem = new KvkItem()
+                {
+                    KvkNummer = inschrijving.KvkNummer,
+                    Naam = inschrijving.InschrijvingNaam, // inschrijving.Naam,
+                    Vestigingen = inschrijving.Vestigingen.ToList(),
+                    NaamEigenaar = inschrijving.VolledigeNaamEigenaar,
+                    AantalMedewerkers = inschrijving.FulltimeWerkzamePersonen
+                };
 
-            IExportResult result;
-            if (createNew)
-                result = exportService.InsertExternalRecord(inschrijving);
-            else
-            {
-                result = exportService.UpdateExternalRecord(inschrijving);
+                var exportService = IocConfig.Container.GetInstance<IExportService>();
 
-                if (result.NoItemsFoundInsertInstead && immediatelyCreateNewIfExists)
+                IExportResult result;
+                if (createNew)
                     result = exportService.InsertExternalRecord(inschrijving);
+                else
+                {
+                    result = exportService.UpdateExternalRecord(inschrijving);
 
+                    if (result.NoItemsFoundInsertInstead && immediatelyCreateNewIfExists)
+                        result = exportService.InsertExternalRecord(inschrijving);
+
+                }
+
+                return View(new CrmExportResult(result.Succes, result.Message, result.NoItemsFoundInsertInstead, result.Errors) { KvkItem = kvkItem });
             }
-
-            return View(new CrmExportResult(result.Succes, result.Message, result.NoItemsFoundInsertInstead, result.Errors) { KvkItem = kvkItem });
+            catch (Exception ex)
+            {
+                var msg = $"Error in Export! Error message: {ex.Message}";
+                logger.Error(ex, msg);
+                return View("Export", new CrmExportResult(false, msg, false, new[] { ex.Message })
+                {
+                    KvkItem = new KvkItem(),
+                });
+            }
         }
 
         public ActionResult ExportVestiging(string vestigingNummer, bool createNew = false, bool immediatelyCreateNewIfExists = true)
@@ -439,32 +440,44 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             if (!User.IsAllowedAllActions(ApplicationActions.CVnHR_ManageCrm))
                 return RedirectToAction("AccessDenied", "Users", new { actions = ApplicationActions.CVnHR_ManageCrm });
 
-            var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
-            var vestiging = repo.GetLatestVestiging(vestigingNummer);
+            try
+            { 
+                var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
+                var vestiging = repo.GetLatestVestiging(vestigingNummer);
 
-            var exportService = IocConfig.Container.GetInstance<IExportService>();
+                var exportService = IocConfig.Container.GetInstance<IExportService>();
 
-            IExportResult result;
-            if (createNew)
-                result = exportService.InsertExternalVestiging(vestiging);
-            else
-            {
-                result = exportService.UpdateExternalVestiging(vestiging);
-
-                if (result.NoItemsFoundInsertInstead && immediatelyCreateNewIfExists)
+                IExportResult result;
+                if (createNew)
                     result = exportService.InsertExternalVestiging(vestiging);
+                else
+                {
+                    result = exportService.UpdateExternalVestiging(vestiging);
+
+                    if (result.NoItemsFoundInsertInstead && immediatelyCreateNewIfExists)
+                        result = exportService.InsertExternalVestiging(vestiging);
+                }
+
+                var kvkItem = new KvkItem()
+                {
+                    KvkNummer = vestiging.KvkInschrijving.KvkNummer,
+                    Naam = vestiging.KvkInschrijving.InschrijvingNaam, // vestiging.KvkInschrijving.Naam,
+                    Vestigingen = new List<Vestiging> { vestiging },
+                    NaamEigenaar = vestiging.Naam,
+                    AantalMedewerkers = vestiging.TotaalWerkzamePersonen
+                };
+
+                return View("Export", new CrmExportResult(result.Succes, result.Message, result.NoItemsFoundInsertInstead, result.Errors) { KvkItem = kvkItem });
             }
-
-            var kvkItem = new KvkItem()
+            catch (Exception ex)
             {
-                KvkNummer = vestiging.KvkInschrijving.KvkNummer,
-                Naam = vestiging.KvkInschrijving.InschrijvingNaam, // vestiging.KvkInschrijving.Naam,
-                Vestigingen = new List<Vestiging> { vestiging },
-                NaamEigenaar = vestiging.Naam,
-                AantalMedewerkers = vestiging.TotaalWerkzamePersonen
-            };
-
-            return View("Export", new CrmExportResult(result.Succes, result.Message, result.NoItemsFoundInsertInstead, result.Errors) { KvkItem = kvkItem });
+                var msg = $"Error in Export! Error message: {ex.Message}";
+                logger.Error(ex, msg);
+                return View("Export", new CrmExportResult(false, msg, false, new[] { ex.Message })
+                {
+                    KvkItem = new KvkItem(),
+                });
+            }
         }
 
         public ActionResult ExportDebiteuren(string kvkNummer, bool createNew = false,

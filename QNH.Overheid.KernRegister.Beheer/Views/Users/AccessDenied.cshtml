@@ -12,7 +12,11 @@
         </div>
         <div class="col-sm-9">
             <h3 style="color: red">Geen toegang</h3>
-            <p>Voor deze actie zijn de volgende rechten nodig: @string.Join(", ", Model.DeniedPermission.Select(p=> p.GetDisplayName()))</p>
+            <p>Voor deze actie zijn de volgende rechten nodig: @string.Join(", ", Model.DeniedPermission.Select(p => p.GetDisplayName()))</p>
+            @if (Model.Any)
+            {
+                <p>Één van de bovenstaande rechten is voldoende.</p>
+            }
             <p>Vraag je leidinggevende of een CVnHR administrator om deze rechten.</p>
             <h4>Administrators:</h4>
             <ul>

@@ -3,6 +3,7 @@ using NLog;
 using QNH.Overheid.KernRegister.BatchProcess.Processes;
 using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Crm;
+using QNH.Overheid.KernRegister.Business.Enums;
 using QNH.Overheid.KernRegister.Business.KvK;
 using QNH.Overheid.KernRegister.Business.Model;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
@@ -99,8 +100,48 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                     case "A":
                         KvKDataserviceV2_5.Test();
                         break;
-                    case "RSGB":
-                        RsgbProcesses.FillRsgbForZipcodes(MaxDegreeOfParallelism, _brmoLogger, args.ElementAtOrDefault(1) == "drenthe" ? null : args?.Skip(1).ToList());
+                    case "BRMO":
+                        Action<string, Exception> log = (msg, ex) => {
+                            Console.WriteLine(msg);
+                            if (ex == null)
+                                _brmoLogger.Info(msg);
+                            else
+                                _brmoLogger.Error(ex, msg);
+                        };
+                        var version = args[1];
+                        if (string.IsNullOrWhiteSpace(version))
+                        {
+                            log("Could not start proces. Argument version missing.", new ArgumentException("version")); ;
+                            break;
+                        }
+                        var type = args[2];
+                        var brmoProcessType = BrmoProcessTypes.ZipCodes;
+                        if (string.IsNullOrWhiteSpace(type))
+                        {
+                            log("Could not start proces. Argument version missing.", new ArgumentException("version")); ;
+                            break;
+                        }
+                        else
+                        {
+                            switch (type)
+                            {
+                                case "KvkIds":
+                                    brmoProcessType = BrmoProcessTypes.KvkIds;
+                                    break;
+                                case "ZipCodes":
+                                    brmoProcessType = BrmoProcessTypes.ZipCodes;
+                                    break;
+                            }
+                        }
+                        var zipCodes = args.Skip(3).ToList();
+                        if (!zipCodes.Any())
+                        {
+                            log("Could not start proces. Zipcodes missing!", new ArgumentException("version")); ;
+                            break;
+                        }
+                        log($"Starting BRMO task for version {version} with {brmoProcessType} {string.Join(" ", zipCodes)}", null);
+                        RsgbProcesses.FillRsgbForZipcodes(MaxDegreeOfParallelism, _brmoLogger, version, brmoProcessType, zipCodes);
+                        log("Finished BRMO task", null);
                         break;
                     case "PROBIS":
                         var probis = IocConfig.Container.GetInstance<IFinancialExportService>();
@@ -340,7 +381,7 @@ QNH.Overheid.KernRegister.BatchProcess
 
                 Console.Write(consoleMessage);
             };
-            processing.ProcessRecords(records);
+            processing.ProcessRecords(records, "Batchprocess ImportAll");
 
 
         }

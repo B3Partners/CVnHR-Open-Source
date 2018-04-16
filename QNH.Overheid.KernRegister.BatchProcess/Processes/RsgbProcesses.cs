@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using NLog;
-using QNH.Overheid.KernRegister.Beheer.Utilities;
 using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Enums;
-using QNH.Overheid.KernRegister.Business.Integration;
-using QNH.Overheid.KernRegister.Business.Model;
 using QNH.Overheid.KernRegister.Business.Service;
 using QNH.Overheid.KernRegister.Business.Service.BRMO;
 
@@ -18,32 +15,32 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
     {
         // TODO: retry with CSV file??
 
-        public static void FillRsgbForZipcodes(int maxDegreeOfParallelism, Logger log, List<string> kvkIds = null)
+        public static void FillRsgbForZipcodes(int maxDegreeOfParallelism, 
+            Logger log, 
+            string HRDataserviceVersion,
+            BrmoProcessTypes type, 
+            List<string> items = null)
         {
             Console.WriteLine("Make sure to run this process as administrator!");
 
-            if (kvkIds == null)
+            List<string> kvkIds;
+            if (type == BrmoProcessTypes.ZipCodes)
             {
-                var msg = $"Searching kvkIds for all zipCodes in Drenthe: {_zipCodesDrenthe.Length} zipCodes found.";
+                var msg = $"Searching kvkIds in zipcodes: {string.Join(" ", items)}";
                 log.Debug(msg);
                 Console.WriteLine(msg);
-                kvkIds = ZipcodeProcesses.GetKvkIdsForZipcode(maxDegreeOfParallelism, true, _zipCodesDrenthe).ToList();
+                kvkIds = ZipcodeProcesses.GetKvkIdsForZipcode(maxDegreeOfParallelism, true, items.ToArray()).ToList();
                 msg = $"Found {kvkIds.Count()} kvk Ids.";
                 log.Debug(msg);
                 Console.WriteLine(msg);
             }
-            else if (!kvkIds.Any())
-            {
-                var msg = $"Searching kvkIds in zipcdoe 9408AM.";
-                log.Debug(msg);
-                Console.WriteLine(msg);
-                kvkIds = ZipcodeProcesses.GetKvkIdsForZipcode(maxDegreeOfParallelism, true, "9408AM").ToList();
-                msg = $"Found {kvkIds.Count()} kvk Ids.";
-                log.Debug(msg);
-                Console.WriteLine(msg);
-            }
+            else
+                kvkIds = items;
 
-            var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+            var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
+            var service = hrDataserviceVersionNumberBrmo == "2.5"
+                ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
+                : IocConfig.Container.GetInstance<IKvkSearchService>();
             var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
 
             var errors = new List<Exception>();
@@ -54,7 +51,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                 try
                 {
                     // retry without bypassing cache
-                    var xDoc = RawXmlCache.Get(kvkNummer, () => { service.SearchInschrijvingByKvkNummer(kvkNummer); });
+                    var xDoc = RawXmlCache.Get(kvkNummer, () => { service.SearchInschrijvingByKvkNummer(kvkNummer, "Batchprocess BRMO"); });
                     var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
                     brmoSyncService.Transform(kvkNummer);
                     if (status != AddInschrijvingResultStatus.BrmoInschrijvingCreated)
