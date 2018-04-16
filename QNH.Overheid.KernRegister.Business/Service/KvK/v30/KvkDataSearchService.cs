@@ -9,6 +9,7 @@ using System.Text;
 using System.Xml;
 using NLog;
 using QNH.Overheid.KernRegister.Business.Business;
+using QNH.Overheid.KernRegister.Business.KvK.Exceptions;
 using QNH.Overheid.KernRegister.Business.KvK.v30;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
 
@@ -92,7 +93,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                 // Log the specific kvk Error
                 KvkErrorLogger.Error(kvkNummer + " | " + string.Join("; ", errors.Select(e => e.MessageType + ": " + e.Message)));
 
-                throw new Exception(msg);
+                throw new KvkServerException(msg);
             }
 
             // Add the current requested inschrijving to cache

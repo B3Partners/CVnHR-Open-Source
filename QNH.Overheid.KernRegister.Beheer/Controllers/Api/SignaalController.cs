@@ -1,5 +1,8 @@
 ﻿using NLog;
+using Polly;
 using QNH.Overheid.KernRegister.Business.Business;
+using QNH.Overheid.KernRegister.Business.KvK.Exceptions;
+using QNH.Overheid.KernRegister.Business.Model.Entities;
 using QNH.Overheid.KernRegister.Business.Service;
 using QNH.Overheid.KernRegister.Business.Service.BRMO;
 using QNH.Overheid.KernRegister.Business.SignaalService;
@@ -8,6 +11,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -125,10 +129,17 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
             try
             {
                 var service = IocConfig.Container.GetInstance<IKvkSearchService>();
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName);
-                var storageService = IocConfig.Container.GetInstance<IInschrijvingSyncService>();
-                var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
-                _log.Trace($"Inschrijving status: {status}");
+                var kvkInschrijving = GetKvkInschrijvingWithRetry(service, kvkNummer);
+                if (kvkInschrijving != null)
+                {
+                    var storageService = IocConfig.Container.GetInstance<IInschrijvingSyncService>();
+                    var status = storageService.AddNewInschrijvingIfDataChanged(kvkInschrijving);
+                    _log.Trace($"Inschrijving status: {status}");
+                }
+                else
+                {
+                    _log.Error("KvkInschrijving null!");
+                }
             }
             catch (Exception ex)
             {
@@ -145,11 +156,11 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
                 var service = hrDataserviceVersionNumberBrmo == "2.5"
                     ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
                     : IocConfig.Container.GetInstance<IKvkSearchService>();
-                var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName);
 
-                // retry with bypassing cache
+                // Ensure kvkInschrijving
+                var kvkInschrijving = GetKvkInschrijvingWithRetry(service, kvkNummer);
                 var xDoc = RawXmlCache.Get(kvkNummer,
-                    () => { kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName, true); });
+                    () => { kvkInschrijving = GetKvkInschrijvingWithRetry(service, kvkNummer); });
 
                 var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
                 var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
@@ -161,6 +172,26 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
                 _log.Error(ex);
                 //throw ex;
             }
+        }
+
+        private KvkInschrijving GetKvkInschrijvingWithRetry(IKvkSearchService service, string kvkNummer)
+        {
+            KvkInschrijving kvkInschrijving = null;
+
+            // Setup polly to retry actions
+            var policy = Policy.Handle<FaultException>()
+                .Or<KvkServerException>()
+                .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                    (ex, timeSpan, retryCount, ctx) => {
+                        _log.Warn(ex, $"Retrying exception: {ex.Message}, retry count: {retryCount}");
+                    });
+
+            policy.Execute(() => {
+                // Always bypass cache since update happened.
+                kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName, true);
+            });
+
+            return kvkInschrijving;
         }
     }
 }
