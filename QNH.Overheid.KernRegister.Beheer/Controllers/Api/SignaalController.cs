@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -138,7 +139,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
                 }
                 else
                 {
-                    _log.Error("KvkInschrijving null!");
+                    _log.Error($"Could not get inschrijving for KvKNummer {kvkNummer}");
                 }
             }
             catch (Exception ex)
@@ -159,13 +160,27 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
 
                 // Ensure kvkInschrijving
                 var kvkInschrijving = GetKvkInschrijvingWithRetry(service, kvkNummer);
+                if (kvkInschrijving == null)
+                {
+                    _log.Error($"Could not get inschrijving for KvKNummer {kvkNummer}");
+                    return;
+                }
+
                 var xDoc = RawXmlCache.Get(kvkNummer,
                     () => { kvkInschrijving = GetKvkInschrijvingWithRetry(service, kvkNummer); });
 
-                var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
-                var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
-                brmoSyncService.Transform(kvkNummer);
-                _log.Trace($"Inschrijving status: {status}");
+                // Use polly for exponential backoff
+                Policy.Handle<WebException>(ex => ex.Status == WebExceptionStatus.Timeout)
+                    .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                        (ex, timeSpan, retryCount, ctx) => {
+                            _log.Warn(ex, $"Retrying exception: {ex.Message}, retry count: {retryCount}");
+                        })
+                    .Execute(() => {
+                        var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
+                        var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
+                        brmoSyncService.Transform(kvkNummer);
+                        _log.Trace($"Inschrijving status: {status}");
+                    });
             }
             catch (Exception ex)
             {
@@ -179,17 +194,16 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
             KvkInschrijving kvkInschrijving = null;
 
             // Setup polly to retry actions
-            var policy = Policy.Handle<FaultException>()
+            Policy.Handle<FaultException>()
                 .Or<KvkServerException>()
                 .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
                     (ex, timeSpan, retryCount, ctx) => {
                         _log.Warn(ex, $"Retrying exception: {ex.Message}, retry count: {retryCount}");
-                    });
-
-            policy.Execute(() => {
-                // Always bypass cache since update happened.
-                kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName, true);
-            });
+                    })
+                .Execute(() => {
+                    // Always bypass cache since update happened.
+                    kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, ApiUserName, true);
+                });
 
             return kvkInschrijving;
         }
