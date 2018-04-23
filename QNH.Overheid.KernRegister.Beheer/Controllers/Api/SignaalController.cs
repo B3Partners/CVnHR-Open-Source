@@ -173,7 +173,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
                 Policy.Handle<WebException>(ex => ex.Status == WebExceptionStatus.Timeout)
                     .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
                         (ex, timeSpan, retryCount, ctx) => {
-                            _log.Warn(ex, $"Retrying exception: {ex.Message}, retry count: {retryCount}");
+                            _log.Warn($"Retrying exception: {ex.Message}, retry count: {retryCount}");
                         })
                     .Execute(() => {
                         var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
@@ -198,7 +198,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
                 .Or<KvkServerException>()
                 .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
                     (ex, timeSpan, retryCount, ctx) => {
-                        _log.Warn(ex, $"Retrying exception: {ex.Message}, retry count: {retryCount}");
+                        _log.Warn($"Retrying exception: {ex.Message}, retry count: {retryCount}");
                     })
                 .Execute(() => {
                     // Always bypass cache since update happened.
