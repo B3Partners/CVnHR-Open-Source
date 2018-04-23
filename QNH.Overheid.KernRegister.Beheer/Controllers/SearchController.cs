@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using Newtonsoft.Json;
+using NLog;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
 using QNH.Overheid.KernRegister.Beheer.ViewModels;
 using QNH.Overheid.KernRegister.Business.Business;
@@ -12,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -223,6 +225,20 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         {
             var service = IocConfig.Container.GetInstance<IKvkSearchService>();
             return View(service.SearchVestigingByVestigingsNummer(vestigingId, kvknummer));
+        }
+
+        public ActionResult Raw(string kvknummer)
+        {
+            var service = IocConfig.Container.GetInstance<IKvkSearchService>();
+            var result = service.GetInschrijvingResponseTypeByKvkNummer(kvknummer);
+
+            var jsonSerializerSettings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All,
+            };
+            var json = JsonConvert.SerializeObject(result, jsonSerializerSettings);
+
+            return Content(json, "application/json", Encoding.UTF8);
         }
     }
 }

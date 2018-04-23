@@ -8,6 +8,8 @@ namespace QNH.Overheid.KernRegister.Business.Service
         KvkInschrijving SearchInschrijvingByKvkNummer(string kvkNummer, string requesterName, bool bypassCache = false);
 
         Vestiging SearchVestigingByVestigingsNummer(string vestigingsNummer, string kvkNummer = null);
+
+        dynamic GetInschrijvingResponseTypeByKvkNummer(string kvkNummer, bool bypassCache = false);
     }
 
     public interface IKvkSearchServiceV25 : IKvkSearchService
