@@ -227,18 +227,31 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             return View(service.SearchVestigingByVestigingsNummer(vestigingId, kvknummer));
         }
 
-        public ActionResult Raw(string kvknummer)
+        public ActionResult Raw(string kvknummer, string type = "json")
         {
             var service = IocConfig.Container.GetInstance<IKvkSearchService>();
-            var result = service.GetInschrijvingResponseTypeByKvkNummer(kvknummer);
-
-            var jsonSerializerSettings = new JsonSerializerSettings()
+            switch (type)
             {
-                TypeNameHandling = TypeNameHandling.All,
-            };
-            var json = JsonConvert.SerializeObject(result, jsonSerializerSettings);
+                case "xml":
+                    // retry with bypassing cache
+                    var xDoc = RawXmlCache.Get(kvknummer,
+                        () => { service.SearchInschrijvingByKvkNummer(kvknummer, User.GetUserName(), true); });
 
-            return Content(json, "application/json", Encoding.UTF8);
+                    return Content(xDoc.ToString(), "application/xml", Encoding.UTF8);
+                case "json":
+                default:
+                    
+                    var result = service.GetInschrijvingResponseTypeByKvkNummer(kvknummer);
+
+                    var jsonSerializerSettings = new JsonSerializerSettings()
+                    {
+                        TypeNameHandling = TypeNameHandling.All,
+                    };
+                    var json = JsonConvert.SerializeObject(result, jsonSerializerSettings);
+
+                    return Content(json, "application/json", Encoding.UTF8);
+            }
+            
         }
     }
 }
