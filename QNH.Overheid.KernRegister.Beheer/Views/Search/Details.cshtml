@@ -70,6 +70,13 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12 small">
+        Volledig bericht kvk:
+        @Html.ActionLink("xml", "Raw", "Search", routeValues: new { kvknummer = Model.KvkNummer, type = "xml" }, htmlAttributes: new { target="_blank" }),
+        @Html.ActionLink("json", "Raw", "Search", routeValues: new { kvknummer = Model.KvkNummer, type = "json" }, htmlAttributes: new { target = "_blank" })
+    </div>
+</div>
 
 @section scripts {
     <script type="text/javascript">
