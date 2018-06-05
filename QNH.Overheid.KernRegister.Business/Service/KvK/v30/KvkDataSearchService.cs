@@ -549,5 +549,37 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
             return pong;
 
         }
+
+        public dynamic GetInschrijvingResponseTypeByKvkNummer(string kvkNummer, bool bypassCache = false)
+        {
+            try
+            {
+                var request = new ophalenInschrijvingRequest()
+                {
+                    ophalenInschrijvingRequest1 = new InschrijvingRequestType()
+                    {
+                        klantreferentie = _klantReferentie,
+                        Item = kvkNummer,
+                        ItemElementName = ItemChoiceType.kvkNummer
+                    }
+                };
+                return _service.ophalenInschrijving(request);
+            }
+            catch (FaultException ex)
+            {
+                var fault = ex.CreateMessageFault();
+                if (fault.HasDetail)
+                {
+                    var f = fault.GetReaderAtDetailContents();
+                    var x = f.ReadOuterXml();
+                    var invalidXml = RawXmlCache.Get(kvkNummer);
+                    throw new Exception($"Er is een fout opgetreden bij de KvK. FoutBericht(en): {ex.Message} {ex.Reason} - {x}; xml: {invalidXml}");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
     }
 }
