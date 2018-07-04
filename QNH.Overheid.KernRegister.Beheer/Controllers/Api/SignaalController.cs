@@ -22,7 +22,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
     {
         private readonly Logger _log = LogManager.GetLogger("apiLogger");
         private const string ApiUserName = "Api/Signaal";
-        private bool DoNotUseThreadingForApi = Convert.ToBoolean(ConfigurationManager.AppSettings["DoNotUseThreadingForApi"] ?? "false");
+        private static readonly bool DoNotUseThreadingForApi = Convert.ToBoolean(ConfigurationManager.AppSettings["DoNotUseThreadingForApi"] ?? "false");
 
         // GET: api/Signaal
         public IEnumerable<string> Get()
