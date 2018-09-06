@@ -1,0 +1,8 @@
+/*
+
+SQL script to update CVnHR database v2.x to v3.0
+
+*/
+
+ALTER TABLE [SCHEMA].KVKINSCHRIJVING
+	ADD NONMAILING NVARCHAR(255);
