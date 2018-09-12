@@ -3,6 +3,8 @@ using System.IO;
 using System.Net;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace QNH.Overheid.CVnHR.Api.Tests
 {
@@ -16,8 +18,18 @@ namespace QNH.Overheid.CVnHR.Api.Tests
             //Console.WriteLine(kvknummer2);
 
 
-            var apiUrl = "http://kvk.local/api/signaal/nieuweinschrijving";
+            var apiUrl = "http://kvk.local/api/signaal/signaal";
 
+            Enumerable.Range(0, 20).ToList().ForEach(i =>
+            {
+                new Thread(() => DoRequest(apiUrl)).Start();
+            });
+
+            Console.ReadLine();
+        }
+
+        private static void DoRequest(string apiUrl)
+        {
             var request = (HttpWebRequest)WebRequest.Create(apiUrl);
             //var bytes = System.Text.Encoding.ASCII.GetBytes(Messages.OldNieuweInschrijving);
             var bytes = System.Text.Encoding.ASCII.GetBytes(Messages.NewNieuweInschrijving);
@@ -29,10 +41,9 @@ namespace QNH.Overheid.CVnHR.Api.Tests
             requestStream.Close();
             HttpWebResponse response;
             response = (HttpWebResponse)request.GetResponse();
-            Console.WriteLine($"Repsonse statuscode: {response.StatusCode}");
             var responseStream = response.GetResponseStream();
             string responseStr = new StreamReader(responseStream).ReadToEnd();
-            Console.WriteLine("Response: " + responseStr);
+            Console.WriteLine($"Response statuscode: {response.StatusCode}, Response: {responseStr}");
         }
 
         private static string ParseKvKnummerFromHttpRequestMessage(string xml)
