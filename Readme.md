@@ -32,6 +32,8 @@ of Commerce (KvK).
 - Als een inschrijving geen vestigingen heeft (eenmanszaak/stichting/vereniging) wordt de rechtspersoon (Niet Natuurlijk Persoon) 
   als vestiging ingevoerd, waarbij het RSIN als vestiging nummer opgegeven wordt.
 
+- [Technisch en functionele omschrijving CVnHR applicatie](documentation/Technische%20en%20functionale%20omschrijving%20CVnHR%20applicatie%20QNH%20v2.0.1000.md)
+
 - TODO => link to Config examples
 
 
