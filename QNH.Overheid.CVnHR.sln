@@ -29,6 +29,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Projects", "Test Proje
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QNH.Overheid.CVnHR.Api.Tests", "Test Projects\QNH.Overheid.CVnHR.Api.Tests\QNH.Overheid.CVnHR.Api.Tests.csproj", "{677AFA0C-8ECC-45BF-B47F-35826B76FE57}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{86ACABA4-09E0-47D9-9990-703CEBABACB6}"
+	ProjectSection(SolutionItems) = preProject
+		documentation\datamodel-cvnhr.png = documentation\datamodel-cvnhr.png
+		documentation\Technische en functionale omschrijving CVnHR applicatie QNH v2.0.1000.md = documentation\Technische en functionale omschrijving CVnHR applicatie QNH v2.0.1000.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +124,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5A606AD4-994B-4720-B9AA-9299423E6FEF} = {C5ADA832-071B-4619-B1FB-53501F796AE1}
 		{677AFA0C-8ECC-45BF-B47F-35826B76FE57} = {CC6CC166-22DF-4B82-A277-0723128C2E77}
+		{86ACABA4-09E0-47D9-9990-703CEBABACB6} = {C5ADA832-071B-4619-B1FB-53501F796AE1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00FEBFD8-A20A-4D5D-96B0-089E1A2D7158}
