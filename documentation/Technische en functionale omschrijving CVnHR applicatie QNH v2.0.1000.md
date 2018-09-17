@@ -284,7 +284,7 @@ De verbinding met de database wordt tot stand gebracht met behulp van een nHiber
 connectionstring. Deze is opgenomen in de configuratie bestanden van de zowel de 
 webapplicatie als de executable.
 
-## Installatie
+# Installatie
 De database kan automatisch door de webapplicatie aangemaakt worden door het instellen 
 van de configuratie setting “CreateDatabase” in de appSettings (zie hoofdstuk “Het 
 configureren van de executable en de webapplicatie”). Het is aangeraden deze setting 
