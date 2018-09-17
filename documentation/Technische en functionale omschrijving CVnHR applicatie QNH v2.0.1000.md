@@ -389,12 +389,12 @@ internet verbinding.
 Hieronder staan de gebruikte technologieën benodigd bij het draaien, en gebruikt tijdens het 
 ontwikkelen van de applicatie:
 
-Windows Server 2012
-IIS 7.5
-.NET 4.6.1
-ASP.NET MVC 5.0
-ASP.NET WCF
-Visual Studio 2010 compatible solution
-GIT
-Oracle 11g database
-Microsoft SQL Server
+- Windows Server 2012
+- IIS 7.5
+- .NET 4.6.1
+- ASP.NET MVC 5.0
+- ASP.NET WCF
+- Visual Studio 2010 compatible solution
+- GIT
+- Oracle 11g database
+- Microsoft SQL Server
