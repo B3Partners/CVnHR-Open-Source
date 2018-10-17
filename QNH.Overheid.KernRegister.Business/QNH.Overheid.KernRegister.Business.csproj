@@ -289,8 +289,6 @@
     <Compile Include="Service\KvkSearchServiceSelector.cs" />
     <Compile Include="Service\KvK\MissingHoofdVestigingException.cs" />
     <Compile Include="Service\KvK\Pong.cs" />
-    <Compile Include="Service\KvK\v2_5\KvkDataSearchService.cs" />
-    <Compile Include="Service\KvK\v2_5\KvkSearchServiceExtensions.cs" />
     <Compile Include="Service\KvK\v30\KvkDataSearchService.cs" />
     <Compile Include="Service\KvK\v30\KvkSearchServiceExtensions.cs" />
     <Compile Include="Service\NationaalGeoregisterLocatieService.cs" />
