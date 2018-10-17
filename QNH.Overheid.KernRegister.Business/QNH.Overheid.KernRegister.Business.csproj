@@ -280,6 +280,7 @@
     <Compile Include="Model\nHibernate\NHRepository.cs" />
     <Compile Include="Model\TransactionWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\BRMO\BrmoReference.cs" />
     <Compile Include="Service\BRMO\BrmoSyncService.cs" />
     <Compile Include="Service\BRMO\IBrmoSyncService.cs" />
     <Compile Include="Service\IInschrijvingSyncService.cs" />
