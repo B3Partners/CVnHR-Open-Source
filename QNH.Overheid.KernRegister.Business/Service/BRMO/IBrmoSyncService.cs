@@ -12,6 +12,5 @@ namespace QNH.Overheid.KernRegister.Business.Service.BRMO
     public interface IBrmoSyncService
     {
         AddInschrijvingResultStatus UploadXDocumentToBrmo(XDocument xDocument);
-        void Transform(string kvkNummer);
     }
 }
