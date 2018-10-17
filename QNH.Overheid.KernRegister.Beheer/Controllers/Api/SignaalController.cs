@@ -174,10 +174,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
         {
             try
             {
-                var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
-                var service = hrDataserviceVersionNumberBrmo == "2.5"
-                    ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
-                    : IocConfig.Container.GetInstance<IKvkSearchService>();
+                var service = IocConfig.Container.GetInstance<IKvkSearchService>();
 
                 // Ensure kvkInschrijving
                 var kvkInschrijving = GetKvkInschrijvingWithRetry(service, kvkNummer);
