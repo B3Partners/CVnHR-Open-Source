@@ -50,7 +50,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                     // retry without bypassing cache
                     var xDoc = RawXmlCache.Get(kvkNummer, () => { service.SearchInschrijvingByKvkNummer(kvkNummer, "Batchprocess BRMO"); });
                     var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
-                    brmoSyncService.Transform(kvkNummer);
                     if (status != AddInschrijvingResultStatus.BrmoInschrijvingCreated)
                     {
                         throw new Exception("Status not expected: " + status.ToString());

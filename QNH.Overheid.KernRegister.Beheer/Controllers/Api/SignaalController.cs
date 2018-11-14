@@ -196,7 +196,6 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
                     .Execute(() => {
                         var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
                         var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
-                        brmoSyncService.Transform(kvkNummer);
                         _log.Trace($"Inschrijving status: {status}");
                     });
             }
