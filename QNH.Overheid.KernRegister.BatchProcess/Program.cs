@@ -131,9 +131,35 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                                 case "ZipCodes":
                                     brmoProcessType = BrmoProcessTypes.ZipCodes;
                                     break;
+                                case "Csv":
+                                    brmoProcessType = BrmoProcessTypes.Csv;
+                                    break;
                             }
                         }
-                        var zipCodes = args.Skip(3).ToList();
+                        var zipCodes = new List<String>();
+                        if (brmoProcessType == BrmoProcessTypes.Csv)
+                        {
+                            var i = 0;
+                            var uploadFolder = ConfigurationManager.AppSettings["uploadFolder"];
+                            var path = args[3];
+                            using (var reader = new StreamReader(uploadFolder + "\\" + path))
+                            {
+                                while (!reader.EndOfStream)
+                                {
+                                    
+                                    var line = reader.ReadLine();
+                                    if (i != 0)
+                                    {
+                                        zipCodes.Add(line);
+                                    }
+                                    i++;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            zipCodes = args.Skip(3).ToList();
+                        }
                         if (!zipCodes.Any())
                         {
                             log("Could not start proces. Zipcodes missing!", new ArgumentException("version")); ;
