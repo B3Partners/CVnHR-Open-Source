@@ -141,6 +141,9 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         {
                             var i = 0;
                             var uploadFolder = ConfigurationManager.AppSettings["uploadFolder"];
+                            if (uploadFolder.Length == 0) {
+                                log("Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing")); ;
+                            }
                             var path = args[3];
                             using (var reader = new StreamReader(uploadFolder + "\\" + path))
                             {
@@ -151,6 +154,11 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                                     if (i != 0)
                                     {
                                         zipCodes.Add(line);
+                                    }
+                                    else {
+                                        if (line.Equals("postcode")) {
+                                            brmoProcessType = BrmoProcessTypes.ZipCodes;
+                                        }
                                     }
                                     i++;
                                 }
