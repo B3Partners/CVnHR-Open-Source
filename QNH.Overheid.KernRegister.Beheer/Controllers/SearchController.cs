@@ -149,7 +149,6 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
                         var brmoSyncService = nestedContainer.GetInstance<IBrmoSyncService>();
                         brmostatus = brmoSyncService.UploadXDocumentToBrmo(xDoc);
-                        brmoSyncService.Transform(kvkNummer);
                     }
                     catch (Exception ex)
                     {
