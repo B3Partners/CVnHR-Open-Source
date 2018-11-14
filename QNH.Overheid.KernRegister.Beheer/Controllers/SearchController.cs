@@ -134,10 +134,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             {
                 if (toBrmo)
                 {
-                    var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
-                    var service = hrDataserviceVersionNumberBrmo == "2.5"
-                        ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
-                        : IocConfig.Container.GetInstance<IKvkSearchService>();
+                    var service = IocConfig.Container.GetInstance<IKvkSearchService>();
 
                     // for now always bypass cache to ensure correct version in cache.
                     var kvkInschrijving = service.SearchInschrijvingByKvkNummer(kvkNummer, User.GetUserName(), true);

@@ -261,7 +261,6 @@
     <Compile Include="IocConfig.cs" />
     <Compile Include="Processes\BatchProcesses.cs" />
     <Compile Include="Processes\ZipCodeRecord.cs" />
-    <Compile Include="Processes\KvKDataserviceV2_5.cs" />
     <Compile Include="Processes\RsgbProcesses.cs" />
     <Compile Include="Processes\ZipcodeProcesses.cs" />
     <Compile Include="Program.cs" />
