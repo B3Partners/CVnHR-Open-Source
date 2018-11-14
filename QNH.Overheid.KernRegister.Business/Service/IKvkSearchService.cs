@@ -11,9 +11,4 @@ namespace QNH.Overheid.KernRegister.Business.Service
 
         dynamic GetInschrijvingResponseTypeByKvkNummer(string kvkNummer, bool bypassCache = false);
     }
-
-    public interface IKvkSearchServiceV25 : IKvkSearchService
-    {
-
-    }
 }
