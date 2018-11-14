@@ -55,16 +55,24 @@
             <br />
             <label>Process type:</label>
             @Html.DropDownListFor(m => m.Config.BrmoProcessType,
-              Model.Config.PossibleBrmoProcessTypes.Select(m => new SelectListItem() { Text = m, Value = m }), htmlAttributes: null)
+              Model.Config.PossibleBrmoProcessTypes.Select(m => new SelectListItem() { Text = m, Value = m }), new { id="processType"})
 
-            <br />
-            <label>Postcodes</label>
-            <br />
-            <textarea id="Brmo-PostCodes" cols="80" rows="6" style="text-align:left;">@string.Join(", ", Model.Config.PostCodes)</textarea>
+            <div class="brmo-config-area">
+                <br />
+                <label>Postcodes/KvkIds</label>
+                <br />
+                <textarea id="Brmo-PostCodes" cols="80" rows="6" style="text-align:left;">@string.Join(", ", Model.Config.PostCodes)</textarea>
 
-            <br />
-            <button class="btn btn-default btn-primary btn-save-config">Save</button>
-        </div>
+                <br />
+                <button class="btn btn-default btn-primary btn-save-config">Save</button>
+            </div>
+            <div class="brmo-config-area-csv">
+                @Html.Partial("_BackloadPartial")
+                <br />
+                <button class="btn btn-default btn-primary btn-save-config">Save</button>
+            </div>
+            
+      </div>
     </div>
 </div>
 
@@ -76,23 +84,12 @@
 
     @Scripts.Render("~/bundles/datetimepicker")
 
-    @if(!Model.ExportTaskManager.ExecutableProcessDisabled)
+    <!-- Initialize the jQuery File Upload Plugin -->
+    <script src="~/Scripts/FileUpload/brmo.js"></script>
+
+    @if (!Model.ExportTaskManager.ExecutableProcessDisabled)
     {
         @TaskSchedulerScript.RenderTaskSchedulerScript(Url, Model.ExportTaskManager.Trigger, Model.ExportTaskManager.Trigger == null ? TaskTriggerType.Time : Model.ExportTaskManager.Trigger.TriggerType)
     }
 
-    <script type="text/javascript">
-        $(function () {
-            // Save config
-            $(".btn-save-config").on("click", function (btn) {
-                var HRDataserviceVersion = $("#Config_HRDataserviceVersion").val();
-                var BrmoProcessType = $("#Config_BrmoProcessType").val();
-                var PostCodes = $("#Brmo-PostCodes").val();
-                $.post("@Url.Action("SaveConfig")", { PostCodes: PostCodes, HRDataserviceVersion: HRDataserviceVersion, BrmoProcessType: BrmoProcessType })
-                    .fail(function () {
-                        alert("Error!");
-                    });
-            });
-        });
-    </script>
 }

@@ -9,6 +9,7 @@ namespace QNH.Overheid.KernRegister.Business.Enums
     public enum BrmoProcessTypes
     {
         ZipCodes,
-        KvkIds
+        KvkIds,
+        Csv
     }
 }
