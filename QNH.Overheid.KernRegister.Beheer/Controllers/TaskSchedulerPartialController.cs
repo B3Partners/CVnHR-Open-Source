@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using NLog;
+using QNH.Overheid.KernRegister.Organization.Resources;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -98,8 +99,6 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 Argument = argument;
 
                 TaskService = new TaskService();
-
-
 
                 ScheduledTask = null;
 
@@ -314,7 +313,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public void UpdateTaskManagerArguments(string arguments, string newName)
         {
-            newName = "CVnHR " + newName;
+            newName = Default.ApplicationName +" "+ newName;
             if (!ExportTaskManager.ScheduledTask.Name.Equals(newName))
             {
                 ExportTaskManager.ScheduledTask.Definition.Actions.Cast<ExecAction>().Single().Arguments = arguments;
