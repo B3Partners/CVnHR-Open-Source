@@ -30,22 +30,21 @@
     </style>
 }
 
-<div>
+<div
     <!-- The file upload form used as target for the file upload widget -->
-        <div class="col-sm-3">
-            <h3>Config</h3>
-        </div>
-
-    @foreach (var task in Model.TaskProcesses)
-    {
-        <div class="row">
-            <div class="col-sm-12">
-                <a href="#" id="@task.Name" data-href="@task.Name">@task.Name</a>
-                <button onclick="manageTask(this.id)" id="@task.Name" class="btn btn-default btn-primary btn-save-config">Beheer taak</button>
-            </div>
-        </div>
-    }
+    <h3>Geconfigureerde BRMO taken</h3>
 </div>
+
+@foreach (var task in Model.TaskProcesses)
+{
+   <div class="row">
+        <div>
+            <label id="@task.Name" style="width:250px">@task.Name</label>
+            <button onclick="manageTask(this.id)" id="@task.Name" class="btn btn-default btn-primary" >Beheer taak</button>
+            <button onclick="deleteTask(this.id)" id="@task.Name" class="btn btn-default btn-primary">Verwijder taak</button>
+        </div>
+    </div>
+}
 
 @section scripts {
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
@@ -57,6 +56,16 @@
     <script type="text/javascript">
         function manageTask(clicked_id) {
             location.replace(window.location.origin + "/Brmo?name=" + clicked_id);
-        }
+        };
+
+        function deleteTask(clicked_id) {
+            $.post(window.location.href + "/DeleteTask", { name: clicked_id })
+                .success(function (){
+                    location.reload();
+                })
+            .fail(function () {
+                alert("Taak kan niet worden verwijderd!");
+            });
+        };
     </script>
 }
