@@ -96,6 +96,9 @@ $("document").ready(function () {
             PostCodes = $("#Brmo-PostCodes").val();
         }
         $.post(window.location.href.split('?')[0] + "/SaveConfig", { PostCodes: PostCodes, taskName: taskName, HRDataserviceVersion: HRDataserviceVersion, BrmoProcessType: BrmoProcessType })
+            .success(function () {
+                alert("Taak is opgeslagen");
+            })
             .fail(function () {
                 alert("Error!");
             });
