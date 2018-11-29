@@ -39,6 +39,13 @@
         <div class="col-sm-9">
             <h3>Plan een batchupdate</h3>
             <p>Plan hier de batchupdate van @Default.BrmoApplication</p>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">Taak naam</div>
+                <div class="col-sm-8">
+                    <input type='text' class="form-control" id="Task-name"/>
+                </div>
+            </div>
             @Html.Partial("_TaskSchedulerPartial", Model.ExportTaskManager)
         </div>
     </div>
@@ -68,10 +75,9 @@
             </div>
             <div class="brmo-config-area-csv">
                 @Html.Partial("_BackloadPartial")
-                <br />
+                <br/>
                 <button class="btn btn-default btn-primary btn-save-config">Save</button>
             </div>
-            
       </div>
     </div>
 </div>
