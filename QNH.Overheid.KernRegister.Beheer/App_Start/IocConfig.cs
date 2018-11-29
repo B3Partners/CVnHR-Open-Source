@@ -3,7 +3,9 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
+using NHibernate.Dialect;
 using NHibernate.Driver;
+using Npgsql;
 using Oracle.ManagedDataAccess.Client;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
 using QNH.Overheid.KernRegister.Business.Business;
@@ -13,29 +15,24 @@ using QNH.Overheid.KernRegister.Business.Crm.nAdres;
 using QNH.Overheid.KernRegister.Business.Crm.Probis;
 using QNH.Overheid.KernRegister.Business.Integration;
 using QNH.Overheid.KernRegister.Business.Integration.WcfExtensions;
-using QNH.Overheid.KernRegister.Business.KvK;
-using QNH.Overheid.KernRegister.Business.KvK.Service;
 using QNH.Overheid.KernRegister.Business.KvK.WcfExtensions;
+using QNH.Overheid.KernRegister.Business.KvKSearchApi;
 using QNH.Overheid.KernRegister.Business.Model;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
 using QNH.Overheid.KernRegister.Business.Model.nHibernate;
 using QNH.Overheid.KernRegister.Business.Service;
 using QNH.Overheid.KernRegister.Business.Service.BRMO;
-using QNH.Overheid.KernRegister.Business.Service.KvK.v2_5;
+using QNH.Overheid.KernRegister.Business.Service.Users;
 using QNH.Overheid.KernRegister.Organization.Resources;
 using StructureMap;
 using StructureMap.Web;
 using System;
 using System.Configuration;
-using System.IO;
-using System.Threading;
-using NHibernate.Dialect;
-using QNH.Overheid.KernRegister.Business.Service.Users;
 using System.Data;
 using System.Data.SqlClient;
-using Npgsql;
 using System.Data.SqlServerCe;
-using QNH.Overheid.KernRegister.Business.KvKSearchApi;
+using System.IO;
+using System.Threading;
 
 namespace QNH.Overheid.KernRegister.Beheer
 {
@@ -189,18 +186,13 @@ namespace QNH.Overheid.KernRegister.Beheer
                 RawXmlCache.CacheInHours = searchServiceCacheTimeInHours;
 
                 // KvK HR-Dataservice
-                var dataService = x.For<Dataservice>()
-                    .Use<CustomDataService>()
-                    .SelectConstructor(() => new CustomDataService());
-                var dataServiceV30 = x.For<Business.KvK.v30.Dataservice>()
+                var dataService = x.For<Business.KvK.v30.Dataservice>()
                         .Use<Business.KvK.v30.CustomDataService>()
                         .SelectConstructor(() => new Business.KvK.v30.CustomDataService());
+
                 if (SettingsHelper.BrmoApplicationEnabled)
                 {
                     dataService.SetProperty(ds => ds.Endpoint
-                                                    .EndpointBehaviors
-                                                    .Add(new RawXmlActionBehavior(RawXmlCache.Add)));
-                    dataServiceV30.SetProperty(ds => ds.Endpoint
                                                         .EndpointBehaviors
                                                         .Add(new RawXmlActionBehavior(RawXmlCache.Add)));
 
@@ -210,33 +202,15 @@ namespace QNH.Overheid.KernRegister.Beheer
                         dataService.SetProperty(ds => ds.Endpoint
                             .EndpointBehaviors
                             .Add(new RawXMLBehavior(ConfigurationManager.AppSettings["InschrijvingenXmlResponseFile"])));
-                        dataServiceV30.SetProperty(ds => ds.Endpoint
+                        dataService.SetProperty(ds => ds.Endpoint
                                 .EndpointBehaviors
                                 .Add(new RawXMLBehavior(ConfigurationManager.AppSettings["InschrijvingenXmlResponseFile"])));
                     }
                 }
 
                 // Set up KvkSearchService
-                var hrDataserviceVersionNumber = ConfigurationManager.AppSettings["HR-DataserviceVersionNumber"];
-                if (hrDataserviceVersionNumber == "2.5")
-                {
-                    x.For<IKvkSearchService>().HybridHttpOrThreadLocalScoped().Use<KvkDataSearchService>()
-                        .SelectConstructor(() => new KvkDataSearchService(Container.GetInstance<Dataservice>(), "klantReferentie", 0))
-                        .Ctor<string>().Is(ConfigurationManager.AppSettings["SearchServiceKlantReferentie"])
-                        .Ctor<int>().Is(searchServiceCacheTimeInHours);
-                }
-                else if (hrDataserviceVersionNumber == "3.0")
-                {
-                    x.For<IKvkSearchService>().HybridHttpOrThreadLocalScoped().Use<Business.Service.KvK.v30.KvkDataSearchService>()
+                x.For<IKvkSearchService>().HybridHttpOrThreadLocalScoped().Use<Business.Service.KvK.v30.KvkDataSearchService>()
                         .SelectConstructor(() => new Business.Service.KvK.v30.KvkDataSearchService(Container.GetInstance<Business.KvK.v30.Dataservice>(), "klantReferentie", 0))
-                        .Ctor<string>().Is(ConfigurationManager.AppSettings["SearchServiceKlantReferentie"])
-                        .Ctor<int>().Is(searchServiceCacheTimeInHours);
-                }
-                else
-                    throw new ConfigurationErrorsException($"HR-DataserviceVersionNumber {hrDataserviceVersionNumber} not implemented.");
-
-                x.For<IKvkSearchServiceV25>().HybridHttpOrThreadLocalScoped().Use<KvkDataSearchService>()
-                        .SelectConstructor(() => new KvkDataSearchService(Container.GetInstance<Dataservice>(), "klantReferentie", 0))
                         .Ctor<string>().Is(ConfigurationManager.AppSettings["SearchServiceKlantReferentie"])
                         .Ctor<int>().Is(searchServiceCacheTimeInHours);
 

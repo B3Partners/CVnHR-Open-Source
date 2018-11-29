@@ -4,7 +4,7 @@ using QNH.Overheid.KernRegister.BatchProcess.Processes;
 using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Crm;
 using QNH.Overheid.KernRegister.Business.Enums;
-using QNH.Overheid.KernRegister.Business.KvK;
+using QNH.Overheid.KernRegister.Business.KvK.v30;
 using QNH.Overheid.KernRegister.Business.Model;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
 using QNH.Overheid.KernRegister.Organization.Resources;
@@ -96,9 +96,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         break;
                     case "S":
                         SanityCheck();
-                        break;
-                    case "A":
-                        KvKDataserviceV2_5.Test();
                         break;
                     case "BRMO":
                         Action<string, Exception> log = (msg, ex) => {
@@ -196,7 +193,6 @@ QNH.Overheid.KernRegister.BatchProcess
     Z => Get all KvKIds for the zipcodes from any of the csv files found in the Zipcode directory and creates a csv file in the Csv directory
     T => Test Postcode service
     S => SanityCheck
-    A => Test KvKDataservice Version 2.5
     RSGB => Fill RSGB for the zipcodes provided (e.g. 7283 7705 for zipcodes 7283 and 7705, or 'drenthe' for the total of Drenthe)
 ");
                         Console.ReadLine();
@@ -208,7 +204,7 @@ QNH.Overheid.KernRegister.BatchProcess
             }
             catch (Exception ex)
             {
-                _logger.ErrorException("Finished with error(s)!", ex);
+                _logger.Error(ex, "Finished with error(s)!");
                 throw;
             }
         }
@@ -355,7 +351,8 @@ QNH.Overheid.KernRegister.BatchProcess
             {
                 ophalenInschrijvingRequest1 = new InschrijvingRequestType() { 
                     klantreferentie = ConfigurationManager.AppSettings["SearchServiceKlantReferentie"],
-                    kvkNummer = kvkNummer
+                    Item = kvkNummer,
+                    ItemElementName = ItemChoiceType.kvkNummer
                 }
             });
 
@@ -367,7 +364,8 @@ QNH.Overheid.KernRegister.BatchProcess
             var result = _service.ophalenVestiging(new ophalenVestigingRequest(new VestigingRequestType()
             {
                 klantreferentie = ConfigurationManager.AppSettings["SearchServiceKlantReferentie"],
-                vestigingsnummer = vestigingNummer
+                Item = vestigingNummer,
+                ItemElementName = ItemChoiceType1.vestigingsnummer
             }));
 
             return result;

@@ -5,7 +5,6 @@ using QNH.Overheid.KernRegister.Business.KvK.Exceptions;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
 using QNH.Overheid.KernRegister.Business.Service;
 using QNH.Overheid.KernRegister.Business.Service.BRMO;
-using QNH.Overheid.KernRegister.Business.SignaalService;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.ServiceModel;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -22,6 +22,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
     {
         private readonly Logger _log = LogManager.GetLogger("apiLogger");
         private const string ApiUserName = "Api/Signaal";
+        private static readonly bool DoNotUseThreadingForApi = Convert.ToBoolean(ConfigurationManager.AppSettings["DoNotUseThreadingForApi"] ?? "false");
 
         // GET: api/Signaal
         public IEnumerable<string> Get()
@@ -127,6 +128,16 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
 
         private void UpdateOrInsertInschrijving(string kvkNummer)
         {
+            if (DoNotUseThreadingForApi)
+                UpdateOrInsertInschrijvingAction(kvkNummer);
+            else
+            {
+                new Thread(() => UpdateOrInsertInschrijvingAction(kvkNummer)).Start();
+            }
+        }
+
+        private void UpdateOrInsertInschrijvingAction(string kvkNummer)
+        {
             try
             {
                 var service = IocConfig.Container.GetInstance<IKvkSearchService>();
@@ -151,12 +162,19 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
 
         private void UpdateOrInsertInschrijvingBrmo(string kvkNummer)
         {
+            if (DoNotUseThreadingForApi)
+                UpdateOrInsertInschrijvingBrmoAction(kvkNummer);
+            else
+            {
+                new Thread(() => UpdateOrInsertInschrijvingBrmoAction(kvkNummer)).Start();
+            }
+        }
+
+        private void UpdateOrInsertInschrijvingBrmoAction(string kvkNummer)
+        {
             try
             {
-                var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
-                var service = hrDataserviceVersionNumberBrmo == "2.5"
-                    ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
-                    : IocConfig.Container.GetInstance<IKvkSearchService>();
+                var service = IocConfig.Container.GetInstance<IKvkSearchService>();
 
                 // Ensure kvkInschrijving
                 var kvkInschrijving = GetKvkInschrijvingWithRetry(service, kvkNummer);
@@ -178,7 +196,6 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers.Api
                     .Execute(() => {
                         var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
                         var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
-                        brmoSyncService.Transform(kvkNummer);
                         _log.Trace($"Inschrijving status: {status}");
                     });
             }
