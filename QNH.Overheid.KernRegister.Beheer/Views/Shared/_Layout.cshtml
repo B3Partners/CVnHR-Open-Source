@@ -77,7 +77,7 @@
                         @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_SyncBrmo) && SettingsHelper.BrmoApplicationEnabled)
                         {
                             <li class="@(url.Contains("/syncbrmo") ? "active" : null)">
-                                @Html.ActionLink(Default.SyncBrmo, "Index", "Brmo", new { name = Default.ApplicationName + " Batchupdate BRMO Task" },null)
+                                @Html.ActionLink(Default.SyncBrmo, "Index", "Brmo", new { name = Default.ApplicationName + " BRMO Standaard taak" },null)
                             </li>
                         }
                         @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Tasks))
