@@ -37,10 +37,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
             else
                 kvkIds = items;
 
-            var hrDataserviceVersionNumberBrmo = ConfigurationManager.AppSettings["HR-DataserviceVersionNumberBrmo"];
-            var service = hrDataserviceVersionNumberBrmo == "2.5"
-                ? IocConfig.Container.GetInstance<IKvkSearchServiceV25>()
-                : IocConfig.Container.GetInstance<IKvkSearchService>();
+            var service = IocConfig.Container.GetInstance<IKvkSearchService>();
             var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
 
             var errors = new List<Exception>();
@@ -53,7 +50,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                     // retry without bypassing cache
                     var xDoc = RawXmlCache.Get(kvkNummer, () => { service.SearchInschrijvingByKvkNummer(kvkNummer, "Batchprocess BRMO"); });
                     var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
-                    brmoSyncService.Transform(kvkNummer);
                     if (status != AddInschrijvingResultStatus.BrmoInschrijvingCreated)
                     {
                         throw new Exception("Status not expected: " + status.ToString());
