@@ -111,7 +111,14 @@
                     var userName = Server.UrlDecode(Request["DisplayUsername"]) ?? User.Identity.Name;
                     if (string.IsNullOrEmpty(userName) && true)
                     {
-                        userName = "[unknown user]";
+                        if (string.IsNullOrEmpty(SettingsHelper.UsernameToUseWhenEmpty))
+                        {
+                            userName = "[unknown user]";
+                        }
+                        else {
+                            userName = SettingsHelper.UsernameToUseWhenEmpty;
+                        }
+
                     }
                 }
                 &copy; @DateTime.Now.Year - beheerapplicatie @Default.ApplicationName (@SettingsHelper.Environment) - v. @ViewContext.Controller.GetType().Assembly.GetName().Version
