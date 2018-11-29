@@ -168,6 +168,14 @@ namespace QNH.Overheid.KernRegister.Organization.Resources
             { Organization.B3Partners, "Dit weghalen"}
         }[CurrentOrganization];
 
+        public static string ToTasks => new OrganizationResource()
+        {
+            { Organization.Qnh, "Taken beheren" },
+            { Organization.Drenthe, "Taken beheren" },
+            { Organization.Flevoland, "Taken beheren" },
+            { Organization.B3Partners, "Taken beheren"}
+        }[CurrentOrganization];
+
         /// <summary>
         /// For copy/paste... TODO: create template?
         /// </summary>
