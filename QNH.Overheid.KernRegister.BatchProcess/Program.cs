@@ -139,8 +139,11 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                             var i = 0;
                             var uploadFolder = ConfigurationManager.AppSettings["uploadFolder"];
                             if (uploadFolder.Length == 0) {
-                                log("Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing")); ;
+                                log("Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing")); 
                             }
+                            var prefix = "";
+                            var usePrefixZero = ConfigurationManager.AppSettings["UseZeroPrefix"];
+                            if (usePrefixZero.Equals("true")) { prefix = "0"; }
                             var path = args[3];
                             using (var reader = new StreamReader(uploadFolder + "\\" + path))
                             {
@@ -150,7 +153,12 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                                     var line = reader.ReadLine();
                                     if (i != 0)
                                     {
-                                        zipCodes.Add(line);
+                                        if (line.Length == 7)
+                                        {
+                                            log("adding prefix 0 for KVK-nummer:"+line,null);
+                                            zipCodes.Add(prefix + line);
+                                        }
+                                        else { zipCodes.Add(line); }
                                     }
                                     else {
                                         if (line.Equals("postcode")) {
@@ -173,6 +181,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         log($"Starting BRMO task for version {version} with {brmoProcessType} {string.Join(" ", zipCodes)}", null);
                         RsgbProcesses.FillRsgbForZipcodes(MaxDegreeOfParallelism, _brmoLogger, version, brmoProcessType, zipCodes);
                         log("Finished BRMO task", null);
+                        Console.ReadLine();
                         break;
                     case "PROBIS":
                         var probis = IocConfig.Container.GetInstance<IFinancialExportService>();
