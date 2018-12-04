@@ -85,10 +85,19 @@ $("document").ready(function () {
         if ($("#processType").val() === "Csv") {
             var rows = $("#files_uploaded>tr");
             PostCodes = "";
+            var csvCount = 0;
             for (var i = 0; i < rows.length; i++) {
                 if ($(rows[i].children[3]).find("input").is(":checked")) {
-                    PostCodes += rows[i].children[1].innerText + " ";
+                    PostCodes += rows[i].children[1].innerText;
+                    csvCount++;
                 }
+            }
+            if (csvCount > 1) {
+                alert("Er kan maar één CSV bestand per taak geselecteerd worden.");
+                return;
+            } else if (PostCodes.indexOf(" ") != -1) {
+                alert("CSV bestandsnamen mogen geen spaties bevatten");
+                return;
             }
             PostCodes = PostCodes.replace(/(\r\n|\n|\r)/gm, "");
         }
