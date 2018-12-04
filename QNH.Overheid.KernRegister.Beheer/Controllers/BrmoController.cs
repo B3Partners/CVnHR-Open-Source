@@ -46,6 +46,11 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             return taskController.GetCurrentState();
         }
 
+        public FileResult DownloadLogFile(string fileName)
+        {
+            return taskController.DownloadLogFile(fileName);
+        }
+
         [HttpPost]
         public JsonResult StartBatchUpdateNow() {
             return taskController.StartBatchUpdateNow();
