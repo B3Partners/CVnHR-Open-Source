@@ -48,8 +48,13 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         {
             get
             {
+                string caseTest = Argument;
+                if (caseTest.Contains("BRMO"))
+                {
+                    caseTest = "BRMO";
+                }
                 var logPath = "Logs";
-                switch (Argument)
+                switch (caseTest)
                 {
                     case "B":
                         logPath = Path.Combine(logPath, "Crm");
