@@ -106,6 +106,7 @@ $("document").ready(function () {
         }
         $.post(window.location.href.split('?')[0] + "/SaveConfig", { PostCodes: PostCodes, taskName: taskName, HRDataserviceVersion: HRDataserviceVersion, BrmoProcessType: BrmoProcessType })
             .success(function () {
+                location.replace(window.location.origin + "/Brmo?name=CVnHR " + taskName);
                 alert("Taak is opgeslagen");
             })
             .fail(function () {
