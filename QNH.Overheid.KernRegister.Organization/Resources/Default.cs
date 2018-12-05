@@ -3,6 +3,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace QNH.Overheid.KernRegister.Organization.Resources
 {
@@ -29,7 +30,7 @@ namespace QNH.Overheid.KernRegister.Organization.Resources
             {Organization.Qnh, "[CompanyName]"},
             {Organization.Drenthe, "Provincie Drenthe"},
             {Organization.Flevoland, "Provincie Flevoland"},
-            { Organization.B3Partners, "geef de organisatie op"}
+            { Organization.B3Partners, ConfigurationManager.AppSettings["CompanyName"]}
         }[CurrentOrganization];
 
         public static string CrmApplication => new OrganizationResource()
@@ -69,7 +70,7 @@ namespace QNH.Overheid.KernRegister.Organization.Resources
             {Organization.Qnh, "Welkom bij de CVnHR applicatie van de [CompanyName]"},
             {Organization.Drenthe, "Welkom bij de CVnHR applicatie van de Provincie Drenthe"},
             {Organization.Flevoland, "Welkom bij de voorziening handelsregister van de Provincie Flevoland"},
-            { Organization.B3Partners, "Welkom bij de CVnHR applicatie van geef de organisatie op"}
+            { Organization.B3Partners, "Welkom bij de CVnHR applicatie van "+ConfigurationManager.AppSettings["CompanyName"]}
         }[CurrentOrganization];
 
         public static string LogoUrl => new OrganizationResource()
