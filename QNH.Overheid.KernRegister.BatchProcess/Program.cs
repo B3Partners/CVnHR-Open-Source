@@ -181,7 +181,6 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         log($"Starting BRMO task for version {version} with {brmoProcessType} {string.Join(" ", zipCodes)}", null);
                         RsgbProcesses.FillRsgbForZipcodes(MaxDegreeOfParallelism, _brmoLogger, version, brmoProcessType, zipCodes);
                         log("Finished BRMO task", null);
-                        Console.ReadLine();
                         break;
                     case "PROBIS":
                         var probis = IocConfig.Container.GetInstance<IFinancialExportService>();
