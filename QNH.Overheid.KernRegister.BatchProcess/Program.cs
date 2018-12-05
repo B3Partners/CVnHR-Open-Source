@@ -163,6 +163,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                                     else {
                                         if (line.Equals("postcode")) {
                                             brmoProcessType = BrmoProcessTypes.ZipCodes;
+                                            prefix = "";
                                         }
                                     }
                                     i++;
