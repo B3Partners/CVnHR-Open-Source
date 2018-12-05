@@ -55,7 +55,7 @@
     <!-- Initialize the jQuery File Upload Plugin -->
     <script type="text/javascript">
         function manageTask(clicked_id) {
-            location.replace(window.location.origin + "/Brmo?name=" + clicked_id);
+            location.replace(window.location.origin + window.location.pathname.replace("Tasks", "Brmo") + "?name=" + clicked_id);
         };
 
         function deleteTask(clicked_id) {
