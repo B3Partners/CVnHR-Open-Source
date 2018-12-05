@@ -153,7 +153,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                                     var line = reader.ReadLine();
                                     if (i != 0)
                                     {
-                                        if (line.Length == 7)
+                                        if (line.Length == 7 && usePrefixZero.Equals("true"))
                                         {
                                             log("adding prefix 0 for KVK-nummer:"+line,null);
                                             zipCodes.Add(prefix + line);
