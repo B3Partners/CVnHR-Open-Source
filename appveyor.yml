@@ -4,7 +4,11 @@ max_jobs: 1
 
 image: Visual Studio 2017
 skip_tags: true
-clone_folder: C:\projects\CVnHR-Open-Source
+clone_folder: C:\projects\CVnHR
+
+init:
+  - git config --global core.autocrlf input
+  - git config --global core.safecrlf true
 
 environment:
   fast_finish: true
@@ -15,19 +19,20 @@ services:
 - iis
 
 before_build:
-  appveyor-retry nuget restore
+  - appveyor-retry nuget restore
+  # kopieer de voorbeeld configs naar de build directory
+  - cmd: copy C:\projects\CVnHR\QNH.Overheid.KernRegister.BatchProcess\Config\examples\*.config C:\projects\CVnHR\QNH.Overheid.KernRegister.BatchProcess\Config
+  - cmd: copy C:\projects\CVnHR\QNH.Overheid.KernRegister.Beheer\Config\examples\*.config C:\projects\CVnHR\QNH.Overheid.KernRegister.Beheer\Config
 
 build:
   project: QNH.Overheid.CVnHR.sln
   parallel: true
   verbosity: minimal
 
-test_script: off
-
 notifications:
 - provider: GitHubPullRequest
   on_build_success: false
-  on_build_failure: true
+  on_build_failure: false
   on_build_status_changed: true
 
 cache:
