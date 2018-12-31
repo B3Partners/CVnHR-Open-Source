@@ -8,7 +8,7 @@ service. Furthermore the application provides batchwise updating and synchronisa
 __Open Source__: The project is made open source to allow other provinces to use this 
 application either stand-alone or in combination with the BRMO application by B3partners
 
-Original development is done by QNH Consulting B.V.
+Original development was done by QNH Consulting B.V.
 
 __Contact__ Corné Hogerheijde @ QNH and/or B3Partners (info@b3partners.nl)
 
@@ -24,6 +24,9 @@ of Commerce (KvK).
 - Install the PKI certificate and fill out the values needed in the .config files
 - Create a database on either Oracle or MS SQL and update .config files accordingly
 - Surfs up dude!
+
+[![Build status](https://ci.appveyor.com/api/projects/status/wn0rb1qs4iq9m35h?svg=true)](https://ci.appveyor.com/project/mprins/cvnhr-open-source)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=B3Partners/CVnHR-Open-Source)](https://dependabot.com)
 
 # Documentation en Configuration
 
