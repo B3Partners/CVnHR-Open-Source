@@ -5,7 +5,6 @@ max_jobs: 1
 image: Visual Studio 2017
 skip_tags: true
 clone_folder: C:\projects\CVnHR-Open-Source
-clone_depth: 20
 
 environment:
   fast_finish: true
@@ -14,6 +13,9 @@ services:
 - mssql2017
 - postgresql
 - iis
+
+before_build:
+  appveyor-retry nuget restore
 
 build:
   project: QNH.Overheid.CVnHR.sln
@@ -27,3 +29,6 @@ notifications:
   on_build_success: false
   on_build_failure: true
   on_build_status_changed: true
+
+cache:
+  - packages -> QNH.Overheid.CVnHR.sln
