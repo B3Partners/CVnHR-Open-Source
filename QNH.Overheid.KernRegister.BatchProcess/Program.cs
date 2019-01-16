@@ -139,8 +139,11 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                             var i = 0;
                             var uploadFolder = ConfigurationManager.AppSettings["uploadFolder"];
                             if (uploadFolder.Length == 0) {
-                                log("Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing")); ;
+                                log("Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing")); 
                             }
+                            var prefix = "";
+                            var usePrefixZero = ConfigurationManager.AppSettings["UseZeroPrefix"];
+                            if (usePrefixZero.Equals("true")) { prefix = "0"; }
                             var path = args[3];
                             using (var reader = new StreamReader(uploadFolder + "\\" + path))
                             {
@@ -150,11 +153,17 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                                     var line = reader.ReadLine();
                                     if (i != 0)
                                     {
-                                        zipCodes.Add(line);
+                                        if (line.Length == 7 && usePrefixZero.Equals("true"))
+                                        {
+                                            log("adding prefix 0 for KVK-nummer:"+line,null);
+                                            zipCodes.Add(prefix + line);
+                                        }
+                                        else { zipCodes.Add(line); }
                                     }
                                     else {
                                         if (line.Equals("postcode")) {
                                             brmoProcessType = BrmoProcessTypes.ZipCodes;
+                                            prefix = "";
                                         }
                                     }
                                     i++;
