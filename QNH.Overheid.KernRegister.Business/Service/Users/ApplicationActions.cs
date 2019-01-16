@@ -41,6 +41,9 @@ Heeft daarnaast nog wel BRMO inloggegevens nodig.")]
         [DisplayName("Crediteuren"), 
             Description("Gebruiker mag KvK en CVnHR gegevens doorzetten naar Crediteuren in het Financiele systeem")]
         CVnHR_Crediteuren,
+        [DisplayName("Geplande taken"),
+            Description("Gebruiker mag geplande taken beheren")]
+        CVnHR_Tasks,
         [DisplayName("Administrator"), 
             Description("Administrator functie (Gebruikersbeheer)")]
         CVnHR_Admin
