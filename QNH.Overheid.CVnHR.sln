@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", 
 	ProjectSection(SolutionItems) = preProject
 		Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add NonMailing.sql = Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add NonMailing.sql
 		Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add User Tables.sql = Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add User Tables.sql
+		Migrations\CVnHR - v2.x - v.3.0 - [POSTGRESQL] - Add NonMailing.sql = Migrations\CVnHR - v2.x - v.3.0 - [POSTGRESQL] - Add NonMailing.sql
+		Migrations\CVnHR - v2.x - v.3.0 - [POSTGRESQL] - Add User Tables.sql = Migrations\CVnHR - v2.x - v.3.0 - [POSTGRESQL] - Add User Tables.sql
 		Migrations\CVnHR - v2.x - v.3.0 - [SQLSERVER] - Add NonMailing.sql = Migrations\CVnHR - v2.x - v.3.0 - [SQLSERVER] - Add NonMailing.sql
 		Migrations\CVnHR - v2.x - v.3.0 - [SQLSERVER] - Add User Tables .sql = Migrations\CVnHR - v2.x - v.3.0 - [SQLSERVER] - Add User Tables .sql
 	EndProjectSection
