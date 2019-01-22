@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using NHibernate;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
-using QNH.Overheid.KernRegister.Business.Model.nHibernate;
-using QNH.Overheid.KernRegister.Business.Utility;
-
-using NHibernate.Impl;
-using NHibernate.Linq;
 using QNH.Overheid.KernRegister.Business.Model.Debug;
 
 namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
