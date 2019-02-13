@@ -466,19 +466,29 @@ QNH.Overheid.KernRegister.BatchProcess
             service.Endpoint.EndpointBehaviors.OfType<ClientViaBehavior>().First().Uri = new Uri(
                 service.Endpoint.EndpointBehaviors.OfType<ClientViaBehavior>().First().Uri.ToString()
                 .Replace("webservices.", "webservices.preprod."));
-            service.Endpoint.Address = new EndpointAddress(new Uri(service.Endpoint.Address.Uri.ToString().Replace("HRIP-Dataservice", "HRIP-DataservicePP"))
+            service.Endpoint.Address = new EndpointAddress(
+                new Uri(service.Endpoint.Address.Uri.ToString().Replace("Dataservice", "DataservicePP"))
                     , service.Endpoint.Address.Identity, service.Endpoint.Address.Headers);
+
+            var expectedErrorKvkNummers = new[] { "90002563" };
 
             _service = service;
 
-            var errors = new List<ophalenInschrijvingResponse>();
+            var errors = new Dictionary<string, ophalenInschrijvingResponse>();
             var records = ReadInschrijvingRecords("Data\\CTcheck\\CT omgeving test kvknummers.csv");
             Parallel.ForEach(records, record =>
             {
                 var inschrijving = GetProductTypeResponse(record.kvknummer);
                 if (inschrijving == null || inschrijving.ophalenInschrijvingResponse1.meldingen.fout != null)
                 {
-                    errors.Add(inschrijving);
+                    if (expectedErrorKvkNummers.Contains(record.kvknummer) && inschrijving != null)
+                    {
+                        Console.Write($"\rOk. (expected error) Kvknummer {record.kvknummer}");
+                    }
+                    else
+                    {
+                        errors.Add(record.kvknummer, inschrijving);
+                    }
                 }
                 else
                 {
@@ -486,7 +496,14 @@ QNH.Overheid.KernRegister.BatchProcess
                 }
             });
             Console.WriteLine();
-            Console.WriteLine(errors.Any() ? $"Errors! Found {errors.Count()} errors..." : "Succes!");
+            var errorMeldingen = string.Join(Environment.NewLine, 
+                    errors
+                        .Select(e => 
+                        $"{e.Key}: {e.Value.ophalenInschrijvingResponse1.meldingen.fout[0].code} {e.Value.ophalenInschrijvingResponse1.meldingen.fout[0].omschrijving}"
+                        ));
+            Console.WriteLine(errors.Any() 
+                ? $"Errors! Found {errors.Count()} errors... {Environment.NewLine}{errorMeldingen}"
+                : "Succes!");
 
             Console.ReadLine();
         }
