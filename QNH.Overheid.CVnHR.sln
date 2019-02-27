@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", 
 	ProjectSection(SolutionItems) = preProject
 		Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add NonMailing.sql = Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add NonMailing.sql
 		Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add User Tables.sql = Migrations\CVnHR - v2.x - v.3.0 - [ORACLE] - Add User Tables.sql
+		Migrations\CVnHR - v2.x - v.3.0 - [POSTGRESQL] - Add NonMailing.sql = Migrations\CVnHR - v2.x - v.3.0 - [POSTGRESQL] - Add NonMailing.sql
+		Migrations\CVnHR - v2.x - v.3.0 - [POSTGRESQL] - Add User Tables.sql = Migrations\CVnHR - v2.x - v.3.0 - [POSTGRESQL] - Add User Tables.sql
 		Migrations\CVnHR - v2.x - v.3.0 - [SQLSERVER] - Add NonMailing.sql = Migrations\CVnHR - v2.x - v.3.0 - [SQLSERVER] - Add NonMailing.sql
 		Migrations\CVnHR - v2.x - v.3.0 - [SQLSERVER] - Add User Tables .sql = Migrations\CVnHR - v2.x - v.3.0 - [SQLSERVER] - Add User Tables .sql
 	EndProjectSection
@@ -35,6 +37,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	ProjectSection(SolutionItems) = preProject
 		documentation\datamodel-cvnhr.png = documentation\datamodel-cvnhr.png
 		documentation\Technische en functionale omschrijving CVnHR applicatie QNH v2.0.1000.md = documentation\Technische en functionale omschrijving CVnHR applicatie QNH v2.0.1000.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{2340AD38-6AF0-4408-AE03-333B7DCADB7D}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 	EndProjectSection
 EndProject
 Global
@@ -127,6 +134,7 @@ Global
 		{5A606AD4-994B-4720-B9AA-9299423E6FEF} = {C5ADA832-071B-4619-B1FB-53501F796AE1}
 		{677AFA0C-8ECC-45BF-B47F-35826B76FE57} = {CC6CC166-22DF-4B82-A277-0723128C2E77}
 		{86ACABA4-09E0-47D9-9990-703CEBABACB6} = {C5ADA832-071B-4619-B1FB-53501F796AE1}
+		{2340AD38-6AF0-4408-AE03-333B7DCADB7D} = {C5ADA832-071B-4619-B1FB-53501F796AE1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00FEBFD8-A20A-4D5D-96B0-089E1A2D7158}

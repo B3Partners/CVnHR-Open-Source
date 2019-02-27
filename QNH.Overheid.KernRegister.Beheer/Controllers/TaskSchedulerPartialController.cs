@@ -125,8 +125,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                             Enabled = false
                         },
                         new ExecAction(ExecutablePath, Argument),
-                        UserId: "SYSTEM", // "LOCAL SERVICE",
-                        LogonType: TaskLogonType.ServiceAccount
+                        userId: "SYSTEM", // "LOCAL SERVICE",
+                        logonType: TaskLogonType.ServiceAccount
                     );
                     //ScheduledTask.Definition.Principal.RunLevel = TaskRunLevel.Highest;
                     //ScheduledTask.RegisterChanges();
@@ -333,8 +333,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                     ExportTaskManager.ScheduledTask = tsNew.AddTask(newName,
                     t,
                     action,
-                    UserId: "SYSTEM", // "LOCAL SERVICE",
-                    LogonType: TaskLogonType.ServiceAccount
+                    userId: "SYSTEM", // "LOCAL SERVICE",
+                    logonType: TaskLogonType.ServiceAccount
                     );
                     tsNew.RootFolder.DeleteTask(taskName);
                     ExportTaskManager.ScheduledTask.RegisterChanges();
