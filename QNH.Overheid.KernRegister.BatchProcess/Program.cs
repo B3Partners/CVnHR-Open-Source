@@ -1,5 +1,4 @@
-﻿using CsvHelper;
-using NLog;
+﻿using NLog;
 using QNH.Overheid.KernRegister.BatchProcess.Processes;
 using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Crm;
@@ -7,6 +6,7 @@ using QNH.Overheid.KernRegister.Business.Enums;
 using QNH.Overheid.KernRegister.Business.KvK.v30;
 using QNH.Overheid.KernRegister.Business.Model;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
+using QNH.Overheid.KernRegister.Business.Utility;
 using QNH.Overheid.KernRegister.Organization.Resources;
 using System;
 using System.Collections.Generic;
@@ -98,90 +98,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         SanityCheck();
                         break;
                     case "BRMO":
-                        Action<string, Exception> log = (msg, ex) => {
-                            Console.WriteLine(msg);
-                            if (ex == null)
-                                _brmoLogger.Info(msg);
-                            else
-                                _brmoLogger.Error(ex, msg);
-                        };
-                        var version = args[1];
-                        if (string.IsNullOrWhiteSpace(version))
-                        {
-                            log("Could not start proces. Argument version missing.", new ArgumentException("version")); ;
-                            break;
-                        }
-                        var type = args[2];
-                        var brmoProcessType = BrmoProcessTypes.ZipCodes;
-                        if (string.IsNullOrWhiteSpace(type))
-                        {
-                            log("Could not start proces. Argument version missing.", new ArgumentException("version")); ;
-                            break;
-                        }
-                        else
-                        {
-                            switch (type)
-                            {
-                                case "KvkIds":
-                                    brmoProcessType = BrmoProcessTypes.KvkIds;
-                                    break;
-                                case "ZipCodes":
-                                    brmoProcessType = BrmoProcessTypes.ZipCodes;
-                                    break;
-                                case "Csv":
-                                    brmoProcessType = BrmoProcessTypes.Csv;
-                                    break;
-                            }
-                        }
-                        var zipCodes = new List<String>();
-                        if (brmoProcessType == BrmoProcessTypes.Csv)
-                        {
-                            var i = 0;
-                            var uploadFolder = ConfigurationManager.AppSettings["uploadFolder"];
-                            if (uploadFolder.Length == 0) {
-                                log("Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing")); 
-                            }
-                            var prefix = "";
-                            var usePrefixZero = ConfigurationManager.AppSettings["UseZeroPrefix"];
-                            if (usePrefixZero.Equals("true")) { prefix = "0"; }
-                            var path = args[3];
-                            using (var reader = new StreamReader(uploadFolder + "\\" + path))
-                            {
-                                while (!reader.EndOfStream)
-                                {
-                                    
-                                    var line = reader.ReadLine();
-                                    if (i != 0)
-                                    {
-                                        if (line.Length == 7 && usePrefixZero.Equals("true"))
-                                        {
-                                            log("adding prefix 0 for KVK-nummer:"+line,null);
-                                            zipCodes.Add(prefix + line);
-                                        }
-                                        else { zipCodes.Add(line); }
-                                    }
-                                    else {
-                                        if (line.Equals("postcode")) {
-                                            brmoProcessType = BrmoProcessTypes.ZipCodes;
-                                            prefix = "";
-                                        }
-                                    }
-                                    i++;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            zipCodes = args.Skip(3).ToList();
-                        }
-                        if (!zipCodes.Any())
-                        {
-                            log("Could not start proces. Zipcodes missing!", new ArgumentException("version")); ;
-                            break;
-                        }
-                        log($"Starting BRMO task for version {version} with {brmoProcessType} {string.Join(" ", zipCodes)}", null);
-                        RsgbProcesses.FillRsgbForZipcodes(MaxDegreeOfParallelism, _brmoLogger, version, brmoProcessType, zipCodes);
-                        log("Finished BRMO task", null);
+                        BrmoProcesses.BatchProcessBrmo(args, MaxDegreeOfParallelism, _brmoLogger);
                         break;
                     case "PROBIS":
                         var probis = IocConfig.Container.GetInstance<IFinancialExportService>();
@@ -236,7 +153,7 @@ QNH.Overheid.KernRegister.BatchProcess
 
                 if (file.Extension.ToLower() != ".csv")
                     continue;
-                records.AddRange(ReadInschrijvingRecords(file.FullName).Distinct());
+                records.AddRange(CsvUtils.ReadInschrijvingRecords(file.FullName).Distinct());
             }
 
             _downloadTotal = records.Count;
@@ -433,28 +350,13 @@ QNH.Overheid.KernRegister.BatchProcess
 
             var inschrijvingenRecords =
                 repo.Query()
-                    .Select(i => new { KvkNummer = i.KvkNummer })
+                    .Select(i => new { i.KvkNummer })
                     .Select(k => new InschrijvingRecord() { kvknummer = k.KvkNummer }).ToList().Distinct();
 
             return inschrijvingenRecords;
         }
 
-        public static IEnumerable<InschrijvingRecord> ReadInschrijvingRecords(string fileName)
-        {
-            // First read complete CSV to see how many KVKnummers we need to process
-            IEnumerable<InschrijvingRecord> inschrijvingCsvRecords;
-            using (TextReader reader = File.OpenText(fileName))
-            {
-                var csv = new CsvReader(reader);
-                inschrijvingCsvRecords = csv.GetRecords<InschrijvingRecord>().ToArray();
-            }
-
-            return inschrijvingCsvRecords;
-        }
-
         #endregion
-
-
 
         #region S argument
 
@@ -475,7 +377,7 @@ QNH.Overheid.KernRegister.BatchProcess
             _service = service;
 
             var errors = new Dictionary<string, ophalenInschrijvingResponse>();
-            var records = ReadInschrijvingRecords("Data\\CTcheck\\CT omgeving test kvknummers.csv");
+            var records = CsvUtils.ReadInschrijvingRecords("Data\\CTcheck\\CT omgeving test kvknummers.csv");
             Parallel.ForEach(records, record =>
             {
                 var inschrijving = GetProductTypeResponse(record.kvknummer);

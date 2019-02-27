@@ -1,27 +1,19 @@
-﻿using Backload.Controllers;
-using CsvHelper;
-using QNH.Overheid.KernRegister.Beheer.Migrations;
-using QNH.Overheid.KernRegister.Business.Business;
-using QNH.Overheid.KernRegister.Business.Model;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using Microsoft.Win32.TaskScheduler;
 using NLog;
-using StructureMap;
+using QNH.Overheid.KernRegister.Business.Business;
+using QNH.Overheid.KernRegister.Business.Crm;
+using QNH.Overheid.KernRegister.Business.Model;
+using QNH.Overheid.KernRegister.Business.Service.Users;
+using QNH.Overheid.KernRegister.Business.Utility;
+using QNH.Overheid.KernRegister.Organization.Resources;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.Mvc;
-using QNH.Overheid.KernRegister.Beheer.Utilities;
-using QNH.Overheid.KernRegister.Business.Crm;
-using QNH.Overheid.KernRegister.Organization.Resources;
-using QNH.Overheid.KernRegister.Business.Service.Users;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -78,7 +70,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             {
                 return;
             }
-            var records = ReadInschrijvingRecords(file.FullName);
+            var records = CsvUtils.ReadInschrijvingRecords(file.FullName);
 
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
             var exportService = IocConfig.Container.GetInstance<IExportService>();
@@ -111,19 +103,6 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 Clients.All.reportProgress(e.SuccesCount, e.ErrorCount, e.Progress, e.SuccesProgress, e.InschrijvingNaam, e.TotalNew, e.TotalUpdated, e.TotalAlreadyExisted);
             };
             processing.InsertRecords(itemsToInsert.Select(i=> new InschrijvingRecord { kvknummer = i }));
-        }
-
-        private IEnumerable<InschrijvingRecord> ReadInschrijvingRecords(string fileName)
-        {
-            // First read complete CSV to see how many KVKnummers we need to process
-            IEnumerable<InschrijvingRecord> inschrijvingCsvRecords;
-            using (TextReader reader = File.OpenText(fileName))
-            {
-                var csv = new CsvReader(reader);
-                inschrijvingCsvRecords = csv.GetRecords<InschrijvingRecord>().ToArray();
-            }
-
-            return inschrijvingCsvRecords;
         }
     }
 }

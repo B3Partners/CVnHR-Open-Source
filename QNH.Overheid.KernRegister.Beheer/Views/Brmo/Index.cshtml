@@ -57,13 +57,18 @@
         <div class="col-sm-9 brmo-config">
             <label>HR-Dataservice version:</label>
             @Html.DropDownListFor(m => m.Config.HRDataserviceVersion,
-              Model.Config.PossibleHRDataserviceVersions.Select(m => new SelectListItem() { Text = m, Value = m }), htmlAttributes: null)
+              Model.Config.PossibleHRDataserviceVersions.Select(m => new SelectListItem() { Text = m, Value = m, Selected = m == "3.0" }), htmlAttributes: null)
 
             <br />
             <label>Process type:</label>
             @Html.DropDownListFor(m => m.Config.BrmoProcessType,
-              Model.Config.PossibleBrmoProcessTypes.Select(m => new SelectListItem() { Text = m, Value = m }), new { id="processType"})
-
+              Model.Config.PossibleBrmoProcessTypes
+                .Select(m => new SelectListItem() {
+                    Text = m,
+                    Value = m,
+                    Selected = m == QNH.Overheid.KernRegister.Business.Enums.BrmoProcessTypes.Csv.ToString()
+                })
+              , new { id="processType"})
             <div class="brmo-config-area">
                 <br />
                 <label>Postcodes/KvkIds</label>
@@ -83,7 +88,7 @@
 </div>
 
 @section scripts {
-    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
 
     <!-- We use Backloads. bundeling feature to register only those client side javascript and style files of the jQuery File Upload Plugin that are needed  -->
     @Scripts.Render("~/bundles/fileupload/bootstrap/BasicPlusUI/js")

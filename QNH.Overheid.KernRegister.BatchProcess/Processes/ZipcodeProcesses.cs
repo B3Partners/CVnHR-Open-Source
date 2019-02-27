@@ -1,13 +1,12 @@
-﻿using System;
+﻿using QNH.Overheid.KernRegister.Business.Service;
+using QNH.Overheid.KernRegister.Business.Utility;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
-using CsvHelper;
-using QNH.Overheid.KernRegister.Business.Service;
 
 namespace QNH.Overheid.KernRegister.BatchProcess.Processes
 {
@@ -48,12 +47,12 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
 
                     if (file.Extension.ToLower() != ".csv")
                         continue;
-                    records.AddRange(ReadZipcodeRecords(file.FullName));
+                    records.AddRange(CsvUtils.ReadZipcodeRecords(file.FullName));
                 }
                 zipCodes = records.Select(z => z.postcode).ToArray();
             }
 
-            var locker = new Object();
+            var locker = new object();
             var kvkIds = new List<string>();
 
             var totalHandled = 0;
@@ -108,18 +107,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                     yield return entry.dossiernummer;
         }
 
-        private static IEnumerable<ZipCodeRecord> ReadZipcodeRecords(string fileName)
-        {
-            // First read complete CSV to see how many KVKnummers we need to process
-            IEnumerable<ZipCodeRecord> inschrijvingCsvRecords;
-            using (TextReader reader = File.OpenText(fileName))
-            {
-                var csv = new CsvReader(reader);
-                inschrijvingCsvRecords = csv.GetRecords<ZipCodeRecord>().ToArray();
-            }
 
-            return inschrijvingCsvRecords;
-        }
 
         public static void ShowPercentProgress(string message, int currElementIndex, int totalElementCount)
         {

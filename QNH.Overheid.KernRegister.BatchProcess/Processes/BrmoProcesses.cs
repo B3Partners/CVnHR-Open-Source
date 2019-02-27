@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using NLog;
@@ -8,14 +9,118 @@ using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Enums;
 using QNH.Overheid.KernRegister.Business.Service;
 using QNH.Overheid.KernRegister.Business.Service.BRMO;
+using QNH.Overheid.KernRegister.Business.Utility;
 
 namespace QNH.Overheid.KernRegister.BatchProcess.Processes
 {
-    public class RsgbProcesses
+    public class BrmoProcesses
     {
-        // TODO: retry with CSV file??
+        public static void BatchProcessBrmo(string[] args,
+            int maxDegreeOfParallelism,
+            Logger brmoLogger)
+        {
+            var version = args[1];
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                log(brmoLogger, "Could not start proces. Argument version missing.", new ArgumentException("version")); ;
+                return;
+            }
+            var type = args[2];
+            if (string.IsNullOrWhiteSpace(type))
+            {
+                log(brmoLogger, "Could not start proces. Argument version missing.", new ArgumentException("version")); ;
+                return;
+            }
 
-        public static void FillRsgbForZipcodes(int maxDegreeOfParallelism, 
+            var brmoProcessType = BrmoProcessTypes.ZipCodes;
+            switch (type)
+            {
+                case "KvkIds":
+                    brmoProcessType = BrmoProcessTypes.KvkIds;
+                    break;
+                case "ZipCodes":
+                    brmoProcessType = BrmoProcessTypes.ZipCodes;
+                    break;
+                case "Csv":
+                    brmoProcessType = BrmoProcessTypes.Csv;
+                    break;
+            }
+            var zipCodes = new List<string>();
+            if (brmoProcessType == BrmoProcessTypes.Csv)
+            {
+                var uploadFolder = ConfigurationManager.AppSettings["uploadFolder"];
+                if (string.IsNullOrWhiteSpace(uploadFolder))
+                {
+                    log(brmoLogger, "Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing"));
+                }
+
+                var prefix = "";
+                var usePrefixZero = Convert.ToBoolean(ConfigurationManager.AppSettings["UseZeroPrefix"] ?? "false");
+                if (usePrefixZero)
+                {
+                    prefix = "0";
+                }
+
+                var path = args[3];
+                var fullPath = Path.Combine(uploadFolder, path);
+                //determine whether path is absolute or relative
+                if (!fullPath.Contains(":"))
+                {
+                    fullPath = Path.Combine(
+                            Directory.GetParent(
+                                Directory.GetParent(
+                                    AppDomain.CurrentDomain.BaseDirectory
+                                    ).ToString()
+                                 ).ToString()
+                                 , fullPath);
+                }
+                if (!File.Exists(fullPath))
+                {
+                    log(brmoLogger, $"Could not start process. Could not find (part of) the path {fullPath}. Please check the UploadFolder configuration setting",
+                        new ArgumentException("Could not find path"));
+                    return;
+                }
+
+                var kvkNummers = CsvUtils.ReadInschrijvingRecords(fullPath);
+                if (kvkNummers.Any())
+                {
+                    if (usePrefixZero)
+                    {
+                        foreach (var kvkNummer in zipCodes)
+                        {
+                            if (kvkNummer.Length == 7)
+                            {
+                                log(brmoLogger, "adding prefix 0 for KVK-nummer:" + kvkNummer, null);
+                                zipCodes.Add(prefix + kvkNummer);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        zipCodes = kvkNummers.Select(k => k.kvknummer).ToList();
+                    }
+                }
+                else
+                {
+                    brmoProcessType = BrmoProcessTypes.ZipCodes;
+                    prefix = "";
+                }
+            }
+            else
+            {
+                zipCodes = args.Skip(3).ToList();
+            }
+            if (!zipCodes.Any())
+            {
+                log(brmoLogger, "Could not start proces. Zipcodes missing!", new ArgumentException("version")); ;
+                return;
+            }
+            log(brmoLogger, $"Starting BRMO task for version {version} with {brmoProcessType} {string.Join(" ", zipCodes)}", null);
+            FillBrmoForZipcodes(maxDegreeOfParallelism, brmoLogger, version, brmoProcessType, zipCodes);
+            log(brmoLogger, "Finished BRMO task", null);
+        }
+
+        private static void FillBrmoForZipcodes(int maxDegreeOfParallelism, 
             Logger log, 
             string HRDataserviceVersion,
             BrmoProcessTypes type, 
@@ -68,6 +173,15 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
             log.Info($@"Kvknummers to retry:
 {string.Join(Environment.NewLine, errorKvkNummers)}");
             Console.WriteLine();
+        }
+
+        private static void log(Logger brmoLogger, string msg, Exception ex)
+        {
+            Console.WriteLine(msg);
+            if (ex == null)
+                brmoLogger.Info(msg);
+            else
+                brmoLogger.Error(ex, msg);
         }
 
         private static readonly string[] _zipCodesDrenthe =
