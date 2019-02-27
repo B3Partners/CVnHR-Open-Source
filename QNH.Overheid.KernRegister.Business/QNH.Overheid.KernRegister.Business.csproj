@@ -300,7 +300,6 @@
     <Compile Include="Utility\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Fakes\Documentation\relations.wsdl" />
     <None Include="Fakes\Documentation\security.wsdl" />
     <None Include="Model\kernregister.huidig.cd" />
