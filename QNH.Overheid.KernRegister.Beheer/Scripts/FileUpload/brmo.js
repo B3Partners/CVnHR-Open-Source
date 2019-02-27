@@ -43,6 +43,8 @@ $(function () {
 
 
 $("document").ready(function () {
+    $("#processType").val("Csv");
+
     var name = getParameterByName("name");
     $("#Task-name").val(name.substr(name.indexOf(' ') + 1));
 
@@ -105,6 +107,8 @@ $("document").ready(function () {
             if (csvCount > 1) {
                 alert("Er kan maar één CSV bestand per taak geselecteerd worden.");
                 return;
+            } else if (csvCount > 1) { 
+                alert("Geen CSV bestand geselecteerd. Selecteer het te gebruiken CSV bestand d.m.v. de checkbox naast het CSV bestand.");
             } else if (PostCodes.indexOf(" ") != -1) {
                 alert("CSV bestandsnamen mogen geen spaties bevatten");
                 return;
@@ -115,7 +119,7 @@ $("document").ready(function () {
             PostCodes = $("#Brmo-PostCodes").val();
         }
         $.post(window.location.href.split('?')[0] + "/SaveConfig", { PostCodes: PostCodes, taskName: taskName, HRDataserviceVersion: HRDataserviceVersion, BrmoProcessType: BrmoProcessType })
-            .success(function () {
+            .done(function () {
                 location.replace(window.location.origin + window.location.pathname + "?name=CVnHR " + taskName);
                 alert("Taak is opgeslagen");
             })

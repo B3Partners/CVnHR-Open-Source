@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace QNH.Overheid.KernRegister.BatchProcess.Processes
+namespace QNH.Overheid.KernRegister.Business.Utility
 {
     public class ZipCodeRecord : IEquatable<ZipCodeRecord>
     {

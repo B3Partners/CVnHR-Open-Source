@@ -111,7 +111,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public BrmoProcessTypes BrmoProcessType { get; set; } = BrmoProcessTypes.ZipCodes;
 
         [JsonIgnore]
-        public IEnumerable<string> PossibleHRDataserviceVersions { get; set; } = new[] { "2.5", "3.0" };
+        public IEnumerable<string> PossibleHRDataserviceVersions { get; set; } = new[] { "3.0" };
 
         [JsonIgnore]
         public IEnumerable<string> PossibleBrmoProcessTypes { get { return Enum.GetNames(typeof(BrmoProcessTypes)); } }

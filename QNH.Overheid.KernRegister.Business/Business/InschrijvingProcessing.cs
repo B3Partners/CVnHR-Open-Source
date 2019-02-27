@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using NLog;
+using QNH.Overheid.KernRegister.Business.Enums;
 using QNH.Overheid.KernRegister.Business.Model;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
 using QNH.Overheid.KernRegister.Business.Service;
-
-using NLog;
-
+using QNH.Overheid.KernRegister.Business.Utility;
 using StructureMap;
-using StructureMap.Pipeline;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using QNH.Overheid.KernRegister.Business.Enums;
 
 namespace QNH.Overheid.KernRegister.Business.Business
 {
@@ -147,8 +143,6 @@ namespace QNH.Overheid.KernRegister.Business.Business
 
         }
 
-       
-
         private void RaiseRecordProcessedEvent(int succesCount, int errorCount,   int progress, int successprogress, string inschrijvingsNaam, int totalNew, int totalUpdated, int totalAlreadyExisted)
         {
             var eventArgs = new RecordProcessedEventArgs
@@ -171,63 +165,5 @@ namespace QNH.Overheid.KernRegister.Business.Business
         }
 
         public event EventHandler<RecordProcessedEventArgs> RecordProcessed;
-
-    }
-
-    public class RecordProcessedEventArgs : EventArgs
-    {
-        public int Progress { get; set; }
-        public String InschrijvingNaam { get; set; }
-        public int SuccesProgress { get; set; }
-        public int SuccesCount { get; set; }
-        public int ErrorCount { get; set; }
-        public int TotalNew { get; set; }
-        public int TotalUpdated { get; set; }
-        public int TotalAlreadyExisted { get; set; }
-    }
-
-    public class InschrijvingRecord : IEquatable<InschrijvingRecord>
-    {
-        public string kvknummer { get; set; }
-
-        public virtual bool Equals(InschrijvingRecord other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            return
-                string.Equals(kvknummer, other.kvknummer);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            if (obj.GetType() != this.GetType())
-            {
-                return false;
-            }
-            return Equals((InschrijvingRecord)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hashCode = kvknummer?.GetHashCode() ?? 0;
-                return hashCode;
-            }
-        }
     }
 }
