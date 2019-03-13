@@ -21,19 +21,19 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
         {
             if (args.Count() == 1)
             {
-                log(brmoLogger, "Could not start BRMO proces. Mandatory arguments missing... (possibly you've tried to start an empty task? Navigate via menu item 'Taken beheren'...)", new ArgumentException("args"));
+                Log(brmoLogger, "Could not start BRMO proces. Mandatory arguments missing... (possibly you've tried to start an empty task? Navigate via menu item 'Taken beheren'...)", new ArgumentException("args"));
                 return;
             }
             var version = args[1];
             if (string.IsNullOrWhiteSpace(version))
             {
-                log(brmoLogger, "Could not start proces. Argument version missing.", new ArgumentException("version")); ;
+                Log(brmoLogger, "Could not start proces. Argument version missing.", new ArgumentException("version")); ;
                 return;
             }
             var type = args[2];
             if (string.IsNullOrWhiteSpace(type))
             {
-                log(brmoLogger, "Could not start proces. Argument type missing.", new ArgumentException("type")); ;
+                Log(brmoLogger, "Could not start proces. Argument type missing.", new ArgumentException("type")); ;
                 return;
             }
 
@@ -56,7 +56,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                 var uploadFolder = ConfigurationManager.AppSettings["uploadFolder"];
                 if (string.IsNullOrWhiteSpace(uploadFolder))
                 {
-                    log(brmoLogger, "Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing"));
+                    Log(brmoLogger, "Could not start proces. UploadFolder is missing.", new ArgumentException("uploadfolder is missing"));
                 }
 
                 var prefix = "";
@@ -81,7 +81,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                 }
                 if (!File.Exists(fullPath))
                 {
-                    log(brmoLogger, $"Could not start process. Could not find (part of) the path {fullPath}. Please check the UploadFolder configuration setting",
+                    Log(brmoLogger, $"Could not start process. Could not find (part of) the path {fullPath}. Please check the UploadFolder configuration setting",
                         new ArgumentException("Could not find path"));
                     return;
                 }
@@ -95,7 +95,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                         {
                             if (inschrijvingRecord.kvknummer.Length == 7)
                             {
-                                log(brmoLogger, "adding prefix 0 for KVK-nummer:" + inschrijvingRecord.kvknummer, null);
+                                Log(brmoLogger, "adding prefix 0 for KVK-nummer:" + inschrijvingRecord.kvknummer);
                                 zipCodes.Add(prefix + inschrijvingRecord.kvknummer);
                             }
                         }
@@ -117,16 +117,19 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
             }
             if (!zipCodes.Any())
             {
-                log(brmoLogger, $"Could not start proces. No kvknumbers found for process {type}!", new ArgumentException("kvknumbers, zipcodes or csv")); ;
+                Log(brmoLogger, $"Could not start proces. No kvknumbers found for process {type}!", new ArgumentException("kvknumbers, zipcodes or csv")); ;
                 return;
             }
-            log(brmoLogger, $"Starting BRMO task for version {version} with {brmoProcessType} {string.Join(" ", zipCodes)}", null);
+            var zipCodeLogger = zipCodes.Count() > 20
+                ? $"{zipCodes.Count().ToString()} items"
+                : string.Join(" ", zipCodes);
+            Log(brmoLogger, $"Starting BRMO task for version {version} with {brmoProcessType} {zipCodeLogger}");
             FillBrmoForZipcodes(maxDegreeOfParallelism, brmoLogger, version, brmoProcessType, zipCodes);
-            log(brmoLogger, "Finished BRMO task", null);
+            Log(brmoLogger, "Finished BRMO task");
         }
 
         private static void FillBrmoForZipcodes(int maxDegreeOfParallelism, 
-            Logger log, 
+            Logger brmoLogger, 
             string HRDataserviceVersion,
             BrmoProcessTypes type, 
             List<string> items = null)
@@ -137,15 +140,19 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
             if (type == BrmoProcessTypes.ZipCodes)
             {
                 var msg = $"Searching kvkIds in zipcodes: {string.Join(" ", items)}";
-                log.Debug(msg);
+                brmoLogger.Debug(msg);
                 Console.WriteLine(msg);
                 kvkIds = ZipcodeProcesses.GetKvkIdsForZipcode(maxDegreeOfParallelism, true, items.ToArray()).ToList();
                 msg = $"Found {kvkIds.Count()} kvk Ids.";
-                log.Debug(msg);
+                brmoLogger.Debug(msg);
                 Console.WriteLine(msg);
             }
             else
                 kvkIds = items;
+
+            Log(brmoLogger, $"Found {kvkIds.Count()} items");
+            kvkIds = kvkIds.Distinct().ToList();
+            Log(brmoLogger, $"Found {kvkIds.Count()} unique items");
 
             var service = IocConfig.Container.GetInstance<IKvkSearchService>();
             var brmoSyncService = IocConfig.Container.GetInstance<IBrmoSyncService>();
@@ -158,7 +165,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                 try
                 {
                     // retry without bypassing cache
-                    var xDoc = RawXmlCache.Get(kvkNummer, () => { service.SearchInschrijvingByKvkNummer(kvkNummer, "Batchprocess BRMO"); });
+                    var xDoc = RawXmlCache.Get(kvkNummer, () => { service.DoeOpvragingBijKvk(kvkNummer, "Batchprocess BRMO"); });
                     var status = brmoSyncService.UploadXDocumentToBrmo(xDoc);
                     if (status != AddInschrijvingResultStatus.BrmoInschrijvingCreated)
                     {
@@ -167,20 +174,20 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex, "Exception for kvkNummer: " + kvkNummer);
+                    brmoLogger.Error(ex, "Exception for kvkNummer: " + kvkNummer);
                     errors.Add(ex);
                     errorKvkNummers.Add(kvkNummer);
                     Console.Write($"\r{ex.Message}");
                 }
             });
 
-            log.Info($"Succesfully uploaded {kvkIds.Count() - errors.Count()} kvk Ids. Found {errors.Count()} errors...");
-            log.Info($@"Kvknummers to retry:
+            brmoLogger.Info($"Succesfully uploaded {kvkIds.Count() - errors.Count()} kvk Ids. Found {errors.Count()} errors...");
+            brmoLogger.Info($@"Kvknummers to retry:
 {string.Join(Environment.NewLine, errorKvkNummers)}");
             Console.WriteLine();
         }
 
-        private static void log(Logger brmoLogger, string msg, Exception ex)
+        private static void Log(Logger brmoLogger, string msg, Exception ex = null)
         {
             Console.WriteLine(msg);
             if (ex == null)
