@@ -58,11 +58,9 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                     return inschrijving;
             }
 
-            KvkCountingLogger.Info($"Calling HR-Dataservice v3.0 {kvkNummer} {requesterName}");
-
             // Roep "Dataservice Inschrijving" aan met kvkNummer als sleutel
             // Via deze service verkrijgen we ook de vestigingsnummers (of zelfs complete vestiging informatie!?) van de hoofdvestiging en de nevenvestigingen
-            var maatschappelijkeActiviteit = GeefMaatschappelijkeActiviteit(kvkNummer, out string peilmoment, out IEnumerable<ValidationMessage> errors);
+            var maatschappelijkeActiviteit = GeefMaatschappelijkeActiviteit(kvkNummer, requesterName, out string peilmoment, out IEnumerable<ValidationMessage> errors);
 
             KvkInschrijving kvkInschrijving = null;
             if (maatschappelijkeActiviteit != null)
@@ -253,23 +251,14 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
             return kvkInschrijving;
         }
 
-        private MaatschappelijkeActiviteitType GeefMaatschappelijkeActiviteit(string kvkNummer, out string peilmoment, out IEnumerable<ValidationMessage> errors)
+        private MaatschappelijkeActiviteitType GeefMaatschappelijkeActiviteit(string kvkNummer, string requesterName, out string peilmoment, out IEnumerable<ValidationMessage> errors)
         {
             errors = null;
             MaatschappelijkeActiviteitType maatschappelijkeActiviteit = null;
             peilmoment = null;
             try
             {
-                var request = new ophalenInschrijvingRequest()
-                {
-                    ophalenInschrijvingRequest1 = new InschrijvingRequestType()
-                    {
-                        klantreferentie = _klantReferentie,
-                        Item = kvkNummer,
-                        ItemElementName = ItemChoiceType.kvkNummer
-                    }
-                };
-                var result = _service.ophalenInschrijving(request)?.ophalenInschrijvingResponse1;
+                var result = DoeOpvragingBijKvk(kvkNummer, requesterName);
                 if (!KvkMaatschappelijkeActiviteitProductValidator.HasErrors(result))
                 {
                     maatschappelijkeActiviteit = result.product.maatschappelijkeActiviteit;
@@ -303,6 +292,22 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
             }
 
             return maatschappelijkeActiviteit;
+        }
+
+        public InschrijvingResponseType DoeOpvragingBijKvk(string kvkNummer, string requesterName)
+        {
+            KvkCountingLogger.Info($"Calling HR-Dataservice v3.0 {kvkNummer} {requesterName}");
+
+            var request = new ophalenInschrijvingRequest()
+            {
+                ophalenInschrijvingRequest1 = new InschrijvingRequestType()
+                {
+                    klantreferentie = _klantReferentie,
+                    Item = kvkNummer,
+                    ItemElementName = ItemChoiceType.kvkNummer
+                }
+            };
+            return _service.ophalenInschrijving(request)?.ophalenInschrijvingResponse1;
         }
 
         #region Create Vestiging
