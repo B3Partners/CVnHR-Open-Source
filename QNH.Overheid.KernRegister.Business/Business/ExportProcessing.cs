@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using QNH.Overheid.KernRegister.Business.Crm;
+using QNH.Overheid.KernRegister.Business.Utility;
 
 namespace QNH.Overheid.KernRegister.Business.Business
 {
