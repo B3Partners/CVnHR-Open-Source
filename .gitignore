@@ -269,3 +269,4 @@ __pycache__/
 /QNH.Overheid.KernRegister.Beheer/Properties/PublishProfiles/FolderProfile.pubxml
 /QNH.Overheid.KernRegister.Beheer/Config/*.config
 /QNH.Overheid.KernRegister.BatchProcess/Config/*.config
+QNH.Overheid.KernRegister.Beheer/Files/brmo/

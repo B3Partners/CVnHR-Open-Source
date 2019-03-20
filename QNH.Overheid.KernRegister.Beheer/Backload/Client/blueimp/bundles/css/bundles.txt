@@ -1,0 +1,9 @@
+Bundles all css files used by the jQuery File Upload Plugin
+and can be used with all themes.
+
+
+Bundle:  jquery.fileupload.bundle.min.css
+Theme:   All themes
+Files included:
+<link href="~/Backload/Client/blueimp/fileupload/css/jquery.fileupload.css" rel="stylesheet" />
+<link href="~/Backload/Client/blueimp/fileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />

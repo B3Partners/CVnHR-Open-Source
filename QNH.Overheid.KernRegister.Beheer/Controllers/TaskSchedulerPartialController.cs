@@ -7,13 +7,14 @@ using System.Linq;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using NLog;
+using QNH.Overheid.KernRegister.Organization.Resources;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
     public class ScheduledTaskManager
     {
         public TaskService TaskService { get; private set; }
-        public Task ScheduledTask { get; private set; }
+        public Task ScheduledTask { get; set; }
 
         public ExecAction ScheduledAction => ScheduledTask != null ? ScheduledTask.Definition.Actions.OfType<ExecAction>().FirstOrDefault() : null;
 
@@ -24,8 +25,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public string LastTaskResult
         {
             get
-            { 
-                switch(ScheduledTask.LastTaskResult)
+            {
+                switch (ScheduledTask.LastTaskResult)
                 {
                     case 0:
                         return "Succes";
@@ -47,8 +48,13 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         {
             get
             {
+                string caseTest = Argument;
+                if (caseTest.Contains("BRMO"))
+                {
+                    caseTest = "BRMO";
+                }
                 var logPath = "Logs";
-                switch (Argument)
+                switch (caseTest)
                 {
                     case "B":
                         logPath = Path.Combine(logPath, "Crm");
@@ -99,7 +105,17 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
                 TaskService = new TaskService();
 
-                ScheduledTask = TaskService.RootFolder.Tasks.FirstOrDefault(t => t.Name.Equals(TaskName));
+                ScheduledTask = null;
+
+                TaskCollection tasks = TaskService.RootFolder.GetTasks(new System.Text.RegularExpressions.Regex(@"CVnHR"));
+
+                foreach (Task t in tasks) {
+                    if (t.Name.Equals(taskName)) {
+                        ScheduledTask = t;
+                        break;
+                    }
+                }
+
                 if (ScheduledTask == null)
                 {
                     ScheduledTask = TaskService.AddTask(TaskName,
@@ -109,8 +125,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                             Enabled = false
                         },
                         new ExecAction(ExecutablePath, Argument),
-                        UserId: "SYSTEM", // "LOCAL SERVICE",
-                        LogonType: TaskLogonType.ServiceAccount
+                        userId: "SYSTEM", // "LOCAL SERVICE",
+                        logonType: TaskLogonType.ServiceAccount
                     );
                     //ScheduledTask.Definition.Principal.RunLevel = TaskRunLevel.Highest;
                     //ScheduledTask.RegisterChanges();
@@ -131,36 +147,37 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
     public class TaskSchedulerPartialController : Controller // BackloadController
     {
         private static Logger _log = LogManager.GetCurrentClassLogger();
-        private static readonly Dictionary<string, ScheduledTaskManager> _taskManagers = new Dictionary<string, ScheduledTaskManager>();
-        private readonly string _taskName;
+        private Dictionary<string, ScheduledTaskManager> taskManagers = new Dictionary<string, ScheduledTaskManager>();
+        private string taskName, taskArgument, executablePath;
 
 
-        protected ScheduledTaskManager ExportTaskManager => _taskManagers[_taskName];
+        public ScheduledTaskManager ExportTaskManager => taskManagers[taskName];
 
         public TaskSchedulerPartialController(string taskName, string argument)
         {
-            _taskName = taskName;
-            if (!_taskManagers.ContainsKey(taskName)) {
-
-                string executablePath = ConfigurationManager.AppSettings["BatchProcessExecutablePath"];
-                //determine whether path is absolute or relative
-                if (!executablePath.Contains(":"))
-                {
-                    executablePath =Path.Combine(
+            this.taskName = taskName;
+            this.taskArgument = argument;
+            executablePath = ConfigurationManager.AppSettings["BatchProcessExecutablePath"];
+            //determine whether path is absolute or relative
+            if (!executablePath.Contains(":"))
+            {
+                executablePath = Path.Combine(
+                        Directory.GetParent(
                             Directory.GetParent(
-                                Directory.GetParent(
-                                    AppDomain.CurrentDomain.BaseDirectory
-                                    ).ToString()
-                                 ).ToString()
-                                 ,executablePath);
-                }
-                _taskManagers.Add(taskName, new ScheduledTaskManager(
+                                AppDomain.CurrentDomain.BaseDirectory
+                                ).ToString()
+                             ).ToString()
+                             , executablePath);
+            }
+            fillTaskManagers();
+            if (!taskManagers.ContainsKey(taskName)) {
+                taskManagers.Add(taskName, new ScheduledTaskManager(
                    taskName: taskName,
                    executablePath: executablePath,
                    argument: argument));
             }
-            if (ExportTaskManager.Trigger is TimeTrigger 
-                && ExportTaskManager.Trigger.Enabled 
+            if (ExportTaskManager.Trigger is TimeTrigger
+                && ExportTaskManager.Trigger.Enabled
                 && ExportTaskManager.ScheduledTask.NextRunTime <= DateTime.MinValue
                 && ExportTaskManager.ScheduledTask.State != TaskState.Running)
             {
@@ -242,7 +259,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                         };
 
                         switch (time.Value.DayOfWeek)
-                        { 
+                        {
                             case DayOfWeek.Monday:
                                 trigger.DaysOfWeek = DaysOfTheWeek.Monday;
                                 break;
@@ -272,7 +289,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                         ExportTaskManager.ScheduledTask.Definition.Triggers.Add(new MonthlyTrigger()
                         {
                             StartBoundary = time.Value,
-                            Enabled = enabled.Value, 
+                            Enabled = enabled.Value,
                             DaysOfMonth = new[] { time.Value.Day }
                         });
                         break;
@@ -299,11 +316,54 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         }
 
-        protected void UpdateTaskManagerArguments(string arguments)
+        public void UpdateTaskManagerArguments(string arguments, string newName)
         {
-            ExportTaskManager.ScheduledTask.Definition.Actions.Cast<ExecAction>().Single().Arguments = arguments;
-            ExportTaskManager.ScheduledTask.RegisterChanges();
+            newName = Default.ApplicationName +" "+ newName;
+            if (!ExportTaskManager.ScheduledTask.Name.Equals(newName))
+            {
+                ExportTaskManager.ScheduledTask.Definition.Actions.Cast<ExecAction>().Single().Arguments = arguments;
+                ExportTaskManager.ScheduledTask.RegisterChanges();
+                TaskService tsNew = new TaskService();
+                Task tsOld = ExportTaskManager.ScheduledTask;
+                Trigger t = (Trigger)tsOld.Definition.Triggers.First().Clone();
+                ExecAction action = (ExecAction)tsOld.Definition.Actions.First().Clone();
+                ExportTaskManager.ScheduledTask = null;
+                try
+                {
+                    ExportTaskManager.ScheduledTask = tsNew.AddTask(newName,
+                    t,
+                    action,
+                    userId: "SYSTEM", // "LOCAL SERVICE",
+                    logonType: TaskLogonType.ServiceAccount
+                    );
+                    tsNew.RootFolder.DeleteTask(taskName);
+                    ExportTaskManager.ScheduledTask.RegisterChanges();
+                    taskName = newName;
+                    taskArgument = arguments;
+                    fillTaskManagers();
+                }
+                catch (Exception e) {
+                    ExportTaskManager.ScheduledTask = tsOld;
+                    Console.WriteLine(e);
+                }
+            }
+            else
+            {
+                ExportTaskManager.ScheduledTask.Definition.Actions.Cast<ExecAction>().Single().Arguments = arguments;
+                ExportTaskManager.ScheduledTask.RegisterChanges();
+            }
         }
-    }
 
+        public void fillTaskManagers() {
+            taskManagers.Clear();
+            TaskService ts = new TaskService();
+            TaskCollection taskList = ts.RootFolder.GetTasks(new System.Text.RegularExpressions.Regex(@"CVnHR"));
+            foreach (Task t in taskList) {
+                taskManagers.Add(t.Name, new ScheduledTaskManager(t.Name, t.Definition.Actions.Cast<ExecAction>().First().Path, t.Definition.Actions.Cast<ExecAction>().First().Arguments));
+
+            }
+
+        }
+
+    }
 }

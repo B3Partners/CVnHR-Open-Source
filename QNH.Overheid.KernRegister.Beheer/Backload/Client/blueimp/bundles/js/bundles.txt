@@ -1,0 +1,78 @@
+Bundles Javascript files used different themes of the jQuery File Upload Plugin
+(In case of problems include the single files from the blueimp/fileupload folder)
+
+
+Bundle:  jquery.fileupload.basic.min.js
+Theme:   Basic
+Files included:
+<script src="~/Backload/Client/blueimp/fileupload/js/vendor/jquery.ui.widget.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.iframe-transport.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/themes/jquery.fileupload-themes.js"></script>
+
+
+Bundle:  jquery.fileupload.basicplus.min.js
+Theme:   BasicPlus
+Files included:
+<script src="~/Backload/Client/blueimp/loadimage/js/load-image.all.min.js"></script>
+<script src="~/Backload/Client/blueimp/blob/js/canvas-to-blob.min.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/vendor/jquery.ui.widget.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.iframe-transport.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-process.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-image.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-audio.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-video.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-validate.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/themes/jquery.fileupload-themes.js"></script>
+
+
+Bundle:  jquery.fileupload.basicplusui.min.js
+Theme:   BasicPlusUi
+Files included:
+<script src="~/Backload/Client/blueimp/templates/js/tmpl.min.js"></script>
+<script src="~/Backload/Client/blueimp/loadimage/js/load-image.all.min.js"></script>
+<script src="~/Backload/Client/blueimp/blob/js/canvas-to-blob.min.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/vendor/jquery.ui.widget.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.iframe-transport.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-process.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-image.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-audio.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-video.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-validate.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-ui.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/themes/jquery.fileupload-themes.js"></script>
+
+
+Bundle:  jquery.fileupload.angularjs.min.js
+Theme:   AngularJS
+Files included:
+<script src="~/Backload/Client/blueimp/loadimage/js/load-image.all.min.js"></script>
+<script src="~/Backload/Client/blueimp/blob/js/canvas-to-blob.min.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/vendor/jquery.ui.widget.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.iframe-transport.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-process.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-image.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-audio.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-video.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-validate.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-angular.js"></script>
+
+
+Bundle:  jquery.fileupload.jqueryui.min.js
+Theme:   JQueryUI
+Files included:
+<script src="~/Backload/Client/blueimp/templates/js/tmpl.min.js"></script>
+<script src="~/Backload/Client/blueimp/loadimage/js/load-image.all.min.js"></script>
+<script src="~/Backload/Client/blueimp/blob/js/canvas-to-blob.min.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.iframe-transport.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-process.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-image.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-audio.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-video.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-validate.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-ui.js"></script>
+<script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-jquery-ui.js"></script>
