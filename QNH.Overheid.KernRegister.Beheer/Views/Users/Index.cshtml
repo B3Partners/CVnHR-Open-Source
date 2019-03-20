@@ -2,31 +2,41 @@
 @{
     ViewBag.Title = "Manage users";
 }
+@section customstyles {
+<style>
+    .usermanager h4 {
+        cursor: pointer;
+    }
 
+    .usermanager h4:hover {
+        text-decoration: underline;
+    }
+</style>
+}
 <div>
-    <div class="row">
+    <div class="row usermanager">
         <div class="col-sm-3">
             <h3>User manager</h3>
             <p>Stel op deze pagina de rechten in voor alle gebruikers.</p>
             <p>Gebruik @Default.CVnHREveryone om iedereen rechten te geven voor een bepaalde groep.</p>
         </div>
         <div class="col-sm-9">
-            <h3>Gebruikersrechten</h3>
+            <h2>Gebruikersrechten</h2>
 
             @foreach (var value in Model)
             {
                 <div class="row">
                     <div class="col-sm-12">
-                        <a data-toggle="collapse" href="#@value.Key.ToString()" aria-expanded="false">
-                            <h3 data-toggle="tooltip" data-placement="left" title="@value.Key.GetDescription()">
-                                @value.Key.GetDisplayName()
-                            </h3>
-                        </a>
+
+
+                        <h4 data-toggle="collapse" href="#@value.Key.ToString()" aria-expanded="false">
+                            @value.Key.GetDisplayName()
+                        </h4>
 
                         <div class="collapse" id="@value.Key.ToString()">
                             <p>@value.Key.GetDescription()</p>
-                            @{ 
-                                var show = value.Value.Any() || value.Key == ApplicationActions.CVnHR_Admin 
+                            @{
+                                var show = value.Value.Any() || value.Key == ApplicationActions.CVnHR_Admin
                                     ? null : "hidden";
                             }
                             <table class="table table-striped table-bordered table-hover table-users-@value.Key @show">
@@ -61,8 +71,8 @@
                                 </tbody>
                             </table>
 
-                            <fieldset class="form-group form-inline">
-                                <input class="form-control" type="text" placeholder="Gebruikersnaam" value="@SettingsHelper.UserManagerPrefillUserName" />
+                            <fieldset class="form-group">
+                                <input class="form-control custom-control-inline" type="text" placeholder="Gebruikersnaam" value="@SettingsHelper.UserManagerPrefillUserName" />
                                 <button class="btn btn-info btn-sm btn-add" data-action="@value.Key" type="submit">Voeg toe</button>
                             </fieldset>
                             <hr />
@@ -76,7 +86,7 @@
 </div>
 
 @section scripts {
-<script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
 
@@ -118,5 +128,5 @@
                 //console.log("TODO add user and action", user, action);
             });
         });
-</script>
+    </script>
 }

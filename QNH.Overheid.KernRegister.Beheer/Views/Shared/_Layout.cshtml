@@ -12,30 +12,42 @@
 
     @if (SettingsHelper.ShowEnvironmentColor)
     {
-        <style>
+    <style>
             .navbar {
                 background-color: @SettingsHelper.EnvironmentColor;
                 background-image: none;
                 border-color: transparent;
+                padding: 0;
             }
 
-            .navbar-inverse .navbar-nav > li > a,
-            .navbar-inverse .navbar-brand {
-                color: #333;
-                text-shadow: none;
+            .navbar li a {
+                width: 100%;
+                height: 100%;
+                display: block;
+                padding: 12px;
+                margin: 0;
+                color:#333;
+                font-size: .9rem;
             }
-        </style>
+
+            .navbar li a:hover {
+                color: #fff;
+            }
+
+            .navbar li.active a {
+                background-color: #333;
+                color: #fff;
+            }
+    </style>
     }
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-light navbar-fixed-top navbar-expand-md">
         <div class="container" style="position:relative;">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
                 @Html.ActionLink(Default.HomeButton, "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
