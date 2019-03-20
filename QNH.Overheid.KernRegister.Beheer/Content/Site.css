@@ -76,6 +76,8 @@ p.left {
     background-image: linear-gradient(to top, #008800 0%, #008000 100%);
 }
 
-.hidden {
-    display: none;
+
+.brmo-config-area-csv {
+    display:none;
+
 }

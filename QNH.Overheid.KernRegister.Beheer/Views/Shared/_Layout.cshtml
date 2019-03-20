@@ -89,7 +89,13 @@
                         @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_SyncBrmo) && SettingsHelper.BrmoApplicationEnabled)
                         {
                             <li class="@(url.Contains("/syncbrmo") ? "active" : null)">
-                                @Html.ActionLink(Default.SyncBrmo, "Index", "Brmo")
+                                @Html.ActionLink(Default.SyncBrmo, "Index", "Brmo", new { name = Default.ApplicationName + " BRMO Standaard taak" },null)
+                            </li>
+                        }
+                        @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Tasks))
+                        {
+                            <li class="@(url.Contains("/tasks") ? "active" : null)">
+                                @Html.ActionLink(Default.ToTasks, "Index", "Tasks")
                             </li>
                         }
                         @if (User.IsAllowedAllActions(ApplicationActions.CVnHR_Admin) || User.IsInitialAdmin())
