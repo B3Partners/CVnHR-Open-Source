@@ -1,5 +1,5 @@
 ﻿@model QNH.Overheid.KernRegister.Beheer.Controllers.ScheduledTaskManager
-           
+
 
 @using Microsoft.Win32.TaskScheduler
 
@@ -27,13 +27,14 @@
         .error {
             color: red;
         }
+
         select[disabled] {
             background-color: #e4e4e4;
         }
     </style>
 }
 
-<div class="modal fade" id="importfromkvk">
+<div class="modal hide fade" id="importfromkvk" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,7 +51,7 @@
                             <div id="procprogresserror" class="progress-bar progress-bar-danger" style="width: 0%">
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="row">
@@ -74,7 +75,7 @@
 
             </div>
             <div class="modal-footer">
-                <button id ="btnCloseProgress" type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+                <button id="btnCloseProgress" type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -102,7 +103,7 @@
             <p>Klik <a href="@Url.Content("~/voorbeeld.csv")">hier</a> voor een voorbeeld .csv bestand.</p>
         </div>
         <div class="col-sm-9">
-                
+
             <h3>Initiële load</h3>
             @Html.Partial("_BackloadPartial")
 
@@ -123,11 +124,6 @@
     </div>
 
 </div>
-
-
-
-
-
 
 @section scripts {
     <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
