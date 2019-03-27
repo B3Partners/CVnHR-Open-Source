@@ -97,11 +97,12 @@ $("document").ready(function () {
     };
 
     $('#fileupload')
-        .bind('fileuploaddestroy', function (e, data) {
+        .on('fileuploaddestroy', function (e, data) {
             // Event handler example. Do something if you need after file has been deleted on the server. 
             // (Refer to the client side documentatio).
         })
-        .bind('fileuploaddone', function (e, data) {
+        .on('fileuploaddone', function (e, data) {
+            
             // alert('We zijn klaar. Dus start met processen!');
             var fileName = data.files[0].name;
             $('#importfromkvk').on('shown.bs.modal', function (e) {
@@ -111,8 +112,6 @@ $("document").ready(function () {
                 });
            });
 
-           $('#importfromkvk').modal({
-                show: true
-            });
+            $('#importfromkvk').modal('show');
         });
 });

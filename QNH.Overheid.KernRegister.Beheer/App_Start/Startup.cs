@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Routing;
 using Microsoft.AspNet.SignalR;
@@ -22,7 +23,8 @@ namespace QNH.Overheid.KernRegister.Beheer
             var resolver = new SignalRStructureMapDependencyResolver(container);
             var config = new HubConfiguration()
             {
-                Resolver = resolver
+                Resolver = resolver,
+                EnableDetailedErrors = Convert.ToBoolean(ConfigurationManager.AppSettings["SignalRDetailedErrors"] ?? "false")
             };
 
             // Any connection or hub wire up and configuration should go here
