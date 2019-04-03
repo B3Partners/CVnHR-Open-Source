@@ -81,3 +81,7 @@ p.left {
     display:none;
 
 }
+
+.hidden {
+    display: none;
+}
