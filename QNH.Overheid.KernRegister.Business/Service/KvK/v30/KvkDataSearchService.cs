@@ -549,7 +549,7 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
             catch (Exception ex)
             {
                 pong = new Pong() { IsSuccesful = false, ExceptionMessage = ex.Message };
-                Logger.DebugException("Something went wrong while calling genereerProduct service for Ping test", ex);
+                Logger.Debug(ex, "Something went wrong while calling genereerProduct service for Ping test");
             }
             return pong;
 

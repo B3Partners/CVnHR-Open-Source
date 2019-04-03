@@ -73,8 +73,7 @@ namespace QNH.Overheid.KernRegister.Business.Business
                 {
                     // Just log the Exception and continue
                     logger.Error("Er ging wat mis bij het ophalen van gegevens voor KVK nummer {0}", inschrijvingCsvRecord.kvknummer);
-                    logger.ErrorException(
-                        $"Error while retrieving KVKNummer = {inschrijvingCsvRecord.kvknummer} Check the exception", ex);
+                    logger.Error(ex, $"Error while retrieving KVKNummer = {inschrijvingCsvRecord.kvknummer} Check the exception");
 
                 }
                 if (kvkInschrijving != null)
@@ -113,8 +112,8 @@ namespace QNH.Overheid.KernRegister.Business.Business
                     catch (Exception ex)
                     {
                         logger.Error("Er ging wat mis bij het opslaan van gegevens in KVK register database KVK nummer {0}", inschrijvingCsvRecord.kvknummer);
-                        logger.ErrorException(
-                            $"Error while storing KVKNummer = {kvkInschrijving.KvkNummer} Naam = {kvkInschrijving.InschrijvingNaam} Check the exception", ex);
+                        logger.Error(ex,
+                            $"Error while storing KVKNummer = {kvkInschrijving.KvkNummer} Naam = {kvkInschrijving.InschrijvingNaam} Check the exception");
                     }
                 }
                 else

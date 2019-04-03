@@ -35,9 +35,10 @@ $(function () {
         context: $('#fileupload')[0]
     }).always(function () {
         $(this).removeClass('fileupload-processing');
-    }).done(function (result) {
+    }).done(function (result, e) {
+
         $(this).fileupload('option', 'done')
-            .call(this, null, { result: result });
+            .call(this, $.Event('done'), { result: result });
     });
 });
 
