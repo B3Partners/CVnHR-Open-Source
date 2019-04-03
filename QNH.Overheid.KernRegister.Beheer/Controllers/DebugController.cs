@@ -80,14 +80,38 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
             var debugInfo = GetDatabaseDebugInfo(repo);
 
-            debugInfo.DeponeringsStukOrphans?.ForEach(d=> repo.ActualRemove(d));
-            debugInfo.FunctieVervullingOrphans?.ForEach(f => repo.ActualRemove(f));
-            debugInfo.HandelsnaamOrphans?.ForEach(h=> repo.ActualRemove(h));
-            debugInfo.SbiActiviteitOrphans?.ForEach(f=> repo.ActualRemove(f));
-            debugInfo.VestigingSbiActiviteitOrphans?.ForEach(f => repo.ActualRemove(f));
-            debugInfo.VestigingOrphans?.ForEach(d => repo.ActualRemove(d));
-            debugInfo.SbiCodeOrphans?.ForEach(f => repo.ActualRemove(f));
-            debugInfo.InschrijvingOrphans?.ForEach(d => repo.ActualRemove(d));
+            foreach (var d in debugInfo.DeponeringsStukOrphans)
+            {
+                repo.ActualRemove(d);
+            }
+            foreach (var f in debugInfo.FunctieVervullingOrphans)
+            {
+                repo.ActualRemove(f);
+            }
+            foreach (var h in debugInfo.HandelsnaamOrphans)
+            {
+                repo.ActualRemove(h);
+            }
+            foreach (var f in debugInfo.SbiActiviteitOrphans)
+            {
+                repo.ActualRemove(f);
+            }
+            foreach (var f in debugInfo.VestigingSbiActiviteitOrphans)
+            {
+                repo.ActualRemove(f);
+            }
+            foreach (var d in debugInfo.VestigingOrphans)
+            {
+                repo.ActualRemove(d);
+            }
+            foreach (var f in debugInfo.SbiCodeOrphans)
+            {
+                repo.ActualRemove(f);
+            }
+            foreach (var i in debugInfo.InschrijvingOrphans)
+            {
+                repo.ActualRemove(i);
+            }
 
             return RedirectToAction("Index");
         }

@@ -51,7 +51,7 @@ $(function () {
         $(this).removeClass('fileupload-processing');
     }).done(function (result) {
         $(this).fileupload('option', 'done')
-            .call(this, null, { result: result });
+            .call(this, $.Event('done'), { result: result });
     });
 });
 
