@@ -1,0 +1,266 @@
+﻿
+CONFIGURATION SETTINGS AND OPTIONS
+Insert only the settings you want to change in your Web.Backload.config file.
+Remarks: The server side Backload handler supports complex storage structures (folders).
+These storage structures can be influenced server and client side. On the server side you can set up root folders (Web.Backload.config), on the client you set up context specific sub-folders (see example below).
+The good thing: You do not have to use all this settings. Just ignore these settings to use the default simple and flat structure. In this case everything is stored within a default folder (file-system:  ~/files)
+
+CLIENT SIDE AND SERVER SIDE SETTINGS
+Server side settings: filesRoot, objectsRoot and content type specific sub-folders (see "Settings and Default Values" below):
+filesRoot is the root folder for all uploads. objectsRoot is a sub-folders an can be ignored if you do not need it.
+Set up content type specific sub folders, if you want to filter and store files of a specific content into separate sub-folders. Example: Store images into an images sub-folders (content-types: images/jpeg, images/png, etc. typeFragment: images/). See also example in the contentTypes section.
+Client side parameters: objectContext and uploadContext (see Example):
+The parameters objectContext and uploadContext are optional client side parameters). You do not have to include them in the request.
+Basically they influence the storage location on the server, regardless if it is a database or folder structure.
+
+Example:
+You want to set up an artist library were users are able to store content (songs, images, videos, other files).
+You want to store the different content in separate sub-folders of a root artist folder, where any content belongs to this specific artist is stored.
+Your servers folder structure: [filesRoot]/[objectsRoot]/[objectContext]/[uploadContext] (e.g. ~/files/artists/michealjackson/videos) where [filesRoot] and [objectsRoot] are set up server side in the Web.Backload.config file.
+ObjectContext will be the artist. It must be a unique name (e.g. michealjackson) or an id. Any uploaded files related to this artist will be stored within a location of this unique id or name.
+UploadContext values are the different content types in this example (e.g. songs, images, videos, other) and result into a sub-folders. 
+The client side parameters (objectContext, uploadContext and fileName) can be send in the URL as a query-string or in the body (form) and will be used by the server side handler to determine the storage location.
+Note: The sub-folders structure can be even more complex: uploadContext supports sub-folders within sub-folders (e.g. /songs/mp3, /songs/wav, etc.). Simply separate the sub-folders by semicolon. Use this example pattern as the value of uploadContext: uploadContext="songs;mp3" or uploadContext="documents;pdf". 
+Note also: You can also set up automatic storage into content type specific sub-folders where Backload stores files based on their content type (e.g. PDF files into a "documents" sub-folders) (see below).
+
+
+SETTINGS AND DEFAULT VALUES (2.2):
+     
+
+     backload:              // Basic settings for the Backload component library. TIP: You do not need to include any of these setting in your web.config or external config file, if these default settings fit your needs. 
+      storageContext:       // Files can be stored in the file system to a cloud storage or to a database [Default: "Filesystem"]
+        Filesystem          // Saves uploaded files in the file system (or SMB/UNC shared folder) [Default]
+        CloudStorage        // Saves uploaded files to a cloud storage and enables the cloud configuration element.
+        Database            // Saves uploaded files to a database and enables the database configuration element.  Supports code-less storage (no application code needed), Entity Framework, SQL FileStreams, SQL FileTables and external file storage (filesystem).
+      eventing              // In your custom code you can bind an handler to events. If this option is set to true, events will be fired [Default="false"].
+      tracing               // Enables tracing support. Note that tracing consumes some system resources and should only be enabled during development or to find errors in production. [Default: false].
+      enableIntegratedHandler	// By default the internal file upload handler is running and ready to receive incoming files or requests. This enables us zero configuration. If you want to set up your own controller in order to do some business logic, set this to "false". [Default: "true"]
+      webFilesRoot          // Obsolete. Use "virtualDirectory" in the FileSystem or database element instead. This attribute will be removed in a future release.
+      uniqueFileNames       // Generates unique file names based on GUIDs [Default: "false"]
+      keepOrgFileNames      // Only applies, if you use the uniqueFileNames option. If set to true, the original file name will be stored (sub-folders: _mappings) [Default: "false"]
+      getInclSubFolders     // On a GET request (return links to uploaded files) only the upload root folder (default filesRoot) is searched for uploaded files. Set to true in order to include sub-folders. (Example: A content-type specific sub-folders is set to "pdffiles" the search will find files within this sub-folders. There are several ways set up sub-folderss, e.g. uploadContext and objectContext) [Default: "false"]
+      returnExtraInfo       // We use this setting, to return internal information for the jQuery File Upload Plugin. If you do not want this, set it to "none" [Default: "basic"]
+      plugin                // Defines the default JSON output format. You can overwrite the JSON output within the OutgoingResponseCreated event. See examples [Default: "Auto"]
+        JQueryFileUpload    // Generates JSON for the jQuery FileUpload Plugin from blueimp [Default].
+        PlUpload            // Generates JSON for PlUpload Plugin from Moxiecode.
+        FineUploader        // Generates JSON for the Fine Uploader from Widen Enterprises
+        Auto                // Send a plugin=[JQueryFileUpload|PlUpload|Custom] query-string (not case sensitive) with your request (Example: plugin=plupload). Because this is request based you can change the JSON output with every AJAX request.
+        Custom              // Does not generate an output before calling the OutgoingResponseCreated event and you have to generate your own output in this event.
+      base64MaxSize         // Max length of a base64 encoded embedded data URL. Only required if a URL pattern is set to return a base64 string in KB (e.g. thumbsUrlPattern="{base64}") [Default="1000" = 1MB].
+      deleteUrlPattern,
+      fileUrlPattern,   
+      thumbsUrlPattern:     // This attribute sets the pattern of the URL returned back to the client in order to download or delete a file. You can use the shortcuts described below. If you do not set this attribute, a direct link is returned by default. If you do not want to return a URL, set this to an empty string or use the shortcut {none} (e.g. thumbsUrlPattern="{none}" [Default (GET):"{url}", Default (DELETE):"{backload}"].
+        [not set],{url}     // If you want a direct link to download the file, do NOT set this value or set the shortcut {url} (e.g. fileUrlPattern="{url}". You do not need to set this value as this is the default for GET requests (DELETE requests: if not set {backload} is the default).
+        [empty],{none}      // If you do not want a URL to be returned for GET or DELETE requests, set this attribute to an empty string or use the shortcut {none} (e.g. fileUrlPattern="").
+        {backload}          // If you want the file to be returned/deleted by the Backload component, set it to the shortcut {backload} (Default for the deleteUrlPattern. An explicit file single file request (GET/DELETE with a filename) will now be handled as any other request by the Backload component. You can use your extensions like you are used to. We added an additional extension for the Get file requests: IGetFileRequest. Backloads internal handler has the following pattern (see below) fileUrlPattern="~/Backload/UploadHandler?{fileName}&{objectContext}&{uploadContext}&{content} (empty values are not send back). "{Backload}" is the default for the deleteUrlPattern.
+        [pattern]           // You can define your own pattern for URLs returned to the client, for example if you want to use your own download handler. 
+                            // Use the shortcuts below (Example: thumbsUrlPattern="http://downloads.myweb.com?file={fileName}&path={full}&preview&foo={query:bar}")
+                            // "~/":            Relative to web root (Replacement example http://localhost/).              
+                            // {name}:          Resolves to name of the file (Example:{name} => somepic.jpg).
+                            // {fileName}:      Resolves to name of the file as a full query (Example:{fileName} => fileName=somepic.jpg).
+                            // {original}:		Resolves to original name of the file (can be used when the name has changed during processing) (Example:{originalName} => originalname.jpg).
+                            // {originalName}:  Resolves to original name of the file (can be used when the name has changed during processing) as a full query (Example:{originalName} => fileName=originalname.jpg).
+                            // {root}:          Resolves to relative root storage folder path (Replacement example: files/uploads/)
+                            // {objectContext}  If you send an objectContext with your request, this will be the value of the objectContext parameter (see examples for more on this)
+                            // {uploadContext}  If you send an uploadContext with your request, this will be the value of the uploadContext parameter(see examples for more on this)
+                            // {content}        For a content type sub-folders, if you set up this feature
+                            // {full}           Shortcut for [root]/[objectContext]/[uploadContext]/[content]/
+                            // {base64}         Encodes the data (bytes) as a base64 string and includes it in the JSON response. Limited to 256 KB file size, switches to {Backload} if bigger. Saves file requests but blows up the JSON output (not deleteUrlPattern).
+                            // {query:all}      If you send custom query-strings along with your request all will be returned in the URL.
+                            // {query:key}      The custom query-string with this key will be returned. (Example: {query:foo} => &foo=bar)
+      xmlns:*, xsi:*        // No custom setting. Used for schema validation and Visual Studio Intellisense.
+
+      <backload storageContext="Filesystem" eventing="false" tracing="true" enableIntegratedHandler="true" uniqueFileNames="false" keepOrgFileNames="false" getInclSubFolders="true" returnExtraInfo="basic" plugin="JQueryFileUpload" deleteUrlPattern="{backload}" filesUrlPattern="{url}" thumbsUrlPattern="{url}" base64MaxSize="1000" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:name="urn:backload-schema" xsi:noNamespaceSchemaLocation="Web.Backload.xsd" >
+
+
+
+
+
+      fileSystem:           // Sets the parameters for the "Filesystem" storage location:
+       filesRoot            // Root upload folder. If the value starts with '~/' (e.g. ~/files) the path is relative to the web application root, otherwise set an absolute local path (e.g. d:\files) and also set a virtual path name in the "virtualDirectory" attribute [Default: "~/Files"]
+       objectsRoot          // Sub-folder within the filesRoot. Set it to objectsRoot="" if you do not need a sub-folders [Default: ""].
+       copiesRoot           // Root of a folder where Backload stores a copy of an uploaded file, if set to a none empty string. If the value is empty ("") not copies are stored. If the value starts with '~/' (e.g. ~/copies) the path is relative to the web root. If the value not starts with '~/' and it isn't an absolute local path, the value will be treated as a sub-folders to filesRoot ('copies' -> ~/files/copies). Otherwise set an absolute local path (e.g. d:/backup) [Default: ""].
+       chunkPathPrefix      // Temporary folder prefix if file chunks are uploaded into the upload folder before they are merged [Default: "$$"].
+       virtualDirectory     // Name of virtual directory in your IIS application to an external storage location (UNC or full file system path). If filesRoot is relative to the web application root (starts with '~/', see filesRoot), you do not need to set this value. If filesRoot is an absolute path, you usually set a virtual path in IIS to this external location. In this case, the virtualDirectory attribute must be set to the name of the virtual path and filesRoot to the external path. Example: If the virtual path is z:\files and the name is "files", set filesRoot="z:\files" and virtualDirectory="/files" [Default: "/"]
+       auxFilesFolder       // Sub-folder for supporting files (previews, mappings, etc). If "auxFilesFolder" is not empty (e.g. auxFilesFolder="_aux") supporting files will be stored in an external path ([filesRoot]\[auxFilesFolder]\). In this case the main upload directories only contain the uploaded files. [Default: ""].
+
+      <fileSystem filesRoot="~/Files" objectsRoot="" copiesRoot="" chunkPathPrefix="$$" auxFilesFolder="" />
+      
+
+
+
+
+      database:             // Provides setting for database configuration. Supports code-less storage (no application code needed), Entity Framework, SQL FileStreams, SQL FileTables and external file storage (file-system).
+       connection           // Name of the database connection (see Web.config). Can also be a connection string.  [Default: "FilesContext"]
+       tableName            // Name of the underlying database table [Default: "Files"].
+       storageMode:         // Defines if files are stored within the database file or as SqlFiieStream. SqlFIleStreams are stored outside of the database file as blob within the file system, but they are managed by the database engine. When using SqlFileStreams, SQL Server and the database must enable the SqlFileStream feature. More info: <a href="https://msdn.microsoft.com/de-de/library/gg471497(v=sql.120).aspx">FILESTREAM (SQL Server)</a>. [Default: "Internal"].
+         Internal           // Files will be stored within the database (default).
+         SqlFileStream      // Files will be stored as SqlFileStream outside of the database file in a file-system directory, but managed by the database engine. This allows us to store very large files. More info: <a href="https://msdn.microsoft.com/de-de/library/gg471497(v=sql.120).aspx">FILESTREAM (SQL Server)</a>. Unlike SqlFileTable, files (blobs) cannot be accessed directly on the file system.
+         SqlFileTable       // Like SqlFileStreams, files will be stored in a SqlFileTable outside of the database file in a file-system directory, but managed by the database engine. This allows us to store very large files. More info: <a href="https://msdn.microsoft.com/de-de/library/ff929144(v=sql.120).aspx">FileTables (SQL Server)</a>. Unlike SqlFileStreams FileTable files can be accessed, created and deleted within the file system as normal file. This allows us for example to copy a file with the explorer to the FileTable's directory in the file system where Sql Server catches the file and manages it. You can also enable a client to directory download the file if you create a virtual path from IIS to the FileTable directory.
+         FileSystem         // Files will be stored on the file-system. A virtual path in the database points to the file.
+       fileTableName        // Name of the SqlFileTable if a SqlFileTable is running on SQL Server. In a SqlFileTable, files will be stored outside of the database file in a file-system directory, but managed by the database engine. This allows to store very large files. In contrast to SqlFileStreams, SqlFileTable files can be accessed, created and deleted directly within the file system as normal files. This allows us for example to copy a file with the explorer to the FileTable's directory in the file system where Sql Server catches the file and manages it. When you create a virtual path in IIS to the FileTable directory in the filesystem, A client can download the files in the SqlFileTable directly from the browser. <a href="https://msdn.microsoft.com/de-de/library/ff929144(v=sql.120).aspx">FileTables (SQL Server)</a>. [Default: "FileTable"].
+       rootPath             // Root path of the file directory when using external file storage (storageMode: SqlFileTable or FileSystem) (SqlFileTable example: "\\Server\SQLEXPRESS\FILES\Uploads\" where "FILES" is the database and "Uploads" is the name of the SqlFileTable.) (FilePath example: z:\Uploads). NOTE: If rootPath is not configured in storageMode "SqlFileTable", rootPath will be automatically retrieved from Sql Server. [Default: "~/Files"]
+       tempFolder           // If set to a none empty string, this setting is used to store file chunks, before the full uploaded file will be stored into the database. If you use chunked file uploads, it is recommend to store the chunks in a temporary directory to get best performance. (Examples: "~/Files/Temp/" (app relative), "z:\dbstorage\temp\" (absolute), "\\server\dbstorage\temp\" (unc)) [Default: ""]
+       columnMapping        // If the data model has different column names than the defaults (e.g. FileId instead of the default Id), a column mapping for column names can be set. Example: columnMapping="{Id=FileId,Name=FileName,Original=OriginalName}". This setting can also be done within the context. See also the database demo package. [Default: ""]
+       virtualDirectory     // Storage mode "SqlFileTable" or "FileSystem" only. This setting is only needed if direct download of files is enabled in the configuration with the setting filesUrlPattern="{url}" (default: {backload}). Note: Direct download of files is only available in the storage modes "SqlFileTable" and "FileSystem", because in these modes files are stored as regular files on the file system. As in standard filesystem storage, VirtualDirectory needs to be set as the name of a virtual directory in IIS or an absolute URL //if the file system to download files is outside the web application (e.g. UNC shares). VirtualDirectory represents the name of virtual path in your IIS application to an external storage location. If filesRoot is relative to the web application root (starts with '~/', see filesRoot), you do not need to set this value. If filesRoot is an absolute path, you usually set a virtual path in IIS to this external location. In this case, the virtualDirectory attribute must be set to the name of the virtual path and filesRoot to the absolute path. Example: If the virtual path is z:\files and the name is "files", set filesRoot="z:\files" and virtualDirectory="/files" [Default: "/"]
+       extension            // Name of the plugin file, e.g. extension="Backload.Plugin.Database.dll". If this is an empty string the extension name will be automatically set to: "Backload.Plugin.Database.dll [Default: "Backload.Plugin.Database.dll"]
+
+      <database connection="FilesContext" tableName="Files" storageMode="Internal" fileTableName="FileTable" rootPath="~/Files" tempFolder="" virtualDirectory="/" columnMapping="" extension="Backload.Plugin.Database.dll" />
+ 
+
+
+
+      
+      cloudStorage:         // Sets the attributes for cloud storage
+       serviceProvider      // Storage service provider. [Default: "AzureBlobStorage]
+	     AzureBlobStorage   // Microsoft Azure Blob storage service
+       extension            // Name of the extension file, e.g. extension="Backload.Plugin.AzureBlobStorage.dll". If this is an empty string the extension name will be automatically set to: "Backload.Plugin.[serviceProvider].dll [Default: ""]
+
+       azureBlobStorage:    // Microsoft Azure Blob storage settings
+         connectionString   // Azure Storage Service connection string name, usually located in the .cscfg file or Web.config. If this is an empty string, the local storage emulator will be used [Default: "StorageConnectionString"]
+           [not set]        // Backload looks for the connection-string "StorageConnectionString" in Azure service definition file (.cscfg) or Web.config
+           [empty], ""]     // Internally resolved to "UseDevelopmentStorage=true". Uses the storage emulator
+           {string}	        // Backload looks for a custom name in the Azure service definition file (.cscfg) or in Web.config
+         uploadContainer    // Name of the files upload container. Example: uploadContainer="files". Must start with a lowercase letter. Automatically created if it doesn't exist [Default: "files"]
+         previewContainer   // Name of the thumbnails container. Example: previewContainer="previews". Must start with a lowercase letter. Automatically created if it doesn't exist [Default: "previews"]
+         accessType:        // Public access type to the uploaded files [Default: "token"]
+           private          // No public access.
+           public           // Anyone with the URL can get or list, but not store or delete files.
+           token            // Ad-hoc shared access signature (SAS). Storage access requires a valid access token. [Default].
+           storedPolicy     // A shared (stored) access policy will be used. Define a name of the stored policy within the storedPolicyName attribute.  Note: Note: Your code is responsible to renew the policy before it expires!
+         storedPolicyName   // If accessType is set to "storedPolicy", this attribute is the name of the shared access policy. Note: Your code is responsible to renew the policy before it expires! [Default: "backload"]
+         tokenExpires       // Sas access type only. Time period (in minutes) before the shared access token expires. [Default: "60"]
+         objectsRoot        // Virtual sub-folders within the uploadContainer. Set it to objectsRoot="" if you do not need a sub-folders [Default: ""]
+         copiesContainer    // Name of a copy container.  [Default: ""]
+         containerCreation  // Sets the container existence checking and auto creation behavior [Default: "auto"]
+           auto             // Container existence is verified on first access, created it if necessary, after that assumed that the container exists (Default).
+           always           // Verify container existence on every request and try to create it if it not exists.
+           never            // No checks for container existence. The containers (files, previews, [archives]) must be available (pre-created) on a request.
+
+      <cloudStorage serviceProvider="AzureBlobStorage" extension="">
+        <azureBlobStorage connectionString="StorageConnectionString" uploadContainer="uploads" accessType="token" storedPolicyName="backload" tokenExpires="60" objectsRoot="" copiesContainer="" containerCreation="auto" />
+      </cloudStorage>
+
+
+
+
+
+      security:             // Security related settings. By default there are no restrictions. If you need a deeper control, set up your own controller to receive the request, do the authentication/authorization and then call the handler.
+       forceObjectContext   // A request must always include an none empty objectContext parameter (query or form) to be valid. If you use "objectContext" to store/retrieve user related files, a malicious request could reveal some other users files, if forceObjectContext is false [Default:"false"]
+       allowAnonymous       // True: Anyone is allowed, false: The user must be authenticated [Default: "true"]
+       allowedDownloadRole  // By default there are no restrictions on who can download files by a GET request. You can change this by adding a comma separated list of roles [Default: "*"]
+       allowedUploadRoles   // By default there are no restrictions on who can upload files within a POST/PUT request. You can change this by adding a comma separated list of roles [Default: "*"]
+       allowedDeleteRoles   // By default there are no restrictions on who can delete files by a DELETE request. You can change this by adding a comma separated list of roles [Default: "*"]
+      
+	   cors:                // Enables/disables and configures CROSS-ORIGIN RESOURCE SHARING (CORS). CORS is used in environments, where file requests (e.g. GET) come from different domains (e.g. client: http://www.yourwebsite.com, Backload: http://fileservice.com/Backload/Filehandler).
+         enabled            // To enable CORS requests set this attribute to true [Default=°false°]
+         allowedDomains     // Comma-separated list of allowed domains for client side requests or "*" to allow all client side CORS requests. Example: allowedOrigin="http://www.myservice.com". [Default="*"]
+         allowedMethods     // Comma-separated list of allowed HTTP methods. [Default="GET,POST,DELETE"]
+         allowedHeaders     // Comma-separated list of allowed (none simple) headers. [Default=""]
+         credentials        // Specifies if a request should send credentials by setting credentials="true" [Default="false"]
+         maxAge             // Validity period of CORS permission settings (in seconds) before the client makes a new request for permissions. Note: Not all clients use this value [Default="36000"]
+
+      <security forceObjectContext="false" allowAnonymous="true" allowedDownloadRoles="*" allowedUploadRoles="*" allowedDeleteRoles="*">
+        <cors enabled="false" allowedDomains="*" allowedMethods="GET,POST,DELETE" allowedHeaders="" credentials="false" />
+      </security>
+      
+      
+      	
+
+
+      images, thumbnails:   // Image and thumbnail settings
+       width                // Width or max width (depends on resizeMode) of the resulting image [images range: 1-100000, Default: "1024"; thumbnails range: 1-1000, Default: "80"]
+       height               // Height or max height (depends on resizeMode) of the resulting image [images range: 1-100000, Default: "768"; thumbnails range: 1-1000, Default: "60"]
+       dpi                  // Resolution of the resulting image (dots per inch) [Range: 1-2400, Default: "96"]
+       canvasColor          // Background color of the canvas. Only used when resize mode is fit and the image ratio of the source and target image differ. You can also use argb (rgb with alpha channel, e.g. background: #00ffffff (transparent), #80ffffff (white, 50% transparency), #ffffffff (white, opaque)) [Default: #ffffff]
+       maxFileSize          // Images only: Max file size (bytes) of an image to be processed by the image processing sub pipeline. If the file size is bigger, the image is stored directly bypassing image processing [Default: "0" (unlimited)].
+       forceImageType:      // Images only: By default the image type of the original image is used. Set this attribute to always output a different type (e.g. image/png or image/jpeg [Default: none])
+         none               // Use the original image type
+         image/png          // Files with .png (portable network graphics) extension
+         image/jpeg         // Files with .jpeg or .jpg extension
+         image/tiff         // Files with .tif or .tiff extension
+         image/gif          // Files with .gif extension
+         image/bmp          // Microsoft Bitmap format
+		 image/vnd.ms-photo // JPEG XR (extended range, formerly MS Photo) format
+       resizeMode:          // [Default: "none"]
+         none               // Keep original image, no resizing or cropping
+         ratio              // No Canvas, preserves ratio, width and height are max sizes, smaller images are upscaled
+         maxratio           // Same as ratio, but smaller images are not upscaled.
+         fit                // Fit into canvas, preserves ratio, centered on canvas
+         place              // If the source image is bigger than the canvas same as fit. If it is smaller than the canvas, it will be placed in the center of the canvas without resizing
+         crop               // Placed on canvas, cropped if necessary with center of the original image
+       fastProcessing       // Enables/disables faster image processing for non-canvas transformations (e.g. ratio) or for images that are bigger than canvas. [Default: "true"]
+       watermark            // Images only: Optional watermark image if images are uploaded. Example: watermark="~/Backload/Imaging/watermark.png". [Default: "" (no watermark)].
+       background           // Images only: Optional background image if images are placed or fit onto a canvas. Example: background="~/Backload/Imaging/background.png". [Default: "" (no background image)].
+       watermarkPosition:   // Images only: Vertical position of a watermark to be placed on an image[Default: "center"]
+         top                // Top position
+         center             // Center position
+         bottom             // Bottom position
+        imageType           // Thumbnails only: Thumbnail images must all have the same image type in order the upload handler can find and return the correct thumbnail path [Default: "image/png"]
+        path                // Thumbnails only: Location of the thumbnail sub-folders within the folder where the main file is stored. Set to an empty string (path="") to avoid physical storage. [Default: "_thumbs"]<
+	    store               // Thumbnail only: If set to "true" (default), preview images are stored physically. If this attribute is set to false and you request preview images (e.g. in a plugin UI) thumbnails have to be created on every request. If you usually use preview images it is recommed to set this attribute to "true". [Default: "true"]
+
+      <images width="1024" height="768" dpi="96" canvasColor="#ffffffff" forceImageType="none" resizeMode="none" maxFileSize="0" background="" watermark="", watermarkPosition="center" />     
+      <thumbnails store="true" path="_thumbs" width="80" height="60" dpi="96" canvasColor="#ffffffff" resizeMode="place" imageType="image/png" />     
+      
+      
+      
+
+
+      clientFiles:          // If the bundling feature is used (@Render.Scripts(), @Render.Styles()), set the appropriate files folder. TIP: Don't forget to register the bundling feature in the global.asax. See example project.
+        scripts             // Scripts folder [Default: "~/Backload/Client"]
+        styles              // Styles folder [Default: "~/Backload/Client"]
+
+      <clientFiles scripts="~/Backload/Client" styles="~/Backload/Client" />
+      
+      
+      
+
+
+      cacheManager:         // Adds cache headers to the response if enabled, and returns a HTTP status 304 (Not Modified), if no files have been uploaded or deleted since the last request. Note: If you manually or by a different application change files, don't use "lastModified=true", because only requests within Backload's pipeline will be recognized.
+       lastModified         // If true, includes a Last-Modified header in the response and returns a 304 (Not Modified) if no files where uploaded or deleted since the last request. [Default="false"]
+       etag                 // If true, a ETag is returned in the response on a single file request. In the next request for this file a 304 is returned, if the file has not been modified. [Default="false"]
+       expires              // Adds an Expires header to the response, if the value is not 0 (seconds). Example: useExpires="3600" (adds 1 hour to the Expires header) [Default="0"]
+       location             // Adds a Cache-Control header to the response (Please refer to the System.Web.HttpCacheability enumeration for more info) [Default="ServerAndPrivate"]
+       mustRevalidate       // Sets "must-revalidate" within the Cache-Control header. Caches (e.g. Browser, Proxy) are forced to validate if the request has changed [Default="true"].
+
+      <cacheManager lastModified="false" etag="false" expires="0" location="ServerAndPrivate" mustRevalidate="true" />
+      
+  
+    
+
+
+      contentTypes:         // Adds a new content type definition to the configuration.
+        thumbnailPath       // Path to the content type thumbnails. [Default: "~/Backload/ContentTypes"]
+        thumbnailSize       // Content type thumbnail size [Default: "64"] 
+        useThumbnailCanvas  // Places the thumbnail on a canvas, so it has the same size than image thumbnails [Default: "true"]
+
+        contentType:        // Defines a new content type or overrides an existing type
+                            // New contentType entry (MS Office, OpenOffice, PDF, Textfile are included by default. No need to include these anymore):
+                            // Use <clear /> to clear all preexisting entries, use <remove name="[entrynmae]" /> to remove a specific entry (Example: <remove name="_AdobePDFFile" /> to remove the predefined PDF type).
+                            // Pre-defined type names: _AdobePDFFile, _MSExcel2003, _MSExcel2012, _MSPowerpoint2003, _MSPowerpoint2012, _MSWord2003, _MSWord2012, _OpenOfficeWriter, _TextFile. 
+                            // Remarks: _MSxxxx2012 includes all file types from 2007 to 2012 office versions.  _MSxxxx2003 includes all file types up to the 2003 office version.
+          name              // A unique name of the entry
+          extFragment       // Complete or fragment of the file extension as RegEx string (e.g. .mp finds .mp3, .mp4, .mpeg, etc). Leave it blank, to skip this test.
+          typeFragment      // Complete or fragment of the content-type as RegEx string (e.g. "mpeg" audio/mpeg, video/mpeg, etc). Leave it blank, to skip this test. Content-types matches are preferred over extension matches.
+          thumbnail         // Name of the thumbnail image within the content-types thumbnail folder. Special handling of images: Leave it blank, to send a preview of the uploaded image back, or set a thumbnail if you do not want to return a preview.
+          sub-folders       // Sub-folder of the object context folder. Has to be set only if files of this content-type should be stored separately from other types (e.g. "movies"). [Default: ""]
+
+          <clear />         // Deletes all predefined types -->
+          <remove name="..."/>	// Removes the type handling for a specific content type. Example: <remove name="_AdobePDFFile"/> -->
+
+      <contentTypes thumbnailPath="~/Backload/ContentTypes" thumbnailSize="64" useThumbnailCanvas="true">
+        <remove name="_AdobePDFFile"/> // Remove predefined PDF type handling
+        <add name="SamplePDFFiles" extFragment=".pdf" typeFragment="application/pdf" thumbnail="PDF.png" subFolder="pdfs" /> // Add special type handling for PDF files. Sub-folder will be created, if it doesn't exist
+        <add name="SampleAllImageFiles" extFragment="" typeFragment="image/" thumbnail="" subFolder="images" /> // Add special content type handling for all image types and store them in a image sub-folders. This folder will be automatically created if it doesn't exist. The attribute thumbnail is set to an empty string, so that an image preview will be returned (otherwise a static image)
+      </contentTypes>
+
+
+
+
+
+      license:              // Provided license data for Pro/Enterprise editions only
+        licensee:           // Provided licensee value (usually email address). Obligatory field in the paid editions.
+        licenseKey:         // Provided license key. Obligatory field in the paid editions.
+
+      <license licensee="someone@company.com" licenseKey="{some valid key}" />

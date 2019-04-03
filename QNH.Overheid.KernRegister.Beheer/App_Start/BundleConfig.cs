@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Backload.Bundles;
+using System.Web;
 using System.Web.Optimization;
 
 namespace QNH.Overheid.KernRegister.Beheer
@@ -8,6 +9,9 @@ namespace QNH.Overheid.KernRegister.Beheer
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
+            // Add or remove this line for the bundeling feature
+            BackloadBundles.RegisterBundles(bundles);
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

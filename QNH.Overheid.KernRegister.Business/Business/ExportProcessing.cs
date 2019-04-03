@@ -61,8 +61,8 @@ namespace QNH.Overheid.KernRegister.Business.Business
                         msg =
                             $"Er ging wat mis bij het updaten van de export record voor KVK register database KVK nummer {inschrijvingCsvRecord.kvknummer}";
                         logger.Warn(msg);
-                        logger.ErrorException(
-                            $"Error while updating KVKNummer = {inschrijving.KvkNummer} Naam = {inschrijving.InschrijvingNaam} Check the exception", ex);
+                        logger.Error(ex,
+                            $"Error while updating KVKNummer = {inschrijving.KvkNummer} Naam = {inschrijving.InschrijvingNaam} Check the exception");
                     }
 
                     if (exportResult != null)
@@ -168,8 +168,8 @@ namespace QNH.Overheid.KernRegister.Business.Business
                         msg =
                             $"Er ging wat mis bij het inserten van de export record voor KVK register database KVK nummer {inschrijvingCsvRecord.kvknummer}";
                         logger.Warn(msg);
-                        logger.ErrorException(
-                            $"Error while inserting KVKNummer = {inschrijving.KvkNummer} Naam = {inschrijving.InschrijvingNaam} Check the exception", ex); // inschrijving.Naam
+                        logger.Error(ex,
+                            $"Error while inserting KVKNummer = {inschrijving.KvkNummer} Naam = {inschrijving.InschrijvingNaam} Check the exception"); // inschrijving.Naam
                     }
 
                     if (exportResult != null)
