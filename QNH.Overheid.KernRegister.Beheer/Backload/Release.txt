@@ -1,0 +1,48 @@
+﻿What's new in release 2.2.7 (ASP.NET Core Edition)?
+- Added bundled and minified client side script and style files and
+- Removed ASP.NET server side bundling (depreciated in ASP.NET Core 1.0)
+- Added server side event ConfigurationLoaded (First event in execution pipeline)
+- Removed Web.config component registration for all target platforms (obsolete in ASP.NEt Core 1.0 projects)
+- Image processing supports EXIF orientation tag
+- Added fastProcessing config setting in images element
+
+Bug fixes:
+- Image processing failed to create non canvas images (#107)
+- Fixed: Content type changes in config had no effect
+- Linux and Mac Os X: Path not created correctly (2.2.6).
+
+
+
+Release 2.2:
+
+- Azure Blob Storage support
+- Native Database support (incl. EF, FileStream, FileTable, FileSystem storage)
+- Support for request based configuration settings
+- Supporting files (like previews) can be stored in a seperate path
+
+Bug fixes:
+- GetInclSubfolder setting problem fixed
+
+
+
+
+==========================================================================================================
+
+Important migration notes (from releases < 2.0):
+
+- Event handler: If you attached to events, FileUploadStatus and FileUploadStatusItem have been renamed to:
+  FileStatus and FileStatusItem in the namespace Backload.Contracts.Status. In your event handlers you must
+  change the interface names and namespaces.
+
+- Configuration: New Web.Backload.xsd schema file must be referenced in the Web.Backload.config file.
+
+- Web.config: The version of the Backload section must be set from 1.9 to 2:
+  <section name="backload" type="Backload.Configuration.BackloadSection, Backload, Version=2, ... />  
+
+- Javascript: The controller has a new path: /Backload/FileHandler.
+
+- JQuery File Upload Plugin (Views): Release 2.0 uses the new Json field names introduced recently in 
+  the Client side plugin from bluimp: e.g. delete_url -> deleteUrl, thumbnail_url -> thumbnailUrl, delete_type -> deleteType, etc.
+
+- Bundeling: New bundle naming schema (~/Backload/Bundles/BackloadBundles.cs). Example: "~/backload/blueimp/bootstrap/BasicPlusUI" 
+  for the jQuery File Upload Plugin: Basic Plus UI theme.

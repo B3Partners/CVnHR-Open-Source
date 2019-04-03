@@ -240,7 +240,7 @@ QNH.Overheid.KernRegister.BatchProcess
                 }
                 catch (FaultException ex)
                 {
-                    _logger.ErrorException("Error for number: " + nummer, ex);
+                    _logger.Error(ex, "Error for number: " + nummer);
                     Console.WriteLine("Error for number: " + nummer + " -> check the log file.");
                     lock (_errorsLock)
                     {
@@ -250,7 +250,7 @@ QNH.Overheid.KernRegister.BatchProcess
                 }
                 catch (Exception ex)
                 {
-                    _logger.ErrorException("Error for number: " + nummer, ex);
+                    _logger.Error(ex, "Error for number: " + nummer);
                     Console.WriteLine("Error for number: " + nummer + " -> check the log file.");
                     lock (_errorsLock)
                     {
@@ -313,7 +313,7 @@ QNH.Overheid.KernRegister.BatchProcess
             }
             catch (Exception ex)
             {
-                _logger.FatalException("Something went wrong, application will exit", ex);
+                _logger.Fatal(ex, "Something went wrong, application will exit");
                 Console.WriteLine("Something went wrong. Application exits. Check log for exception");
                 Environment.Exit(-1);
             }

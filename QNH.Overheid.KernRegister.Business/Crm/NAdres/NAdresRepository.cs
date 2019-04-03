@@ -304,7 +304,7 @@ namespace QNH.Overheid.KernRegister.Business.Crm.nAdres
                 }
                 catch (Exception ex)
                 {
-                    _logger.ErrorException("Error at vestigingId: " + vestigingId + " and relId: " + bedrijfsNr + "!", ex);
+                    _logger.Error(ex, "Error at vestigingId: " + vestigingId + " and relId: " + bedrijfsNr + "!");
                     var msg =
                         $"Fout bij vestiging voor BEDRIJFSNR {bedrijfsNr} en vestigingsNummer {vestigingId}: {ex.Message}";
                     functionalLogger.Error(msg);
@@ -444,7 +444,7 @@ namespace QNH.Overheid.KernRegister.Business.Crm.nAdres
                 }
                 catch (Exception ex)
                 {
-                    _logger.ErrorException("Error on executing update query", ex);
+                    _logger.Error(ex, "Error on executing update query");
                 }
 
                 if (updateSuccess)

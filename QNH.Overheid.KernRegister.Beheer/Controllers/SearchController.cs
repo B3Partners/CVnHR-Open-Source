@@ -75,7 +75,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             }
             catch (Exception ex)
             {
-                logger.ErrorException("Something went wrong while searching for Inschrijving with kvknummer: " + kvkNummer, ex);
+                logger.Error(ex, "Something went wrong while searching for Inschrijving with kvknummer: " + kvkNummer);
 
                 return View(new KvkSearch
                 {

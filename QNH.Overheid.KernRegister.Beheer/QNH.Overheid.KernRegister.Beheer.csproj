@@ -53,13 +53,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Backload, Version=1.9.3.7, Culture=neutral, PublicKeyToken=02eaf42ab375d363, processorArchitecture=MSIL">
-      <HintPath>..\packages\Backload.1.9.3.8\lib\net45\Backload.dll</HintPath>
+    <Reference Include="Backload, Version=2.2.7.0, Culture=neutral, PublicKeyToken=02eaf42ab375d363, processorArchitecture=MSIL">
+      <HintPath>..\packages\Backload.Core.2.2.7\lib\net45\Backload.dll</HintPath>
     </Reference>
-    <Reference Include="Backload.Contracts, Version=1.9.3.7, Culture=neutral, PublicKeyToken=079b4834180abdf7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Backload.1.9.3.8\lib\net45\Backload.Contracts.dll</HintPath>
+    <Reference Include="Backload.Contracts, Version=2.2.7.0, Culture=neutral, PublicKeyToken=079b4834180abdf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Backload.Core.2.2.7\lib\net45\Backload.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
@@ -94,8 +94,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+    <Reference Include="FluentNHibernate, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.1.2\lib\net461\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
@@ -128,6 +128,15 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=59d6d24383174ac4, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocation.1.0.0\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.7\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
     </Reference>
@@ -137,8 +146,8 @@
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.3.2.7\lib\net45\Microsoft.Web.WebPages.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.8.7.0, Culture=neutral, PublicKeyToken=c416bc1b32d97233, processorArchitecture=MSIL">
-      <HintPath>..\packages\TaskScheduler.2.8.7\lib\net452\Microsoft.Win32.TaskScheduler.dll</HintPath>
+    <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.8.8.0, Culture=neutral, PublicKeyToken=c416bc1b32d97233, processorArchitecture=MSIL">
+      <HintPath>..\packages\TaskScheduler.2.8.8\lib\net452\Microsoft.Win32.TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.10.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.10.1\lib\net45\Moq.dll</HintPath>
@@ -146,17 +155,17 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=5.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.2.5\lib\net461\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.5.11\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.6.2\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql, Version=4.0.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.0.4\lib\net451\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Oracle.ManagedDataAccess.18.3.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <HintPath>..\packages\Oracle.ManagedDataAccess.18.6.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -164,11 +173,17 @@
     <Reference Include="Polly, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
       <HintPath>..\packages\Polly.6.1.2\lib\netstandard2.0\Polly.dll</HintPath>
     </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StructureMap.4.7.0\lib\net45\StructureMap.dll</HintPath>
+      <HintPath>..\packages\StructureMap.4.7.1\lib\net45\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.web.4.0.0.315\lib\net40\StructureMap.Web.dll</HintPath>
@@ -185,6 +200,7 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
@@ -196,8 +212,8 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -270,7 +286,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
-    <Compile Include="App_Start\BackloadConfig.cs" />
     <Compile Include="App_Start\BootstrapBundleConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\CultureConfig.cs" />
@@ -279,6 +294,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Backload\Bundles\BackloadBundles.cs" />
+    <Compile Include="Backload\Controller\BackloadController.cs" />
+    <Compile Include="Backload\Controller\BackloadController.obsolete.cs" />
+    <Compile Include="Backload\Helper\ResultCreator.Classic.cs" />
+    <Compile Include="Backload\Helper\ResultCreator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\SignaalController.cs" />
     <Compile Include="Controllers\BrmoController.cs" />
@@ -388,86 +408,173 @@
     <Content Include="Backload\Client\blueimp\loadimage\js\vendor\jquery.Jcrop.js" />
     <Content Include="Backload\Client\blueimp\templates\js\tmpl.js" />
     <Content Include="Backload\Client\blueimp\templates\js\tmpl.min.js" />
-    <Content Include="Content\Backload\content-types\128\Excel.png" />
-    <Content Include="Content\Backload\content-types\128\File.png" />
-    <Content Include="Content\Backload\content-types\128\FileNotFound.png" />
-    <Content Include="Content\Backload\content-types\128\Image.png" />
-    <Content Include="Content\Backload\content-types\128\Multimedia.png" />
-    <Content Include="Content\Backload\content-types\128\OpenOffice-Writer.png" />
-    <Content Include="Content\Backload\content-types\128\PDF.png" />
-    <Content Include="Content\Backload\content-types\128\PowerPoint.png" />
-    <Content Include="Content\Backload\content-types\128\Text.png" />
-    <Content Include="Content\Backload\content-types\128\Word.png" />
-    <Content Include="Content\Backload\content-types\16\Excel.png" />
-    <Content Include="Content\Backload\content-types\16\File.png" />
-    <Content Include="Content\Backload\content-types\16\FileNotFound.png" />
-    <Content Include="Content\Backload\content-types\16\Image.png" />
-    <Content Include="Content\Backload\content-types\16\Multimedia.png" />
-    <Content Include="Content\Backload\content-types\16\OpenOffice-Writer.png" />
-    <Content Include="Content\Backload\content-types\16\PDF.png" />
-    <Content Include="Content\Backload\content-types\16\PowerPoint.png" />
-    <Content Include="Content\Backload\content-types\16\Text.png" />
-    <Content Include="Content\Backload\content-types\16\Word.png" />
-    <Content Include="Content\Backload\content-types\24\Excel.png" />
-    <Content Include="Content\Backload\content-types\24\File.png" />
-    <Content Include="Content\Backload\content-types\24\FileNotFound.png" />
-    <Content Include="Content\Backload\content-types\24\Image.png" />
-    <Content Include="Content\Backload\content-types\24\Multimedia.png" />
-    <Content Include="Content\Backload\content-types\24\OpenOffice-Writer.png" />
-    <Content Include="Content\Backload\content-types\24\PDF.png" />
-    <Content Include="Content\Backload\content-types\24\PowerPoint.png" />
-    <Content Include="Content\Backload\content-types\24\Text.png" />
-    <Content Include="Content\Backload\content-types\24\Word.png" />
-    <Content Include="Content\Backload\content-types\32\Excel.png" />
-    <Content Include="Content\Backload\content-types\32\File.png" />
-    <Content Include="Content\Backload\content-types\32\FileNotFound.png" />
-    <Content Include="Content\Backload\content-types\32\Image.png" />
-    <Content Include="Content\Backload\content-types\32\Multimedia.png" />
-    <Content Include="Content\Backload\content-types\32\OpenOffice-Writer.png" />
-    <Content Include="Content\Backload\content-types\32\PDF.png" />
-    <Content Include="Content\Backload\content-types\32\PowerPoint.png" />
-    <Content Include="Content\Backload\content-types\32\Text.png" />
-    <Content Include="Content\Backload\content-types\32\Word.png" />
-    <Content Include="Content\Backload\content-types\48\Excel.png" />
-    <Content Include="Content\Backload\content-types\48\File.png" />
-    <Content Include="Content\Backload\content-types\48\FileNotFound.png" />
-    <Content Include="Content\Backload\content-types\48\Image.png" />
-    <Content Include="Content\Backload\content-types\48\Multimedia.png" />
-    <Content Include="Content\Backload\content-types\48\OpenOffice-Writer.png" />
-    <Content Include="Content\Backload\content-types\48\PDF.png" />
-    <Content Include="Content\Backload\content-types\48\PowerPoint.png" />
-    <Content Include="Content\Backload\content-types\48\Text.png" />
-    <Content Include="Content\Backload\content-types\48\Word.png" />
-    <Content Include="Content\Backload\content-types\64\Excel.png" />
-    <Content Include="Content\Backload\content-types\64\File.png" />
-    <Content Include="Content\Backload\content-types\64\FileNotFound.png" />
-    <Content Include="Content\Backload\content-types\64\Image.png" />
-    <Content Include="Content\Backload\content-types\64\Multimedia.png" />
-    <Content Include="Content\Backload\content-types\64\OpenOffice-Writer.png" />
-    <Content Include="Content\Backload\content-types\64\PDF.png" />
-    <Content Include="Content\Backload\content-types\64\PowerPoint.png" />
-    <Content Include="Content\Backload\content-types\64\Text.png" />
-    <Content Include="Content\Backload\content-types\64\Word.png" />
-    <Content Include="Content\Backload\content-types\72\Excel.png" />
-    <Content Include="Content\Backload\content-types\72\File.png" />
-    <Content Include="Content\Backload\content-types\72\FileNotFound.png" />
-    <Content Include="Content\Backload\content-types\72\Image.png" />
-    <Content Include="Content\Backload\content-types\72\Multimedia.png" />
-    <Content Include="Content\Backload\content-types\72\OpenOffice-Writer.png" />
-    <Content Include="Content\Backload\content-types\72\PDF.png" />
-    <Content Include="Content\Backload\content-types\72\PowerPoint.png" />
-    <Content Include="Content\Backload\content-types\72\Text.png" />
-    <Content Include="Content\Backload\content-types\72\Word.png" />
-    <Content Include="Content\Backload\content-types\96\Excel.png" />
-    <Content Include="Content\Backload\content-types\96\File.png" />
-    <Content Include="Content\Backload\content-types\96\FileNotFound.png" />
-    <Content Include="Content\Backload\content-types\96\Image.png" />
-    <Content Include="Content\Backload\content-types\96\Multimedia.png" />
-    <Content Include="Content\Backload\content-types\96\OpenOffice-Writer.png" />
-    <Content Include="Content\Backload\content-types\96\PDF.png" />
-    <Content Include="Content\Backload\content-types\96\PowerPoint.png" />
-    <Content Include="Content\Backload\content-types\96\Text.png" />
-    <Content Include="Content\Backload\content-types\96\Word.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ar.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\az.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\bg.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\bs.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ca.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\cs.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\cy.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\da.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\de.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\el.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\en.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\es.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\et.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\fa.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\fi.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\fr.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\he.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\hr.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\hu.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\hy.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\id.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\it.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ja.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ka.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\kk.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\km.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ko.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ku_IQ.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\lt.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\lv.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\mn.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ms.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\nl.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\pl.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\pt_BR.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ro.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ru.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sk.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sq.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sr.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sr_RS.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sv.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\th_TH.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\tr.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\uk_UA.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\vi.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\zh_CN.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\zh_TW.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\css\jquery.plupload.queue.css" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\backgrounds.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\buttons-disabled.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\buttons.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\delete.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\done.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\error.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\throbber.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\transp50.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\jquery.plupload.queue.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\jquery.plupload.queue.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\css\jquery.ui.plupload.css" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\img\loading.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\img\plupload.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\jquery.ui.plupload.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\jquery.ui.plupload.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\moxie.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\moxie.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\Moxie.swf" />
+    <Content Include="Backload\Client\moxie\plupload\js\plupload.dev.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\plupload.full.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\plupload.min.js" />
+    <Content Include="Backload\Client\widen\fineuploader\continue.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\edit.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\fine-uploader-gallery.min.css" />
+    <Content Include="Backload\Client\widen\fineuploader\fine-uploader-new.min.css" />
+    <Content Include="Backload\Client\widen\fineuploader\js\fine-uploader.min.js" />
+    <Content Include="Backload\Client\widen\fineuploader\loading.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\pause.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\placeholders\not_available-generic.png" />
+    <Content Include="Backload\Client\widen\fineuploader\placeholders\waiting-generic.png" />
+    <Content Include="Backload\Client\widen\fineuploader\processing.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\retry.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\templates\fine-uploader-gallery.template.js" />
+    <Content Include="Backload\Client\widen\fineuploader\trash.gif" />
+    <Content Include="Backload\Config\_Defaults\Defaults.txt" />
+    <Content Include="Backload\ContentTypes\128\Excel.png" />
+    <Content Include="Backload\ContentTypes\128\File.png" />
+    <Content Include="Backload\ContentTypes\128\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\128\Image.png" />
+    <Content Include="Backload\ContentTypes\128\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\128\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\128\PDF.png" />
+    <Content Include="Backload\ContentTypes\128\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\128\Text.png" />
+    <Content Include="Backload\ContentTypes\128\Word.png" />
+    <Content Include="Backload\ContentTypes\16\Excel.png" />
+    <Content Include="Backload\ContentTypes\16\File.png" />
+    <Content Include="Backload\ContentTypes\16\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\16\Image.png" />
+    <Content Include="Backload\ContentTypes\16\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\16\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\16\PDF.png" />
+    <Content Include="Backload\ContentTypes\16\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\16\Text.png" />
+    <Content Include="Backload\ContentTypes\16\Word.png" />
+    <Content Include="Backload\ContentTypes\24\Excel.png" />
+    <Content Include="Backload\ContentTypes\24\File.png" />
+    <Content Include="Backload\ContentTypes\24\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\24\Image.png" />
+    <Content Include="Backload\ContentTypes\24\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\24\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\24\PDF.png" />
+    <Content Include="Backload\ContentTypes\24\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\24\Text.png" />
+    <Content Include="Backload\ContentTypes\24\Word.png" />
+    <Content Include="Backload\ContentTypes\32\Excel.png" />
+    <Content Include="Backload\ContentTypes\32\File.png" />
+    <Content Include="Backload\ContentTypes\32\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\32\Image.png" />
+    <Content Include="Backload\ContentTypes\32\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\32\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\32\PDF.png" />
+    <Content Include="Backload\ContentTypes\32\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\32\Text.png" />
+    <Content Include="Backload\ContentTypes\32\Word.png" />
+    <Content Include="Backload\ContentTypes\48\Excel.png" />
+    <Content Include="Backload\ContentTypes\48\File.png" />
+    <Content Include="Backload\ContentTypes\48\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\48\Image.png" />
+    <Content Include="Backload\ContentTypes\48\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\48\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\48\PDF.png" />
+    <Content Include="Backload\ContentTypes\48\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\48\Text.png" />
+    <Content Include="Backload\ContentTypes\48\Word.png" />
+    <Content Include="Backload\ContentTypes\64\Excel.png" />
+    <Content Include="Backload\ContentTypes\64\File.png" />
+    <Content Include="Backload\ContentTypes\64\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\64\Image.png" />
+    <Content Include="Backload\ContentTypes\64\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\64\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\64\PDF.png" />
+    <Content Include="Backload\ContentTypes\64\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\64\Text.png" />
+    <Content Include="Backload\ContentTypes\64\Word.png" />
+    <Content Include="Backload\ContentTypes\72\Excel.png" />
+    <Content Include="Backload\ContentTypes\72\File.png" />
+    <Content Include="Backload\ContentTypes\72\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\72\Image.png" />
+    <Content Include="Backload\ContentTypes\72\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\72\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\72\PDF.png" />
+    <Content Include="Backload\ContentTypes\72\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\72\Text.png" />
+    <Content Include="Backload\ContentTypes\72\Word.png" />
+    <Content Include="Backload\ContentTypes\96\Excel.png" />
+    <Content Include="Backload\ContentTypes\96\File.png" />
+    <Content Include="Backload\ContentTypes\96\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\96\Image.png" />
+    <Content Include="Backload\ContentTypes\96\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\96\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\96\PDF.png" />
+    <Content Include="Backload\ContentTypes\96\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\96\Text.png" />
+    <Content Include="Backload\ContentTypes\96\Word.png" />
+    <Content Include="Backload\Imaging\readme.txt" />
+    <Content Include="Backload\License.txt" />
+    <Content Include="Backload\Release.txt" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -559,9 +666,6 @@
     </Compile>
     <Content Include="App_Code\TaskSchedulerScript.cshtml" />
     <Content Include="App_Code\BackButton.cshtml" />
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -581,6 +685,12 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Backload\Logs\log.folder" />
+    <Content Include="Backload\Client\moxie\plupload\js\Moxie.xap" />
+    <None Include="Backload\Config\Web.Backload.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Backload\Web.Backload.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -601,7 +711,6 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\AccessDenied.cshtml" />
-    <Content Include="Views\Brmo\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -634,10 +743,6 @@
     <Content Include="Backload\Client\blueimp\fileupload\package.json" />
     <Content Include="Backload\Client\blueimp\blob\package.json" />
     <Content Include="App_Browsers\qt.browser" />
-    <None Include="Web.Backload.Default.config" />
-    <None Include="Web.Backload.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -800,26 +905,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\SQL\" />
-    <Folder Include="Backload\Client\moxie\plupload\js\i18n\" />
-    <Folder Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\css\" />
-    <Folder Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\" />
-    <Folder Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\css\" />
-    <Folder Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\img\" />
-    <Folder Include="Backload\Client\widen\fineuploader\js\" />
-    <Folder Include="Backload\Client\widen\fineuploader\placeholders\" />
-    <Folder Include="Backload\Client\widen\fineuploader\templates\" />
-    <Folder Include="Backload\Config\_Defaults\" />
-    <Folder Include="Backload\ContentTypes\128\" />
-    <Folder Include="Backload\ContentTypes\16\" />
-    <Folder Include="Backload\ContentTypes\24\" />
-    <Folder Include="Backload\ContentTypes\32\" />
-    <Folder Include="Backload\ContentTypes\48\" />
-    <Folder Include="Backload\ContentTypes\64\" />
-    <Folder Include="Backload\ContentTypes\72\" />
-    <Folder Include="Backload\ContentTypes\96\" />
-    <Folder Include="Backload\Controller\" />
-    <Folder Include="Backload\Helper\" />
-    <Folder Include="Backload\Imaging\" />
     <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
