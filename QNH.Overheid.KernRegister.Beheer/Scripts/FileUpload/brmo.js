@@ -1,47 +1,4 @@
-﻿
-$(function () {
-    'use strict';
-
-    var url = 'Backload/UploadHandler?objectContext=brmo';
-    // Initialize the jQuery File Upload widget:
-    $('#fileupload').fileupload({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: url,
-        acceptFileTypes: /(csv)$/i
-    });
-
-    // Enable iframe cross-domain access via redirect option:
-    $('#fileupload').fileupload(
-        'option',
-        'redirect',
-        window.location.href.replace(
-            /\/[^\/]*$/,
-            '/cors/result.html?%s'
-        )
-    );
-
-    // Load existing files by an initial ajax request to the server after page loads up
-    // This is done by a simple jQuery ajax call, not by the FIle Upload plugin.,
-    // but the results are passed to the plugin with the help of the context parameter: 
-    // context: $('#fileupload')[0] and the $(this)... call in the done handler. 
-    // With ajax.context you can pass a JQuery object to the event handler and use "this".
-    $('#fileupload').addClass('fileupload-processing');
-    $.ajax({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: url,
-        dataType: 'json',
-        context: $('#fileupload')[0]
-    }).always(function () {
-        $(this).removeClass('fileupload-processing');
-    }).done(function (result, e) {
-
-        $(this).fileupload('option', 'done')
-            .call(this, $.Event('done'), { result: result });
-    });
-});
-
+﻿CURRENTVIEW_OBJECTCONTEXT = "brmo";
 
 $("document").ready(function () {
     $("#processType").val("Csv");
@@ -64,7 +21,7 @@ $("document").ready(function () {
         var names = $("#Brmo-PostCodes").val().split(" ");
         for (var i = 0; i < rows.length; i++) {
             for (var j = 0; j < names.length; j++) {
-                if (names[j] == rows[i].children[1].innerText.replace(/(\r\n|\n|\r)/gm, "").trim()) {
+                if (names[j] === rows[i].children[1].innerText.replace(/(\r\n|\n|\r)/gm, "").trim()) {
                     $(rows[i].children[3]).find("input").prop("checked", true);
                 }
             }
