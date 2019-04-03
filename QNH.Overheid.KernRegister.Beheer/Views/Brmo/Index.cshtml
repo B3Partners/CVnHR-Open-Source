@@ -7,22 +7,16 @@
 
 @section customstyles
 {
-
     @Styles.Render("~/bundles/fileupload/bootstrap/BasicPlusUI/css")
-
-    <!-- Bootstrap CSS fixes for IE6 -->
-    <!--[if lt IE 7]><link rel="stylesheet" href="/Content/FileUpload/css/bootstrap/bootstrap-ie6.debug.css"><![endif]-->
-    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
-
-    @Styles.Render("~/bundles/datetimepickercss")
     <style>
         .form-batch .row {
             margin-bottom: 5px;
         }
+
         .error {
             color: red;
         }
+
         select[disabled] {
             background-color: #e4e4e4;
         }
@@ -43,7 +37,7 @@
             <div class="row">
                 <div class="col-sm-4">Taak naam</div>
                 <div class="col-sm-8">
-                    <input type='text' class="form-control" id="Task-name"/>
+                    <input type='text' class="form-control" id="Task-name" />
                 </div>
             </div>
             @Html.Partial("_TaskSchedulerPartial", Model.ExportTaskManager)
@@ -63,12 +57,13 @@
             <label>Process type:</label>
             @Html.DropDownListFor(m => m.Config.BrmoProcessType,
               Model.Config.PossibleBrmoProcessTypes
-                .Select(m => new SelectListItem() {
+                .Select(m => new SelectListItem()
+                     {
                     Text = m,
                     Value = m,
                     Selected = m == QNH.Overheid.KernRegister.Business.Enums.BrmoProcessTypes.Csv.ToString()
                 })
-              , new { id="processType"})
+              , new { id = "processType" })
             <div class="brmo-config-area">
                 <br />
                 <label>Postcodes/KvkIds</label>
@@ -80,23 +75,20 @@
             </div>
             <div class="brmo-config-area-csv">
                 @Html.Partial("_BackloadPartial")
-                <br/>
+                <br />
                 <button class="btn btn-default btn-primary btn-save-config">Save</button>
             </div>
-      </div>
+        </div>
     </div>
 </div>
 
 @section scripts {
-    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
-
     <!-- We use Backloads. bundeling feature to register only those client side javascript and style files of the jQuery File Upload Plugin that are needed  -->
     @Scripts.Render("~/bundles/fileupload/bootstrap/BasicPlusUI/js")
 
-    @Scripts.Render("~/bundles/datetimepicker")
-
     <!-- Initialize the jQuery File Upload Plugin -->
     <script src="~/Scripts/FileUpload/brmo.js"></script>
+    <script src="~/Scripts/FileUpload/InitializeFileUpload.js"></script>
 
     @if (!Model.ExportTaskManager.ExecutableProcessDisabled)
     {

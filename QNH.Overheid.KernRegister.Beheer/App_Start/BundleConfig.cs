@@ -45,13 +45,6 @@ namespace QNH.Overheid.KernRegister.Beheer
                         "~/Content/themes/base/datepicker.css",
                         "~/Content/themes/base/progressbar.css",
                         "~/Content/themes/base/theme.css"));
-
-            // Datetimepicker
-            bundles.Add(new StyleBundle("~/bundles/datetimepickercss").Include("~/Content/bootstrap-datetimepicker.css"));
-
-            bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
-                        "~/scripts/moment.js",
-                        "~/scripts/bootstrap-datetimepicker.js"));
         }
     }
 }

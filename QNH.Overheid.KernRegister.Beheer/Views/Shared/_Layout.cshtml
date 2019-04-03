@@ -4,15 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - @Default.ApplicationName</title>
+    <!-- Bootstrap CSS fixes for IE6 -->
+    <!--[if lt IE 7]><link rel="stylesheet" href="/Content/FileUpload/css/bootstrap/bootstrap-ie6.debug.css"><![endif]-->
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/bootstrap-theme")
     @Styles.Render("~/Content/css")
     @RenderSection("customstyles", required: false)
     @Scripts.Render("~/bundles/modernizr")
 
+    <!-- Styles needed for datetimepicker -->
+    <link rel="stylesheet" href="/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.min.css">
+
     @if (SettingsHelper.ShowEnvironmentColor)
     {
-    <style>
+        <style>
             .navbar {
                 background-color: @SettingsHelper.EnvironmentColor;
                 background-image: none;
@@ -38,7 +47,7 @@
                 background-color: #333;
                 color: #fff;
             }
-    </style>
+        </style>
     }
 
 </head>

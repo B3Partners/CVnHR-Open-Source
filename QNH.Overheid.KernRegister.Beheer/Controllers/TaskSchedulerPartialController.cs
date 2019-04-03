@@ -318,7 +318,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public void UpdateTaskManagerArguments(string arguments, string newName)
         {
-            newName = Default.ApplicationName +" "+ newName;
+            newName = Default.ApplicationName + " " + newName;
             if (!ExportTaskManager.ScheduledTask.Name.Equals(newName))
             {
                 ExportTaskManager.ScheduledTask.Definition.Actions.Cast<ExecAction>().Single().Arguments = arguments;
@@ -360,9 +360,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             TaskCollection taskList = ts.RootFolder.GetTasks(new System.Text.RegularExpressions.Regex(@"CVnHR"));
             foreach (Task t in taskList) {
                 taskManagers.Add(t.Name, new ScheduledTaskManager(t.Name, t.Definition.Actions.Cast<ExecAction>().First().Path, t.Definition.Actions.Cast<ExecAction>().First().Arguments));
-
             }
-
         }
 
     }
