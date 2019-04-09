@@ -301,6 +301,7 @@
     <Compile Include="Backload\Helper\ResultCreator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\SignaalController.cs" />
+    <Compile Include="ViewModel\BrmoConfig.cs" />
     <Compile Include="Controllers\BrmoController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
@@ -575,7 +576,6 @@
     <Content Include="Backload\Imaging\readme.txt" />
     <Content Include="Backload\License.txt" />
     <Content Include="Backload\Release.txt" />
-    <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -597,6 +597,7 @@
     <Content Include="Content\FileUpload\img\loading.gif" />
     <Content Include="Content\FileUpload\img\progressbar.gif" />
     <Content Include="Content\FileUpload\img\progressblue.gif" />
+    <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -694,13 +695,16 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\FileUpload\InitializeFileUpload.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -762,7 +766,6 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
@@ -792,8 +795,6 @@
     <Compile Include="ViewModel\KvkSearchCriteria.cs" />
     <Compile Include="ViewModel\KvkSearchResult.cs" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
-    <Content Include="Scripts\bootstrap-datetimepicker.js" />
-    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\FileUpload\angularjs\angular.debug.js" />
     <Content Include="Scripts\FileUpload\backload.demo.js" />
     <Content Include="Scripts\FileUpload\bootstrap\bootstrap-image-gallery.debug.js" />
@@ -844,7 +845,6 @@
     <Content Include="Images\Provincie_Drenthe_800px.png" />
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\FileUpload\cors\jquery.xdr-transport.js" />
-    <Content Include="Scripts\FileUpload\export.js" />
     <Content Include="Scripts\FileUpload\inschrijving.js" />
     <Content Include="Scripts\FileUpload\jquery.fileupload-ui.js" />
     <Content Include="Scripts\FileUpload\jquery.iframe-transport.js" />

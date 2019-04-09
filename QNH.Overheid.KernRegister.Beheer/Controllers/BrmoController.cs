@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
 using QNH.Overheid.KernRegister.Beheer.ViewModel;
-using QNH.Overheid.KernRegister.Business.Enums;
 using QNH.Overheid.KernRegister.Business.Service.Users;
-using QNH.Overheid.KernRegister.Organization.Resources;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -15,22 +12,14 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
     [CVnHRAuthorize(ApplicationActions.CVnHR_SyncBrmo)]
     public class BrmoController :Controller
     {
-
         public static TaskSchedulerPartialController taskController;
 
         public string JsonConfigPath => Path.Combine(new FileInfo(taskController.ExportTaskManager.ExecutablePath).DirectoryName, "JsonConfig");
-
-        public string JsonConfig => Path.Combine(JsonConfigPath, "brmo-config.json");
-
-        public BrmoController()
-        {
-        }
 
         //
         // GET: /Export/
         public ActionResult Index(string name)
         {   
-
             taskController =  new TaskSchedulerPartialController(name,"BRMO");
             if (taskController.ExportTaskManager == null)
                 throw new ArgumentException("ExportTaskManager");
@@ -77,7 +66,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 .ToList();
             var argument = $"BRMO {config.HRDataserviceVersion} {config.BrmoProcessType.ToString()} {string.Join(" ", postCodes)}";
             taskController.UpdateTaskManagerArguments(argument,config.taskName);
-            JsonFile.WriteAllText(Path.Combine(JsonConfigPath, config.taskName+ "-brmo-config.json"), JsonConvert.SerializeObject(config));
+            JsonFile.WriteAllText(Path.Combine(GetFileName(config.taskName)), JsonConvert.SerializeObject(config));
         }
 
         private BrmoConfig GetConfig(string name)
@@ -87,34 +76,21 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             }
             if (!Directory.Exists(JsonConfigPath))
             {
-                Directory.CreateDirectory(JsonConfigPath); // TODO
+                Directory.CreateDirectory(JsonConfigPath);
             }
 
-            if (!JsonFile.Exists(Path.Combine(JsonConfigPath, name + "-brmo-config.json")))
+            if (!JsonFile.Exists(Path.Combine(GetFileName(name))))
             {
                 var config = new BrmoConfig() { PostCodes = "7283,7705,7740", taskName = name };
                 SaveConfig(config);
             }
 
-            return JsonConvert.DeserializeObject<BrmoConfig>(JsonFile.ReadAllText(Path.Combine(JsonConfigPath, name + "-brmo-config.json")));
+            return JsonConvert.DeserializeObject<BrmoConfig>(JsonFile.ReadAllText(GetFileName(name)));
         }
-    }
 
-    public class BrmoConfig
-    {
-        public string PostCodes { get; set; }
-
-        public string taskName { get; set; }
-        
-        public string HRDataserviceVersion { get; set; } = "2.5";
-
-        public BrmoProcessTypes BrmoProcessType { get; set; } = BrmoProcessTypes.ZipCodes;
-
-        [JsonIgnore]
-        public IEnumerable<string> PossibleHRDataserviceVersions { get; set; } = new[] { "3.0" };
-
-        [JsonIgnore]
-        public IEnumerable<string> PossibleBrmoProcessTypes { get { return Enum.GetNames(typeof(BrmoProcessTypes)); } }
-
+        private string GetFileName(string name)
+        {
+            return Path.Combine(JsonConfigPath, $"{name}-brmo-config.json");
+        }
     }
 }
