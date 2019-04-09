@@ -93,11 +93,6 @@
                 }
             }, "json");
         });
-
-        $(".log-files").on("click", "a", function (e) {
-            e.preventDefault();
-            window.open("@Url.Action("DownloadLogFile")?fileName=" + $(this).attr("data-href"), "_blank");
-        });
     });
 
     </script>
