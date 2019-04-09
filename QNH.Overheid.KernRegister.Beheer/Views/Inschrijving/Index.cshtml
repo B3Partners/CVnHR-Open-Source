@@ -10,15 +10,7 @@
 
 @section customstyles
 {
-
     @Styles.Render("~/bundles/fileupload/bootstrap/BasicPlusUI/css")
-
-    <!-- Bootstrap CSS fixes for IE6 -->
-    <!--[if lt IE 7]><link rel="stylesheet" href="/Content/FileUpload/css/bootstrap/bootstrap-ie6.debug.css"><![endif]-->
-    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
-
-    @Styles.Render("~/bundles/datetimepickercss")
     <style>
         .form-batch .row {
             margin-bottom: 5px;
@@ -135,12 +127,11 @@
 
     <!-- Initialize the jQuery File Upload Plugin -->
     <script src="~/Scripts/FileUpload/inschrijving.js"></script>
+    <script src="~/Scripts/FileUpload/InitializeFileUpload.js"></script>
 
     <!-- The TaskScheduler Script -->
-    @Scripts.Render("~/bundles/datetimepicker")
     @if (!Model.ExecutableProcessDisabled)
     {
         @TaskSchedulerScript.RenderTaskSchedulerScript(Url, Model.Trigger, Model.Trigger == null ? TaskTriggerType.Time : Model.Trigger.TriggerType)
     }
-
 }

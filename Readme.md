@@ -12,6 +12,8 @@ Original development was done by QNH Consulting B.V.
 
 __Contact__ Corné Hogerheijde @ QNH and/or B3Partners (info@b3partners.nl)
 
+## Build Solution
+- Ensure SlowCheetah extension in Visual Studio is installed. [Slow Cheetah](https://github.com/Microsoft/slow-cheetah)
 
 ## Development environment setup
 
