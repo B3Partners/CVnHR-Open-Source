@@ -6,9 +6,33 @@ using System.Linq;
 using System.Web.Mvc;
 using System.IO;
 using System;
+using System.Web.Hosting;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
+using QNH.Overheid.KernRegister.Business.Utility;
+using QNH.Overheid.KernRegister.Beheer.Utilities;
+using QNH.Overheid.KernRegister.Business.Business;
+using System.Diagnostics;
+using NLog;
+using System.Collections.Concurrent;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
+    public class MutatiesModel
+    {
+        public IEnumerable<string> MutatiesLogFiles
+        {
+            get
+            {
+                var directory = HostingEnvironment.MapPath("~/Logs/Mutaties");
+                if (Directory.Exists(directory))
+                    return Directory.GetFiles(directory, "*.log");
+                else
+                    return Enumerable.Empty<string>();
+            }
+        }
+    }
+
     [CVnHRAuthorize(ApplicationActions.CVnHR_Tasks)]
     public class TasksController : Controller
     {
@@ -18,6 +42,10 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             return View(this);
         }
 
+        public ActionResult Mutaties()
+        {
+            return View(new MutatiesModel());
+        }
 
         [HttpPost]
         public void DeleteTask(string name) {
@@ -57,6 +85,109 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 }
                 return taskList;
 
+            }
+        }
+
+        public FileResult DownloadLogFile(string fileName)
+        {
+            var model = new MutatiesModel();
+            var file = model.MutatiesLogFiles.SingleOrDefault(f => f == fileName || f.EndsWith(fileName));
+            if (file != null)
+            {
+                return File(file, "text/plain");
+            }
+            else
+                return null;
+        }
+    }
+
+    [CVnHRAuthorize(ApplicationActions.CVnHR_Tasks)]
+    [HubName("csvMutatieHub")]
+    public class CsvMutatieHub : Hub
+    {
+        private static readonly Logger _logger = LogManager.GetLogger("mutatiesLogger");
+
+        public void ProcessCsv(string fileToProcess, bool brmoChecked, bool cvnhrChecked)
+        {
+            try
+            {
+                if (!brmoChecked && !cvnhrChecked)
+                {
+                    return;
+                }
+
+                var physicalPath = HostingEnvironment.MapPath("~/Files/mutaties/" + fileToProcess);
+                if (physicalPath == null)
+                {
+                    return;
+                }
+
+                var file = new FileInfo(physicalPath);
+                if (!file.Exists)
+                {
+                    return;
+                }
+
+                if (file.Extension.ToLower() != ".csv")
+                {
+                    return;
+                }
+
+                var records = CsvUtils.ReadInschrijvingRecords(file.FullName);
+                var maxDegreeOfParallelism = Convert.ToInt32(ConfigurationManager.AppSettings["MaxDegreeOfParallelism"] ?? "1");
+
+                var startStopLogger = LogManager.GetCurrentClassLogger();
+
+                startStopLogger.Debug($"Starting to process file {file.FullName} for CVnHR: {cvnhrChecked} and for BRMO: {brmoChecked}");
+
+                var processing = new InschrijvingProcessing(IocConfig.Container, maxDegreeOfParallelism, _logger);
+                processing.RecordProcessed += RecordProcessedHandler;
+
+                if (cvnhrChecked)
+                {
+                    _logger.Info($"Starting CVnHR upload for file {file.FullName}");
+                    processing.ProcessRecords(records, Context.User.GetUserName(), ProcessTaskTypes.CVnHR);
+                }
+                if (brmoChecked)
+                {
+                    _logger.Info($"Starting BRMO upload for file {file.FullName}");
+                    processing.ProcessRecords(records, Context.User.GetUserName(), ProcessTaskTypes.Brmo);
+                }
+                startStopLogger.Debug($"Finished!");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Error on processing file! {fileToProcess}");
+            }
+        }
+
+        public void RecordProcessedHandler(object sender, RecordProcessedEventArgs e)
+        {
+            // Clients.All.reportProgress(e.Progress, e.InschrijvingNaam);
+            Debug.Print($"Progress={e.Progress} Inschrijvingsnaam={e.InschrijvingNaam}");
+            Clients.Caller.reportProgress(e.SuccesCount, e.ErrorCount, e.Progress, e.SuccesProgress, e.InschrijvingNaam, e.TotalNew, e.TotalUpdated, e.TotalAlreadyExisted);
+
+            /*if (e.IsError && e.KvkNummer != "0")
+            {
+                _logger.Debug($"Error for: {e.KvkNummer}");
+            }*/
+
+            if (e.InschrijvingNaam == "Klaar") // 100%
+            {
+                _logger.Info("-------------------------------------------");
+                _logger.Info($@"Summary {e.Type}: 
+Success: {e.SuccesCount},
+Error: {e.ErrorCount},
+TotalNew: {e.TotalNew},
+TotalUpdated: {e.TotalUpdated},
+TotalAlreadyExisted: {e.TotalAlreadyExisted}");
+
+                if (e.Errors.Count > 0)
+                {
+                    _logger.Error($"Errors: {Environment.NewLine}{string.Join(Environment.NewLine, e.Errors)}");
+                }
+
+                _logger.Info("-------------------------------------------");
             }
         }
     }
