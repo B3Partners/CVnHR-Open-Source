@@ -132,6 +132,7 @@ namespace QNH.Overheid.KernRegister.Business.Business
                     switch (status)
                     {
                         case AddInschrijvingResultStatus.NewInschrijvingAdded:
+                        case AddInschrijvingResultStatus.BrmoInschrijvingCreated:
                             _logger.Debug(
                                 $"Nieuwe inschrijving opgeslagen voor kvknumer = {inschrijvingCsvRecord.kvknummer}, naam = {inschrijvingNaam}, aantal vestigingen = {aantalVestigingen}");
                             totalNew += 1;
@@ -145,6 +146,11 @@ namespace QNH.Overheid.KernRegister.Business.Business
                             _logger.Debug(
                                 $"Inschrijving bestond al voor kvknumer = {inschrijvingCsvRecord.kvknummer}, naam = {inschrijvingNaam}, aantal vestigingen = {aantalVestigingen}");
                             totalAlreadyExisted += 1;
+                            break;
+                        case AddInschrijvingResultStatus.Error:
+                            _logger.Error(
+                                $"Error voor kvknumer = {inschrijvingCsvRecord.kvknummer}, naam = {inschrijvingNaam}, aantal vestigingen = {aantalVestigingen}");
+                            errors.Add(inschrijvingCsvRecord.kvknummer);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException("Did not receive a status...");
