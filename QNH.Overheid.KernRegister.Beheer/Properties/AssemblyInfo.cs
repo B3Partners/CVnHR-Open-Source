@@ -32,5 +32,5 @@ using QNH.Overheid.KernRegister.Beheer;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("3.4.*")]
-[assembly: AssemblyFileVersion("3.4.0.0")]
+[assembly: AssemblyVersion("3.5.*")]
+[assembly: AssemblyFileVersion("3.5.0.0")]
