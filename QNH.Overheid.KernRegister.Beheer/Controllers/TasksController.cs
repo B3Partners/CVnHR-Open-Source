@@ -47,6 +47,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             return View(new MutatiesModel());
         }
 
+        public ActionResult DownloadMutatieCsvOutsideArea()
+
         [HttpPost]
         public void DeleteTask(string name) {
             string executablePath;
@@ -135,7 +137,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 var startStopLogger = LogManager.GetCurrentClassLogger();
 
                 startStopLogger.Debug($"Starting to process file {file.FullName} for CVnHR: {cvnhrChecked} and for BRMO: {brmoChecked}");
-                _summaryLogger.Debug($"Starting to process file {file.FullName} for CVnHR: {cvnhrChecked} and for BRMO: {brmoChecked}");
+                _summaryLogger.Info($"Starting to process file {file.FullName} for CVnHR: {cvnhrChecked} and for BRMO: {brmoChecked}");
 
                 var processing = new InschrijvingProcessing(IocConfig.Container, maxDegreeOfParallelism, _logger);
                 processing.RecordProcessed += RecordProcessedHandler;
