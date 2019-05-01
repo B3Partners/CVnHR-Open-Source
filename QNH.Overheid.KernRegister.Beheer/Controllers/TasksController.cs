@@ -106,16 +106,12 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
     public class CsvMutatieHub : Hub
     {
         private static readonly Logger _logger = LogManager.GetLogger("mutatiesLogger");
+        private static readonly Logger _summaryLogger = LogManager.GetLogger("mutatiesSummaryLogger");
 
         public void ProcessCsv(string fileToProcess, bool brmoChecked, bool cvnhrChecked)
         {
             try
             {
-                if (!brmoChecked && !cvnhrChecked)
-                {
-                    return;
-                }
-
                 var physicalPath = HostingEnvironment.MapPath("~/Files/mutaties/" + fileToProcess);
                 if (physicalPath == null)
                 {
@@ -133,7 +129,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                     return;
                 }
 
-                var records = CsvUtils.ReadInschrijvingRecords(file.FullName);
+                var records = CsvUtils.ReadInschrijvingRecords(file.FullName, _logger);
                 var maxDegreeOfParallelism = Convert.ToInt32(ConfigurationManager.AppSettings["MaxDegreeOfParallelism"] ?? "1");
 
                 var startStopLogger = LogManager.GetCurrentClassLogger();
@@ -167,15 +163,10 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             Debug.Print($"Progress={e.Progress} Inschrijvingsnaam={e.InschrijvingNaam}");
             Clients.Caller.reportProgress(e.SuccesCount, e.ErrorCount, e.Progress, e.SuccesProgress, e.InschrijvingNaam, e.TotalNew, e.TotalUpdated, e.TotalAlreadyExisted);
 
-            /*if (e.IsError && e.KvkNummer != "0")
-            {
-                _logger.Debug($"Error for: {e.KvkNummer}");
-            }*/
-
             if (e.InschrijvingNaam == "Klaar") // 100%
             {
-                _logger.Info("-------------------------------------------");
-                _logger.Info($@"Summary {e.Type}: 
+                _summaryLogger.Info("-------------------------------------------");
+                _summaryLogger.Info($@"Summary {e.Type}: 
 Success: {e.SuccesCount},
 Error: {e.ErrorCount},
 TotalNew: {e.TotalNew},
@@ -184,10 +175,10 @@ TotalAlreadyExisted: {e.TotalAlreadyExisted}");
 
                 if (e.Errors.Count > 0)
                 {
-                    _logger.Error($"Errors: {Environment.NewLine}{string.Join(Environment.NewLine, e.Errors)}");
+                    _summaryLogger.Error($"Errors: {Environment.NewLine}{string.Join(Environment.NewLine, e.Errors)}");
                 }
 
-                _logger.Info("-------------------------------------------");
+                _summaryLogger.Info("-------------------------------------------");
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿$(function () {
     'use strict';
 
-    var url = '/Backload/UploadHandler?objectContext=' + CURRENTVIEW_OBJECTCONTEXT;
+    var url = BACKLOADURL + '?objectContext=' + CURRENTVIEW_OBJECTCONTEXT;
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
