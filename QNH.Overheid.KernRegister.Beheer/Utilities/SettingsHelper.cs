@@ -22,7 +22,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Utilities
                     case "ACC":
                         return "#388f58";
                     default:
-                        return string.Empty;
+                        return "lightgray";
                 }
             }
         }
