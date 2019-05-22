@@ -53,7 +53,7 @@ namespace QNH.Overheid.KernRegister.Business.Service
                 if (latestInschrijvingFromDb == null) // Just store the new one
                 {
                     kvkInschrijving.IngevoegdOp = DateTime.Now.AddSeconds(1);
-                    kvkInschrijving.GeldigTot = DateTime.MaxValue;
+                    kvkInschrijving.GeldigTot = DateTime.MaxValue.AddSeconds(-1); // Fix for ORACLE
                     _kvkInschrijvingRepo.AddOrUpdate(kvkInschrijving);
                     return AddInschrijvingResultStatus.NewInschrijvingAdded;
                 }
@@ -73,11 +73,11 @@ namespace QNH.Overheid.KernRegister.Business.Service
 
                 // Create the new inchrijving
                 kvkInschrijving.IngevoegdOp = DateTime.Now.AddSeconds(1);
-                kvkInschrijving.GeldigTot = DateTime.MaxValue;
+                kvkInschrijving.GeldigTot = DateTime.MaxValue.AddSeconds(-1); // Fix for ORACLE
                 foreach (var vestiging in kvkInschrijving.Vestigingen)
                 {
                     vestiging.IngevoegdOp = DateTime.Now.AddSeconds(1);
-                    vestiging.GeldigTot = DateTime.MaxValue;
+                    vestiging.GeldigTot = DateTime.MaxValue.AddSeconds(-1); // Fix for ORACLE
                 }
                 _kvkInschrijvingRepo.AddOrUpdate(kvkInschrijving);
 
