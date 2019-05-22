@@ -48,7 +48,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult DownloadMutatieCsvOutsideArea()
         {
-            throw new NotImplementedException("TODO, impelment me!");
+            throw new NotImplementedException(@"TODO: implement me! 
+Actions to take: download a Csv with all kvknummers from outside a specified area, e.g. Provincie Drenthe + Groningen + aangrenzende gemeenten");
         }
 
         [HttpPost]
