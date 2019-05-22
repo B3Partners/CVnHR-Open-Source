@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28917.181
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QNH.Overheid.KernRegister.Beheer", "QNH.Overheid.KernRegister.Beheer\QNH.Overheid.KernRegister.Beheer.csproj", "{2FCBA8C1-BBB4-4E37-BA0D-FF3F8BA8CEA4}"
 EndProject
