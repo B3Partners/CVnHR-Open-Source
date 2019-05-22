@@ -96,7 +96,7 @@
         </td>
         <td>
             <p class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+                <a href="{%=file.url%}" title="{%=file.name%}">{%=file.name%}</a>
             </p>
             {% if (file.error) { %}
             <div><span class="label label-important">Error</span> {%=file.error%}</div>
