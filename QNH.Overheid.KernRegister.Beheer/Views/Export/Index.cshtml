@@ -36,8 +36,6 @@
 </div>
 
 @section scripts {
-    @Scripts.Render("~/bundles/datetimepicker")
-
     @if(!Model.ExecutableProcessDisabled)
     {
         @TaskSchedulerScript.RenderTaskSchedulerScript(Url, Model.Trigger, Model.Trigger == null ? TaskTriggerType.Time : Model.Trigger.TriggerType)

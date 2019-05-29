@@ -1,7 +1,7 @@
 ﻿$(function () {
     'use strict';
 
-    var url = 'Backload/UploadHandler?objectContext=' + CURRENTVIEW_OBJECTCONTEXT;
+    var url = BACKLOADURL + '?objectContext=' + CURRENTVIEW_OBJECTCONTEXT;
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
@@ -34,7 +34,7 @@
         context: $('#fileupload')[0]
     }).always(function () {
         $(this).removeClass('fileupload-processing');
-    }).done(function (result, e) {
+    }).done(function (result) {
 
         $(this).fileupload('option', 'done')
             .call(this, $.Event('done'), { result: result });

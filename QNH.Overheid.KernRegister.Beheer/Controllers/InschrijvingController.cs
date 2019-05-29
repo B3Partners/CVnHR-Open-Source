@@ -59,7 +59,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             var maxDegreeOfParallelism = Convert.ToInt32(ConfigurationManager.AppSettings["MaxDegreeOfParallelism"] ?? "1");
             var processing = new InschrijvingProcessing(IocConfig.Container, maxDegreeOfParallelism);
             processing.RecordProcessed += RecordProcessedHandler;
-            processing.ProcessRecords(records, Context.User.GetUserName());
+            processing.ProcessRecords(records, Context.User.GetUserName(), ProcessTaskTypes.CVnHR);
         }
 
         public void RecordProcessedHandler(object sender, RecordProcessedEventArgs e)

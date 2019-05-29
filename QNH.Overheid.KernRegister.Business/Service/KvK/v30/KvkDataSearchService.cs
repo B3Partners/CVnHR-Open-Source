@@ -340,8 +340,8 @@ namespace QNH.Overheid.KernRegister.Business.Service.KvK.v30
                 vestiging.RegistratieDatumAanvang = DateTime.MinValue.ToString("yyyyMMdd"); // VALUENOTPROVIDED;
 
             // Voeg geldigheid toe
-            vestiging.GeldigTot = DateTime.MaxValue;
-            vestiging.IngevoegdOp = DateTime.Now.Date;
+            vestiging.GeldigTot = DateTime.MaxValue.AddSeconds(-1); // Fix for ORACLE
+            vestiging.IngevoegdOp = DateTime.Now;
 
             return vestiging;
         }

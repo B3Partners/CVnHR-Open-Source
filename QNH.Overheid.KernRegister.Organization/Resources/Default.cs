@@ -177,6 +177,14 @@ namespace QNH.Overheid.KernRegister.Organization.Resources
             { Organization.B3Partners, "Taken beheren"}
         }[CurrentOrganization];
 
+        public static string ToMutaties => new OrganizationResource()
+        {
+            { Organization.Qnh, "Mutaties" },
+            { Organization.Drenthe, "Mutaties" },
+            { Organization.Flevoland, "Mutaties" },
+            { Organization.B3Partners, "Mutaties"}
+        }[CurrentOrganization];
+
         /// <summary>
         /// For copy/paste... TODO: create template?
         /// </summary>

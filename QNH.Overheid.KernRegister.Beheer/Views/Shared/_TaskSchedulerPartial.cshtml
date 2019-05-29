@@ -85,7 +85,7 @@
         {
             <div class="row">
                 <div class="col-sm-12">
-                    <a href="#" data-href="@Path.GetFileName(logfile)">@Path.GetFileName(logfile)</a>
+                    <a href="#" data-base-url="@Url.Action("DownloadLogFile")" data-href="@Path.GetFileName(logfile)">@Path.GetFileName(logfile)</a>
                 </div>
             </div>
         }

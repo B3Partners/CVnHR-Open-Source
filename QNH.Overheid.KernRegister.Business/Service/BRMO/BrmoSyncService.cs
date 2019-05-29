@@ -41,7 +41,10 @@ namespace QNH.Overheid.KernRegister.Business.Service.BRMO
                     if(ex?.Response != null)
                         using (var reader = new StreamReader(ex.Response.GetResponseStream()))
                             response = reader.ReadToEnd();
-                    
+
+                    if (response.Contains("BrmoDuplicaatLaadprocesException"))
+                        return AddInschrijvingResultStatus.InschrijvingAlreadyExists;
+
                     throw new WebException(
                         $"Error while uploading xml to {_brmoReference.NhrServiceUrl}. {response}", ex);
                 }
