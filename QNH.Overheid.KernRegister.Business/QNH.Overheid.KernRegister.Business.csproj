@@ -175,6 +175,9 @@
   <ItemGroup>
     <Compile Include="Business\ExportProcessing.cs" />
     <Compile Include="Business\InschrijvingProcessing.cs" />
+    <Compile Include="Service\ZipCodes\AreaService.cs" />
+    <Compile Include="Service\ZipCodes\CHANGEME.cs" />
+    <Compile Include="Service\ZipCodes\IGetVestigingenOutsideAreaService.cs" />
     <Compile Include="Utility\InschrijvingRecord.cs" />
     <Compile Include="Business\RawXmlCache.cs" />
     <Compile Include="Business\RecordProcessedEventArgs.cs" />
