@@ -89,7 +89,6 @@ namespace QNH.Overheid.KernRegister.Business.Business
             int totalAlreadyExisted = 0;
             ConcurrentBag<string> errors = new ConcurrentBag<string>();
 
-            //foreach (var inschrijvingCsvRecord in inschrijvingRecords)
             Parallel.ForEach(inschrijvingRecords, new ParallelOptions() { MaxDegreeOfParallelism = _maxDegreeOfParallelism }, (inschrijvingCsvRecord) =>
             {
                 bool success = false;
@@ -162,7 +161,6 @@ namespace QNH.Overheid.KernRegister.Business.Business
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error("Er ging wat mis bij het opslaan van gegevens in KVK register database KVK nummer {0}", inschrijvingCsvRecord.kvknummer);
                     _logger.Error(ex,
                         $"Error while storing KVKNummer = {inschrijvingCsvRecord.kvknummer} Naam = {inschrijvingNaam} Check the exception");
                     errors.Add(inschrijvingCsvRecord.kvknummer);
@@ -183,7 +181,7 @@ namespace QNH.Overheid.KernRegister.Business.Business
                 }
             });
 
-            // And were ready... So report 100% complete to force client to finish
+            // And we're ready... So report 100% complete to force client to finish
             // Clients.All.reportProgress(100);
             errorCount = loopcount - succesCount;
             RaiseRecordProcessedEvent(succesCount, errorCount,(int) progress, (int)succesprogress, "Klaar",totalNew, totalUpdated, totalAlreadyExisted, type, false, "0", errors.ToList());
