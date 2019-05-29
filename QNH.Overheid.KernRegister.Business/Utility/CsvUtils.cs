@@ -74,5 +74,19 @@ namespace QNH.Overheid.KernRegister.Business.Utility
 
             return inschrijvingCsvRecords;
         }
+
+        public static byte[] WriteToCsv<T>(IEnumerable<T> records)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var streamWriter = new StreamWriter(memoryStream))
+                    using (var csvWriter = new CsvWriter(streamWriter))
+                    {
+                        csvWriter.WriteRecords<T>(records);
+                    } // StreamWriter gets flushed here.
+
+                return memoryStream.ToArray();
+            }
+        }
     }
 }

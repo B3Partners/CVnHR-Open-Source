@@ -5,6 +5,7 @@ using NLog;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
 using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Service.Users;
+using QNH.Overheid.KernRegister.Business.Service.ZipCodes;
 using QNH.Overheid.KernRegister.Business.Utility;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 
@@ -35,6 +39,14 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
     [CVnHRAuthorize(ApplicationActions.CVnHR_Tasks)]
     public class TasksController : Controller
     {
+
+        private readonly IAreaService _areaService;
+
+        public TasksController(IAreaService areaService)
+        {
+            _areaService = areaService;
+        }
+
         // GET: Tasks
         public ActionResult Index()
         {
@@ -46,10 +58,18 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             return View(new MutatiesModel());
         }
 
+        [HttpGet]
         public ActionResult DownloadMutatieCsvOutsideArea()
         {
-            throw new NotImplementedException(@"TODO: implement me! 
-Actions to take: download a Csv with all kvknummers from outside a specified area, e.g. Provincie Drenthe + Groningen + aangrenzende gemeenten");
+            // TODO: allow configuration/setting of numbers (the CHANGEME class)
+            // TODO: allow download and process (?)
+
+            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(CHANGEME.AllCombined)
+                .Select(KvkNummer => new { KvkNummer });
+
+            var fileName = $"{DateTime.Now.ToString("yyyy-MM-dd-HHmmss")}-DownloadMutatieCsvOutsideArea.csv";
+
+            return File(CsvUtils.WriteToCsv(kvkNummers), "text/csv", fileName);
         }
 
         [HttpPost]
