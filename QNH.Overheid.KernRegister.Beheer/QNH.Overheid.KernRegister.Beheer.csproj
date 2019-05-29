@@ -715,6 +715,11 @@
     <Content Include="Scripts\FileUpload\InitializeFileUpload.js" />
     <Content Include="Scripts\FileUpload\mutaties.js" />
     <Content Include="Scripts\FileUpload\tasks.js" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -760,6 +765,8 @@
     <Content Include="Backload\Client\blueimp\blob\package.json" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Views\Tasks\mutaties.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
