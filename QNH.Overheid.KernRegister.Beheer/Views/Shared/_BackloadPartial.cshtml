@@ -2,7 +2,7 @@
     ViewBag.Title = "_BackloadPartial";
 }
 
-<form id="fileupload" action="/Backload/UploadHandler" method="POST" enctype="multipart/form-data">
+<form id="fileupload" action="~/Backload/UploadHandler" method="POST" enctype="multipart/form-data">
     <!-- Redirect browsers with JavaScript disabled to the origin page -->
     <noscript><input type="hidden" name="redirect" value="/"></noscript>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -96,7 +96,7 @@
         </td>
         <td>
             <p class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+                <a href="{%=file.url%}" title="{%=file.name%}">{%=file.name%}</a>
             </p>
             {% if (file.error) { %}
             <div><span class="label label-important">Error</span> {%=file.error%}</div>
@@ -106,14 +106,13 @@
             <span class="size">{%=o.formatFileSize(file.size)%}</span>
         </td>
         <td>
-            <button class="btn btn-danger delete" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}" {% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
+            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
                 <i class="icon-trash icon-white"></i>
                 <span>Verwijder</span>
             </button>
 
             <input type="checkbox" name="delete" value="1" class="toggle">
         </td>
-
     </tr>
     {% } %}
 </script>

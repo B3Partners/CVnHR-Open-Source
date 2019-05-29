@@ -339,9 +339,7 @@ QNH.Overheid.KernRegister.BatchProcess
 
                 Console.Write(consoleMessage);
             };
-            processing.ProcessRecords(records, "Batchprocess ImportAll");
-
-
+            processing.ProcessRecords(records, "Batchprocess ImportAll", ProcessTaskTypes.CVnHR);
         }
 
         private static IEnumerable<InschrijvingRecord> ReadInschrijvingRecords()

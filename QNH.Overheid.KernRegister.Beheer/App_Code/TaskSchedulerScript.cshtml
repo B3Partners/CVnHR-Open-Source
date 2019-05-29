@@ -3,8 +3,8 @@
 
 @helper RenderTaskSchedulerScript(System.Web.Mvc.UrlHelper Url, Trigger trigger, TaskTriggerType triggerType)
 {
-    <script type="text/javascript" src="/scripts/moment.min.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="~/scripts/moment.min.js"></script>
+    <script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
     $(function () {
 
@@ -92,11 +92,6 @@
                     //alert(result.error);
                 }
             }, "json");
-        });
-
-        $(".log-files").on("click", "a", function (e) {
-            e.preventDefault();
-            window.open("@Url.Action("DownloadLogFile")?fileName=" + $(this).attr("data-href"), "_blank");
         });
     });
 
