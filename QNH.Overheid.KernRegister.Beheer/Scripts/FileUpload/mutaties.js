@@ -1,6 +1,30 @@
 ﻿CURRENTVIEW_OBJECTCONTEXT = "mutaties";
 
 $("document").ready(function () {
+
+    // Save postcodes
+    $("#MutationSaveZipcodes").on('click', function () {
+        var zipCodes = $("#MutationZipCodes").val();
+        var url = $(this).attr('data-url');
+        $.post(url, { zipCodes })
+            .done(function () {
+                alert("Zipcodes zijn opgeslagen");
+            })
+            .fail(function () {
+                alert("Error!");
+            });
+    });
+
+    $("#DownloadAndProcess").on('click', function () {
+        var url = $(this).attr('data-url');
+        $.get(url)
+            .done(function (result) {
+                console.log(result);
+                StartProcess(result);
+            });
+    });
+
+    // Mutation task actions
     var csvMutatieHub = $.connection.csvMutatieHub;
 
     $('#btnCloseProgress').click(function (event) {
@@ -50,18 +74,22 @@ $("document").ready(function () {
         .on('fileuploaddone', function (e, data) {
 
             var fileName = data.files[0].name;
-            $('#mutatiedialog').on('shown.bs.modal', function (e) {
-                // do something...
-                $.connection.hub.start().done(function () {
-                    var brmoChecked = $('#brmo-mutations').prop('checked');
-                    var cvnhrChecked = $('#cvnhr-mutations').prop('checked');
-
-                    //console.log(`filename: ${fileName}, brmo: ${brmoChecked}, cvnhr: ${cvnhrChecked}`);
-
-                    csvMutatieHub.server.processCsv(fileName, brmoChecked, cvnhrChecked);
-                });
-           });
-
-            $('#mutatiedialog').modal('show');
+            StartProcess(fileName);
         });
+
+    function StartProcess(fileName) {
+        $('#mutatiedialog').on('shown.bs.modal', function (e) {
+            // do something...
+            $.connection.hub.start().done(function () {
+                var brmoChecked = $('#brmo-mutations').prop('checked');
+                var cvnhrChecked = $('#cvnhr-mutations').prop('checked');
+
+                //console.log(`filename: ${fileName}, brmo: ${brmoChecked}, cvnhr: ${cvnhrChecked}`);
+
+                csvMutatieHub.server.processCsv(fileName, brmoChecked, cvnhrChecked);
+            });
+        });
+
+        $('#mutatiedialog').modal('show');
+    }
 });
