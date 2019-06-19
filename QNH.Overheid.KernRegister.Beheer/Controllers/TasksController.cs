@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.Win32.TaskScheduler;
+using Newtonsoft.Json;
 using NLog;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
 using QNH.Overheid.KernRegister.Business.Business;
@@ -15,9 +16,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using JsonFile = System.IO.File;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -34,6 +37,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                     return Enumerable.Empty<string>();
             }
         }
+
+        public IEnumerable<string> ZipCodes { get; set; }
     }
 
     [CVnHRAuthorize(ApplicationActions.CVnHR_Tasks)]
@@ -55,21 +60,46 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult Mutaties()
         {
-            return View(new MutatiesModel());
+            return View(new MutatiesModel() { ZipCodes = GetZipCodes() });
         }
 
         [HttpGet]
         public ActionResult DownloadMutatieCsvOutsideArea()
         {
-            // TODO: allow configuration/setting of numbers (the CHANGEME class)
-            // TODO: allow download and process (?)
-
-            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(CHANGEME.AllCombined)
+            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(ZipcodesDrentheGroningenEnAangrezendeGemeenten.AllCombined)
                 .Select(KvkNummer => new { KvkNummer });
 
-            var fileName = $"{DateTime.Now.ToString("yyyy-MM-dd-HHmmss")}-DownloadMutatieCsvOutsideArea.csv";
+            return File(CsvUtils.WriteToCsv(kvkNummers), "text/csv", GetMutatieCsvOutsideAreaFileName());
+        }
 
-            return File(CsvUtils.WriteToCsv(kvkNummers), "text/csv", fileName);
+        [HttpGet]
+        public ActionResult DownloadMutatieCsvOutsideAreaAndProcess()
+        {
+            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(ZipcodesDrentheGroningenEnAangrezendeGemeenten.AllCombined)
+                .Select(KvkNummer => new { KvkNummer });
+
+            var fileName = GetMutatieCsvOutsideAreaFileName();
+            var physicalPath = HostingEnvironment.MapPath("~/Files/mutaties/" + fileName);
+
+            JsonFile.WriteAllBytes(physicalPath, CsvUtils.WriteToCsv(kvkNummers));
+
+            return Content(fileName);
+        }
+
+        private string GetMutatieCsvOutsideAreaFileName()
+            => $"{DateTime.Now.ToString("yyyy-MM-dd-HHmmss")}-Inschrijvingen-buiten-geconfigureerd-gebied.csv";
+
+        [HttpPost]
+        public ActionResult SaveZipCodeConfiguration(string zipCodes)
+        {
+            var postCodes = zipCodes
+               .Split(new[] { ",", ";", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+               .Select(p => p.Trim())
+               .Distinct();
+
+            JsonFile.WriteAllText(GetZipCodePath(), JsonConvert.SerializeObject(postCodes));
+
+            return new EmptyResult();
         }
 
         [HttpPost]
@@ -101,7 +131,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             get
             {
                 TaskService ts = new TaskService();
-                IEnumerable<Task> taskCollection = ts.RootFolder.GetTasks(new System.Text.RegularExpressions.Regex(@"CVnHR")).ToArray();
+                IEnumerable<Task> taskCollection = ts.RootFolder.GetTasks(new Regex(@"CVnHR")).ToArray();
                 List<Task> taskList = new List<Task>();
                 foreach (Task t in taskCollection) {
                     if (t.Definition.Actions.Cast<ExecAction>().Single().Arguments.Split(' ')[0].Equals("BRMO")) {
@@ -123,6 +153,35 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             }
             else
                 return null;
+        }
+
+        public ActionResult GetZipcodesDrentheGroningenEnAangrezendeGemeenten() {
+            return Content(string.Join(", ", ZipcodesDrentheGroningenEnAangrezendeGemeenten.AllCombined));
+        }
+
+        private string GetZipCodeConfigDirectory() =>
+            HostingEnvironment.MapPath("~/JsonConfig");
+
+        private string GetZipCodePath()
+        {
+            return Path.Combine(GetZipCodeConfigDirectory(), "mutaties-zipcodes.json");
+        }
+
+        private IEnumerable<string> GetZipCodes()
+        {
+            var zipCodeDir = GetZipCodeConfigDirectory();
+            if (!Directory.Exists(zipCodeDir))
+            {
+                Directory.CreateDirectory(zipCodeDir);
+            }
+
+            var path = GetZipCodePath();
+            if (!JsonFile.Exists(path))
+            {
+                JsonFile.WriteAllText(path, JsonConvert.SerializeObject(new[] { "0000", "0001" }));
+            }
+
+            return JsonConvert.DeserializeObject<IEnumerable<string>>(JsonFile.ReadAllText(path));
         }
     }
 

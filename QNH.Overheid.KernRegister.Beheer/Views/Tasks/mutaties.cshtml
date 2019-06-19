@@ -18,6 +18,10 @@
         select[disabled] {
             background-color: #e4e4e4;
         }
+
+        #MutationZipCodes {
+            max-width: 800px;
+        }
     </style>
 }
 
@@ -35,6 +39,8 @@
             <label for="cvnhr-mutations">@Default.ApplicationName</label>
         </div>
 
+        <hr/>
+        <h4>Handmatige upload mutatiebestanden</h4>
         @Html.Partial("_BackloadPartial")
 
 
@@ -51,11 +57,38 @@
             }
         </div>
 
-        <hr/>
-        <h4>Download all kvknummers outside area</h4>
+        <hr />
+        <h4>Download</h4>
+        <p>
+            Klik op onderstaande link om een csv bestand te downloaden met daarin alle CVnHR inschrijvingen die buiten het mutatieabonnement
+            vallen. Periodiek kan deze lijst gebruikt worden om de CVnHR weer helemaal up-to-date te krijgen met het handelsregister.
+            Het gebied van het mutatieabonnement kan hieronder geconfigureerd worden door alle postcodecijfers van het mutatieabonnementsgebied
+            in te voeren. (Bijvoorbeeld te verkrijgen via: <a href="https://postcode.site/">https://postcode.site/</a>)
+        </p>
+        <p>
+            Gebruik de knop "Download en start process" om deze file direct te uploaden en te verwerken.
+        </p>
         <div>
-            @Html.ActionLink("Download all kvknummers outside area", "DownloadMutatieCsvOutsideArea", "Tasks")
+            @Html.ActionLink("Download  alle kvknummers buiten het mutatieabonnement gebied", "DownloadMutatieCsvOutsideArea", "Tasks", new { @class = "btn btn-large btn-success" })
+            
+            <button id="DownloadAndProcess" class="btn btn-large btn-warning" 
+                    data-url="@Url.Action("DownloadMutatieCsvOutsideAreaAndProcess", "Tasks")">
+                Download en start process
+            </button>
         </div>
+
+        <br />
+        <label><strong>Postcodecijfers voor het gebied van het mutatieabonnement:</strong></label>
+        <br />
+        <p>Vul hieronder alle postcodecijfers in voor het gebied van het mutatieabonnement, en druk op opslaan.</p>
+        <textarea id="MutationZipCodes" cols="180" rows="16" style="text-align:left;" placeholder="Vul hier alle postcodecijfers in.">@string.Join(", ", Model.ZipCodes)</textarea>
+
+        <br />
+        <button id="MutationSaveZipcodes" data-url="@Url.Action("SaveZipCodeConfiguration", "Tasks")" class="btn btn-default btn-primary btn-save-config">Opslaan</button>
+        <br />
+        <a href="@Url.Action("GetZipcodesDrentheGroningenEnAangrezendeGemeenten", "Tasks")" target="_blank">
+            Klik hier voor een lijst postcodes van Drenthe+Groningen en aangrenzende gemeenten.
+        </a>
     </div>
 </div>
 

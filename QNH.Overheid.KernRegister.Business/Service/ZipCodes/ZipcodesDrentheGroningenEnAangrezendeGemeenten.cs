@@ -3,7 +3,10 @@ using System.Linq;
 
 namespace QNH.Overheid.KernRegister.Business.Service.ZipCodes
 {
-    public static class CHANGEME // Via https://postcode.site/
+    /// <summary>
+    /// Via https://postcode.site/
+    /// </summary>
+    public static class ZipcodesDrentheGroningenEnAangrezendeGemeenten 
     {
         public static int[] AllPostcodesDrenthe = new[] {
 3925
