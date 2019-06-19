@@ -312,10 +312,10 @@
       <Version>5.2.5</Version>
     </PackageReference>
     <PackageReference Include="NLog.Config">
-      <Version>4.6.4</Version>
+      <Version>4.6.5</Version>
     </PackageReference>
     <PackageReference Include="NLog.Schema">
-      <Version>4.6.4</Version>
+      <Version>4.6.5</Version>
     </PackageReference>
     <PackageReference Include="Npgsql">
       <Version>4.0.7</Version>
