@@ -69,8 +69,11 @@
             Gebruik de knop "Download en start process" om deze file direct te uploaden en te verwerken.
         </p>
         <div>
-            @Html.ActionLink("Download  alle kvknummers buiten het mutatieabonnement gebied", "DownloadMutatieCsvOutsideArea", "Tasks", new { @class = "btn btn-large btn-success" })
-            
+            <button id="Download" class="btn btn-large btn-success"
+                    data-url="@Url.Action("DownloadMutatieCsvOutsideArea", "Tasks")">
+                Download  alle kvknummers buiten het mutatieabonnement gebied
+            </button>
+
             <button id="DownloadAndProcess" class="btn btn-large btn-warning" 
                     data-url="@Url.Action("DownloadMutatieCsvOutsideAreaAndProcess", "Tasks")">
                 Download en start process
