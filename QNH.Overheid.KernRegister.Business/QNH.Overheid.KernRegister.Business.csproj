@@ -295,7 +295,7 @@
       <Version>5.2.5</Version>
     </PackageReference>
     <PackageReference Include="NLog">
-      <Version>4.6.4</Version>
+      <Version>4.6.5</Version>
     </PackageReference>
     <PackageReference Include="Oracle.ManagedDataAccess">
       <Version>19.3.0</Version>
