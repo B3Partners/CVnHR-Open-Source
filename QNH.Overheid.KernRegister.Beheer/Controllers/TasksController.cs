@@ -66,7 +66,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         [HttpGet]
         public ActionResult DownloadMutatieCsvOutsideArea()
         {
-            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(ZipcodesDrentheGroningenEnAangrezendeGemeenten.AllCombined)
+            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(GetZipCodes())
                 .Select(KvkNummer => new { KvkNummer });
 
             return File(CsvUtils.WriteToCsv(kvkNummers), "text/csv", GetMutatieCsvOutsideAreaFileName());
@@ -75,7 +75,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         [HttpGet]
         public ActionResult DownloadMutatieCsvOutsideAreaAndProcess()
         {
-            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(ZipcodesDrentheGroningenEnAangrezendeGemeenten.AllCombined)
+            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(GetZipCodes())
                 .Select(KvkNummer => new { KvkNummer });
 
             var fileName = GetMutatieCsvOutsideAreaFileName();
@@ -121,8 +121,8 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
             TaskService ts = new TaskService();
             ts.RootFolder.DeleteTask(name);
             string filePath = Path.Combine(exePath, name.Substring(name.IndexOf(' ') + 1) + "-brmo-config.json");
-            if (System.IO.File.Exists(filePath)) {
-                System.IO.File.Delete(filePath);
+            if (JsonFile.Exists(filePath)) {
+                JsonFile.Delete(filePath);
             }
         }
 
