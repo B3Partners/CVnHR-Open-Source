@@ -86,7 +86,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                     return;
                 }
 
-                var kvkNummers = CsvUtils.ReadInschrijvingRecords(fullPath);
+                var kvkNummers = CsvUtils.ReadInschrijvingRecords(fullPath,brmoLogger);
                 if (kvkNummers.Any())
                 {
                     if (usePrefixZero)
