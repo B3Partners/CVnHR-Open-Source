@@ -93,7 +93,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
         public ActionResult SaveZipCodeConfiguration(string zipCodes)
         {
             var postCodes = zipCodes
-               .Split(new[] { ",", ";", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+               .Split(new[] { ",", ";", Environment.NewLine, "\n" }, StringSplitOptions.RemoveEmptyEntries)
                .Select(p => p.Trim())
                .Distinct();
 
