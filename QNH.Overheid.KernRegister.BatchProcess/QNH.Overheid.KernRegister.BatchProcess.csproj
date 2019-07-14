@@ -321,7 +321,7 @@
       <Version>4.0.7</Version>
     </PackageReference>
     <PackageReference Include="Oracle.ManagedDataAccess">
-      <Version>19.3.0</Version>
+      <Version>19.3.1</Version>
     </PackageReference>
     <PackageReference Include="SqlServerCompact">
       <Version>4.0.8854.1</Version>
