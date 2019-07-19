@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.Win32.TaskScheduler;
+using Newtonsoft.Json;
 using NLog;
 using QNH.Overheid.KernRegister.Beheer.Utilities;
 using QNH.Overheid.KernRegister.Business.Business;
 using QNH.Overheid.KernRegister.Business.Service.Users;
+using QNH.Overheid.KernRegister.Business.Service.ZipCodes;
 using QNH.Overheid.KernRegister.Business.Utility;
 using System;
 using System.Collections.Generic;
@@ -12,8 +14,13 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using JsonFile = System.IO.File;
 
 namespace QNH.Overheid.KernRegister.Beheer.Controllers
 {
@@ -30,11 +37,21 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                     return Enumerable.Empty<string>();
             }
         }
+
+        public IEnumerable<string> ZipCodes { get; set; }
     }
 
     [CVnHRAuthorize(ApplicationActions.CVnHR_Tasks)]
     public class TasksController : Controller
     {
+
+        private readonly IAreaService _areaService;
+
+        public TasksController(IAreaService areaService)
+        {
+            _areaService = areaService;
+        }
+
         // GET: Tasks
         public ActionResult Index()
         {
@@ -43,13 +60,46 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
 
         public ActionResult Mutaties()
         {
-            return View(new MutatiesModel());
+            return View(new MutatiesModel() { ZipCodes = GetZipCodes() });
         }
 
+        [HttpGet]
         public ActionResult DownloadMutatieCsvOutsideArea()
         {
-            throw new NotImplementedException(@"TODO: implement me! 
-Actions to take: download a Csv with all kvknummers from outside a specified area, e.g. Provincie Drenthe + Groningen + aangrenzende gemeenten");
+            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(GetZipCodes())
+                .Select(KvkNummer => new { KvkNummer });
+
+            return File(CsvUtils.WriteToCsv(kvkNummers), "text/csv", GetMutatieCsvOutsideAreaFileName());
+        }
+
+        [HttpGet]
+        public ActionResult DownloadMutatieCsvOutsideAreaAndProcess()
+        {
+            var kvkNummers = _areaService.GetInschrijvingenWithAllVestigingenOutsideArea(GetZipCodes())
+                .Select(KvkNummer => new { KvkNummer });
+
+            var fileName = GetMutatieCsvOutsideAreaFileName();
+            var physicalPath = HostingEnvironment.MapPath("~/Files/mutaties/" + fileName);
+
+            JsonFile.WriteAllBytes(physicalPath, CsvUtils.WriteToCsv(kvkNummers));
+
+            return Content(fileName);
+        }
+
+        private string GetMutatieCsvOutsideAreaFileName()
+            => $"{DateTime.Now.ToString("yyyy-MM-dd-HHmmss")}-Inschrijvingen-buiten-geconfigureerd-gebied.csv";
+
+        [HttpPost]
+        public ActionResult SaveZipCodeConfiguration(string zipCodes)
+        {
+            var postCodes = zipCodes
+               .Split(new[] { ",", ";", Environment.NewLine, "\n" }, StringSplitOptions.RemoveEmptyEntries)
+               .Select(p => p.Trim())
+               .Distinct();
+
+            JsonFile.WriteAllText(GetZipCodePath(), JsonConvert.SerializeObject(postCodes));
+
+            return new EmptyResult();
         }
 
         [HttpPost]
@@ -71,8 +121,8 @@ Actions to take: download a Csv with all kvknummers from outside a specified are
             TaskService ts = new TaskService();
             ts.RootFolder.DeleteTask(name);
             string filePath = Path.Combine(exePath, name.Substring(name.IndexOf(' ') + 1) + "-brmo-config.json");
-            if (System.IO.File.Exists(filePath)) {
-                System.IO.File.Delete(filePath);
+            if (JsonFile.Exists(filePath)) {
+                JsonFile.Delete(filePath);
             }
         }
 
@@ -81,7 +131,7 @@ Actions to take: download a Csv with all kvknummers from outside a specified are
             get
             {
                 TaskService ts = new TaskService();
-                IEnumerable<Task> taskCollection = ts.RootFolder.GetTasks(new System.Text.RegularExpressions.Regex(@"CVnHR")).ToArray();
+                IEnumerable<Task> taskCollection = ts.RootFolder.GetTasks(new Regex(@"CVnHR")).ToArray();
                 List<Task> taskList = new List<Task>();
                 foreach (Task t in taskCollection) {
                     if (t.Definition.Actions.Cast<ExecAction>().Single().Arguments.Split(' ')[0].Equals("BRMO")) {
@@ -103,6 +153,35 @@ Actions to take: download a Csv with all kvknummers from outside a specified are
             }
             else
                 return null;
+        }
+
+        public ActionResult GetZipcodesDrentheGroningenEnAangrezendeGemeenten() {
+            return Content(string.Join(", ", ZipcodesDrentheGroningenEnAangrezendeGemeenten.AllCombined));
+        }
+
+        private string GetZipCodeConfigDirectory() =>
+            HostingEnvironment.MapPath("~/JsonConfig");
+
+        private string GetZipCodePath()
+        {
+            return Path.Combine(GetZipCodeConfigDirectory(), "mutaties-zipcodes.json");
+        }
+
+        private IEnumerable<string> GetZipCodes()
+        {
+            var zipCodeDir = GetZipCodeConfigDirectory();
+            if (!Directory.Exists(zipCodeDir))
+            {
+                Directory.CreateDirectory(zipCodeDir);
+            }
+
+            var path = GetZipCodePath();
+            if (!JsonFile.Exists(path))
+            {
+                JsonFile.WriteAllText(path, JsonConvert.SerializeObject(new[] { "0000", "0001" }));
+            }
+
+            return JsonConvert.DeserializeObject<IEnumerable<string>>(JsonFile.ReadAllText(path));
         }
     }
 
