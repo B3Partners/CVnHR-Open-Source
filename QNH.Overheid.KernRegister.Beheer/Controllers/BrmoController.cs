@@ -14,7 +14,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
     {
         public static TaskSchedulerPartialController taskController;
 
-        public string JsonConfigPath => Path.Combine(new FileInfo(taskController.ExportTaskManager.ExecutablePath).DirectoryName, "JsonConfig");
+        public static string JsonConfigPath => Path.Combine(new FileInfo(taskController.ExportTaskManager.ExecutablePath).DirectoryName, "JsonConfig");
 
         //
         // GET: /Export/
@@ -66,7 +66,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 .ToList();
             var argument = $"BRMO {config.HRDataserviceVersion} {config.BrmoProcessType.ToString()} {string.Join(" ", postCodes)}";
             taskController.UpdateTaskManagerArguments(argument,config.taskName);
-            JsonFile.WriteAllText(Path.Combine(GetFileName(config.taskName)), JsonConvert.SerializeObject(config));
+            JsonFile.WriteAllText(GetFileName(config.taskName), JsonConvert.SerializeObject(config));
         }
 
         private BrmoConfig GetConfig(string name)
@@ -79,7 +79,7 @@ namespace QNH.Overheid.KernRegister.Beheer.Controllers
                 Directory.CreateDirectory(JsonConfigPath);
             }
 
-            if (!JsonFile.Exists(Path.Combine(GetFileName(name))))
+            if (!JsonFile.Exists(GetFileName(name)))
             {
                 var config = new BrmoConfig() { PostCodes = "7283,7705,7740", taskName = name };
                 SaveConfig(config);

@@ -67,7 +67,7 @@ $("document").ready(function () {
                 return;
             } else if (csvCount > 1) { 
                 alert("Geen CSV bestand geselecteerd. Selecteer het te gebruiken CSV bestand d.m.v. de checkbox naast het CSV bestand.");
-            } else if (PostCodes.indexOf(" ") != -1) {
+            } else if (PostCodes.indexOf(" ") !== -1) {
                 alert("CSV bestandsnamen mogen geen spaties bevatten");
                 return;
             }
