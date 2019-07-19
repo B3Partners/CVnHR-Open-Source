@@ -30,40 +30,30 @@ namespace QNH.Overheid.KernRegister.Business.Utility
                     .Select(h => h.ToLowerInvariant());
             // First read complete CSV to see how many KVKnummers we need to process
             IEnumerable<InschrijvingRecord> inschrijvingCsvRecords;
-            bool useLogger = logger != null ? true : false;
             using (TextReader reader = File.OpenText(fileName))
             {
                 var csv = new CsvReader(reader);
                 csv.Configuration.ReadingExceptionOccurred = (x) => {
-                    if (useLogger)
-                    {
-                        logger.Info($"Error in CSV: {x.GetType()} - {x.Message} for record: {x.ReadingContext.RawRecord}");
-                    }
+                    logger.Info($"Error in CSV: {x.GetType()} - {x.Message} for record: {x.ReadingContext.RawRecord}");
                     return false; // do not throw!
                 };
 
                 // Setup the matching headers, allow any of the configurated headers to match
                 csv.Configuration.PrepareHeaderForMatch = (string header, int index) => {
-                    if (useLogger)
-                    {
-                        logger.Debug($"Start PrepareHeaderForMatch => header: {header} - index: {index} - configuratedHeaders: {string.Join(", ", configuratedHeaders)}, - delimeter: {csv.Configuration.Delimiter}");
-                    }
+                    logger.Debug($"Start PrepareHeaderForMatch => header: {header} - index: {index} - configuratedHeaders: {string.Join(", ", configuratedHeaders)}, - delimeter: {csv.Configuration.Delimiter}");
                     var headerLower = header.ToLowerInvariant();
                     return configuratedHeaders.Any(h => h == headerLower) ? nameof(InschrijvingRecord.kvknummer) : header;
                 };
                 // Log validate errors for header
                 csv.Configuration.HeaderValidated = (bool success, string[] items, int index, ReadingContext ctx) => {
-                    if (!success && useLogger) {
+                    if (!success) {
                         logger.Info($"Could not find header(s). items: {string.Join(",", items)}, index: {index}, for record: {ctx.RawRecord}");
                     }
                 };
 
                 // Set BadDataFound to log (and ignore?) bad data.
                 csv.Configuration.BadDataFound = (readingContext) => {
-                    if (useLogger)
-                    {
-                        logger.Info($"Bad data found! Error on record: {readingContext.RawRecord}");
-                    }
+                    logger.Info($"Bad data found! Error on record: {readingContext.RawRecord}");
                 };
 
                 // Set the delimeter so culture is not an issue 
