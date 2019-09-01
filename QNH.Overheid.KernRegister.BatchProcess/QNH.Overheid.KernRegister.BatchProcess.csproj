@@ -315,7 +315,7 @@
       <Version>4.6.5</Version>
     </PackageReference>
     <PackageReference Include="NLog.Schema">
-      <Version>4.6.5</Version>
+      <Version>4.6.7</Version>
     </PackageReference>
     <PackageReference Include="Npgsql">
       <Version>4.0.7</Version>
