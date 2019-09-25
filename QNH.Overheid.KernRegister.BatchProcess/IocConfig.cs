@@ -172,7 +172,7 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                         // End nHibernate setup
                         break;
                     default:
-                        throw new ConfigurationErrorsException("No valid 'DatabaseProvider' key found in AppSettings. Possible (implemented) values: EF | NHibernateOracle | NHibernateSQLCE | NHibernatePostGRESQL");
+                        throw new ConfigurationErrorsException("No valid 'DatabaseProvider' key found in AppSettings. Possible (implemented) values: NHibernateOracle | NHibernateSQL | NHibernateSQLCE | NHibernatePostGRESQL");
                 }
 
                 // Services:
