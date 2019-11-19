@@ -238,19 +238,10 @@
     <Content Include="Config\examples\system.serviceModel.client.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\AppSettings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Config\ConnectionStrings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\system.serviceModel.behaviors.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\system.serviceModel.client.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Config\AppSettings.config" />
+    <None Include="Config\ConnectionStrings.config" />
+    <None Include="Config\system.serviceModel.behaviors.config" />
+    <None Include="Config\system.serviceModel.client.config" />
     <None Include="Data\CTcheck\CT omgeving test kvknummers.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

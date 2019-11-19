@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using NHibernate;
 using System.Linq;
-using System.Text;
-using FluentNHibernate.Cfg.Db;
-using NHibernate;
-using NHibernate.Linq;
 
 namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
 {
