@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using QNH.Overheid.KernRegister.Business.Model.Debug;
+﻿using QNH.Overheid.KernRegister.Business.Model.Debug;
 using QNH.Overheid.KernRegister.Business.Model.Entities;
+using System.Collections.Generic;
 
 namespace QNH.Overheid.KernRegister.Business.Model
 {

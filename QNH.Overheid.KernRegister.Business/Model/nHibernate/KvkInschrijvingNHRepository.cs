@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using NHibernate;
-using QNH.Overheid.KernRegister.Business.Model.Entities;
-using QNH.Overheid.KernRegister.Business.Model.nHibernate;
-using QNH.Overheid.KernRegister.Business.Utility;
-
-using NHibernate.Impl;
-using NHibernate.Linq;
+﻿using NHibernate;
 using QNH.Overheid.KernRegister.Business.Model.Debug;
+using QNH.Overheid.KernRegister.Business.Model.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
 {
@@ -17,7 +11,6 @@ namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
     {
         public KvkInschrijvingNHRepository(ISession session) : base(session)
         {
-            
         }
 
         public override void Remove(KvkInschrijving entity)
@@ -33,26 +26,6 @@ namespace QNH.Overheid.KernRegister.Business.Model.nHibernate
             var latestInschrijving =
                     Query().SingleOrDefault(k => k.KvkNummer == kvkNummer && k.GeldigTot > DateTime.Now);
             return latestInschrijving;
-            //try
-            //{
-            //    var latestInschrijving =
-            //        Query().SingleOrDefault(k => k.KvkNummer == kvkNummer && k.GeldigTot > DateTime.Now);
-            //    return latestInschrijving;
-            //}
-            //catch (InvalidOperationException ex)
-            //{
-            //    if (ex.Message == "Sequence contains more than one element")
-            //    {
-            //        var inschrijvingen = Query().Where(k => k.KvkNummer == kvkNummer);
-            //        foreach (var inschrijving in inschrijvingen.Except(new[] {inschrijvingen.First()}))
-            //        {
-            //            inschrijving.GeldigTot = DateTime.Now.AddSeconds(-1);
-            //            base.AddOrUpdate(inschrijving);
-            //        }
-            //        throw new InvalidOperationException("Multiple valid 'inschrijvingen' found. Expired some of the inschrijvingen. Please try again.", ex);
-            //    }
-            //    throw;
-            //}
         }
 
         private static readonly object _lock = new object();
