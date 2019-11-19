@@ -26,13 +26,16 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
 
             _functionalLoggerKernregistratie.Debug("Start batchupdate van alle " + Default.ApplicationName + " inschrijvingen.");
 
-            var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
+            List<string> allCurrentInschrijvingen;
+            using (var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>())
+            {
 
-            var allCurrentInschrijvingen = repo.Query()
-                                                .Where(k => k.GeldigTot > DateTime.Now)
-                                                .Select(k => k.KvkNummer)
-                                                .Distinct()
-                                                .ToList();
+                allCurrentInschrijvingen = repo.Query()
+                                                    .Where(k => k.GeldigTot > DateTime.Now)
+                                                    .Select(k => k.KvkNummer)
+                                                    .Distinct()
+                                                    .ToList();
+            }
 
             _functionalLoggerKernregistratie.Debug("Aantal gevonden inschrijvingen: {0}", allCurrentInschrijvingen.Count());
 
@@ -131,8 +134,11 @@ Succesvol afgerond!
             Console.WriteLine("Starting batch to update all Crm Vestigingen.");
             _functionalLoggerCrm.Debug("Start batchupdate van alle Crm vestigingen.");
 
-            var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>();
-            var allVestigingen = repo.GetAllCurrentVestigingen().ToList();
+            List<Vestiging> allVestigingen;
+            using (var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>()) {
+                allVestigingen = repo.GetAllCurrentVestigingen().ToList();
+            }
+                
 
             // Do a check for duplicates and remove all invalid duplicates
             _logger.Debug("Checking for duplicates");
