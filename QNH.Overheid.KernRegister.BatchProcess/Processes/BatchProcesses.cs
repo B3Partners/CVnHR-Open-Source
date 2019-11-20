@@ -135,58 +135,57 @@ Succesvol afgerond!
             _functionalLoggerCrm.Debug("Start batchupdate van alle Crm vestigingen.");
 
             List<Vestiging> allVestigingen;
-            using (var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>()) {
+            using (var repo = IocConfig.Container.GetInstance<IKvkInschrijvingRepository>())
+            {
                 allVestigingen = repo.GetAllCurrentVestigingen().ToList();
+
+                // Do a check for duplicates and remove all invalid duplicates
+                _logger.Debug("Checking for duplicates");
+                var duplicates = allVestigingen.Where(v => v.GeldigTot > DateTime.Now).GroupBy(v => v.Vestigingsnummer).Where(v => v.Count() > 1).ToList();
+                if (duplicates.Any())
+                {
+                    // Now check if all inschrijvingen for this duplicate still valid based on RegistratieDatumEinde, otherwise do not use in batch
+                    var invalidDuplicates = duplicates.SelectMany(dup =>
+                            dup.Where(v =>
+                                    DateTime.ParseExact(v.RegistratieDatumEinde ?? "99991231", "yyyyMMdd", CultureInfo.InvariantCulture) <= DateTime.Now
+                                    || v.KvkInschrijving == null
+                                    || DateTime.ParseExact(v.KvkInschrijving.RegistratieDatumEinde ?? "99991231", "yyyyMMdd", CultureInfo.InvariantCulture) <= DateTime.Now
+                                    )
+                                );
+                    allVestigingen = allVestigingen.Except(invalidDuplicates).ToList();
+                }
+
+                // Check again, if any left we have a problem
+                duplicates = allVestigingen.Where(v => v.GeldigTot > DateTime.Now).GroupBy(v => v.Vestigingsnummer).Where(v => v.Count() > 1).ToList();
+                if (duplicates.Any())
+                {
+                    _logger.Debug("{0} duplicates found.", duplicates.Count());
+                    _functionalLoggerCrm.Error("Dubbele vestigingen gevonden in de " + Default.ApplicationName + " database. Neem contact op met de systeembeheerder!");
+
+                    var msgDuplicates = "Duplicate VestigingId's: " + Environment.NewLine + string.Join(Environment.NewLine, duplicates.Select(d => d.Key)) + Environment.NewLine;
+                    _logger.Debug(msgDuplicates);
+                    _functionalLoggerCrm.Debug(msgDuplicates);
+                    throw new InvalidDataException("Duplicates found!");
+                }
+                else
+                    _logger.Debug("No duplicates found.");
+
+
+                _functionalLoggerCrm.Debug("{0} vestigingen gevonden in de " + Default.ApplicationName, allVestigingen.Count());
+
+                try
+                {
+                    var exportService = IocConfig.Container.GetInstance<IExportService>();
+                    exportService.UpdateAllExistingExternalVestigingen(allVestigingen, _functionalLoggerCrm, MaxDegreeOfParallelismCrm);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, "Error(s) while synchronizing Crm.");
+                    _functionalLoggerCrm.Error(ex, "Error(s) opgetreden tijdens de Crm batchUpdate!");
+                    _functionalLoggerCrm.Error(Environment.NewLine);
+                    throw;
+                }
             }
-                
-
-            // Do a check for duplicates and remove all invalid duplicates
-            _logger.Debug("Checking for duplicates");
-            var duplicates = allVestigingen.Where(v => v.GeldigTot > DateTime.Now).GroupBy(v => v.Vestigingsnummer).Where(v => v.Count() > 1).ToList();
-            if (duplicates.Any())
-            {
-                // Now check if all inschrijvingen for this duplicate still valid based on RegistratieDatumEinde, otherwise do not use in batch
-                var invalidDuplicates = duplicates.SelectMany(dup =>
-                        dup.Where(v =>
-                                DateTime.ParseExact(v.RegistratieDatumEinde ?? "99991231", "yyyyMMdd", CultureInfo.InvariantCulture) <= DateTime.Now
-                                || v.KvkInschrijving == null
-                                || DateTime.ParseExact(v.KvkInschrijving.RegistratieDatumEinde ?? "99991231", "yyyyMMdd", CultureInfo.InvariantCulture) <= DateTime.Now
-                                )
-                            );
-                allVestigingen = allVestigingen.Except(invalidDuplicates).ToList();
-            }
-
-            // Check again, if any left we have a problem
-            duplicates = allVestigingen.Where(v => v.GeldigTot > DateTime.Now).GroupBy(v => v.Vestigingsnummer).Where(v => v.Count() > 1).ToList();
-            if (duplicates.Any())
-            {
-                _logger.Debug("{0} duplicates found.", duplicates.Count());
-                _functionalLoggerCrm.Error("Dubbele vestigingen gevonden in de " + Default.ApplicationName + " database. Neem contact op met de systeembeheerder!");
-
-                var msgDuplicates = "Duplicate VestigingId's: " + Environment.NewLine + string.Join(Environment.NewLine, duplicates.Select(d => d.Key)) + Environment.NewLine;
-                _logger.Debug(msgDuplicates);
-                _functionalLoggerCrm.Debug(msgDuplicates);
-                throw new InvalidDataException("Duplicates found!");
-            }
-            else
-                _logger.Debug("No duplicates found.");
-
-
-            _functionalLoggerCrm.Debug("{0} vestigingen gevonden in de " + Default.ApplicationName, allVestigingen.Count());
-
-            try
-            {
-                var exportService = IocConfig.Container.GetInstance<IExportService>();
-                exportService.UpdateAllExistingExternalVestigingen(allVestigingen, _functionalLoggerCrm, MaxDegreeOfParallelismCrm);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "Error(s) while synchronizing Crm.");
-                _functionalLoggerCrm.Error(ex, "Error(s) opgetreden tijdens de Crm batchUpdate!");
-                _functionalLoggerCrm.Error(Environment.NewLine);
-                throw;
-            }
-
             _functionalLoggerCrm.Debug("Succesvol afgerond!" + Environment.NewLine);
             Console.WriteLine("Finished updating all Crm vestigingen.");
         }
