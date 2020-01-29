@@ -175,6 +175,9 @@ namespace QNH.Overheid.KernRegister.Beheer
 
                         // End nHibernate setup
                         break;
+                    case "false":
+                        Console.WriteLine("Geen database gebruikt");
+                        break;
                     default:
                         throw new ConfigurationErrorsException("No valid 'DatabaseProvider' key found in AppSettings. Possible (implemented) values: EF | NHibernateOracle | NHibernateSQLCE | NHibernatePostGRESQL");
                 }
@@ -261,6 +264,9 @@ namespace QNH.Overheid.KernRegister.Beheer
                                 fullTableName: ConfigurationManager.AppSettings["nAdresFullTableName"],
                                 displayName: ConfigurationManager.AppSettings["CrmDisplayName"]
                             ));
+                        break;
+                    case "false":
+                        Console.WriteLine("Geen CRM gebruikt");
                         break;
                     default:
                         throw new ConfigurationErrorsException("CrmApplication from settings is unknown to the application. Value searched for: " + ConfigurationManager.AppSettings["CrmToUse"]);
