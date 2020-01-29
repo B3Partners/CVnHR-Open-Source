@@ -273,3 +273,4 @@ QNH.Overheid.KernRegister.Beheer/JsonConfig/*.json
 QNH.Overheid.KernRegister.Beheer/Files/brmo/
 QNH.Overheid.KernRegister.Beheer/Files/tasks/
 QNH.Overheid.KernRegister.Beheer/Files/mutaties/
+QNH.Overheid.KernRegister.MailingTool/App.config
