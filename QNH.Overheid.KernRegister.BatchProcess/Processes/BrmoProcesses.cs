@@ -98,6 +98,9 @@ namespace QNH.Overheid.KernRegister.BatchProcess.Processes
                                 Log(brmoLogger, "adding prefix 0 for KVK-nummer:" + inschrijvingRecord.kvknummer);
                                 zipCodes.Add(prefix + inschrijvingRecord.kvknummer);
                             }
+                            else {
+                                zipCodes.Add(inschrijvingRecord.kvknummer);
+                            }
                         }
                     }
                     else
