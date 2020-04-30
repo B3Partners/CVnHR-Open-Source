@@ -23,8 +23,7 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
 
         #region Fields
 
-        private readonly SecuritySoap _securityService;
-        private readonly RelationsSoap _relationsService;
+        private readonly IRelationServiceContract _relationsService;
         private readonly IExportCredentials _credentials;
         private static IPostcodeService _postcodeService;
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
@@ -36,9 +35,8 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
 
         #region Constructor
 
-        public DocBaseRepository(SecuritySoap securityService, RelationsSoap relationsService, IExportCredentials credentials, IPostcodeService postcodeService)
+        public DocBaseRepository( IRelationServiceContract relationsService, IExportCredentials credentials, IPostcodeService postcodeService)
         {
-            _securityService = securityService;
             _relationsService = relationsService;
             _credentials = credentials;
 
@@ -392,8 +390,8 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
 
         private bool Login(string userName, string password)
         {
-            var loginResponse = _securityService.Login(new LoginRequest(new LoginRequestBody(userName, password)));
-            return loginResponse != null && loginResponse.Body.LoginResult;
+            var loginResponse = _relationsService.Login(new LoginRequest(userName, password));
+            return loginResponse != null && loginResponse.LoginResult;
         }
 
         /// <summary>
@@ -408,7 +406,7 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
 
             UpdateDataTableFieldsIfChanged(ref ifFields, newVestiging);
 
-            return _relationsService.CreateRelation(RELATIONTYPE, _credentials.AuthId, _credentials.ProcessId, ifFieldDataSet);
+            return _relationsService.CreateRelation(new CreateRelationRequest(RELATIONTYPE, _credentials.AuthId, _credentials.ProcessId, ifFieldDataSet)).CreateRelationResult;
             
         }
 
@@ -441,8 +439,8 @@ namespace QNH.Overheid.KernRegister.Business.Crm.DocBase
                 // Functionally decided not to use the existing, but always overwrite
                 //var authId = Convert.ToInt32(ifFieldDataSet.Tables[RELATIONTABLE].Rows[0]["AUTOPROFIEL_ID"]);
                 var authId = _credentials.AuthId;
-                var updateSuccess = _relationsService.UpdateRelation(relId, RELATIONTYPE, authId, _credentials.ProcessId, ifFieldDataSet);
-                if (updateSuccess)
+                var updateSuccess = _relationsService.UpdateRelation(new UpdateRelationRequest(relId, RELATIONTYPE, authId, _credentials.ProcessId, ifFieldDataSet));
+                if (updateSuccess.UpdateRelationResult)
                     _logger.Debug("Succesfully updated vestiging with vestigingnummer {0} and DocBase REL_ID {1}", vestiging.Vestigingsnummer, relId);
                 else
                 {
