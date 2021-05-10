@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: sunday
+    time: "06:00"
+    timezone: Europe/Amsterdam
+  open-pull-requests-limit: 25
+  reviewers:
+  - mvdstruijk
+  - CorneHogerheijde
+  assignees:
+  - mvdstruijk
