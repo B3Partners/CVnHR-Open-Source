@@ -229,11 +229,9 @@ namespace QNH.Overheid.KernRegister.BatchProcess
                 switch (ConfigurationManager.AppSettings["CrmToUse"]) // Default.CrmApplication)
                 {
                     case "DocBase":
-                        x.For<SecuritySoap>().Use<SecuritySoapClient>()
-                                .SelectConstructor(() => new SecuritySoapClient())
-                                .SetProperty(ssc => ssc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                        x.For<RelationsSoap>().Use<RelationsSoapClient>()
-                            .SelectConstructor(() => new RelationsSoapClient())
+                        
+                        x.For<IRelationServiceContract>().Use<RelationServiceContractClient>()
+                            .SelectConstructor(() => new RelationServiceContractClient())
                             .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
 
                         // We need a postcode service for DocBase Municipality

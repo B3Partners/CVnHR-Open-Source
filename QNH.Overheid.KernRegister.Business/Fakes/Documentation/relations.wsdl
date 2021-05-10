@@ -1,551 +1,565 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://acanthis.com/DocNet/WS_API/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://acanthis.com/DocNet/WS_API/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BasicRelationService" targetNamespace="http://tempuri.org/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://acanthis.com/DocNet/WS_API/">
-      <s:element name="GetRelationsList">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="p_strType" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="p_strWhereClause" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetRelationsListResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRelationsListResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetRelationTypesList">
-        <s:complexType />
-      </s:element>
-      <s:element name="GetRelationTypesListResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRelationTypesListResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetNewRelationIndexFields">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetNewRelationIndexFieldsResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetNewRelationIndexFieldsResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetRelationGeneralFields">
-        <s:complexType />
-      </s:element>
-      <s:element name="GetRelationGeneralFieldsResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRelationGeneralFieldsResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetRelationDefaultAuthorizationProfile">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetRelationDefaultAuthorizationProfileResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="GetRelationDefaultAuthorizationProfileResult" type="s:int" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetNewRelationAuthorizationProfiles">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetNewRelationAuthorizationProfilesResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetNewRelationAuthorizationProfilesResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetExistingRelationAuthorizationProfiles">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="relId" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetExistingRelationAuthorizationProfilesResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetExistingRelationAuthorizationProfilesResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetExistingRelationIndexFields">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="relId" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetExistingRelationIndexFieldsResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetExistingRelationIndexFieldsResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="CreateRelation">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="authorizationProfileID" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="processID" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="indexFields">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="CreateRelationResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="CreateRelationResult" type="s:int" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="DeleteRelation">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="relId" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="relType" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="DeleteRelationResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="DeleteRelationResult" type="s:boolean" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="UpdateRelation">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="relId" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="relationType" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="authorizationProfileID" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="processID" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="indexFields">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="UpdateRelationResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="UpdateRelationResult" type="s:boolean" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-    </s:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <xs:element name="CorsOptionsRequest">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CorsOptionsRequestResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationsList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="whereClause" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationsListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetRelationsListResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationsList_StandardAttributesWhere">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="whereClause" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="whereClauseStandardAttributes" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationsList_StandardAttributesWhereResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetRelationsList_StandardAttributesWhereResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationsListPaged">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="whereClause" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="whereClauseStandardAttributes" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="pageIndex" type="xs:int"/>
+            <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+            <xs:element minOccurs="0" name="sortColumn" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="sortDescending" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationsListPagedResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetRelationsListPagedResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationTypesList">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationTypesListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetRelationTypesListResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetNewRelationIndexFields">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="relationType" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetNewRelationIndexFieldsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetNewRelationIndexFieldsResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationGeneralFields">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationGeneralFieldsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetRelationGeneralFieldsResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationDefaultAuthorizationProfile">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="relationType" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRelationDefaultAuthorizationProfileResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetRelationDefaultAuthorizationProfileResult" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetNewRelationAuthorizationProfiles">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="relationType" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetNewRelationAuthorizationProfilesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetNewRelationAuthorizationProfilesResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetExistingRelationAuthorizationProfiles">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="relId" type="xs:int"/>
+            <xs:element minOccurs="0" name="relationType" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetExistingRelationAuthorizationProfilesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetExistingRelationAuthorizationProfilesResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetExistingRelationIndexFields">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="relId" type="xs:int"/>
+            <xs:element minOccurs="0" name="relationType" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetExistingRelationIndexFieldsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetExistingRelationIndexFieldsResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateRelation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="relationType" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="authorizationProfileID" type="xs:int"/>
+            <xs:element minOccurs="0" name="processID" type="xs:int"/>
+            <xs:element minOccurs="0" name="indexFields" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateRelationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CreateRelationResult" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteRelation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="relId" type="xs:int"/>
+            <xs:element minOccurs="0" name="relType" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteRelationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="DeleteRelationResult" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateRelation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="relId" type="xs:int"/>
+            <xs:element minOccurs="0" name="relationType" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="authorizationProfileID" type="xs:int"/>
+            <xs:element minOccurs="0" name="processID" type="xs:int"/>
+            <xs:element minOccurs="0" name="indexFields" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateRelationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UpdateRelationResult" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PrepareDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="date" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="format" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PrepareDateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="PrepareDateResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+      <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+      <xs:element name="byte" nillable="true" type="xs:byte"/>
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+      <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+      <xs:element name="double" nillable="true" type="xs:double"/>
+      <xs:element name="float" nillable="true" type="xs:float"/>
+      <xs:element name="int" nillable="true" type="xs:int"/>
+      <xs:element name="long" nillable="true" type="xs:long"/>
+      <xs:element name="QName" nillable="true" type="xs:QName"/>
+      <xs:element name="short" nillable="true" type="xs:short"/>
+      <xs:element name="string" nillable="true" type="xs:string"/>
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+      <xs:element name="char" nillable="true" type="tns:char"/>
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration"/>
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid"/>
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName"/>
+      <xs:attribute name="Id" type="xs:ID"/>
+      <xs:attribute name="Ref" type="xs:IDREF"/>
+    </xs:schema>
   </wsdl:types>
-  <wsdl:message name="GetRelationsListSoapIn">
-    <wsdl:part name="parameters" element="tns:GetRelationsList" />
+  <wsdl:message name="IBasicRelationServiceContract_CorsOptionsRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:CorsOptionsRequest"/>
   </wsdl:message>
-  <wsdl:message name="GetRelationsListSoapOut">
-    <wsdl:part name="parameters" element="tns:GetRelationsListResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_CorsOptionsRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CorsOptionsRequestResponse"/>
   </wsdl:message>
-  <wsdl:message name="GetRelationTypesListSoapIn">
-    <wsdl:part name="parameters" element="tns:GetRelationTypesList" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationsList"/>
   </wsdl:message>
-  <wsdl:message name="GetRelationTypesListSoapOut">
-    <wsdl:part name="parameters" element="tns:GetRelationTypesListResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationsListResponse"/>
   </wsdl:message>
-  <wsdl:message name="GetNewRelationIndexFieldsSoapIn">
-    <wsdl:part name="parameters" element="tns:GetNewRelationIndexFields" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationsList_StandardAttributesWhere_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationsList_StandardAttributesWhere"/>
   </wsdl:message>
-  <wsdl:message name="GetNewRelationIndexFieldsSoapOut">
-    <wsdl:part name="parameters" element="tns:GetNewRelationIndexFieldsResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationsList_StandardAttributesWhere_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationsList_StandardAttributesWhereResponse"/>
   </wsdl:message>
-  <wsdl:message name="GetRelationGeneralFieldsSoapIn">
-    <wsdl:part name="parameters" element="tns:GetRelationGeneralFields" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationsListPaged_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationsListPaged"/>
   </wsdl:message>
-  <wsdl:message name="GetRelationGeneralFieldsSoapOut">
-    <wsdl:part name="parameters" element="tns:GetRelationGeneralFieldsResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationsListPaged_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationsListPagedResponse"/>
   </wsdl:message>
-  <wsdl:message name="GetRelationDefaultAuthorizationProfileSoapIn">
-    <wsdl:part name="parameters" element="tns:GetRelationDefaultAuthorizationProfile" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationTypesList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationTypesList"/>
   </wsdl:message>
-  <wsdl:message name="GetRelationDefaultAuthorizationProfileSoapOut">
-    <wsdl:part name="parameters" element="tns:GetRelationDefaultAuthorizationProfileResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationTypesList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationTypesListResponse"/>
   </wsdl:message>
-  <wsdl:message name="GetNewRelationAuthorizationProfilesSoapIn">
-    <wsdl:part name="parameters" element="tns:GetNewRelationAuthorizationProfiles" />
+  <wsdl:message name="IBasicRelationServiceContract_GetNewRelationIndexFields_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNewRelationIndexFields"/>
   </wsdl:message>
-  <wsdl:message name="GetNewRelationAuthorizationProfilesSoapOut">
-    <wsdl:part name="parameters" element="tns:GetNewRelationAuthorizationProfilesResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetNewRelationIndexFields_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNewRelationIndexFieldsResponse"/>
   </wsdl:message>
-  <wsdl:message name="GetExistingRelationAuthorizationProfilesSoapIn">
-    <wsdl:part name="parameters" element="tns:GetExistingRelationAuthorizationProfiles" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationGeneralFields_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationGeneralFields"/>
   </wsdl:message>
-  <wsdl:message name="GetExistingRelationAuthorizationProfilesSoapOut">
-    <wsdl:part name="parameters" element="tns:GetExistingRelationAuthorizationProfilesResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationGeneralFields_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationGeneralFieldsResponse"/>
   </wsdl:message>
-  <wsdl:message name="GetExistingRelationIndexFieldsSoapIn">
-    <wsdl:part name="parameters" element="tns:GetExistingRelationIndexFields" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationDefaultAuthorizationProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationDefaultAuthorizationProfile"/>
   </wsdl:message>
-  <wsdl:message name="GetExistingRelationIndexFieldsSoapOut">
-    <wsdl:part name="parameters" element="tns:GetExistingRelationIndexFieldsResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetRelationDefaultAuthorizationProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationDefaultAuthorizationProfileResponse"/>
   </wsdl:message>
-  <wsdl:message name="CreateRelationSoapIn">
-    <wsdl:part name="parameters" element="tns:CreateRelation" />
+  <wsdl:message name="IBasicRelationServiceContract_GetNewRelationAuthorizationProfiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNewRelationAuthorizationProfiles"/>
   </wsdl:message>
-  <wsdl:message name="CreateRelationSoapOut">
-    <wsdl:part name="parameters" element="tns:CreateRelationResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetNewRelationAuthorizationProfiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNewRelationAuthorizationProfilesResponse"/>
   </wsdl:message>
-  <wsdl:message name="DeleteRelationSoapIn">
-    <wsdl:part name="parameters" element="tns:DeleteRelation" />
+  <wsdl:message name="IBasicRelationServiceContract_GetExistingRelationAuthorizationProfiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetExistingRelationAuthorizationProfiles"/>
   </wsdl:message>
-  <wsdl:message name="DeleteRelationSoapOut">
-    <wsdl:part name="parameters" element="tns:DeleteRelationResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetExistingRelationAuthorizationProfiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetExistingRelationAuthorizationProfilesResponse"/>
   </wsdl:message>
-  <wsdl:message name="UpdateRelationSoapIn">
-    <wsdl:part name="parameters" element="tns:UpdateRelation" />
+  <wsdl:message name="IBasicRelationServiceContract_GetExistingRelationIndexFields_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetExistingRelationIndexFields"/>
   </wsdl:message>
-  <wsdl:message name="UpdateRelationSoapOut">
-    <wsdl:part name="parameters" element="tns:UpdateRelationResponse" />
+  <wsdl:message name="IBasicRelationServiceContract_GetExistingRelationIndexFields_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetExistingRelationIndexFieldsResponse"/>
   </wsdl:message>
-  <wsdl:portType name="RelationsSoap">
+  <wsdl:message name="IBasicRelationServiceContract_CreateRelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRelation"/>
+  </wsdl:message>
+  <wsdl:message name="IBasicRelationServiceContract_CreateRelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRelationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IBasicRelationServiceContract_DeleteRelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRelation"/>
+  </wsdl:message>
+  <wsdl:message name="IBasicRelationServiceContract_DeleteRelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRelationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IBasicRelationServiceContract_UpdateRelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRelation"/>
+  </wsdl:message>
+  <wsdl:message name="IBasicRelationServiceContract_UpdateRelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRelationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IBasicRelationServiceContract_PrepareDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:PrepareDate"/>
+  </wsdl:message>
+  <wsdl:message name="IBasicRelationServiceContract_PrepareDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PrepareDateResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="IBasicRelationServiceContract">
+    <wsdl:operation name="CorsOptionsRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicBaseServiceContract/CorsOptionsRequest" message="tns:IBasicRelationServiceContract_CorsOptionsRequest_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicBaseServiceContract/CorsOptionsRequestResponse" message="tns:IBasicRelationServiceContract_CorsOptionsRequest_OutputMessage"/>
+    </wsdl:operation>
     <wsdl:operation name="GetRelationsList">
-      <wsdl:input message="tns:GetRelationsListSoapIn" />
-      <wsdl:output message="tns:GetRelationsListSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationsList" message="tns:IBasicRelationServiceContract_GetRelationsList_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationsListResponse" message="tns:IBasicRelationServiceContract_GetRelationsList_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationsList_StandardAttributesWhere">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationsList_StandardAttributesWhere" message="tns:IBasicRelationServiceContract_GetRelationsList_StandardAttributesWhere_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationsList_StandardAttributesWhereResponse" message="tns:IBasicRelationServiceContract_GetRelationsList_StandardAttributesWhere_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationsListPaged">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationsListPaged" message="tns:IBasicRelationServiceContract_GetRelationsListPaged_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationsListPagedResponse" message="tns:IBasicRelationServiceContract_GetRelationsListPaged_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="GetRelationTypesList">
-      <wsdl:input message="tns:GetRelationTypesListSoapIn" />
-      <wsdl:output message="tns:GetRelationTypesListSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationTypesList" message="tns:IBasicRelationServiceContract_GetRelationTypesList_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationTypesListResponse" message="tns:IBasicRelationServiceContract_GetRelationTypesList_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="GetNewRelationIndexFields">
-      <wsdl:input message="tns:GetNewRelationIndexFieldsSoapIn" />
-      <wsdl:output message="tns:GetNewRelationIndexFieldsSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetNewRelationIndexFields" message="tns:IBasicRelationServiceContract_GetNewRelationIndexFields_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetNewRelationIndexFieldsResponse" message="tns:IBasicRelationServiceContract_GetNewRelationIndexFields_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="GetRelationGeneralFields">
-      <wsdl:input message="tns:GetRelationGeneralFieldsSoapIn" />
-      <wsdl:output message="tns:GetRelationGeneralFieldsSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationGeneralFields" message="tns:IBasicRelationServiceContract_GetRelationGeneralFields_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationGeneralFieldsResponse" message="tns:IBasicRelationServiceContract_GetRelationGeneralFields_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="GetRelationDefaultAuthorizationProfile">
-      <wsdl:input message="tns:GetRelationDefaultAuthorizationProfileSoapIn" />
-      <wsdl:output message="tns:GetRelationDefaultAuthorizationProfileSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationDefaultAuthorizationProfile" message="tns:IBasicRelationServiceContract_GetRelationDefaultAuthorizationProfile_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetRelationDefaultAuthorizationProfileResponse" message="tns:IBasicRelationServiceContract_GetRelationDefaultAuthorizationProfile_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="GetNewRelationAuthorizationProfiles">
-      <wsdl:input message="tns:GetNewRelationAuthorizationProfilesSoapIn" />
-      <wsdl:output message="tns:GetNewRelationAuthorizationProfilesSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetNewRelationAuthorizationProfiles" message="tns:IBasicRelationServiceContract_GetNewRelationAuthorizationProfiles_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetNewRelationAuthorizationProfilesResponse" message="tns:IBasicRelationServiceContract_GetNewRelationAuthorizationProfiles_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="GetExistingRelationAuthorizationProfiles">
-      <wsdl:input message="tns:GetExistingRelationAuthorizationProfilesSoapIn" />
-      <wsdl:output message="tns:GetExistingRelationAuthorizationProfilesSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetExistingRelationAuthorizationProfiles" message="tns:IBasicRelationServiceContract_GetExistingRelationAuthorizationProfiles_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetExistingRelationAuthorizationProfilesResponse" message="tns:IBasicRelationServiceContract_GetExistingRelationAuthorizationProfiles_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="GetExistingRelationIndexFields">
-      <wsdl:input message="tns:GetExistingRelationIndexFieldsSoapIn" />
-      <wsdl:output message="tns:GetExistingRelationIndexFieldsSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetExistingRelationIndexFields" message="tns:IBasicRelationServiceContract_GetExistingRelationIndexFields_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/GetExistingRelationIndexFieldsResponse" message="tns:IBasicRelationServiceContract_GetExistingRelationIndexFields_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="CreateRelation">
-      <wsdl:input message="tns:CreateRelationSoapIn" />
-      <wsdl:output message="tns:CreateRelationSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/CreateRelation" message="tns:IBasicRelationServiceContract_CreateRelation_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/CreateRelationResponse" message="tns:IBasicRelationServiceContract_CreateRelation_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="DeleteRelation">
-      <wsdl:input message="tns:DeleteRelationSoapIn" />
-      <wsdl:output message="tns:DeleteRelationSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/DeleteRelation" message="tns:IBasicRelationServiceContract_DeleteRelation_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/DeleteRelationResponse" message="tns:IBasicRelationServiceContract_DeleteRelation_OutputMessage"/>
     </wsdl:operation>
     <wsdl:operation name="UpdateRelation">
-      <wsdl:input message="tns:UpdateRelationSoapIn" />
-      <wsdl:output message="tns:UpdateRelationSoapOut" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/UpdateRelation" message="tns:IBasicRelationServiceContract_UpdateRelation_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/UpdateRelationResponse" message="tns:IBasicRelationServiceContract_UpdateRelation_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/PrepareDate" message="tns:IBasicRelationServiceContract_PrepareDate_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IBasicRelationServiceContract/PrepareDateResponse" message="tns:IBasicRelationServiceContract_PrepareDate_OutputMessage"/>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="RelationsSoap" type="tns:RelationsSoap">
-    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetRelationsList">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationsList" style="document" />
+  <wsdl:binding name="BasicHttpBinding_IBasicRelationServiceContract" type="tns:IBasicRelationServiceContract">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CorsOptionsRequest">
+      <soap:operation soapAction="http://tempuri.org/IBasicBaseServiceContract/CorsOptionsRequest" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationsList">
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetRelationsList" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationsList_StandardAttributesWhere">
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetRelationsList_StandardAttributesWhere" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationsListPaged">
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetRelationsListPaged" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRelationTypesList">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationTypesList" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetRelationTypesList" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetNewRelationIndexFields">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetNewRelationIndexFields" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetNewRelationIndexFields" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRelationGeneralFields">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationGeneralFields" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetRelationGeneralFields" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRelationDefaultAuthorizationProfile">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationDefaultAuthorizationProfile" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetRelationDefaultAuthorizationProfile" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetNewRelationAuthorizationProfiles">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetNewRelationAuthorizationProfiles" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetNewRelationAuthorizationProfiles" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetExistingRelationAuthorizationProfiles">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetExistingRelationAuthorizationProfiles" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetExistingRelationAuthorizationProfiles" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetExistingRelationIndexFields">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/GetExistingRelationIndexFields" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/GetExistingRelationIndexFields" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateRelation">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/CreateRelation" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/CreateRelation" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="DeleteRelation">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/DeleteRelation" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/DeleteRelation" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdateRelation">
-      <soap:operation soapAction="http://acanthis.com/DocNet/WS_API/UpdateRelation" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/UpdateRelation" style="document"/>
       <wsdl:input>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" />
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareDate">
+      <soap:operation soapAction="http://tempuri.org/IBasicRelationServiceContract/PrepareDate" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="RelationsSoap12" type="tns:RelationsSoap">
-    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetRelationsList">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationsList" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetRelationTypesList">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationTypesList" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetNewRelationIndexFields">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetNewRelationIndexFields" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetRelationGeneralFields">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationGeneralFields" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetRelationDefaultAuthorizationProfile">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetRelationDefaultAuthorizationProfile" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetNewRelationAuthorizationProfiles">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetNewRelationAuthorizationProfiles" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetExistingRelationAuthorizationProfiles">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetExistingRelationAuthorizationProfiles" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetExistingRelationIndexFields">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/GetExistingRelationIndexFields" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CreateRelation">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/CreateRelation" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DeleteRelation">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/DeleteRelation" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UpdateRelation">
-      <soap12:operation soapAction="http://acanthis.com/DocNet/WS_API/UpdateRelation" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="Relations">
-    <wsdl:port name="RelationsSoap" binding="tns:RelationsSoap">
-      <soap:address location="http://simi-test/dnwsapi/relations.asmx" />
-    </wsdl:port>
-    <wsdl:port name="RelationsSoap12" binding="tns:RelationsSoap12">
-      <soap12:address location="http://simi-test/dnwsapi/relations.asmx" />
+  <wsdl:service name="BasicRelationService">
+    <wsdl:port name="BasicHttpBinding_IBasicRelationServiceContract" binding="tns:BasicHttpBinding_IBasicRelationServiceContract">
+      <soap:address location="http://swdms01-acc/Doc(Base)WCF/BasicRelationService.svc"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
