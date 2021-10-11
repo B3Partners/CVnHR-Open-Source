@@ -10,6 +10,5 @@ updates:
   open-pull-requests-limit: 25
   reviewers:
   - mvdstruijk
-  - CorneHogerheijde
   assignees:
   - mvdstruijk
