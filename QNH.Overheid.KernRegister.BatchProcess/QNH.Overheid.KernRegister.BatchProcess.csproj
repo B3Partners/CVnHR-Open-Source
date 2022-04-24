@@ -311,7 +311,7 @@
       <Version>4.7.9</Version>
     </PackageReference>
     <PackageReference Include="Npgsql">
-      <Version>5.0.4</Version>
+      <Version>6.0.4</Version>
     </PackageReference>
     <PackageReference Include="Oracle.ManagedDataAccess">
       <Version>19.11.0</Version>
