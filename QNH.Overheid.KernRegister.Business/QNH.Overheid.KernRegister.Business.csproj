@@ -301,7 +301,7 @@
       <Version>4.7.9</Version>
     </PackageReference>
     <PackageReference Include="Oracle.ManagedDataAccess">
-      <Version>19.11.0</Version>
+      <Version>21.6.1</Version>
     </PackageReference>
     <PackageReference Include="StructureMap">
       <Version>4.7.1</Version>
