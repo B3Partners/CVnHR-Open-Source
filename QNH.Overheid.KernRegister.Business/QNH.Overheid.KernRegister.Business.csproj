@@ -197,7 +197,6 @@
     <Compile Include="Crm\Probis\ProbisRepository.cs" />
     <Compile Include="Enums\BrmoProcessTypes.cs" />
     <Compile Include="Integration\DocBase-Relations-Service.cs" />
-    <Compile Include="Integration\DocBase-Security-Service.cs" />
     <Compile Include="Integration\WcfExtensions\CookieManagerBehavior.cs" />
     <Compile Include="Integration\WcfExtensions\CookieManagerMessageInspector.cs" />
     <Compile Include="KvKSearchApi\Entities\KvKSearchApiParameters.cs" />
@@ -255,7 +254,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Fakes\Documentation\relations.wsdl" />
-    <None Include="Fakes\Documentation\security.wsdl" />
     <None Include="Model\kernregister.huidig.cd" />
   </ItemGroup>
   <ItemGroup>

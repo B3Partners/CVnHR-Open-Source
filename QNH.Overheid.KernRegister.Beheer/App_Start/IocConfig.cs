@@ -205,9 +205,6 @@ namespace QNH.Overheid.KernRegister.Beheer
                         dataService.SetProperty(ds => ds.Endpoint
                             .EndpointBehaviors
                             .Add(new RawXMLBehavior(ConfigurationManager.AppSettings["InschrijvingenXmlResponseFile"])));
-                        dataService.SetProperty(ds => ds.Endpoint
-                                .EndpointBehaviors
-                                .Add(new RawXMLBehavior(ConfigurationManager.AppSettings["InschrijvingenXmlResponseFile"])));
                     }
                 }
 
@@ -237,11 +234,9 @@ namespace QNH.Overheid.KernRegister.Beheer
                 switch (ConfigurationManager.AppSettings["CrmToUse"]) // Default.CrmApplication)
                 {
                     case "DocBase":
-                        x.For<SecuritySoap>().Use<SecuritySoapClient>()
-                                .SelectConstructor(() => new SecuritySoapClient())
-                                .SetProperty(ssc => ssc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
-                        x.For<RelationsSoap>().Use<RelationsSoapClient>()
-                            .SelectConstructor(() => new RelationsSoapClient())
+                       
+                        x.For<IRelationServiceContract>().Use<RelationServiceContractClient>()
+                            .SelectConstructor(() => new RelationServiceContractClient())
                             .SetProperty(rsc => rsc.Endpoint.Behaviors.Add(new CookieManagerBehavior()));
 
                         // We need a postcode service for DocBase Municipality
